@@ -105,13 +105,16 @@ class Mail{
 		return json_encode($result);
 	}
 
-	public function cs_get_mail($mid)
+	public function cs_get_mail($mid, $tag = 0)
 	{
 		$result = $this->link_result("select id,fromuid,touid,title,content from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid", "get_mail -> select error");
 		if ($result != false)
 		{
-			$this->link_result("update cs_mail_user set status = 1 where mid = $mid;",
-				"get_mail -> update error");	
+			if ($tag == 1)
+			{
+				$this->link_result("update cs_mail_user set status = 1 where mid = $mid;",
+					"get_mail -> update error");	
+			}
 
 			return json_encode($result);
 		}
