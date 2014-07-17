@@ -57,8 +57,7 @@ class Mail{
 		$title = $info["title"];
 		$content = $info["content"];
 		$touid_arr = $info["touid"];
-
-		$this->link_result("insert into cs_mail (fromuid,sdate,title,content) values ($this->uid,now(),$title,$content);",
+		$this->link_result("insert into cs_mail (fromuid,sdate,title,content) values ($this->uid,now(),'$title','$content');",
 		   	"send mail -> insert cs_mail error");
 
 		$return = $this->link_result("select max(mid) from cs_mail;",
@@ -76,13 +75,13 @@ class Mail{
 	public function cs_get_recvmids($tag = 0)
 	{
 		if ($tag == 0)
-			$result = $this->link_result("select mid,status from cs_mail_user where touid=1030 ",// = $this->uid",
+			$result = $this->link_result("select mid, status from cs_mail_user where touid = $this->uid",
 			   	"get_recvmids -> select tag=0 error");
 		if ($tag == 1)
-			$result = $this->link_result("select mid,status from cs_mail_user where touid = $this->uid and status = 0",
+			$result = $this->link_result("select mid, status from cs_mail_user where touid = $this->uid and status = 0",
 				"get_recvmids -> select tag=1 error");
 		if ($tag == 2)
-			$result = $this->link_result("select mid,status from cs_mail_user where touid = $this->uid and status = 1",
+			$result = $this->link_result("select mid, status from cs_mail_user where touid = $this->uid and status = 1",
 				"get_recvmids -> select tag=2 error");	
 	
 		if ($result == null)
@@ -107,7 +106,7 @@ class Mail{
 
 	public function cs_get_mail($mid)
 	{
-		$result = $this->link_result("select id,fromuid,touid,title,content from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid", "get_mail -> select error");
+		$result = $this->link_result("select id,fromuid, sdate, touid, title, content from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid", "get_mail -> select error");
 		if ($result != false)
 		{
 			$this->link_result("update cs_mail_user set status = 1 where mid = $mid;",

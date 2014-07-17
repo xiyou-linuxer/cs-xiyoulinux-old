@@ -16,8 +16,9 @@ function checkArr($checkArr){	//检查对应类型，参数是数组
 		return false;
 	$check_ok = true;
 	while( $value = current($checkArr) ){
-		if( !empty(key($checkArr)) )
-			$check_ok &= checkStr($value,key($checkArr));
+		$result = key($checkArr);
+		if( !empty($result))
+			$check_ok &= checkStr($value,$result);
 		next($checkArr);
 	}
 	reset($checkArr);
