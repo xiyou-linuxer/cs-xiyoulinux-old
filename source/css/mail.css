@@ -1,0 +1,109 @@
+body {
+    padding-top:50px;
+}
+
+.navbar .xylinux {
+    color:#ffffff;
+}
+
+/*user.php
+*/
+.navbar-text a.active {
+    color:#ffffff;
+}
+
+
+/*mail.php*/
+
+.left-bar {
+    position:fixed;
+    background:#eeeeee;
+    float:left;
+}
+
+.main-container {
+    width:100%;
+}
+
+.mail-container {
+   float:right; 
+}
+
+.mail-table {
+    cursor:pointer;
+    border:2px solid #eeeeee;
+}
+
+.mail-table .row-header, .mail-table .rowheader:hover {
+    cursor:default !important;
+    color:#333333 !important;
+    background:#eeeeee !important;
+}
+
+.mail-table tr {
+    color:#333333;
+}
+
+.mail-table tr:hover {
+    color:ffffff;
+    background:#999999;
+}
+
+.mail-table tr.active {
+    color:000000;
+    background:#999999;
+}
+
+@media (min-width: 1200px) {
+    .left-bar {
+        width:15%;
+	padding:10px;
+    }
+    
+    .mail-container {
+        width:85%;
+	padding:10px;
+    }
+}
+
+@media (min-width: 980px) and (max-width:1199px) {
+    .left-bar {
+        width:15%;
+	padding:10px;
+    }
+    
+    .mail-container {
+        width:85%;
+	padding:10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .left-bar {
+        width:20%;
+    }
+
+    .mail-container {
+        width:80%;
+    }
+}
+@media (max-width: 767px) {
+    .left-bar {
+        width:100%;
+	display:block;
+    }
+ 
+    .mail-container {
+        width:100%;
+    }
+}
+@media (max-width: 480px) {
+    .left-bar {
+        width:100%;
+	display:block;
+    }
+
+    .mail-container {
+        width:100%;
+    }
+}
