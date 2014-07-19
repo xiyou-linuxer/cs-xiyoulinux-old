@@ -98,25 +98,6 @@ mid INT UNSIGNED NOT NULL,
 touid INT UNSIGNED NOT NULL,
 status INT(1) NOT NULL DEFAULT 0
 ) AUTO_INCREMENT=1;
--- --------------------------------------------------------------------------------
--- create user app table
--- [cs_user_app] table name
--- --------------------------------------------------------------------------------
--- columns
--- [uid] user id
--- [aid] app id
--- [status] app status 0: not active; 1: active
--- [path] app path
--- --------------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `cs_user_app`;
-
-CREATE TABLE `cs_user_app` (
-uid INT UNSIGNED PRIMARY KEY NOT NULL,
-aid INT UNSIGNED NOT NULL,
-status INT NOT NULL DEFAULT 0,
-path CHAR(128) NOT NULL
-);
 
 -- --------------------------------------------------------------------------------
 -- create app list table
@@ -134,6 +115,6 @@ DROP TABLE IF EXISTS `cs_app`;
 CREATE TABLE `cs_app` (
 aid INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
 name CHAR(32) NOT NULL,
-path CHAR(128) NOT NULL,
+dis CHAR(128) NOT NULL,
 status INT(1) NOT NULL DEFAULT 1
 )AUTO_INCREMENT=1; 
