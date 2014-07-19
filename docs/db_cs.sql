@@ -104,13 +104,11 @@ CREATE TABLE `cs_mail_user` (
 -- --------------------------------------------------------------------------------
 -- columns
 -- [name]  app name
--- [des]  app description
 -- [status]  app status 0: not active; 1: active
 -- --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `cs_app`;
 
 CREATE TABLE `cs_app` (
 	name    CHAR(32)      NOT NULL,
-	des    CHAR(128)     NOT NULL,
 	status  INT(1)        NOT NULL DEFAULT 1
 )AUTO_INCREMENT=1; 
