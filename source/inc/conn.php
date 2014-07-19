@@ -13,7 +13,7 @@ class Csdb{		//封装成类,对外目前就一个query接口
 		$this->user = 'xx';
 		$this->pwd = 'xx';
 		$this->dbName = 'xx';
-		$this->charset = 'xx';		
+		$this->charset = 'utf8';		
 		$this->connect($this->host,$this->user,$this->pwd,$this->dbName,$this->charset);
 	}
 	
