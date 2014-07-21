@@ -11,8 +11,8 @@ class Csdb{		//封装成类,对外目前就一个query接口
 	public function __construct(){	//自动初始化
 		$this->host = 'localhost';
 		$this->user = 'root';
-		$this->pwd = 'perfect456';
-		$this->dbName = 'linux_project';
+		$this->pwd = '*****';
+		$this->dbName = '*******';
 		$this->charset = 'utf-8';		
 		$this->connect($this->host,$this->user,$this->pwd,$this->dbName,$this->charset);
 	}
