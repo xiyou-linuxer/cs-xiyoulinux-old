@@ -2,6 +2,10 @@
 require_once("conn.php");
 require_once("error_log.php");
 
+$m = new Mail(1030);
+$array = json_decode($m->cs_get_mail(283, 1, 1), true);
+var_dump($array);
+
 class Mail{
 	private $uid;
 
@@ -104,9 +108,38 @@ class Mail{
 		return json_encode($result);
 	}
 
-	public function cs_get_mail($mid, $tag = 0)
+	private function combine_mid($data)
 	{
-		$result = $this->link_result("select id,fromuid, sdate, touid, title, content from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid", "get_mail -> select error");
+		// code...
+		$mid = array();
+		foreach($data as $row)
+		{
+			$mid[] = $row["touid"];
+		}
+		$data[0]["touid"] = $mid;
+		return $data[0];
+	}
+
+	/*$tag == 0,   消息仍未未读
+	 *$tag == other, 消息标记未已读
+	 *$flag = 0,寻找$uid的未读信息
+	 *$flag == other,寻找$uid的已读信息
+	 * */
+	public function cs_get_mail($mid, $tag = 0, $flag = 0)
+	{	
+
+		if ($flag == 0)
+		{
+			$result = $this->link_result("select id,fromuid, sdate, touid, title, content from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid and touid = $this->uid", "get_mail -> select error");
+		}else 
+		{
+			$result =  $this->link_result("select id,fromuid, sdate, touid, title, content from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid", "get_mail -> select error");
+
+		$result = $this->combine_mid($result);
+			
+		}
+
+
 		if ($result != false)
 		{
 			if ($tag == 1)
