@@ -1,7 +1,11 @@
 ﻿<?php
 session_start();
 
-$_session['uid'] = 1001;
+require_once('inc/user.php');
+require_once('inc/mail.php');
+require_once('config.php');
+
+$_SESSION['uid'] = 1002;
 
 if (!isset($_GET['select'])) {
     echo '<script language="javascript" type="text/javascript">window.location.href="mail.php?select=all";</script>';
@@ -50,7 +54,7 @@ if (!isset($_GET['select'])) {
 
 <div class="page-container row">
     <!-- begin sidebar -->
-    <div class="page-sidebar col-md-2" id="open_sidebar">
+    <div class="page-sidebar col-md-2">
         <!-- begin sidebar menu -->        
         <ul class="page-sidebar-menu">
             <li>
@@ -124,17 +128,16 @@ if ($_GET['action'] == 'read' && isset($_GET['mid'])) {
 ?>
     </div>
 </div>
-    <script src="js/jquery.js"></script>
-    <script src="metronic/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="metronic/media/js/app.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="js/DT_bootstrap.js"></script>
-    <script src="js/table-managed.js"></script>
-    <script src="js/jquery.urlGET.js"></script>
-    <script>
-        function OnMailClick(obj, mid) {
-            obj.className="active";
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="js/DT_bootstrap.js" type="text/javascript"></script>
+    <script src="js/table-managed.js" type="text/javascript"></script>
+    <script src="js/jquery.urlGET.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function OnMailClick(mid) {
             var GET = $.urlGet();
             var select = GET['select'];
             document.location="?select="+select+"&action=read&mid="+mid;

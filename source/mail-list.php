@@ -1,112 +1,75 @@
-<table class="table tabel-striped table-bordered table-hover" id="mail_table">
+<table class="table table-striped table-bordered table-hover" id="mail_table">
     <thead>
         <tr>
             <th width="300">标题</th>
-            <th width="150">时间</th>
-            <th width="120">发送者</th>
-            <th width="120">状态</th>
+            <th class="text-center" width="150">时间</th>
+            <th class="text-center" width="120">发送者</th>
+            <th class="text-center" width="120">状态</th>
 		    <th>预览</th>
         </tr>
     </thead>
     <tbody id="mail_table_body" style="cursor:pointer;">
 <?php
-require_once('inc/conn.php');
-require_once('inc/mail.php');
-
-$mailClass = new Mail(1001);
-
 $select = $_GET['select'];
 
 switch($select){
 case 'all':
-    $var = 3;			//
-    cs_all_info($var);
-    break;
-case 'read':
-    $var = 1;
-    cs_all_info($var);
+    $var = 0;			
     break;
 case 'unread':
-    $var = 0;
-    cs_all_info($var);
+    $var = 1;
+    break;
+case 'read':
+    $var = 2;
     break;
 case 'draft':
-    $var = 2;
-    cs_all_info($var);
+    $var = 3;
     break;
 default:
-    cs_all_info(3);
+    exit;
 }
 
-function cs_all_info($var) {
-    $userClass = new Csdb();
-    $query_str = "SELECT * FROM cs_mail,cs_mail_user WHERE cs_mail.fromuid = cs_mail_user.touid ;";
-    $result = $userClass->query($query_str);
-    if( $result->num_rows <= 0 ){
-        echo 'false';
-        if( is_object($result) )
-            $result->close();
+set_mail_list($var);
+
+function set_mail_list($var) {
+    $mailClass = new Mail($_SESSION['uid']);
+    $mid_json = $mailClass->cs_get_recvmids($var);
+    $mid_array = json_decode($mid_json);
+
+    if (count($mid_array) == 0) {
         return;
     }
 
-    while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
-        $com[] = $row;
-    }
-    if( is_object($result) )
-        $result->close();
-    $count_json = count($com);
 
-    for($i = 0;$i < $count_json; $i++)
-    {
-
-        $mid = $com[$i]['mid'];
-        $title = $com[$i]['title'];
-        $sdate = $com[$i]['sdate'];
-        $fromuid = $com[$i]['fromuid'];
-        $status = $com[$i]['status'];
-        $content = $com[$i]['content'];
+    foreach ($mid_array as $mid_obj) {
+        if ($mid_obj == null) {
+            continue;
+        }
+        $mail_json = $mailClass->cs_get_mail($mid_obj->mid, 0, 0);
+        $mail_obj = json_decode($mail_json);
         
-        //
-        if($var != 3)
-        {
-            if($var != $status)
-                continue;
+        if (mail_obj == null) {
+            continue;
         }
 
-
-        //获取发件人信息
-        $query_str = "SELECT name FROM cs_mail_user,cs_user WHERE cs_mail_user.touid=cs_user.uid AND cs_mail_user.touid = $fromuid;";
-
-        $result = $userClass->query($query_str);
-        if( $result->num_rows <= 0 ){
-            echo 'false';
-            if( is_object($result) )
-                $result->close();
+        if ($mail_obj->status == 0) {
+            $mail_obj->status = '未读'; 
+            $label_class = 'label-warning';
+        } else {
+            $mail_obj->status ='已读';
+            $label_class = 'label-success';
         }
+        $mail_obj->content = substr_utf8($mail_obj->content, 0, 25, 1);
+        $user_json = cs_get_userinfo($mail_obj->fromuid);
+        $user_obj = json_decode($user_json);
 
-        while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
-            $con[] = $row;
-        }
-        if( is_object($result) )
-            $result->close();
-
-        $fromuser =  $con[0]['name'];
-
-        //获取状态
-        if($status == 0)
-            $status = "未读";
-        else if($status == 1)
-            $status = "已读";
-        else if($status == 2)
-            $status = "草稿";
-
-        echo "	<tr onclick='OnMailClick(this,{$mid})'>";
-        echo "<td>{$title}</td>";
-        echo "    <td>{$sdate}</td>";
-        echo "    <td>{$fromuser}</td>";
-        echo "	  <td>{$status}</td>";
-        echo "<td>{$content}</td></tr>";
-
+        echo "<tr onclick='OnMailClick({$mid_obj->mid})'>";
+        echo "  <td>{$mail_obj->title}</td>";
+        echo "  <td class='text-center'>{$mail_obj->sdate}</td>";
+        echo "  <td class='text-center'>{$user_obj->name}</td>";
+        echo "	<td class='text-center'><span class=\"label {$label_class}\">&nbsp;{$mail_obj->status}&nbsp;</label></td>";
+        echo "  <td>{$mail_obj->content}</td>";
+        echo "</tr>";
     }
 }
 ?>

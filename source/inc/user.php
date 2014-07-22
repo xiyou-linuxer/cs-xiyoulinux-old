@@ -4,40 +4,40 @@
 	require_once("inc/function.php");	
 	
 	date_default_timezone_set('PRC');
-	$logfile = fopen("register.log", "a");
-	fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
+	//$logfile = fopen("register.log", "a");
+	//fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
 
 	$conn = new Csdb();
 
 	$func = $_GET["func"];
 	switch($func){
 	case 'cs_add_user':
-		fwrite($logfile,"add_user\r\n");
+	//	fwrite($logfile,"add_user\r\n");
 		cs_add_user();
 		break;
 	case 'cs_del_user':
-		fwrite($logfile,"del_user\r\n");
+	//	fwrite($logfile,"del_user\r\n");
 		cs_del_user();
 		break;
 	case 'cs_get_userinfo':
-		fwrite($logfile,"get_userinfo\r\n");
+	//	fwrite($logfile,"get_userinfo\r\n");
 		cs_get_userinfo();
 		break;
 	case 'cs_update_userinfo':
-		fwrite($logfile,"update_userinfo\r\n");
+	//	fwrite($logfile,"update_userinfo\r\n");
 		cs_update_userinfo();
 		break;
 	case 'cs_get_privilege':
-		fwrite($logfile,"get_privilege\r\n");
+	//	fwrite($logfile,"get_privilege\r\n");
 		cs_get_privilege();
 		break;
 	case 'cs_deliver_privilege':
-		fwrite($logfile,"deliver_privilege\r\n");
+	//	fwrite($logfile,"deliver_privilege\r\n");
 		cs_deliver_privilege();
 		break;
 	}
 
-	fclose($logfile);
+//	fclose($logfile);
 
 ?>
 
@@ -135,9 +135,7 @@ function cs_del_user(){
 		$result->close();
 }
 
-function cs_get_userinfo(){
-	$uid = $_GET['uid'];
-
+function cs_get_userinfo($uid){
 	if( !checkStr('digit',$uid) ){
 		echo 'false';
 		return;
@@ -147,17 +145,16 @@ function cs_get_userinfo(){
 	$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
 	$result = $conn->query($query_str);
 	if( $result->num_rows <= 0 ){
-		echo 'false';
+		return 'false';
 		if( is_object($result) )
 			$result->close();
 		return;
 	}
-	while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
-		$com[] = $row;
-	}
-	if( is_object($result) )
+	$row = $result->fetch_assoc();
+    
+    if( is_object($result) )
 		$result->close();
-	echo json_encode($com);
+	return json_encode($row);
 }
 
 function cs_update_userinfo(){
@@ -256,7 +253,8 @@ function cs_get_privilege(){
 			$result->close();
 		return;
 	}
-	echo $result->fetch_array(MYSQLI_ASSOC)['permisson'];
+    $array = $result->fetch_array(MYSQLI_ASSOC);
+    echo $array['permisson'];
 	
 	if( is_object($result) )
 		$result->close();	
@@ -283,8 +281,10 @@ function cs_deliver_privilege(){
 		if( is_object($result2) )
 			$result2->close();
 		exit;
-	}
-	if($result1->fetch_array(MYSQLI_ASSOC)['permisson'] != '1' || $result2->fetch_array(MYSQLI_ASSOC)['permisson'] != '0'){
+    }
+    $array = $result1->fetch_array(MYSQLI_ASSOC);
+    $array2 = $result2->fetch_array(MYSQLI_ASSOC);
+        if($array['permisson'] != '1' || $array2['permisson'] != '0'){
 		echo 'false';
 		return;
 	}

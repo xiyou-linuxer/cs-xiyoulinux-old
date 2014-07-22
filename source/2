@@ -1,0 +1,54 @@
+<table class="table tabel-striped table-bordered table-hover" id="mail_table">
+    <thead>
+        <tr>
+            <th width="300">标题</th>
+            <th width="150">时间</th>
+            <th width="120">发送者</th>
+            <th width="120">状态</th>
+		    <th>预览</th>
+        </tr>
+    </thead>
+    <tbody id="mail_table_body" style="cursor:pointer;">
+<?php
+$select = $_GET['select'];
+include('inc/user.php');
+
+switch($select){
+case 'all':
+    $var = 0;			//
+    break;
+case 'unread':
+    $var = 1;
+    break;
+case 'read':
+    $var = 2;
+    break;
+case 'draft':
+    $var = 3;
+    break;
+default:
+    exit;
+}
+
+set_mail_list($var);
+
+function set_mail_list($var) {
+    $mailClass = new Mail($_SESSION['uid']);
+    $mid_json = $mailClass->cs_get_recvmids($var);
+    $mid_array = json_decode($mid_json);
+
+    foreach ($mid_array as $mid_obj) {
+        $mail_json = $mailClass->cs_get_mail($mid_obj->mid, 0, 0);
+        $mail_array = json_decode($mail_json);
+        echo $mail_array->title;
+        echo "	<tr onclick='OnMailClick({$mid})'>";
+        echo "<td>{$title}</td>";
+        echo "    <td>{$sdate}</td>";
+        echo "    <td>{$fromuser}</td>";
+        echo "	  <td>{$status}</td>";
+        echo "<td>{$content}</td></tr>";
+    }
+}
+?>
+    </tbody>
+</table>

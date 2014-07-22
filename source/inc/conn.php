@@ -13,7 +13,7 @@ class Csdb{		//封装成类,对外目前就一个query接口
 		$this->user = 'cs_linux';
 		$this->pwd = 'pwd_linux';
 		$this->dbName = 'cs_linux';
-		$this->charset = 'utf-8';		
+		$this->charset = 'utf8';		
 		$this->connect($this->host,$this->user,$this->pwd,$this->dbName,$this->charset);
 	}
 	
@@ -22,7 +22,7 @@ class Csdb{		//封装成类,对外目前就一个query接口
 		if (mysqli_connect_errno()) {
 			printf("数据库连接错误: %s\n", mysqli_connect_error());
 			exit();
-		}else{
+        }else{
 			$this->link->query('set names ' . $c);
 		}
 	}
