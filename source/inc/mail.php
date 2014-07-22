@@ -2,10 +2,6 @@
 require_once("conn.php");
 require_once("error_log.php");
 
-$m = new Mail(1030);
-$array = json_decode($m->cs_get_mail(283, 1, 1), true);
-var_dump($array);
-
 class Mail{
 	private $uid;
 
@@ -119,11 +115,8 @@ class Mail{
 		$data[0]["touid"] = $mid;
 		return $data[0];
 	}
-
-	/*$tag == 0,   消息仍未未读
-	 *$tag == other, 消息标记未已读
-	 *$flag = 0,寻找$uid的未读信息
-	 *$flag == other,寻找$uid的已读信息
+	/*
+	 *具体看文档内容   
 	 * */
 	public function cs_get_mail($mid, $tag = 0, $flag = 0)
 	{	
