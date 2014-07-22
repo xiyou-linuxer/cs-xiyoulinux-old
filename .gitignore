@@ -1,2 +1,1 @@
-inc/conn.php
-inc/mail.php
+source/inc/mail.php
