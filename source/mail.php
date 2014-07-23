@@ -1,11 +1,16 @@
 ﻿<?php
 session_start();
 
-$_session['uid'] = 1000;
+require_once('inc/user.php');
+require_once('inc/mail.php');
+require_once('config.php');
 
-include('config.php');
-include('inc/mail.php');
-require_once('inc/function.php');
+$_SESSION['uid'] = 1002;
+
+if (!isset($_GET['select'])) {
+    echo '<script language="javascript" type="text/javascript">window.location.href="mail.php?select=all";</script>';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -14,155 +19,129 @@ require_once('inc/function.php');
     <title>个人中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="cs,xiyoulinux">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/mail.css" rel="stylesheet">
-    <script src="./jquery/jquery.min.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/mail.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/DT_bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">切换导航</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">切换导航</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand xylinux" href="index.php"><strong>XiyouLinux CS</strong></a>
     </div>
     <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-	<li><a href="index.php"><span class="glyphicon glyphicon-home"></span><strong> 首页</strong></a></li>
+	        <li><a href="index.php"><span class="glyphicon glyphicon-home"></span><strong> 首页</strong></a></li>
             <li><a href="app/project"><span class="glyphicon glyphicon-tasks"></span><strong> 项目</strong></a></li>
             <li><a href="app/donate"><span class="glyphicon glyphicon-usd"></span><strong> 基金</strong></a></li>
             <li><a href="app/faq"><span class="glyphicon glyphicon-comment"></span><strong> 问答</strong></a></li>
             <li><a href="app/activity"><span class="glyphicon glyphicon-certificate"></span><strong> 活动</strong></a></li>
-	    <li class="active"><a href="mail.php"><span class="glyphicon glyphicon-envelope"></span><strong> 站内信<span class="badge">
-<?php
-/************************************************新站内信数目提醒************************************************
-嵌入内容:新站内信数目（未读站内信数目），比如有5份未读邮件则显示：5
-*****************************************************************************************************************/
-
-?>
-
-</span></strong></a></li>
+	        <li class="active">
+                <a href="mail.php">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                    <strong> 站内信<span class="badge badge-warning badge-mail"><?php include_once('mail-tip.php');?></span></strong>
+                </a>
+            </li>
 	    </ul>
-
-<?php
-/************************************************导航栏链接************************************************
-根据用户登录状态，按顺序依次嵌入以下代码：
-
-    登录页面跳转链接（未登录）
-        <script language="javascript" type="text/javascript">window.location.href="login.php";</script>
-
-    注销链接代码(普通用户)：
-	<p class="navbar-text navbar-right">
-            <a href="user.php?action=logout" class="navbar-link">注销</a>
-	</p>
-
-    管理后台链接代码(管理员)：
-	<p class="navbar-text navbar-right">
-            <a href="admin/" class="navbar-link">管理后台</a>
-	</p>
-
-
-    个人中心链接代码（普通用户）：
-        <p class="navbar-text navbar-right">
-            <a href="user.php" class="navbar-link">个人中心</a>
-	</p>
-    
-***********************************************************************************************************/
-$mail = new Mail(1001);
-
-if (isset($_SESSION['uid'])) {
-    echo <<<EOF
-	<p class="navbar-text navbar-right">
-            <a href="user.php?action=logout" class="navbar-link">注销</a>
-	</p>
-EOF;
-
-    if (1 == 1) {
-        echo <<<EOF
-	<p class="navbar-text navbar-right">
-            <a href="admin/" class="navbar-link">管理后台</a>
-	</p>
-EOF;
-    }
-
-    echo <<<EOF
-        <p class="navbar-text navbar-right">
-            <a href="user.php" class="navbar-link">个人中心</a>
-	</p>
-EOF;
-}
-?>
-
+        <?php include_once('nav-link.php');?>
     </div>
 </nav>
-    <div clas="main-container">
-        <div class="left-bar">
-            <p><a href="?select=write" class="btn btn-default btn-block">写站内信</a></p>
-            <p><a href="?select=all" class="btn btn-primary btn-block">全部显示</a></p>
-            <p><a href="?select=unread" class="btn btn-danger btn-block">未读邮件</a></p>
-            <p><a href="?select=read" class="btn btn-success btn-block">已读邮件</a></p>
-            <p><a href="?select=draft" class="btn btn-warning btn-block">草稿</a></p>
-	</div>
-        <div class="mail-container" >
-	    
-            <table class="table mail-table" id="mail-table">
-                <tr class="row-header">
-                    <th>标题</th>
-                    <th>时间</th>
-                    <th>发送者</th>
-                    <th>状态</th>
-		    <th>预览</th>
-		</tr>
+
+<div class="page-container row">
+    <!-- begin sidebar -->
+    <div class="page-sidebar col-md-2">
+        <!-- begin sidebar menu -->        
+        <ul class="page-sidebar-menu">
+            <li>
+                <!-- begin sidebar toggler button -->
+                <div class="sidebar-toggler hidden-phone" id="sidebar_toggler"></div>
+                <!-- begin sidebar toggler button -->
+            </li>
+            <li class="start" id="menu_write">
+                <a href="index.html">
+                <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-edit"></span>
+                <span class="title">写站内信</span>
+                <span class="selected"></span>
+                </a>
+            </li>
+
+            <li class="start" id="menu_all">
+                <a href="mail.php?select=all">
+                <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-list-alt"></span>
+                <span class="title">全部显示</span>
+                <span class="selected"></span>
+                </a>
+            </li>
+
+            <li class="start" id="menu_unread">
+                <a href="mail.php?select=unread">
+                <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-inbox"></span>
+                <span class="title">未读信息</span>
+                <span class="selected"></span>
+                </a>
+            </li>
+
+            <li class="start" id="menu_read">
+                <a href="mail.php?select=read">
+                <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-bookmark"></span>
+                <span class="title">已读信息</span>
+                <span class="selected"></span>
+                </a>
+            </li>
+
+            <li class="start" id="menu_draft">
+                <a href="mail.php?select=draft">
+                <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-file"></span>
+                <span class="title">草稿</span>
+                <span class="selected"></span>
+                </a>
+            </li>
+            <li class="last ">
+                <span class="title"></span>
+            </li>
+        </ul>
+        <!-- end sidebar menu -->
+    </div>
+    <!-- END PAGE -->
+    <div class="container col-md-10">
 <?php
-/************************************************站内信列表************************************************
-根据GET请求分别显示全部(?select=all)、未读(?select=unread)、已读(?select=read)、草稿(?select=draft)站内信	
-    嵌入代码（用大括号括起来的内容需要用动态读取的相应内容进行替换）:
-    <tr onclick="OnClick(this,{站内信id});">
-	<td>{站内信标题}</td>
-        <td>{站内信发送时间}</td>
-        <td>{站内信发信人姓名}</td>
-        <td>{站内信读取状态：显示为已读，未读，或草稿}</td>
-	<td>{站内信内容预览}</td>
-    </tr>
-***********************************************************************************************************/
-$mail = new Mail(1001);
-
-$mid_json = $mail->cs_get_recvmids(0);
-
-$mid_decode = json_decode($mid_json, true);
-
-//$length = count($mid_decode, 0);
-
-//var_dump($mid_decode);
-
-//echo $length;
-
-foreach ($mid_decode as $mid_row) {
-    $mail_json = $mail->cs_get_mail($mid_row['mid']);
-    $mail_decode = json_decode($mail_json, true);
-  
-    foreach ($mail_decode as $row) {
-    //    $row['sdate'] = date('Y-m-d', $row['sdate']);
-        $date = explode(' ', $row['sdate']);
-        $row['sdate'] = $date['0'];
-        echo "<tr onclick=\"OnMailClick(this, $mid_row[mid]);\">
-                  <td>$row[title]</td>
-                  <td>$row[sdate]</td>
-                  <td>$row[fromuid]</td>
-                  <td>$row[status]</td>
-                  <td>$row[content]</td>
-		  </tr>";
-  }
+if ($_GET['action'] == 'read' && isset($_GET['mid'])) {
+    include('read-mail.php');
+} else {
+    include('mail-list.php');
 }
 
 ?>
-            </table>
-        </div>
-    </div><!--row-fluid-->
+    </div>
+</div>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="js/DT_bootstrap.js" type="text/javascript"></script>
+    <script src="js/table-managed.js" type="text/javascript"></script>
+    <script src="js/jquery.urlGET.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function OnMailClick(mid) {
+            var GET = $.urlGet();
+            var select = GET['select'];
+            document.location="?select="+select+"&action=read&mid="+mid;
+        }
+
+        jQuery(document).ready(function() {
+            App.init();
+            TableManaged.init(); 
+
+            var GET = $.urlGet();
+            var select = GET['select'];
+            $("#menu_"+select).attr('class', 'start active');
+        });
+    </script>
 </body>
 </html>
