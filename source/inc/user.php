@@ -1,12 +1,11 @@
 <?php
 
-	require_once("inc/conn.php");
-	require_once("inc/function.php");	
+	require_once("conn.php");
+	require_once("function.php");	
 	
 	date_default_timezone_set('PRC');
 	//$logfile = fopen("register.log", "a");
 	//fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
-
 	$conn = new Csdb();
 
 	$func = $_GET["func"];
