@@ -4,8 +4,8 @@
 	require_once("function.php");	
 	
 	date_default_timezone_set('PRC');
-	//$logfile = fopen("register.log", "a");
-	//fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
+	$logfile = fopen("register.log", "a");
+	fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
 	$conn = new Csdb();
 
 	$func = $_GET["func"];
