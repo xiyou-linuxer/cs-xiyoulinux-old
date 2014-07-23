@@ -4,7 +4,7 @@ require_once("error_log.php");
 
 class Mail{
 	private $uid;
-
+    private $num;
 	function __construct($uid)
 	{
 		// code...
@@ -28,7 +28,7 @@ class Mail{
         $flag = preg_match("/select|show|describe|explain/", $lower_sql_str);
 
 		if ($result != false && $flag != false)
-		{
+        {
 			if ($result->num_rows > 1)
 			{
 				for ($i = 0; $i < $result->num_rows; $i++) 
@@ -86,7 +86,7 @@ class Mail{
 			$result = $this->link_result("select mid from cs_mail_user where touid = $this->uid and status = 0",
 				"get_recvmids -> select tag=1 error");
 		if ($tag == 2)
-			$result = $this->link_result("select mid from cs_mail_user where touid = $this->uid and status = 1",
+			$result = $this->link_result("select cs_mail.mid from cs_mail, cs_mail_user where cs_mail.mid = cs_mail_user.mid and cs_mail_user.touid = $this->uid and cs_mail_user.status = 1 order by  cs_mail.sdate desc",
 				"get_recvmids -> select tag=2 error");	
 		if ($result == null)
             return null;
@@ -107,6 +107,45 @@ class Mail{
 	
 		return json_encode($result);
 	}
+    
+    /* 接口名称: get_mail_num
+     * 功能描述: 获取站内信数目
+     * 参数描述:
+     * $tag = 0, 获取接收的所有信息的数量
+     * $tag = 1，获取接收的未读信息的数量
+     * $tag = 2，获取接收的已读信息的数量
+     * $tag = 3, 获取发送的所有信息的数量
+     * $tag = other, 获取草稿的数量
+     *
+     *
+     */
+
+    function get_mail_num($tag = 0) {
+        $link = $this->getlink();
+        switch ($tag) {
+        case 0:
+            $sql_str = "select mid from cs_mail_user where touid= {$this->uid}";
+            break;
+        case 1:
+            $sql_str = "select mid from cs_mail_user where touid= {$this->uid} and status = 0";
+            break;
+        case 2:
+            $sql_str = "select mid from cs_mail_user where touid= {$this->uid} and status = 1";
+            break;
+        case 3:
+            $sql_str = "select mid from cs_mail where fromuid= {$this->uid}";
+            break;
+//        case 4:
+ //           $sql_str = "select count(mid) from cs_mail where fromuid= {$this->uid}";
+        default:
+            return;
+        }
+
+        $result = $link->query($sql_str);
+        
+        return $result->num_rows;
+    }
+
 
     /* $tag == 0,       获取接受的消息
      * $tag == other,   获取发送的消息

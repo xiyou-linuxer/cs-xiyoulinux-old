@@ -44,7 +44,7 @@ if (!isset($_GET['select'])) {
 	        <li class="active">
                 <a href="mail.php">
                     <span class="glyphicon glyphicon-envelope"></span>
-                    <strong> 站内信<span class="badge"><?php include_once('mail-tip.php');?></span></strong>
+                    <strong> 站内信<span class="badge badge-warning badge-mail"><?php include_once('mail-tip.php');?></span></strong>
                 </a>
             </li>
 	    </ul>
@@ -61,15 +61,6 @@ if (!isset($_GET['select'])) {
                 <!-- begin sidebar toggler button -->
                 <div class="sidebar-toggler hidden-phone" id="sidebar_toggler"></div>
                 <!-- begin sidebar toggler button -->
-            </li>
-            <li>
-                <form class="sidebar-search">
-                    <div class="input-box">
-                        <a href="javascript:;" class="remove"></a>
-                        <input type="text" placeholder="search..." />
-                        <input type="button" class="submit" value=" " />
-                    </div>
-                </form>
             </li>
             <li class="start" id="menu_write">
                 <a href="index.html">

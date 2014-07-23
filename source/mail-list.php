@@ -1,14 +1,15 @@
-<table class="table table-striped table-bordered table-hover" id="mail_table">
-    <thead>
-        <tr>
-            <th width="300">标题</th>
-            <th class="text-center" width="150">时间</th>
-            <th class="text-center" width="120">发送者</th>
-            <th class="text-center" width="120">状态</th>
-		    <th>预览</th>
-        </tr>
-    </thead>
-    <tbody id="mail_table_body" style="cursor:pointer;">
+        <div class="panel panel-default mail-list-panel">
+            <table class="table table-striped table-bordered table-hover" id="mail_table">
+                <thead>
+                    <tr>
+                        <th width="300">标题</th>
+                        <th class="text-center" width="150">时间</th>
+                        <th class="text-center" width="120">发送者</th>
+                        <th class="text-center" width="120">状态</th>
+		                <th>预览</th>
+                    </tr>
+                </thead>
+                <tbody id="mail_table_body" style="cursor:pointer;">
 <?php
 $select = $_GET['select'];
 
@@ -40,11 +41,13 @@ function set_mail_list($var) {
         return;
     }
 
+    //var_dump($mid_array);
 
     foreach ($mid_array as $mid_obj) {
         if ($mid_obj == null) {
             continue;
         }
+  //      echo $mid_obj->mid;
         $mail_json = $mailClass->cs_get_mail($mid_obj->mid, 0, 0);
         $mail_obj = json_decode($mail_json);
         
@@ -73,5 +76,10 @@ function set_mail_list($var) {
     }
 }
 ?>
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+        <!--END PANEL-->
+    <!--END COL-MD-10 -->
+
+<!--END ROW-->
