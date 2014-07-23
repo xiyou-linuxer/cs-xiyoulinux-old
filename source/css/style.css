@@ -213,6 +213,20 @@ ul.page-sidebar-menu > li.active > a .arrow:before,ul.page-sidebar-menu > li.act
     padding: 10px;
 }
 
+.textarea-custom {
+    font-family:inherit;
+    font-weight:500;
+    line-height:1.1;
+    font-size:18px;
+    color:inherit;
+}
+
+.list-bottom-no-margin {
+    margin-bottom:0px !important;
+}
+
+
+/*
 ul.list-responsive>:hover {
     #background:#222222;
 }
@@ -294,3 +308,4 @@ ul.list-responsive>li {
 }
 
 }
+*/
