@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://themes.googleusercontent.com/static/fonts/abel/v3/3YEwT2a1878zysq92S8_9w.eot);
+  src: local('Abel'), local('Abel-Regular'), url(http://themes.googleusercontent.com/static/fonts/abel/v3/3YEwT2a1878zysq92S8_9w.eot) format('embedded-opentype'), url(http://themes.googleusercontent.com/static/fonts/abel/v3/EAqh528fFdbUek8UOky4sA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3fY6323mHUZFJMgTvxaG2iE.eot);
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3fY6323mHUZFJMgTvxaG2iE.eot) format('embedded-opentype'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}

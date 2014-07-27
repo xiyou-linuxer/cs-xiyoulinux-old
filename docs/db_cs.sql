@@ -64,7 +64,7 @@ CREATE TABLE `cs_user` (
 	major       CHAR(32)  NOT NULL, 
 	workplace   CHAR(128) NULL,
 	job         CHAR(32)  NULL
-) AUTO_INCREMENT=1001; 
+) AUTO_INCREMENT=1001, DEFAULT CHARSET=utf8; 
 
 -- --------------------------------------------------------------------------------
 -- create mail table
@@ -85,10 +85,10 @@ DROP TABLE IF EXISTS `cs_mail`;
 CREATE TABLE `cs_mail` (
 	mid     INT UNSIGNED  PRIMARY KEY AUTO_INCREMENT NOT NULL, 
 	fromuid INT UNSIGNED  NOT NULL DEFAULT 1000,
-	sdate   DATETIME      NOT NULL DEFAULT now(),
+	sdate   TIMESTAMP      NOT NULL DEFAULT now(),
 	title   CHAR(64)      NOT NULL,
 	content TEXT          NOT NULL
-) AUTO_INCREMENT=1; 
+) AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
 
 DROP TABLE IF EXISTS `cs_mail_user`;
 
@@ -96,8 +96,8 @@ CREATE TABLE `cs_mail_user` (
 	id      INT UNSIGNED  PRIMARY KEY AUTO_INCREMENT NOT NULL, 
 	mid     INT UNSIGNED  NOT NULL,
 	touid   INT UNSIGNED  NOT NULL,
-	status  INT(1)        NOT NULL DEFAULT 0,
-) AUTO_INCREMENT=1; 
+	status  INT(1)        NOT NULL DEFAULT 0
+) AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
 -- --------------------------------------------------------------------------------
 -- create app list table
 -- [cs_app_list] table name
@@ -111,4 +111,4 @@ DROP TABLE IF EXISTS `cs_app`;
 CREATE TABLE `cs_app` (
 	name    CHAR(32)      NOT NULL,
 	status  INT(1)        NOT NULL DEFAULT 1
-)AUTO_INCREMENT=1; 
+)AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
