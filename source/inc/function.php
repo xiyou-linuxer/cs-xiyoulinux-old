@@ -1,5 +1,14 @@
 <?php
 
+function checkUser($uid){
+	session_start();
+	if( !isset($_SESSION['identity']) )
+		return false;
+	if( crypt($uid,'cs_linux_2012') != $_SESSION['identity'] )
+		return false;
+	return true;
+}
+
 function getIP() {		//获取IP
 	if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))  
 		$realip = $_SERVER['HTTP_X_FORWARDED_FOR']; 
