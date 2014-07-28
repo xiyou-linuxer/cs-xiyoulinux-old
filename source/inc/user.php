@@ -3,61 +3,68 @@
 	require_once("conn.php");
 	require_once("function.php");	
 	
+	checkUser();
+
 	date_default_timezone_set('PRC');
-	//$logfile = fopen("register.log", "a");
-	//fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
+	$logfile = fopen("register.log", "a");
+	fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
+
 	$conn = new Csdb();
 
-	$func = $_GET["func"];
+	$func = $_POST["func"];
 	switch($func){
-	case 'cs_add_user':
-	//	fwrite($logfile,"add_user\r\n");
-		cs_add_user();
+	case 'add_user':
+		fwrite($logfile,"add_user\r\n");
+		add_user();
 		break;
-	case 'cs_del_user':
-	//	fwrite($logfile,"del_user\r\n");
-		cs_del_user();
+	case 'del_user':
+		fwrite($logfile,"del_user\r\n");
+		del_user();
 		break;
-	case 'cs_get_userinfo':
-	//	fwrite($logfile,"get_userinfo\r\n");
-		cs_get_userinfo();
+	case 'get_userinfo':
+		fwrite($logfile,"get_userinfo\r\n");
+		get_userinfo();
 		break;
-	case 'cs_update_userinfo':
-	//	fwrite($logfile,"update_userinfo\r\n");
-		cs_update_userinfo();
+	case 'update_userinfo':
+		fwrite($logfile,"update_userinfo\r\n");
+		update_userinfo();
 		break;
-	case 'cs_get_privilege':
-	//	fwrite($logfile,"get_privilege\r\n");
-		cs_get_privilege();
+	case 'get_privilege':
+		fwrite($logfile,"get_privilege\r\n");
+		get_privilege();
 		break;
-	case 'cs_deliver_privilege':
-	//	fwrite($logfile,"deliver_privilege\r\n");
-		cs_deliver_privilege();
+	case 'deliver_privilege':
+		fwrite($logfile,"deliver_privilege\r\n");
+		deliver_privilege();
+		break;
+	case 'get_avatar':
+		fwrite($logfile,"get_avatar\r\n");
+		get_avatar();
 		break;
 	}
 
-//	fclose($logfile);
+	fclose($logfile);
 
 ?>
 
 <?php
 
-function cs_add_user(){
-    $name = $_GET["name"];	
+function add_user(){
+    $name = $_POST["name"];	
 	$permisson = 0;
-    $password = $_GET["password"];
-	$sex = $_GET["sex"];
-	$phone = $_GET["phone"];
-    $mail = $_GET["mail"];
-    $qq = $_GET["qq"];	
-    $wechat = $_GET["wechat"];
-    $blog = $_GET["blog"];
-    $github = $_GET["github"];
-    $native = $_GET["native"];
-    $grade = $_GET["grade"];
-    $major = $_GET["major"];
-	$workplace = $_GET["workplace"];
-	$job = $_GET["job"];
+    $password = $_POST["password"];
+	$sex = $_POST["sex"];
+	$phone = $_POST["phone"];
+    $mail = $_POST["mail"];
+    $qq = $_POST["qq"];	
+    $wechat = $_POST["wechat"];
+    $blog = $_POST["blog"];
+    $github = $_POST["github"];
+    $native = $_POST["native"];
+    $grade = $_POST["grade"];
+    $major = $_POST["major"];
+	$workplace = $_POST["workplace"];
+	$job = $_POST["job"];
 	if( empty($name) || empty($password) || $sex=="" || empty($mail) || empty($grade) || empty($major) ){
 		echo 'false';
 		return;
@@ -105,8 +112,8 @@ function cs_add_user(){
 		$result->close();
 }
 
-function cs_del_user(){
-	$uid = $_GET['uid'];
+function del_user(){
+	$uid = $_POST['uid'];
 
 	if( !checkStr('digit',$uid) ){
 		echo 'false';
@@ -134,7 +141,9 @@ function cs_del_user(){
 		$result->close();
 }
 
-function cs_get_userinfo($uid){
+function get_userinfo(){
+	$uid = $_POST['uid'];
+
 	if( !checkStr('digit',$uid) ){
 		echo 'false';
 		return;
@@ -144,31 +153,32 @@ function cs_get_userinfo($uid){
 	$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
 	$result = $conn->query($query_str);
 	if( $result->num_rows <= 0 ){
-		return 'false';
+		echo 'false';
 		if( is_object($result) )
 			$result->close();
 		return;
 	}
-	$row = $result->fetch_assoc();
-    
-    if( is_object($result) )
+	while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
+		$com[] = $row;
+	}
+	if( is_object($result) )
 		$result->close();
-	return json_encode($row);
+	echo json_encode($com);
 }
 
-function cs_update_userinfo(){
-    $password = $_GET["password"];
-	$phone = $_GET["phone"];
-    $mail = $_GET["mail"];
-    $qq = $_GET["qq"];	
-    $wechat = $_GET["wechat"];
-    $blog = $_GET["blog"];
-    $github = $_GET["github"];
-    $native = $_GET["native"];
-    $major = $_GET["major"];
-	$workplace = $_GET["workplace"];
-	$job = $_GET["job"];
-	$uid = $_GET["uid"];
+function update_userinfo(){
+    $password = $_POST["password"];
+	$phone = $_POST["phone"];
+    $mail = $_POST["mail"];
+    $qq = $_POST["qq"];	
+    $wechat = $_POST["wechat"];
+    $blog = $_POST["blog"];
+    $github = $_POST["github"];
+    $native = $_POST["native"];
+    $major = $_POST["major"];
+	$workplace = $_POST["workplace"];
+	$job = $_POST["job"];
+	$uid = $_POST["uid"];
 	
 	$checkArr = array(
 		"$uid" => 'digit', 
@@ -235,8 +245,8 @@ function cs_update_userinfo(){
 		$result->close();
 }
 
-function cs_get_privilege(){
-	$uid = $_GET['uid'];
+function get_privilege(){
+	$uid = $_POST['uid'];
 
 	if( !checkStr('digit',$uid) ){
 		echo 'false';
@@ -252,16 +262,16 @@ function cs_get_privilege(){
 			$result->close();
 		return;
 	}
-    $array = $result->fetch_array(MYSQLI_ASSOC);
-    echo $array['permisson'];
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+    echo $row['permisson'];
 	
 	if( is_object($result) )
 		$result->close();	
 }
 
-function cs_deliver_privilege(){
-	$uid_now = $_GET['uid_now'];
-	$uid_next = $_GET['uid_next'];
+function deliver_privilege(){
+	$uid_now = $_POST['uid_now'];
+	$uid_next = $_POST['uid_next'];
 	
 	if( !checkStr('digit',$uid_now) || !checkStr('digit',$uid_next) ){
 		echo 'false';
@@ -280,10 +290,10 @@ function cs_deliver_privilege(){
 		if( is_object($result2) )
 			$result2->close();
 		exit;
-    }
-    $array = $result1->fetch_array(MYSQLI_ASSOC);
-    $array2 = $result2->fetch_array(MYSQLI_ASSOC);
-        if($array['permisson'] != '1' || $array2['permisson'] != '0'){
+	}
+    $row1 = $result1->fetch_array(MYSQLI_ASSOC);
+    $row2 = $result2->fetch_array(MYSQLI_ASSOC);
+    if($row1['permisson'] != '1' ||$row2['permisson'] != '0'){
 		echo 'false';
 		return;
 	}
@@ -297,6 +307,24 @@ function cs_deliver_privilege(){
 		$result1->close();
 	if( is_object($result2) )
 		$result2->close();
+}
+
+function get_avatar(){
+	$uid = $_POST['uid'];
+
+	global $conn;
+	$query = "SELECT `mail` FROM `cs_user`;";
+	$result = $conn->query($query);
+	if( $result->num_rows <= 0){
+		return 'false';
+	}
+	$row = $result->assoc();
+	$mail = $row['mail'];
+	$default = "http://xdth.sinaapp.com/img/man.jpg";
+	$size = 100;
+	$grav_url = "http://www.gravatar.com/avatar/" .md5(strtolower(trim($mail))) .
+		"?d=" .urlencode($default) . "&s=" . $size;
+	return $grav_url;
 }
 
 ?>
