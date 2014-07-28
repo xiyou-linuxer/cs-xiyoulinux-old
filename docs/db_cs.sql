@@ -67,19 +67,18 @@ CREATE TABLE `cs_user` (
 ) AUTO_INCREMENT=1001, DEFAULT CHARSET=utf8; 
 
 -- --------------------------------------------------------------------------------
--- create mail table
--- [cs_user_mail] table name
+-- create cs_mail table
+-- [cs_mail] table name
 -- --------------------------------------------------------------------------------
 -- columns
--- [umid]    the unique identification of mail, auto incrment, and start from 1
--- [fromuid] from_user' uid
--- [touid]   to_user' uid
--- [sdate]   send date
--- [status]  read status, 0: not read; 1: read yet
--- [title]   mail title
--- [content] mail context
+-- [mid]  identification
+-- [fromuid] from uid
+-- [sdate] Date
+-- [title] title
+-- [content] content
+-- [isdraft] point to whether draft
+-- [touser] json string,like {'name' => 'status'}
 -- --------------------------------------------------------------------------------
-
 DROP TABLE IF EXISTS `cs_mail`;
 
 CREATE TABLE `cs_mail` (
@@ -88,16 +87,10 @@ CREATE TABLE `cs_mail` (
 	sdate   TIMESTAMP      NOT NULL DEFAULT now(),
 	title   CHAR(64)      NOT NULL,
 	content TEXT          NOT NULL
+	isdraft INT(1)		NOT NULL DEFAULT 0,
+	touser	MEDIUMTEXT	NOT NULL
 ) AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
 
-DROP TABLE IF EXISTS `cs_mail_user`;
-
-CREATE TABLE `cs_mail_user` (
-	id      INT UNSIGNED  PRIMARY KEY AUTO_INCREMENT NOT NULL, 
-	mid     INT UNSIGNED  NOT NULL,
-	touid   INT UNSIGNED  NOT NULL,
-	status  INT(1)        NOT NULL DEFAULT 0
-) AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
 -- --------------------------------------------------------------------------------
 -- create app list table
 -- [cs_app_list] table name
