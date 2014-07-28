@@ -48,7 +48,8 @@ class Mail{
 			return $result;
 
 		$array = $result->fetch_assoc();
-		$uid = $array["uid"];
+		return $array["uid"];
+
 	}
 
 	private function uid_to_name($uid)
@@ -61,7 +62,7 @@ class Mail{
 			return $result;
 
 		$array = $result->fetch_assoc();
-		$uid = $array["name"];
+		return $array["name"];
 	}
 
 	private function insert_mail($fromuid, $touid, $title, $content, $mid)
@@ -235,6 +236,7 @@ class Mail{
 		{
 			$value["title"] = substr($value["title"], 0, 30);
 			$value["content"] = substr($value["content"], 0, 30);
+			$result = $this->uid_to_name_all($result);
 		}
 
 		unset($value);
@@ -250,6 +252,7 @@ class Mail{
 		{
 			$result = $this->remove_repeat($result);
 			$result = $this->sub_title_content($result, array(30,30));
+			$result = $this->uid_to_name_all($result);
 		}
 
 		return json_encode($result);
@@ -263,6 +266,7 @@ class Mail{
 		{
 			$result = $this->remove_repeat($result);
 			$result = $this->sub_title_content($result, array(30,30));
+			$result = $this->uid_to_name_all($result);
 		}
 
 		return json_encode($result);
@@ -276,6 +280,7 @@ class Mail{
 		{
 			$result = $this->remove_repeat($result);
 			$result = $this->sub_title_content($result, array(30,30));
+			$result = $this->uid_to_name_all($result);
 		}
 
 		return json_encode($result);
@@ -296,7 +301,8 @@ class Mail{
 		$result = $this->link_result("select * from cs_mail,cs_mail_user where cs_mail.mid = cs_mail_user.mid and (fromuid=$this->uid or touid=$this->uid) order by sdate desc",
 			"get_mail_all ->select error");
 
-		//var_dump($result);
+//var_dump($result);
+	
 		if (is_array($result))
 		{
 			$result = $this->remove_repeat($result);
@@ -306,12 +312,26 @@ class Mail{
 		return json_encode($result);	
 	}
 
+	// only 2D array can be used
+	private function uid_to_name_all($info)
+	{
+		foreach ($info as &$value)
+		{
+			$value["fromuser"] = $this->uid_to_name($value["fromuid"]);
+			unset($value["fromuid"]);
+			$value["touid"] = $this->uid_to_name($value["touid"]);
+			unset($value["touid"]);
+		}
+		unset($value);
+	}
+
 	public function get_mail_info($mid)
 	{
 		$result = $this->link_result("select * from cs_mail,cs_mail_user where cs_mail.mid=$mid and cs_mail_user.mid=$mid order by desc",
 			"get_mail_info -> select error");
 
 		$result = $this->remove_repeat($result);
+		$result = $this->uid_to_name_all($result);
 
 		return json_encode($result[0]);
 	}
