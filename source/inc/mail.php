@@ -1,13 +1,11 @@
 <?php
 require_once("conn.php");
-require_once("error_log.php");
 
 class Mail{
 	private $uid;
-    private $num;
-	function __construct($uid)
+
+	public function __construct($uid)
 	{
-		// code...
 		$this->uid = $uid;
 	}
 
@@ -20,157 +18,310 @@ class Mail{
 	private function link_result($sql_str, $error_str)
 	{
 		$link = $this->getlink();
-		unset($result);
 
-		$lower_sql_str = strtolower($sql_str);
 		$result = $link->query($sql_str);
 
-        $flag = preg_match("/select|show|describe|explain/", $lower_sql_str);
+		if ($result == false)
+			echo $error_str;
 
-		if ($result != false && $flag != false)
-        {
-			if ($result->num_rows > 1)
+		if (is_object($result))
+		{
+			if($result->num_rows > 0)
 			{
-				for ($i = 0; $i < $result->num_rows; $i++) 
-				{
-					//$result->field_seek((int)$i);
-					$array = $result->fetch_assoc();
-                    $return_var[$i] = $array;
-				}
+				while( $row = $result->fetch_assoc() )
+					$array[] = $row;
 			}
-			else 
-			{
-				$return_var[] = $result->fetch_assoc();
-			}
-			return $return_var;
+
+			return $array;
 		}
+
+		return $result;
+	}
+
+	private function name_to_uid($name)
+	{
+		$link = $this->getlink();
+
+		$result = $link->query("select uid from cs_user where name = '$name';");
 
 		if ($result == false)
-		{
-			$error = new Error_log($error_str);
+			return $result;
+
+		$array = $result->fetch_assoc();
+		return $array["uid"];
+	}
+
+	private function uid_to_name($uid)
+	{
+		$link = $this->getlink();
+
+		$result - $link->query("select name from cs_user where uid = $uid;");
+
+		if ($result == false)
+			return $result;
+
+		$array = $result->fetch_assoc();
+		$uid = $array["name"];
+	}
+
+	private function insert_mail($fromuid, $touid, $title, $content, $mid)
+	{
+		if ( $mid < 0 ) {
+			
+		}
+
+		$this->link_result("insert into cs_mail(fromuid,title,content) values($this->uid,'$title','$content');",
+			"insert mail -> insert cs_mail error");
+
+		$this->link_result("insert into cs_mail_user(mid,touid) values ('$mid','$touid');",
+			"insert mail -> insert cs_mail error");
+	}
+
+	public function get_mail_count($tag = 0)		//G
+	{
+		
+		switch($tag) {
+			case 0:
+				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%';";
+				$result = $this->link_result($sql,"get mail count -> tag = 0 error");
+				$count = $result[0]["count(mid)"];
+				break;
+			case 1: 
+				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";
+				$result = $this->link_result($sql,"get mail count -> tag = 1 error");
+				$count = 0;
+				for ( $i = 0; $i < count($result); $i++ ) {
+					$row_json = $result[$i]['touser'];
+					$result_json = json_decode($row_json);
+					foreach( $result_json as $key=>$value) {
+						if ( $key == $this->uid && $value == 0 )
+							$count ++;
+					}
+				}
+				break;
+			case 2:
+				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";
+				$result = $this->link_result($sql,"get mail count -> tag = 2 error");
+				$count = 0;
+				for ( $i = 0; $i < count($result); $i++ ) {
+					$row_json = $result[$i]['touser'];
+					$result_json = json_decode($row_json);
+					foreach( $result_json as $key=>$value) {
+						if ( $key == $this->uid && $value == 1 )
+							$count ++;
+					}
+				}
+				break;
+			case 3:
+				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%' and isdraft=1;";
+				$result = $this->link_result($sql,"get mail count -> tag = 3 error");
+				$count = $result[0]['count(mid)'];
+				break;
+		}
+		return json_encode(array("count"=>$count));
+	}
+
+	public function del_mail($mid)		//G
+	{
+		$sql = "select touser from cs_mail where mid=$mid";
+		$result = $this->link_result($sql, "select touser from cs_mail error");
+		$result_json = $result[0]['touser'];
+		$array = array();
+		$array = json_decode($result_json);
+		foreach( $array as $key=>$value) {
+			if( $key == $this->uid)
+				$value=2;
+			$array->{$key} = "$value";
+		}
+		$new_json = json_encode($array);
+		$sql = "update cs_mail set touser='$new_json' where mid=$mid;";
+		$result = $this->link_result($sql, "update touser json error");
+		return json_encode(array("result"=>$result));
+	}
+
+	public function save_draft()	//G
+	{
+		$fromuid = $this->uid;
+		$toname = $_POST["name"];
+		$title = $_POST["title"];
+		$content = $_POST["content"];
+
+		if (empty($toname) && empty($title) && empty($content))
+			return true;
+
+		$users=explode(',',$toname);
+		$array = array();
+		for( $i = 0; $i < count($users); $i++ ) {
+			$tempuid = $this->name_to_uid($users[$i]);
+			$array[$tempuid] = "0";
+		}
+		$user_json = json_encode($array);
+		$sql = "insert into cs_mail(fromuid,title,content,isdraft,touser) values($fromuid,'$title','$content',1,'$user_json');";
+		$result = $this->link_result($sql, "save_draft error");
+		return json_encode(array("result"=>$result));
+	}
+
+	public function send_mail()		//G
+	{
+		$fromuid = $this->uid;
+		$toname = $_POST["name"];
+		$title = $_POST["title"];
+		$content = $_POST["content"];
+		$mid = $_POST["mid"];
+
+		$users=explode(',',$toname);
+		for ( $i = 0; $i < count($users); $i++ ) {
+			$tempuid = $this->name_to_uid($users[$i]);
+			if ( $tempuid == "" ) {
+				$unfind[] = $users[$i];
+			}
+			else {
+				$find[$tempuid] = "0";
+			}
+		}
+		$user_json = json_encode($find);
+		$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";
+		$result = $this->link_result($sql, "send mail error");
+		if ( $unfind == NULL ) {
+			return json_encode(array("result"=>$result));
+		}
+		else {
+			$str = implode(",",$unfind);
+			return json_encode(array("result"=>$str));
 		}
 	}
 
-	public function cs_send_mail($info_json)
+	public function get_mail_list($tag = 0)
 	{
-		$info = json_decode($info_json, true);
-		$title = $info["title"];
-		$content = $info["content"];
-		$touid_arr = $info["touid"];
-		$this->link_result("insert into cs_mail (fromuid,sdate,title,content) values ($this->uid,now(),'$title','$content');",
-		   	"send mail -> insert cs_mail error");
-
-		$return = $this->link_result("select max(mid) from cs_mail;",
-			"send mail-> select mid error");
-
-		$mid = $return["max(mid)"];
-
-		foreach ($touid_arr as $touid)
+		switch($tag)
 		{
-			$this->link_result("insert into cs_mail_user (mid, touid) values (".$mid.",". $touid.")", 
-			   	"send mail -> insert cs_mail_user error");
+			case 0:
+				$result = $this->get_mail_all();
+				break;
+			case 1:
+				$result = $this->get_mail_unread();
+				break;
+			case 2:
+				$result = $this->get_mail_read();
+				break;
+			case 3:
+				$result = $this->get_mail_send();
+				break;
+			case 4:
+				$result = $this->get_mail_draft();
+				break;
+			default :
+				return ;
 		}
+
+		return $result;
 	}
 
-    /* $tag == 0, 获取所有邮件mid
-     * $tag == 1, 获取未读邮件Mid
-     * $tag == 2, 获取已读邮件mid
-     */
-
-	public function cs_get_recvmids($tag = 0)
+	private function remove_repeat($array)
 	{
-		if ($tag == 0)
-			$result = $this->link_result("select distinct mid from cs_mail_user where touid = $this->uid",
-			   	"get_recvmids -> select tag=0 error");
-		if ($tag == 1)
-			$result = $this->link_result("select mid from cs_mail_user where touid = $this->uid and status = 0",
-				"get_recvmids -> select tag=1 error");
-		if ($tag == 2)
-			$result = $this->link_result("select cs_mail.mid from cs_mail, cs_mail_user where cs_mail.mid = cs_mail_user.mid and cs_mail_user.touid = $this->uid and cs_mail_user.status = 1 order by  cs_mail.sdate desc",
-				"get_recvmids -> select tag=2 error");	
-		if ($result == null)
-            return null;
-		return json_encode($result);
-	}
+		$touid = array();
 
-	public function cs_get_sendmids($tag = 0)
-	{
-		if ($tag == 0)
-			$result = $this->link_result("select mid from cs_mail where fromuid =$this->uid",
-			   	"get_sendmids -> select tag=0 error");
-		if ($tag == 1)
-			$result = $this->link_result("select mid from cs_mail where fromuid = $this->uid",
-				"get_sendmids -> select tag=1 error");
-		if ($tag == 2)
-			$result = $this->link_result("select mid from cs_mail where fromuid = $this->uid",
-				"get_rsendmids -> select tag=2 error");	
-	
-		return json_encode($result);
-	}
-    
-    /* 接口名称: get_mail_num
-     * 功能描述: 获取站内信数目
-     * 参数描述:
-     * $tag = 0, 获取接收的所有信息的数量
-     * $tag = 1，获取接收的未读信息的数量
-     * $tag = 2，获取接收的已读信息的数量
-     * $tag = 3, 获取发送的所有信息的数量
-     * $tag = other, 获取草稿的数量
-     *
-     *
-     */
+		$i = 0;
 
-    function get_mail_num($tag = 0) {
-        $link = $this->getlink();
-        switch ($tag) {
-        case 0:
-            $sql_str = "select mid from cs_mail_user where touid= {$this->uid}";
-            break;
-        case 1:
-            $sql_str = "select mid from cs_mail_user where touid= {$this->uid} and status = 0";
-            break;
-        case 2:
-            $sql_str = "select mid from cs_mail_user where touid= {$this->uid} and status = 1";
-            break;
-        case 3:
-            $sql_str = "select mid from cs_mail where fromuid= {$this->uid}";
-            break;
-//        case 4:
- //           $sql_str = "select count(mid) from cs_mail where fromuid= {$this->uid}";
-        default:
-            return;
-        }
+		$mid = $array[0]["mid"];
+		$return_array[$i] = $array[0];
 
-        $result = $link->query($sql_str);
-        
-        return $result->num_rows;
-    }
-
-
-    /* $tag == 0,       获取接受的消息
-     * $tag == other,   获取发送的消息
-     * $flag == 0,      不改变消息状态
-	 * $flag == other,  改变消息阅读状态为已读
-	 * */
-	public function cs_get_mail($mid, $tag = 0, $flag = 0)
-	{	
-
-        if (tag == 0)
-        {
-		    $result = $this->link_result("select id,fromuid, sdate, touid, title, content, status from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid and touid = $this->uid limit 1", "get_mail -> select error");
-        } else {
-		    $result = $this->link_result("select id,fromuid, sdate, touid, title, content, status from cs_mail,cs_mail_user where cs_mail.mid = $mid and cs_mail_user.mid = $mid and fromuid = $this->uid", "get_mail -> select error");
-        }
-
-		if ($result != false && $tag == 0 && $flag != 0)
+		foreach ($array as $value)
 		{
-			$this->link_result("update cs_mail_user set status = 1 where mid = $mid;", "get_mail -> update error");	
-        }
-        
-        //一个mid对应一份站内，为了调用方处理方便，没有以数组的形式返回 
-        $result = $result[0];
+			if ($value["mid"] != $mid)
+			{
+				$mid = $value["mid"];
+				$value["touid"] = $touid;
+				$return_array[$i++] = $value;
+				unset($touid);
+				continue;
+			}
+			$touid[] = $value["touid"];
+		}
+		
+		var_dump($return_array);
+		return $return_array;
+	}
 
-        return json_encode($result);
+	private function sub_title_content($info, $length_arr)	//g
+	{
+		$title_len = $length_arr[0];
+		$content_len = $length_arr[1];
+
+		foreach($info as &$value)
+		{
+			$value["title"] = substr($value["title"], 0, 30);
+			$value["content"] = substr($value["content"], 0, 30);
+		}
+
+		unset($value);
+		return $info;
+	}
+
+	private function get_mail_unread()		//G
+	{
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$result = $this->link_result($sql, "get mail unread error");
+		$result = $this->sub_title_content($result, array(30,30));
+		return json_encode($result);
+	}
+
+	private function get_mail_read()		//G
+	{
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$result = $this->link_result($sql, "get mail unread error");
+		$result = $this->sub_title_content($result, array(30,30));
+		return json_encode($result);
+	}
+
+	private function get_mail_send()		//G
+	{
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=0 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$result = $this->link_result($sql, "get mail draft error");
+		$result = $this->sub_title_content($result, array(30,30));
+		return json_encode($result);
+	}
+
+	private function get_mail_draft()		//G
+	{
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$result = $this->link_result($sql, "get mail draft error");
+		$result = $this->sub_title_content($result, array(30,30));
+		return json_encode($result);
+	}
+
+	private function get_mail_all()			//G
+	{
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%$this->uid%' and cs_user.uid=cs_mail.fromuid;";
+		$result = $this->link_result($sql, "get mail all error");
+		$result = $this->sub_title_content($result, array(30,30));
+		return json_encode($result);
+	}
+
+	public function get_mail_info($mid)		//G
+	{
+		$sql = "select mid,title,sdate as date,name as fromuser,content from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";
+		$result = $this->link_result($sql, "get mail info error");
+		$touser_json = $this->link_result("select touser from cs_mail where mid=$mid;", "select touser error");
+		$touser = json_decode($touser_json[0]["touser"]);
+		$touser->{$this->uid} = "1";
+		$touser_json = json_encode($touser);
+		$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";
+		$this->link_result($sql, "update mail info error");
+		return json_encode($result);
+	}
+
+	public function get_name_match($json)
+	{
+		$info = json_decode($json, true);
+		$name = $info["username"];
+
+		$match_arr = $this->link_result("select name from cs_user where name like '$name\_';");
+
+		if (is_array($match_arr))	
+			return json_encode(array("name" => $match_arr[0]));
+		return $match_arr;
 	}
 }
+
 ?>

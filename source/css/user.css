@@ -1,0 +1,56 @@
+body {
+    padding-top:53px;
+}
+
+.navbar .xylinux {
+    color:#ffffff;
+}
+
+.navbar-text a.active {
+    color:#ffffff;
+}
+
+.input-group-addon .label-div {
+    width:4em;
+}
+
+.form-title-div {
+    font-size:20px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+#tx{
+	border: none;
+	padding: 0px;
+	margin: 10px 0 20px 5px;
+}
+
+#open_sidebar{
+	height: 100%;
+	position: fixed;
+	margin-top: -5px;
+	background: #101010;
+}
+
+#infor{
+	margin-top: 50px;
+	padding: 20px;
+}
+
+[type=text]{
+	width: 300px;
+	margin: 5px 0 10px 0;
+	display: inline;
+}
+
+label{
+	margin-left: 30px;
+	display: table-cell;
+}
+
+.infor-box{
+	position: relative;
+	#display: inline-block;
+	margin: -210px 0 0 440px;
+}

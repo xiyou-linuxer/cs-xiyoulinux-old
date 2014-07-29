@@ -16,201 +16,24 @@ body {
     background-color:#c67605;
 }
 
-.pagination {
-	margin:20px 0
-}
-.pagination ul {
-	display:inline-block;
-	*display:inline;
-	margin-bottom:0;
-	margin-left:0;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	border-radius:4px;
-	*zoom:1;
-	-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.05);
-	-moz-box-shadow:0 1px 2px rgba(0,0,0,0.05);
-	box-shadow:0 1px 2px rgba(0,0,0,0.05)
-}
-.pagination ul>li {
-	display:inline
-}
-.pagination ul>li>a,.pagination ul>li>span {
-	float:left;
-	padding:4px 12px;
-	line-height:20px;
-	text-decoration:none;
-	background-color:#fff;
-	border:1px solid #ddd;
-	border-left-width:0
-}
-.pagination ul>li>a:hover,.pagination ul>li>a:focus,.pagination ul>.active>a,.pagination ul>.active>span {
-	background-color:#f5f5f5
-}
-.pagination ul>.active>a,.pagination ul>.active>span {
-	color:#999;
-	cursor:default
-}
-.pagination ul>.disabled>span,.pagination ul>.disabled>a,.pagination ul>.disabled>a:hover,.pagination ul>.disabled>a:focus {
-	color:#999;
-	cursor:default;
-	background-color:transparent
-}
-.pagination ul>li:first-child>a,.pagination ul>li:first-child>span {
-	border-left-width:1px;
-	-webkit-border-bottom-left-radius:4px;
-	border-bottom-left-radius:4px;
-	-webkit-border-top-left-radius:4px;
-	border-top-left-radius:4px;
-	-moz-border-radius-bottomleft:4px;
-	-moz-border-radius-topleft:4px
-}
-.pagination ul>li:last-child>a,.pagination ul>li:last-child>span {
-	-webkit-border-top-right-radius:4px;
-	border-top-right-radius:4px;
-	-webkit-border-bottom-right-radius:4px;
-	border-bottom-right-radius:4px;
-	-moz-border-radius-topright:4px;
-	-moz-border-radius-bottomright:4px
-}
-.pagination-centered {
-	text-align:center
-}
-.pagination-right {
-	text-align:right
-}
-.dataTables_rilter {
-	}.dataTables_filter label {
-	line-height:20px !important;
-}
-label.input,label.m-wrap {
-	display:block;
-	margin-bottom:5px;
-}
-input.m-wrap,select.m-wrap {
-	height:28px !important;
-	/* In IE7,the height of the select element cannot be changed by height,only font-size */
-  /* For IE7,add top margin to align select with labels */
-  line-height:32px;
-	background-color:#ffffff;
-	background-image:none !important;
-	filter:none !important;
-	border:1px solid #e5e5e5;
-	outline:none;
-	font-size:16px;
-	font-weight:normal;
-	font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-select.m-wrap.small {
-	width:134px !important;
-}
-select.m-wrap:focus {
-	border-color:#999999;
-	outline:0 !important;
-	/* IE6-9 */
-  -webkit-box-shadow:none;
-	-moz-box-shadow:none;
-	box-shadow:none;
-}
-.page-sidebar {
-    padding-top:15px;
-    padding-bottom:15px;
-    background-color:#222222;
-}
-/*sidebar*/
-.ie8 .page-sidebar {
-	position:absolute;
-	width:225px;
-}
-ul.page-sidebar-menu {
-	list-style:none;
-	margin:0;
-	padding:0;
-}
-ul.page-sidebar-menu > li {
-	display:block;
-	margin:0;
-	padding:0;
-	border:0px;
-}
-ul.page-sidebar-menu > li.start > a {
-	border-top-color:transparent !important;
-}
-ul.page-sidebar-menu > li:last-child > a,ul.page-sidebar-menu > li.last > a {
-	border-bottom-color:transparent !important;
-}
-ul.page-sidebar-menu > li > a {
-	display:block;
-	position:relative;
-	margin:0;
-	border:0px;
-	padding:10px 15px;
-	text-decoration:none;
-	font-size:14px;
-	font-weight:300;
-}
-.page-sidebar-fixed ul.page-sidebar-menu > li > a {
-	-webkit-transition:all 0.2s ease;
-	-moz-transition:all 0.2s ease;
-	-o-transition:all 0.2s ease;
-	transition:all 0.2s ease;
-}
-ul.page-sidebar-menu > li > a i {
-	font-size:16px;
-	margin-right:5px;
+.sidebar-collapse {
+    padding:0;
 }
 
-ul.page-sidebar-menu > li > a {
-	border-top:1px solid #5c5c5c !important;
-	color:#ffffff !important;
+.sidebar-list > li {
+    cursor:pointer;
+    color:#ffffff;
+    background:#222222;
+    border:1px solid #222222;
 }
-ul.page-sidebar-menu > li:last-child > a {
-	border-bottom:1px solid transparent !important;
-}
-ul.page-sidebar-menu > li a i {
-	color:#969696;
-}
-ul.page-sidebar-menu > li.open > a,ul.page-sidebar-menu > li > a:hover,ul.page-sidebar-menu > li:hover > a {
-	background:#303030;
-}
-ul.page-sidebar-menu > li.active > a {
-	background:#e02222 !important;
-	border-top-color:transparent !important;
-	color:#ffffff;
-}
-ul.page-sidebar-menu > li.active > a i {
-	color:#ffffff;
-}
-ul.page-sidebar-menu > li > ul.sub-menu > li:first-child > a {
-	border-top:0px !important;
-}
-ul.page-sidebar-menu > li > ul.sub-menu > li.active > a,ul.page-sidebar-menu > li > ul.sub-menu > li > a:hover {
-	color:#ffffff !important;
-	background:#575757 !important;
-}
-ul.page-sidebar-menu > li > ul.sub-menu > li > a:hover {
-	background:#575757 !important;
-}
-/* font color for all sub menu links*/
-ul.page-sidebar-menu li > ul.sub-menu > li > a {
-	color:#bdbdbd;
-}
-/* menu arrows */
-ul.page-sidebar-menu > li > a .arrow:before,ul.page-sidebar-menu > li > a .arrow.open:before {
-	color:#7d7d7d !important;
-}
-ul.page-sidebar-menu > li > ul.sub-menu a .arrow:before,ul.page-sidebar-menu > li > ul.sub-menu a .arrow.open:before {
-	color:#707070 !important;
-}
-ul.page-sidebar-menu > li > a > .arrow.open:before {
-	color:#8a8a8a !important;
-}
-ul.page-sidebar-menu > li.active > a .arrow:before,ul.page-sidebar-menu > li.active > a .arrow.open:before {
-	color:#ffffff !important;
-}
+
 .mail-list-panel {
     margin:10px;
     padding: 10px;
+}
+
+#mail-editor,#mail-content {
+    display:none;
 }
 
 .textarea-custom {

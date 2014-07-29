@@ -9,10 +9,10 @@ class Csdb{		//封装成类,对外目前就一个query接口
 	private $charset;
 	
 	public function __construct(){	//自动初始化
-		$this->host = 'xxx';
-		$this->user = 'xxx';
-		$this->pwd = 'xxx';
-		$this->dbName = 'xxx';
+		$this->host = 'localhost';
+		$this->user = 'cs_linux';
+		$this->pwd = 'pwd_linux';
+		$this->dbName = 'cs_linux';
 		$this->charset = 'utf8';		
 		$this->connect($this->host,$this->user,$this->pwd,$this->dbName,$this->charset);
 	}
