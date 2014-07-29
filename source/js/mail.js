@@ -20,6 +20,9 @@ jQuery.extend({
             $.getMailList(3);
             $.toggleMenu('#menu-list-draft');
             break;
+        case 'view-mail':
+            $.viewMail(0);
+            break;
         default:
             $.getMailList(0);
             $.toggleMenu('#menu-list-all');
@@ -39,18 +42,18 @@ jQuery.extend({
         $('#menu-list-unread').click(function() {
             $.getMailList(1);
             $.toggleMenu('#menu-list-unread');
-            localStorage.tag="unread";
+            localStorage.tag='unread';
         });
         
-        $("#menu-list-read").click(function() {
+        $('#menu-list-read').click(function() {
             $.getMailList(2);
-            $.toggleMenu("#menu-list-read");
-            localStorage.tag="read";
+            $.toggleMenu('#menu-list-read');
+            localStorage.tag='read';
         });
-        $("#menu-list-draft").click(function() {
+        $('#menu-list-draft').click(function() {
             $.getMailList(3);
-            $.toggleMenu("#menu-list-draft");
-            localStorage.tag="draft";
+            $.toggleMenu('#menu-list-draft');
+            localStorage.tag='draft';
         });
     }
 }); 
@@ -70,63 +73,104 @@ jQuery.extend({
 });
 
 jQuery.extend({
-    viewMail:function(mid) {
-        location.href="mail.html";
+    viewMail:function(mail_id) {
+        $('#mail-content').css({'display':'block'});
+        $('#mail-content').siblings().css({'display':'none'});
+        localStorage.tag='view-mail';
+        $.post("mail.php",
+            {
+                func:"get_mail_info",
+                mid:mail_id
+            },
+            function(data, status) {
+                var obj = eval(data);
+                var innerhtml = '';
+
+            }
+        );
     }
 }); 
 
 jQuery.extend({
     getMailList:function(tag) {
-        var xmlhttp = null;
-        if (window.XMLHttpRequest) {//code for IE7, Firefox, Opera, etc.
-            xmlhttp = new XMLHttpRequest();
-        } else if (window.ActiveXObject) {//code for IE6,IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        if (xmlhttp != null) {
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {   
-                    var obj = eval(xmlhttp.responseText);
-                    var innerhtml = "";
-                    if (obj == null) {
-                        $('#mail-table-body').html('没有可显示的数据');
-                    } else {
-                        for (var i = 0; i < obj.length; i++) {
+        $.post('mail.php',
+            {
+                func:"get_mail_list",
+                tag:"0"
+            },
+            function(data, status) {
+                var obj = eval(data);
+                var innerhtml = "";
+                if (obj == null) {
+                    $('#mail-table-body').html('没有可显示的数据');
+                } else {
+                    for (var i = 0; i < obj.length; i++) {
                         //var touser = eval(obj.touser);
                         innerhtml += "<tr onclick=$.viewMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
-                            innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
-                            innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
-                            innerhtml += "<td class='text-center'>" + "未读" + "</td>";
-                            innerhtml += "<td>" + obj[i].content + "</td></tr>";
-                        }
-                        $('#mail-table-body').html(innerhtml); 
+                        innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
+                        innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
+                        innerhtml += "<td class='text-center'>" + "未读" + "</td>";
+                        innerhtml += "<td>" + obj[i].content + "</td></tr>";
                     }
-                }
-            };
-            var url = "mail.php?func=get_mail_list&tag=0";
-            xmlhttp.open("GET", url, true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            //xmlhttp.send("func=get_mail_list&tag=0");
-            xmlhttp.send();
-        } else {
-        alert("你的浏览器暂时无法浏览本页面，请使用firefox,chrome浏览器浏览本页面");
-        }
-    }
+                    $('#mail-table-body').html(innerhtml); 
+                } 
+            }
+        ); 
+    }            
 });
 
 jQuery.extend({
-    urlGet:function() {  
-        var aQuery = window.location.href.split("?");//ȡ??Get????  
-        var aGET = new Array();  
-        if(aQuery.length > 1) {  
-            var aBuf = aQuery[1].split("&");  
-            for(var i=0, iLoop = aBuf.length; i<iLoop; i++) {  
-                var aTmp = aBuf[i].split("=");//????key??Value  
-                aGET[aTmp[0]] = aTmp[1];  
-            }
-        }  
-        return aGET;  
-    } 
+getMailList:function(tag) {
+var xmlhttp = null;
+if (window.XMLHttpRequest) {//code for IE7, Firefox, Opera, etc.
+xmlhttp = new XMLHttpRequest();
+} else if (window.ActiveXObject) {//code for IE6,IE5
+xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+if (xmlhttp != null) {
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {   
+var obj = eval(xmlhttp.responseText);
+var innerhtml = "";
+if (obj == null) {
+$('#mail-table-body').html('没有可显示的数据');
+} else {
+for (var i = 0; i < obj.length; i++) {
+//var touser = eval(obj.touser);
+innerhtml += "<tr onclick=$.viewMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
+innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
+innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
+innerhtml += "<td class='text-center'>" + "未读" + "</td>";
+innerhtml += "<td>" + obj[i].content + "</td></tr>";
+}
+$('#mail-table-body').html(innerhtml); 
+}
+}
+};
+var url = "mail.php?func=get_mail_list&tag=0";
+xmlhttp.open("GET", url, true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("func=get_mail_list&tag=0");
+//xmlhttp.send();
+} else {
+    alert("你的浏览器暂时无法浏览本页面，请使用firefox,chrome浏览器浏览本页面");
+}
+}
+});
+
+jQuery.extend({
+urlGet:function() {  
+var aQuery = window.location.href.split("?");//ȡ??Get????  
+var aGET = new Array();  
+if(aQuery.length > 1) {  
+var aBuf = aQuery[1].split("&");  
+for(var i=0, iLoop = aBuf.length; i<iLoop; i++) {  
+var aTmp = aBuf[i].split("=");//????key??Value  
+aGET[aTmp[0]] = aTmp[1];  
+}
+}  
+return aGET;  
+} 
 });  
 
