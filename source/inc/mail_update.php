@@ -260,7 +260,7 @@ class Mail{
 
 	private function get_mail_unread()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		$result = $this->sub_title_content($result, array(30,30));
 		return json_encode($result);
@@ -268,7 +268,7 @@ class Mail{
 
 	private function get_mail_read()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		$result = $this->sub_title_content($result, array(30,30));
 		return json_encode($result);
@@ -302,7 +302,12 @@ class Mail{
 	{
 		$sql = "select mid,title,sdate as date,name as fromuser,content from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";
 		$result = $this->link_result($sql, "get mail info error");
-
+		$touser_json = $this->link_result("select touser from cs_mail where mid=$mid;", "select touser error");
+		$touser = json_decode($touser_json[0]["touser"]);
+		$touser->{$this->uid} = "1";
+		$touser_json = json_encode($touser);
+		$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";
+		$this->link_result($sql, "update mail info error");
 		return json_encode($result);
 	}
 
