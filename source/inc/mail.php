@@ -263,7 +263,22 @@ class Mail{
 		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		$result = $this->sub_title_content($result, array(30,30));
-		return json_encode($result);
+	
+		for ( $i = 0; $i < count($result); $i ++ ) {
+			foreach ( $result[$i] as $key=>$value) {
+				if ( $key == "touser" ) {
+					$touser = json_decode($value);
+					$status = $touser->{"$this->uid"};
+					if ( $status == 0 ) {
+						$status = "未读";
+					}
+					$new_result[$i]["status"] = $status;
+					continue;
+				}
+				$new_result[$i]["$key"] = "$value";
+			}
+		}
+		return json_encode($new_result);
 	}
 
 	private function get_mail_read()		//G
@@ -271,7 +286,22 @@ class Mail{
 		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		$result = $this->sub_title_content($result, array(30,30));
-		return json_encode($result);
+		
+		for ( $i = 0; $i < count($result); $i ++ ) {
+			foreach ( $result[$i] as $key=>$value) {
+				if ( $key == "touser" ) {
+					$touser = json_decode($value);
+					$status = $touser->{"$this->uid"};
+					if ( $status == 1 ) {
+						$status = "已读";
+					}
+					$new_result[$i]["status"] = $status;
+					continue;
+				}
+				$new_result[$i]["$key"] = "$value";
+			}
+		}
+		return json_encode($new_result);
 	}
 
 	private function get_mail_send()		//G
@@ -292,10 +322,28 @@ class Mail{
 
 	private function get_mail_all()			//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%$this->uid%' and cs_user.uid=cs_mail.fromuid;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%$this->uid%' and cs_user.uid=cs_mail.fromuid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail all error");
 		$result = $this->sub_title_content($result, array(30,30));
-		return json_encode($result);
+
+		for ( $i = 0; $i < count($result); $i ++ ) {
+			foreach ( $result[$i] as $key=>$value) {
+				if ( $key == "touser" ) {
+					$touser = json_decode($value);
+					$status = $touser->{"$this->uid"};
+					if ( $status == 0 ) {
+						$status = "未读";
+					}
+					else if ( $status == 1 ) {
+						$status = "已读";
+					}
+					$new_result[$i]["status"] = $status;
+					continue;
+				}
+				$new_result[$i]["$key"] = "$value";
+			}
+		}
+		return json_encode($new_result);
 	}
 
 	public function get_mail_info($mid)		//G
