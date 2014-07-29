@@ -2,26 +2,26 @@
 	require_once('inc/mail.php');
 	if ( isset($_COOKIE["uid"]) )
 		$uid = $_COOKIE["uid"];
-	$func = $_GET["func"];
+	$func = $_POST["func"];
 
-	$mail = new Mail($uid);
+	$mail = new Mail(1002);
 	switch($func) {
 		case "get_mail_list": 
-			$tag = $_GET["tag"];    echo ($mail->get_mail_list($tag));
+			$tag = $_POST["tag"];    echo ($mail->get_mail_list($tag));
 			break;
-		case "get_mail_info":
-			$mid = $_GET["mid"];	echo($mial->get_mail_info($mid));
+        case "get_mail_info":
+            $mid = $_POST["mid"];    echo($mail->get_mail_info($mid));
 			break;
 		case "get_mail_count":
-			$tag = $_GET["tag"];	echo($mail->get_mail_count($tag));
+			$tag = $_POST["tag"];	echo($mail->get_mail_count($tag));
 			break;
 		case "get_name_match":
-			$json = $_GET["json"];		echo($mail->get_name_match($json));
+			$json = $_POST["json"];		echo($mail->get_name_match($json));
 			break;
 		case "del_mail":
-			$mid = $_GET["mid"];	echo($mail->del_mail($mid));
+			$mid = $_POST["mid"];	echo($mail->del_mail($mid));
 			break;
-		case "send_mail":
+        case "send_mail":
 			echo($mail->send_mail());
 			break;
 		case "save_draft":

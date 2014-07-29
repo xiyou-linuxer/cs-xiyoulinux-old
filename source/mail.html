@@ -106,8 +106,11 @@
                         <h3 class="text-center">写站内信</h3>
                     </div>
                 </div> <!--END PANEL HEADING-->
-                <form class="form">
+                <form class="form" method="post" action="mail.php">
                     <ul class="list-group list-bottom-no-margin">
+                        <li class="list-group-item">
+                            <input type="hidden" name="func" value="send_mail"></input>
+                        </li>
                         <li class="list-group-item">
                             <div class="input-group">
                                 <span class="input-group-addon" >收件人</span> 
@@ -115,7 +118,13 @@
                             </div>
                         </li>
                         <li class="list-group-item">
-                            <textarea class="form-control textarea-custom" rows=10 ></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon" >标题</span> 
+                                <input type="text" name="title" class="form-control" placeholder="请输入信息标题"></input>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <textarea name="content" class="form-control textarea-custom" rows=10 ></textarea>
                         </li>
                         <li class="list-group-item text-right">
                             <button class="btn btn-success">回复信息</button>

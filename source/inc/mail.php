@@ -164,7 +164,7 @@ class Mail{
 	public function send_mail()		//G
 	{
 		$fromuid = $this->uid;
-		$toname = $_POST["name"];
+		$toname = $_POST["touser"];
 		$title = $_POST["title"];
 		$content = $_POST["content"];
 		$mid = $_POST["mid"];

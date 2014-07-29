@@ -17,11 +17,11 @@ jQuery.extend({
             $.toggleMenu('#menu-list-read');
             break;
         case 'draft':
-            $.getMailList(3);
+            $.getMailList(4);
             $.toggleMenu('#menu-list-draft');
             break;
         case 'view-mail':
-            $.viewMail(0);
+          //  $.viewMail(0);
             break;
         default:
             $.getMailList(0);
@@ -51,7 +51,7 @@ jQuery.extend({
             localStorage.tag='read';
         });
         $('#menu-list-draft').click(function() {
-            $.getMailList(3);
+            $.getMailList(4);
             $.toggleMenu('#menu-list-draft');
             localStorage.tag='draft';
         });
@@ -80,7 +80,7 @@ jQuery.extend({
         $.post("mail.php",
             {
                 func:"get_mail_info",
-                mid:mail_id
+                mid:7
             },
             function(data, status) {
                 var obj = eval(data);
@@ -96,7 +96,7 @@ jQuery.extend({
         $.post('mail.php',
             {
                 func:"get_mail_list",
-                tag:"0"
+                tag:tag
             },
             function(data, status) {
                 var obj = eval(data);
@@ -109,7 +109,7 @@ jQuery.extend({
                         innerhtml += "<tr onclick=$.viewMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
                         innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
                         innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
-                        innerhtml += "<td class='text-center'>" + "未读" + "</td>";
+                        innerhtml += "<td class='text-center'>" + obj[i].status + "</td>";
                         innerhtml += "<td>" + obj[i].content + "</td></tr>";
                     }
                     $('#mail-table-body').html(innerhtml); 
@@ -117,46 +117,6 @@ jQuery.extend({
             }
         ); 
     }            
-});
-
-jQuery.extend({
-getMailList:function(tag) {
-var xmlhttp = null;
-if (window.XMLHttpRequest) {//code for IE7, Firefox, Opera, etc.
-xmlhttp = new XMLHttpRequest();
-} else if (window.ActiveXObject) {//code for IE6,IE5
-xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-}
-
-if (xmlhttp != null) {
-xmlhttp.onreadystatechange = function() {
-if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {   
-var obj = eval(xmlhttp.responseText);
-var innerhtml = "";
-if (obj == null) {
-$('#mail-table-body').html('没有可显示的数据');
-} else {
-for (var i = 0; i < obj.length; i++) {
-//var touser = eval(obj.touser);
-innerhtml += "<tr onclick=$.viewMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
-innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
-innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
-innerhtml += "<td class='text-center'>" + "未读" + "</td>";
-innerhtml += "<td>" + obj[i].content + "</td></tr>";
-}
-$('#mail-table-body').html(innerhtml); 
-}
-}
-};
-var url = "mail.php?func=get_mail_list&tag=0";
-xmlhttp.open("GET", url, true);
-xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xmlhttp.send("func=get_mail_list&tag=0");
-//xmlhttp.send();
-} else {
-    alert("你的浏览器暂时无法浏览本页面，请使用firefox,chrome浏览器浏览本页面");
-}
-}
 });
 
 jQuery.extend({
