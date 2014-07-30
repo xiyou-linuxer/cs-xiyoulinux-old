@@ -3,97 +3,103 @@ jQuery.extend({
         switch(localStorage.index) {
         case 'mail-editor':
             $.toggleMenu('#menu-mail-editor');
+            $.toggleView('#mail-editor-view');
             break;
         case 'mail-all':
             $.getMailList(0);
             $.toggleMenu('#menu-mail-all');
+            $.toggleView('#mail-list-view');
             break;
         case 'mail-unread':
             $.getMailList(1);
             $.toggleMenu('#menu-mail-unread');
+            $.toggleView('#mail-list-view');
             break;
         case 'mail-read':
             $.getMailList(2);
             $.toggleMenu('#menu-mail-read');
+            $.toggleView('#mail-list-view');
             break;
         case 'mail-draft':
             $.getMailList(4);
             $.toggleMenu('#menu-mail-draft');
+            $.toggleView('#mail-list-view');
             break;
         case 'mail-viewer':
-            $.viewMail(localStorage.mid);
+            $.readMail(localStorage.mid);
             break;
         default:
             $.getMailList(0);
             $.toggleMenu('#menu-mail-all');
+            $.toggleView('#mail-list-view');
             break;
         }
 
         $('#menu-mail-editor').click(function() {
             $.toggleMenu('#menu-mail-editor');
+            $.toggleView('#mail-editor-view');
             localStorage.tag='mail-editor';
         });
 
         $('#menu-mail-all').click(function() {
             $.getMailList(0);
             $.toggleMenu('#menu-mail-all');
+            $.toggleView('#mail-list-view');
             localStorage.tag='mail-all';
         });
         $('#menu-mail-unread').click(function() {
             $.getMailList(1);
             $.toggleMenu('#menu-mail-unread');
+            $.toggleView('#mail-list-view');
             localStorage.tag='mail-unread';
         });
         
         $('#menu-mail-read').click(function() {
             $.getMailList(2);
             $.toggleMenu('#menu-mail-read');
+            $.toggleView('#mail-list-view');
             localStorage.tag='mail-read';
         });
         $('#menu-mail-draft').click(function() {
             $.getMailList(4);
             $.toggleMenu('#menu-mail-draft');
+            $.toggleView('#mail-list-view');
             localStorage.tag='mail-draft';
         });
         $('#btn-send-mail').click(function() {
             return $.sendMail();            
         });
         $('#btn-reply-mail').click(function() {
-            $('#send-mail-touser').val($('#view-mail-fromuser').html());
-            $('#send-mail-title').val('');
-            $('#send-mail-content').val('');
-            $('#mail-editor-container').css({'display':'block'});
-            $('#mail-editor-container').siblings().css({'display':'none'});
+            $('#mail-editor-touser').val($('#mail-reader-fromuser').html());
+            $('#mail-editor-title').val('');
+            $('#mail-editor-content').val('');
+            $.toggleView('#mail-editor-view');
         });
     }
 }); 
 
 jQuery.extend({
     toggleMenu:function(menu) {
-        var container = '#mail-list-container';
-        if(menu == '#menu-mail-editor') {
-            container = '#mail-editor-container';
-        }
-        
         $(menu).attr('class', 'list-group-item active');
         $(menu).siblings().attr('class', 'list-group-item');
-        $(container).css({'display':'block'});
-        $(container).siblings().css({'display':'none'});
+    }            
+});
+
+jQuery.extend({
+    toggleView:function(view) {
+        $(view).css({'display':'block'});
+        $(view).siblings().css({'display':'none'});
     }            
 });
 
 jQuery.extend({
     sendMail:function() {
-        $('#mail-editor-container').css({'display':'block'});
-        $('#mail-editor-container').siblings().css({'display':'none'});
-       
-
         $.post("mail.php",
             {
                 func:"send_mail",
-                title:$("#send-mail-title").val(),
-                touser:$('#send-mail-touser').val(),
-                content:$('#send-mail-content').val()
+                title:$("#mail-editor-title").val(),
+                touser:$('#mail-editor-touser').val(),
+                content:$('#mail-editor-content').val()
             },
             function(data, status) {
                 var obj = eval("(" + data + ")");
@@ -111,10 +117,10 @@ jQuery.extend({
 }); 
 
 jQuery.extend({
-    viewMail:function(mail_id) {
-        $('#mail-viewer-container').css({'display':'block'});
-        $('#mail-viewer-container').siblings().css({'display':'none'});
-        localStorage.tag='mail-view';
+    readMail:function(mail_id) {
+        $('#mail-reader-view').css({'display':'block'});
+        $('#mail-reader-view').siblings().css({'display':'none'});
+        localStorage.tag='mail-reader';
         localStorage.mid=mail_id;
         $.post("mail.php",
             {
@@ -123,9 +129,9 @@ jQuery.extend({
             },
             function(data, status) {
                 var obj = eval(data);
-                $('#view-mail-title').html(obj[0].title);
-                $('#view-mail-fromuser').html(obj[0].fromuser);
-                $('#view-mail-content').html(obj[0].content);
+                $('#mail-reader-title').html(obj[0].title);
+                $('#mail-reader-fromuser').html(obj[0].fromuser);
+                $('#mail-reader-content').html(obj[0].content);
             }
         );
     }
@@ -146,7 +152,7 @@ jQuery.extend({
                 } else {
                     for (var i = 0; i < obj.length; i++) {
                         //var touser = eval(obj.touser);
-                        innerhtml += "<tr onclick=$.viewMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
+                        innerhtml += "<tr onclick=$.readMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
                         innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
                         innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
                         innerhtml += "<td class='text-center'>" + obj[i].status + "</td>";
@@ -158,19 +164,3 @@ jQuery.extend({
         ); 
     }            
 });
-
-jQuery.extend({
-urlGet:function() {  
-var aQuery = window.location.href.split("?");//ȡ??Get????  
-var aGET = new Array();  
-if(aQuery.length > 1) {  
-var aBuf = aQuery[1].split("&");  
-for(var i=0, iLoop = aBuf.length; i<iLoop; i++) {  
-var aTmp = aBuf[i].split("=");//????key??Value  
-aGET[aTmp[0]] = aTmp[1];  
-}
-}  
-return aGET;  
-} 
-});  
-
