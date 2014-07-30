@@ -136,7 +136,7 @@ jQuery.extend({
             function(data, status) {
                 var obj = eval('(' + data + ')');
                 var innerhtml = '';
-                if (obj.result == 'false') {
+                if (obj == null) {
                     $('#mail-table-body').html('');
                 } else {
                     for (var i = 0; i < obj.length; i++) {
