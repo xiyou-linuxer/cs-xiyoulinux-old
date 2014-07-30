@@ -25,7 +25,7 @@ jQuery.extend({
             $.toggleMenu('#menu-mail-draft');
             $.toggleView('#mail-list-view');
             break;
-        case 'mail-viewer':
+        case 'mail-reader':
             $.readMail(localStorage.mid);
             break;
         default:
@@ -38,33 +38,33 @@ jQuery.extend({
         $('#menu-mail-editor').click(function() {
             $.toggleMenu('#menu-mail-editor');
             $.toggleView('#mail-editor-view');
-            localStorage.tag='mail-editor';
+            localStorage.index='mail-editor';
         });
 
         $('#menu-mail-all').click(function() {
             $.getMailList(0);
             $.toggleMenu('#menu-mail-all');
             $.toggleView('#mail-list-view');
-            localStorage.tag='mail-all';
+            localStorage.index='mail-all';
         });
         $('#menu-mail-unread').click(function() {
             $.getMailList(1);
             $.toggleMenu('#menu-mail-unread');
             $.toggleView('#mail-list-view');
-            localStorage.tag='mail-unread';
+            localStorage.index='mail-unread';
         });
         
         $('#menu-mail-read').click(function() {
             $.getMailList(2);
             $.toggleMenu('#menu-mail-read');
             $.toggleView('#mail-list-view');
-            localStorage.tag='mail-read';
+            localStorage.index='mail-read';
         });
         $('#menu-mail-draft').click(function() {
             $.getMailList(4);
             $.toggleMenu('#menu-mail-draft');
             $.toggleView('#mail-list-view');
-            localStorage.tag='mail-draft';
+            localStorage.index='mail-draft';
         });
         $('#btn-send-mail').click(function() {
             return $.sendMail();            
@@ -94,15 +94,15 @@ jQuery.extend({
 
 jQuery.extend({
     sendMail:function() {
-        $.post("mail.php",
+        $.post('mail.php',
             {
-                func:"send_mail",
-                title:$("#mail-editor-title").val(),
-                touser:$('#mail-editor-touser').val(),
-                content:$('#mail-editor-content').val()
+                func: 'send_mail',
+                title: $('#mail-editor-title').val(),
+                touser: $('#mail-editor-touser').val(),
+                content: $('#mail-editor-content').val()
             },
             function(data, status) {
-                var obj = eval("(" + data + ")");
+                var obj = eval('(' + data + ')');
                 $('.modal-title').html('发送状态');
                 if (obj.result == 'true') {
                     $('.modal-body').html('发送成功');
@@ -111,7 +111,7 @@ jQuery.extend({
                 } else {
                     $('.modal-body').html('失败列表：' + obj.result);
                 }
-                $('#tipsModal').modal({keyboard:true});
+                $('#tipsModal').modal({keyboard: true});
             }
         );
         return false;
@@ -120,20 +120,21 @@ jQuery.extend({
 
 jQuery.extend({
     readMail:function(mail_id) {
-        $('#mail-reader-view').css({'display':'block'});
-        $('#mail-reader-view').siblings().css({'display':'none'});
-        localStorage.tag='mail-reader';
-        localStorage.mid=mail_id;
-        $.post("mail.php",
+        $('#mail-reader-view').css({'display': 'block'});
+        $('#mail-reader-view').siblings().css({'display': 'none'});
+        localStorage.tag = 'mail-reader';
+        localStorage.mid = mail_id;
+        $.post('mail.php',
             {
-                func:"get_mail_info",
-                mid:mail_id
+                func: 'get_mail_info',
+                mid: mail_id
             },
             function(data, status) {
                 var obj = eval(data);
                 $('#mail-reader-title').html(obj[0].title);
                 $('#mail-reader-fromuser').html(obj[0].fromuser);
                 $('#mail-reader-content').html(obj[0].content);
+                localStorage.index = 'mail-reader';
             }
         );
     }
@@ -143,24 +144,24 @@ jQuery.extend({
     getMailList:function(tag) {
         $.post('mail.php',
             {
-                func:"get_mail_list",
-                tag:tag
+                func: 'get_mail_list',
+                tag: tag
             },
             function(data, status) {
                 var obj = eval('(' + data + ')');
                 var innerhtml = '';
                 if (obj.result == 'false') {
-                    $('#mail-table-body').html('');
+                    $('#mail-list-body').html('');
                 } else {
                     for (var i = 0; i < obj.length; i++) {
                         //var touser = eval(obj.touser);
-                        innerhtml += "<tr onclick=$.readMail(" + obj[i].mid + ");><td>" + obj[i].title + "</td>";
-                        innerhtml += "<td class='text-center'>" + obj[i].date + "</td>";
-                        innerhtml += "<td class='text-center'>" + obj[i].fromuser + "</td>";
-                        innerhtml += "<td class='text-center'>" + obj[i].status + "</td>";
-                        innerhtml += "<td>" + obj[i].content + "</td></tr>";
+                        innerhtml += '<tr onclick=$.readMail(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
+                        innerhtml += '<td class="text-center">' + obj[i].date + '</td>';
+                        innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
+                        innerhtml += '<td class="text-center">' + obj[i].status + '</td>';
+                        innerhtml += '<td>' + obj[i].content + '</td></tr>';
                     }
-                    $('#mail-table-body').html(innerhtml); 
+                    $('#mail-list-body').html(innerhtml); 
                 } 
             }
         ); 

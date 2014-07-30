@@ -76,7 +76,7 @@
 		                    <th>预览</th>
                         </tr>
                     </thead>
-                    <tbody id="mail-table-body" style="cursor:pointer;">
+                    <tbody id="mail-list-body" style="cursor:pointer;">
                     </tbody>
                 </table>
             </div><!--END MAIL LIST-->
@@ -96,6 +96,7 @@
                         </li>
                     </ul> <!--END PANEL BODY-->
                     <div class="panel-footer text-right">
+                        <a class="btn btn-danger" id="btn-delete-mail">删除信息</a>
                         <a class="btn btn-success" id="btn-reply-mail">回复信息</a>
                     </div>
             </div><!--END MAIL CONTENT-->
@@ -127,6 +128,7 @@
                             <textarea name="content" class="form-control textarea-custom" id="mail-editor-content" rows=10 ></textarea>
                         </li>
                         <li class="list-group-item text-right">
+                            <button class="btn btn-warning" id="btn-save-draft">保存草稿</button>
                             <button class="btn btn-success" type="submit" id="btn-send-mail">发送信息</button>
                         </li>
                     </ul> <!--END PANEL BODY-->
