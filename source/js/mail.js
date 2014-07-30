@@ -106,6 +106,8 @@ jQuery.extend({
                 $('.modal-title').html('发送状态');
                 if (obj.result == 'true') {
                     $('.modal-body').html('发送成功');
+                } else if (obj.result == 'false') {
+                    $('.modal-body').html('发送失败');                
                 } else {
                     $('.modal-body').html('失败列表：' + obj.result);
                 }
