@@ -20,16 +20,7 @@
     <script type="text/javascript" src="js/DT_bootstrap.js"></script>
     <script src="js/table-managed.js"></script>
     <script src="js/jquery.urlGET.js"></script>
-	<script>
-		$("#datetimepicker").datetimepicker({
-			format: 'yyyy/MM/dd',
-			language: 'en',
-			pickDate: true,
-			hourStep: 15,
-			secondStep: 30,
-			inputMask: true
-		});
-	</script>
+    <script src="js/user.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -56,10 +47,11 @@
 
 <div class="page-container row">
     <div class="page-sidebar col-md-2" id="open_sidebar">
-        <ul class="page-sidebar-menu">
-			<img id="tx" src="img/Lindayi.jpeg"alt ="" class="img-thumbnail">
+        <ul class="page-sidebar-menu" id="left_bar">
+			<a href="http://cn.gravatar.com" target="_BLANK"><img id="tx" alt="点击设置头像" class="img-thumbnail"></a>
+			<div id="left-infor">
 			<li class="name">
-			<span style="color:#ffffff;margin:auto 20px;">林达意        2011级</span>
+			<span style="margin-left:30px;" name="name"></span>
 			</li>
 			<li class="start" id="menu_all">
                 <a href="user.html">
@@ -70,50 +62,51 @@
             </li>
 
             <li class="start" id="menu_unread">
-                <a href="/zyj/cs-xiyoulinux/source/mail.html">
+                <a href="mail.html">
                 <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-envelope"></span>
 				<span class="title">站内信<span class ="badge">new</span></span>
                 <span class="selected"></span>
                 </a>
             </li>
+			</div>
         </ul>
 	</div>
 	<div class = "page-container row">
 		<div class ="col-md-8 col-md-offset-3 panel panel-default" id="infor">
 				<form role="form" method="post">
-					<label>姓名</label>
-					<input class = "form-control" type="text" disabled />
-					<label >生日</label>
-					<input class = "form-control" type="text" disabled />
+				<div style="width:50%">
 					<label >性别</label>
-					<input class = "form-control" type="text" disabled />
-					<div class="infor-box">
-						<label>民族</label>
-						<input class = "form-control" type="text" disabled />
-						<label>级别</label>
-						<input class = "form-control" type="text" disabled />
-						<label>专业</label>
-						<input class = "form-control" type="text" disabled />
-					</div>
+					<input name="sex" class = "form-control" type="text" disabled />
+					<label>民族</label>
+					<input name="native" class = "form-control" type="text" disabled />
+				</div>
+				<div class="infor-box">
+					<label>级别</label>
+					<input name="grade" class = "form-control" type="text" disabled />
+					<label>专业</label>
+					<input name="major" class = "form-control" type="text" disabled />
+				</div>
+				<div style="width:50%">
 					<label>联系电话</label>
-					<input class = "form-control" type="text" placeholder="联系电话" />
+					<input name="phone" class = "form-control" type="text" placeholder="联系电话" />
 					<label>邮箱</label>
-					<input class = "form-control" type="text" placeholder="邮箱" />
+					<input name="mail" class = "form-control" type="text" placeholder="邮箱" />
 					<label>QQ</label>
-					<input class = "form-control" type="text" placeholder="QQ" />
+					<input name="qq" class = "form-control" type="text" placeholder="QQ" />
 					<label>微信</label>
-					<input class = "form-control" type="text" placeholder="微信" >
-					<div class="infor-box">
-						<label>博客</label>
-						<input class = "form-control" type="text" placeholder="博客" />
-						<label>Github</label>
-						<input class = "form-control" type="text" placeholder="Github" />
-						<label>工作地</label>
-						<input class = "form-control" type="text" placeholder="工作地" />
-						<label>职业</label>
-						<input class = "form-control" type="text" placeholder="职业" />
-						<button class ="btn btn-default "type = "submit">保存</button>
-					</div>
+					<input name="wechat" class = "form-control" type="text" placeholder="微信" >
+				</div>
+				<div class="infor-box1">
+					<label>博客</label>
+					<input name="blog" class = "form-control" type="text" placeholder="博客" />
+					<label>Github</label>
+					<input name="github" class = "form-control" type="text" placeholder="Github" />
+					<label>工作地</label>
+					<input name="workplace" class = "form-control" type="text" placeholder="工作地" />
+					<label>职业</label>
+					<input name="job" class = "form-control" type="text" placeholder="职业" />
+				</div>
+				<button class ="btn btn-default "type = "submit">保存</button>
 			</form>
 		</div>
 </div>

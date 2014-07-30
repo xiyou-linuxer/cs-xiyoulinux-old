@@ -1,27 +1,27 @@
 jQuery.extend({
     pageInit:function() {
         switch(localStorage.tag) {
-        case 'edit':
+        case 'edit-mail':
             $.toggleMenu('#menu-edit-mail');
             break;
-        case 'all':
+        case 'list-all':
             $.getMailList(0);
             $.toggleMenu('#menu-list-all');
             break;
-        case 'unread':
+        case 'list-unread':
             $.getMailList(1);
             $.toggleMenu('#menu-list-unread');
             break;
-        case 'read':
+        case 'list-read':
             $.getMailList(2);
             $.toggleMenu('#menu-list-read');
             break;
-        case 'draft':
+        case 'list-draft':
             $.getMailList(4);
             $.toggleMenu('#menu-list-draft');
             break;
         case 'view-mail':
-          //  $.viewMail(0);
+            $.viewMail(localStorage.mid);
             break;
         default:
             $.getMailList(0);
@@ -31,61 +31,96 @@ jQuery.extend({
 
         $('#menu-edit-mail').click(function() {
             $.toggleMenu('#menu-edit-mail');
-            localStorage.tag='edit';
+            localStorage.tag='edit-mail';
         });
 
         $('#menu-list-all').click(function() {
             $.getMailList(0);
             $.toggleMenu('#menu-list-all');
-            localStorage.tag='all';
+            localStorage.tag='list-all';
         });
         $('#menu-list-unread').click(function() {
             $.getMailList(1);
             $.toggleMenu('#menu-list-unread');
-            localStorage.tag='unread';
+            localStorage.tag='list-unread';
         });
         
         $('#menu-list-read').click(function() {
             $.getMailList(2);
             $.toggleMenu('#menu-list-read');
-            localStorage.tag='read';
+            localStorage.tag='list-read';
         });
         $('#menu-list-draft').click(function() {
             $.getMailList(4);
             $.toggleMenu('#menu-list-draft');
-            localStorage.tag='draft';
+            localStorage.tag='list-draft';
         });
     }
 }); 
 
 jQuery.extend({
-    toggleMenu:function(menu_id) {
-        var container_id = '#mail-list';
-        if(menu_id == '#menu-edit-mail') {
-            container_id = '#mail-editor';
+    toggleMenu:function(menu) {
+        var container = '#mail-list';
+        if(menu == '#menu-edit-mail') {
+            container = '#mail-editor';
         }
         
-        $(menu_id).attr('class', 'list-group-item active');
-        $(menu_id).siblings().attr('class', 'list-group-item');
-        $(container_id).css({'display':'block'});
-        $(container_id).siblings().css({'display':'none'});
+        $(menu).attr('class', 'list-group-item active');
+        $(menu).siblings().attr('class', 'list-group-item');
+        $(container).css({'display':'block'});
+        $(container).siblings().css({'display':'none'});
     }            
 });
 
 jQuery.extend({
+    sendMail:function() {
+        $('#mail-editor').css({'display':'block'});
+        $('#mail-editor').siblings().css({'display':'none'});
+       
+
+        $.post("mail.php",
+            {
+                func:"send_mail",
+                title:$("#send-mail-title").val(),
+                touser:$('#send-mail-touser').val(),
+                content:$('#send-mail-content').val()
+            },
+            function(data, status) {
+                var obj = eval("(" + data + ")");
+                $('.modal-title').html('发送状态');
+                if (obj.result == 'true') {
+                    $('.modal-body').html('发送成功');
+                } else {
+                    $('.modal-body').html('失败列表：' + obj.result);
+                }
+                $('#tipsModal').modal({keyboard:true});
+            }
+        );
+        return false;
+    }
+}); 
+
+jQuery.extend({
     viewMail:function(mail_id) {
-        $('#mail-content').css({'display':'block'});
-        $('#mail-content').siblings().css({'display':'none'});
+        $('#mail-viewer').css({'display':'block'});
+        $('#mail-viewer').siblings().css({'display':'none'});
         localStorage.tag='view-mail';
+        localStorage.mid=mail_id;
         $.post("mail.php",
             {
                 func:"get_mail_info",
-                mid:7
+                mid:mail_id
             },
             function(data, status) {
                 var obj = eval(data);
-                var innerhtml = '';
-
+                var innerhtml = '<h3 class="text-center">' + obj[0].title + '</h3>';
+                $('#mail-title').html(innerhtml);
+                
+                innerhtml = '<h4>消息来自: ' + obj[0].fromuser + '</h4>';
+                $('#mail-fromuser').html(innerhtml);
+                
+                innerhtml = '<h4>' + obj[0].content + '</h4>';
+                $('#mail-contentd').html(innerhtml);
             }
         );
     }
@@ -99,10 +134,10 @@ jQuery.extend({
                 tag:tag
             },
             function(data, status) {
-                var obj = eval(data);
-                var innerhtml = "";
-                if (obj == null) {
-                    $('#mail-table-body').html('没有可显示的数据');
+                var obj = eval('(' + data + ')');
+                var innerhtml = '';
+                if (obj.result == 'false') {
+                    $('#mail-table-body').html('');
                 } else {
                     for (var i = 0; i < obj.length; i++) {
                         //var touser = eval(obj.touser);

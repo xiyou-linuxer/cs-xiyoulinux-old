@@ -182,12 +182,13 @@ class Mail{
 		$user_json = json_encode($find);
 		$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";
 		$result = $this->link_result($sql, "send mail error");
-		if ( $unfind == NULL ) {
-			return json_encode(array("result"=>$result));
+        if ( $unfind == NULL ) {
+            $str = ($result == true) ? "true":"false";
+			return json_encode(array("result"=>$str));
 		}
 		else {
-			$str = implode(",",$unfind);
-			return json_encode(array("result"=>$str));
+            $str = implode(",",$unfind);
+            return json_encode(array("result"=>$str));
 		}
 	}
 
@@ -263,7 +264,7 @@ class Mail{
 		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		$result = $this->sub_title_content($result, array(30,30));
-	
+
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
 				if ( $key == "touser" ) {

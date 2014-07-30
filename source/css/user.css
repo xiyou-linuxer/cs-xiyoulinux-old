@@ -23,7 +23,7 @@ body {
 #tx{
 	border: none;
 	padding: 0px;
-	margin: 10px 0 20px 5px;
+	margin: 30px 0 20px 5px;
 }
 
 #open_sidebar{
@@ -31,26 +31,59 @@ body {
 	position: fixed;
 	margin-top: -5px;
 	background: #101010;
+	width: 180px;
 }
 
 #infor{
 	margin-top: 50px;
-	padding: 20px;
+	padding: 30px 20px 30px 80px;
 }
 
 [type=text]{
-	width: 300px;
 	margin: 5px 0 10px 0;
 	display: inline;
+	width: 80%;
 }
 
 label{
 	margin-left: 30px;
 	display: table-cell;
+	overflow: hidden;
 }
 
 .infor-box{
 	position: relative;
-	#display: inline-block;
-	margin: -210px 0 0 440px;
+	margin: -133px 0 40px 360px;
+	overflow: hidden;
+	width: 50%;
+}
+
+.infor-box1{
+	position: relative;
+	margin: -270px 0 30px 360px;
+	overflow: hidden;
+	width: 50%;
+}
+
+li{
+	list-style-type: none;
+	padding: 10px 0 10px 10px;
+ }
+
+#left_bar{
+	margin-left: -40px;
+}
+
+#left-infor{
+	margin-left: 15px;
+	font-size: 16px;
+}
+
+a:hover{
+	text-decoration: none;
+	color: white;
+}
+
+a,[name=name]{
+	color: rgba(255,255,255,0.5);
 }
