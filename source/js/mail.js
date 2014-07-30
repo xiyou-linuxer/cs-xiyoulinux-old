@@ -1,68 +1,78 @@
 jQuery.extend({
     pageInit:function() {
-        switch(localStorage.tag) {
-        case 'edit-mail':
-            $.toggleMenu('#menu-edit-mail');
+        switch(localStorage.index) {
+        case 'mail-editor':
+            $.toggleMenu('#menu-mail-editor');
             break;
-        case 'list-all':
+        case 'mail-all':
             $.getMailList(0);
-            $.toggleMenu('#menu-list-all');
+            $.toggleMenu('#menu-mail-all');
             break;
-        case 'list-unread':
+        case 'mail-unread':
             $.getMailList(1);
-            $.toggleMenu('#menu-list-unread');
+            $.toggleMenu('#menu-mail-unread');
             break;
-        case 'list-read':
+        case 'mail-read':
             $.getMailList(2);
-            $.toggleMenu('#menu-list-read');
+            $.toggleMenu('#menu-mail-read');
             break;
-        case 'list-draft':
+        case 'mail-draft':
             $.getMailList(4);
-            $.toggleMenu('#menu-list-draft');
+            $.toggleMenu('#menu-mail-draft');
             break;
-        case 'view-mail':
+        case 'mail-viewer':
             $.viewMail(localStorage.mid);
             break;
         default:
             $.getMailList(0);
-            $.toggleMenu('#menu-list-all');
+            $.toggleMenu('#menu-mail-all');
             break;
         }
 
-        $('#menu-edit-mail').click(function() {
-            $.toggleMenu('#menu-edit-mail');
-            localStorage.tag='edit-mail';
+        $('#menu-mail-editor').click(function() {
+            $.toggleMenu('#menu-mail-editor');
+            localStorage.tag='mail-editor';
         });
 
-        $('#menu-list-all').click(function() {
+        $('#menu-mail-all').click(function() {
             $.getMailList(0);
-            $.toggleMenu('#menu-list-all');
-            localStorage.tag='list-all';
+            $.toggleMenu('#menu-mail-all');
+            localStorage.tag='mail-all';
         });
-        $('#menu-list-unread').click(function() {
+        $('#menu-mail-unread').click(function() {
             $.getMailList(1);
-            $.toggleMenu('#menu-list-unread');
-            localStorage.tag='list-unread';
+            $.toggleMenu('#menu-mail-unread');
+            localStorage.tag='mail-unread';
         });
         
-        $('#menu-list-read').click(function() {
+        $('#menu-mail-read').click(function() {
             $.getMailList(2);
-            $.toggleMenu('#menu-list-read');
-            localStorage.tag='list-read';
+            $.toggleMenu('#menu-mail-read');
+            localStorage.tag='mail-read';
         });
-        $('#menu-list-draft').click(function() {
+        $('#menu-mail-draft').click(function() {
             $.getMailList(4);
-            $.toggleMenu('#menu-list-draft');
-            localStorage.tag='list-draft';
+            $.toggleMenu('#menu-mail-draft');
+            localStorage.tag='mail-draft';
+        });
+        $('#btn-send-mail').click(function() {
+            return $.sendMail();            
+        });
+        $('#btn-reply-mail').click(function() {
+            $('#send-mail-touser').val($('#view-mail-fromuser').html());
+            $('#send-mail-title').val('');
+            $('#send-mail-content').val('');
+            $('#mail-editor-container').css({'display':'block'});
+            $('#mail-editor-container').siblings().css({'display':'none'});
         });
     }
 }); 
 
 jQuery.extend({
     toggleMenu:function(menu) {
-        var container = '#mail-list';
-        if(menu == '#menu-edit-mail') {
-            container = '#mail-editor';
+        var container = '#mail-list-container';
+        if(menu == '#menu-mail-editor') {
+            container = '#mail-editor-container';
         }
         
         $(menu).attr('class', 'list-group-item active');
@@ -74,8 +84,8 @@ jQuery.extend({
 
 jQuery.extend({
     sendMail:function() {
-        $('#mail-editor').css({'display':'block'});
-        $('#mail-editor').siblings().css({'display':'none'});
+        $('#mail-editor-container').css({'display':'block'});
+        $('#mail-editor-container').siblings().css({'display':'none'});
        
 
         $.post("mail.php",
@@ -102,9 +112,9 @@ jQuery.extend({
 
 jQuery.extend({
     viewMail:function(mail_id) {
-        $('#mail-viewer').css({'display':'block'});
-        $('#mail-viewer').siblings().css({'display':'none'});
-        localStorage.tag='view-mail';
+        $('#mail-viewer-container').css({'display':'block'});
+        $('#mail-viewer-container').siblings().css({'display':'none'});
+        localStorage.tag='mail-view';
         localStorage.mid=mail_id;
         $.post("mail.php",
             {
@@ -113,14 +123,9 @@ jQuery.extend({
             },
             function(data, status) {
                 var obj = eval(data);
-                var innerhtml = '<h3 class="text-center">' + obj[0].title + '</h3>';
-                $('#mail-title').html(innerhtml);
-                
-                innerhtml = '<h4>消息来自: ' + obj[0].fromuser + '</h4>';
-                $('#mail-fromuser').html(innerhtml);
-                
-                innerhtml = '<h4>' + obj[0].content + '</h4>';
-                $('#mail-contentd').html(innerhtml);
+                $('#view-mail-title').html(obj[0].title);
+                $('#view-mail-fromuser').html(obj[0].fromuser);
+                $('#view-mail-content').html(obj[0].content);
             }
         );
     }
@@ -136,7 +141,7 @@ jQuery.extend({
             function(data, status) {
                 var obj = eval('(' + data + ')');
                 var innerhtml = '';
-                if (obj == null) {
+                if (obj.result == 'false') {
                     $('#mail-table-body').html('');
                 } else {
                     for (var i = 0; i < obj.length; i++) {

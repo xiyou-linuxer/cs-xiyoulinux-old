@@ -52,11 +52,11 @@
             </div>
             <div class="collapse navbar-collapse sidebar-collapse" id="sidebar-collapse">
                 <ul class="list-group sidebar-list">
-	                <li class="list-group-item sidebar-menu-item" id="menu-edit-mail"><span class="glyphicon glyphicon-edit"></span>写站内信</li>
-                    <li class="list-group-item sidebar-menu-item" id="menu-list-all"><span class="glyphicon glyphicon-list-alt"></span>全部显示</li>
-	                <li class="list-group-item sidebar-menu-item" id="menu-list-unread"><span class="glyphicon glyphicon-inbox"></span>未读信息</li>
-	                <li class="list-group-item sidebar-menu-item" id="menu-list-read"><span class="glyphicon glyphicon-bookmark"></span>已读信息</li>
-	                <li class="list-group-item sidebar-menu-item" id="menu-list-draft"><span class="glyphicon glyphicon-file"></span>草稿</li>
+	                <li class="list-group-item sidebar-menu-item" id="menu-mail-editor"><span class="glyphicon glyphicon-edit"></span>写站内信</li>
+                    <li class="list-group-item sidebar-menu-item" id="menu-mail-all"><span class="glyphicon glyphicon-list-alt"></span>全部显示</li>
+	                <li class="list-group-item sidebar-menu-item" id="menu-mail-unread"><span class="glyphicon glyphicon-inbox"></span>未读信息</li>
+	                <li class="list-group-item sidebar-menu-item" id="menu-mail-read"><span class="glyphicon glyphicon-bookmark"></span>已读信息</li>
+	                <li class="list-group-item sidebar-menu-item" id="menu-mail-draft"><span class="glyphicon glyphicon-file"></span>草稿</li>
 	            </ul>
             </div>
         </nav>
@@ -65,7 +65,7 @@
     <!-- END PAGE -->
     <div class="container col-md-10">
         <div class="panel panel-default mail-list-panel">
-            <div class="panel panel-default" id="mail-list">
+            <div class="panel panel-default" id="mail-list-container">
                 <table class="table table-striped table-bordered table-hover" id="mail-table">
                     <thead>
                         <tr>
@@ -81,23 +81,26 @@
                 </table>
             </div><!--END MAIL LIST-->
 
-            <div class="panel panel-default" id="mail-viewer">
+            <div class="panel panel-default" id="mail-viewer-container">
                     <div class="panel-heading">
-                        <div class="panel-title" id="mail-title">
+                        <div class="panel-title">
+                            <h3 class="text-center" id="view-mail-title"></h3>
                         </div>
                     </div> <!--END PANEL HEADING-->
                     <ul class="list-group">
-                        <li class="list-group-item" id="mail-fromuser">
+                        <li class="list-group-item">
+                            <h4>信息来自：</h4><h4 id="view-mail-fromuser"></h4>
                         </li>
-                        <li class="list-group-item" id="mail-contentd">
+                        <li class="list-group-item">
+                            <h4 id="view-mail-content"></h4>
                         </li>
                     </ul> <!--END PANEL BODY-->
                     <div class="panel-footer text-right">
-                        <a class="btn btn-success" onclick=$.toggleMenu("#menu-edit-mail")>回复信息</a>
+                        <a class="btn btn-success" id="btn-reply-mail">回复信息</a>
                     </div>
             </div><!--END MAIL CONTENT-->
 
-            <div class="panel panel-default" id="mail-editor">
+            <div class="panel panel-default" id="mail-editor-container">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h3 class="text-center">写站内信</h3>
@@ -124,7 +127,7 @@
                             <textarea name="content" class="form-control textarea-custom" id="send-mail-content" rows=10 ></textarea>
                         </li>
                         <li class="list-group-item text-right">
-                            <button class="btn btn-success" onclick="return $.sendMail()">发送信息</button>
+                            <button class="btn btn-success" type="submit" id="btn-send-mail">发送信息</button>
                         </li>
                     </ul> <!--END PANEL BODY-->
                 </form>
