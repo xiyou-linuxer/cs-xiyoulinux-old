@@ -3,7 +3,7 @@
 	require_once("inc/conn.php");
 	require_once("inc/function.php");	
 	
-	//checkUser();
+	checkUser();
 
 	date_default_timezone_set('PRC');
 	//$logfile = fopen("register.log", "a");
@@ -40,6 +40,10 @@
 	case 'get_avatar':
 	//	fwrite($logfile,"get_avatar\r\n");
 		get_avatar();
+		break;
+	case 'check_user':
+	//	fwrite($logfile,"get_avatar\r\n");
+		check_user();
 		break;
 	}
 
@@ -161,6 +165,7 @@ function get_userinfo(){
 	while( $row = $result->fetch_assoc() ){
 		$com[] = $row;
 	}
+	unset($com[0]['password']);
 	if( is_object($result) )
 		$result->close();
 	echo json_encode($com);
@@ -178,7 +183,7 @@ function update_userinfo(){
     $major = $_POST["major"];
 	$workplace = $_POST["workplace"];
 	$job = $_POST["job"];
-	$uid = $_POST["uid"];
+	$uid = $_COOKIE["uid"];
 	
 	$checkArr = array(
 		"$uid" => 'digit', 
@@ -326,6 +331,13 @@ function get_avatar(){
 	$grav_url = "http://www.gravatar.com/avatar/" .md5(strtolower(trim($mail))) .
 		"?d=" .urlencode($default) . "&s=" . $size;
 	print $grav_url;
+}
+
+function check_user(){
+	if (checkUser() == true)
+		print 'true';
+	else
+		print 'false';
 }
 
 ?>

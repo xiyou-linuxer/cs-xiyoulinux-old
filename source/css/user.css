@@ -23,7 +23,7 @@ body {
 #tx{
 	border: none;
 	padding: 0px;
-	margin: 30px 0 20px 5px;
+	margin: 20px 0 10px 5px;
 }
 
 #open_sidebar{
@@ -35,7 +35,7 @@ body {
 }
 
 #infor{
-	margin-top: 50px;
+	margin: 50px 0 0 260px;
 	padding: 30px 20px 30px 80px;
 }
 
@@ -65,9 +65,9 @@ label{
 	width: 50%;
 }
 
-li{
+#left-infor li{
 	list-style-type: none;
-	padding: 10px 0 10px 10px;
+	padding: 10px 0 10px 25px;
  }
 
 #left_bar{
@@ -75,8 +75,8 @@ li{
 }
 
 #left-infor{
-	margin-left: 15px;
 	font-size: 16px;
+	width: 110%;
 }
 
 a:hover{
