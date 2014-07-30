@@ -221,7 +221,6 @@ class Mail{
 			default :
 				return ;
 		}
-		var_dump($result);
 		return $result;
 	}
 
