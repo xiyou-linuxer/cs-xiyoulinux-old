@@ -147,9 +147,13 @@ class Mail{
 	public function save_draft()	//G
 	{
 		$fromuid = $this->uid;
-		$toname = $_POST["name"];
+		$toname = $_POST["touser"];
 		$title = $_POST["title"];
 		$content = $_POST["content"];
+		
+		if ( empty($toname) && empty($title) && empty($content) ) {
+			return json_encode(array("result"=>"false"));
+		}
 
 		$users=explode(',',$toname);
 		$array = array();
@@ -175,6 +179,10 @@ class Mail{
 		$title = $_POST["title"];
 		$content = $_POST["content"];
 		$mid = $_POST["mid"];
+
+		if ( empty($title) || empty($toname) || empty($content)  ) {
+			return json_encode(array("result"=>"false"));
+		}
 
 		$users=explode(',',$toname);
 		for ( $i = 0; $i < count($users); $i++ ) {
