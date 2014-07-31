@@ -1,5 +1,4 @@
 function init_page() {
-    set_cookie('uid', 1001);
     var menu = get_cookie('menu');
     var view = get_cookie('view');
     var tag;
