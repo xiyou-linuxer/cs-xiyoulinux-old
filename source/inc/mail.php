@@ -123,19 +123,25 @@ class Mail{
 
 	public function del_mail($mid)		//G
 	{
-		$sql = "select touser from cs_mail where mid=$mid";
+		$sql = "select touser,isdraft from cs_mail where mid=$mid";
 		$result = $this->link_result($sql, "select touser from cs_mail error");
-		$result_json = $result[0]['touser'];
-		$array = array();
-		$array = json_decode($result_json);
-		foreach( $array as $key=>$value) {
-			if( $key == $this->uid)
-				$value=2;
-			$array->{$key} = "$value";
+
+		$isdraft = $result[0]['isdraft'];
+		if ( $isdraft == 1 ) {
+			$sql = "delete from cs_mail where mid=$mid;";
 		}
-		$new_json = json_encode($array);
-		$sql = "update cs_mail set touser='$new_json' where mid=$mid;";
-		$result = $this->link_result($sql, "update touser json error");
+		else {
+			$result_json = $result[0]['touser'];
+			$array = json_decode($result_json);
+			foreach( $array as $key=>$value) {
+				if( $key == $this->uid)
+					$value=2;
+				$array->{$key} = "$value";
+			}
+			$new_json = json_encode($array);
+			$sql = "update cs_mail set touser='$new_json' where mid=$mid;";
+		}
+		$result = $this->link_result($sql, "del mail error");
 		if ( $result == 1 ) {
 			return json_encode(array("result"=>"true"));
 		}
