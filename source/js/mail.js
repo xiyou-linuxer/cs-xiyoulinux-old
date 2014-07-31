@@ -69,6 +69,9 @@ jQuery.extend({
             $.toggleView('#mail-list-view');
             localStorage.index='mail-draft';
         });
+        $('#btn-save-draft').click(function() {
+            return $.saveDraft();            
+        });
         $('#btn-send-mail').click(function() {
             return $.sendMail();            
         });
@@ -78,9 +81,22 @@ jQuery.extend({
             $('#mail-editor-content').val('');
             $.toggleView('#mail-editor-view');
         });
-
         $('#btn-delete-mail').click(function() {
             $.delMail(localStorage.mid);
+        });
+        $('#mail-editor-touser').autocomplete({
+            source: function(query, process) {
+                $.post('mail.php', {'username':query},function(respData) {
+                        //return process(respData);
+                    return("[{'username':'张永军'},{'username':'王呵呵'}]");
+                });
+            },
+            formatItem:function(item) {
+                return item['username'];
+            },
+            setValue:function(item) {
+                return {'data-value':item['username'], 'real-value':item['username']};
+            }
         });
     }
 }); 
@@ -98,6 +114,30 @@ jQuery.extend({
         $(view).siblings().css({'display':'none'});
     }            
 });
+
+jQuery.extend({
+    saveDraft:function() {
+        $.post('mail.php',
+            {
+                func: 'save_draft',
+                title: $('#mail-editor-title').val(),
+                touser: $('#mail-editor-touser').val(),
+                content: $('#mail-editor-content').val()
+            },
+            function(data, status) {
+                var obj = eval('(' + data + ')');
+                $('.modal-title').html('保存状态');
+                if (obj.result == 'true') {
+                    $('.modal-body').html('保存成功');
+                } else if (obj.result == 'false') {
+                    $('.modal-body').html('保存失败');                
+                }
+                $('#tipsModal').modal({keyboard: true});
+            }
+        );
+        return false;
+    }
+}); 
 
 jQuery.extend({
     sendMail:function() {
@@ -160,7 +200,8 @@ jQuery.extend({
                 if (obj.result == 'true') {
                     $('.modal-body').html('删除成功');
                     $('#btn-modal-close').click(function() {
-                        $.toggleView('#mail-list-view');
+                        localStorage.index = 'mail-list-view';
+                        location.href='mail.html';
                     });
                 } else if (obj.result == 'false') {
                     $('.modal-body').html('删除失败');                

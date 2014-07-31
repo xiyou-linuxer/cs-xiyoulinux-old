@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+$.fn.autocomplete.defaults.source	js/bootstrap.autocomplete.js	/^    source: []$/;"	p
 $.fn.dataTableExt.oApi.fnPagingInfo	js/DT_bootstrap.js	/^$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )$/;"	f
 $.fn.emulateTransitionEnd	js/bootstrap.js	/^  $.fn.emulateTransitionEnd = function (duration) {$/;"	f
 App	js/app.js	/^var App = function () {$/;"	f
@@ -42,6 +43,11 @@ App.layoutColorCodes.purple	js/app.js	/^        'purple': '#852b99',$/;"	p
 App.layoutColorCodes.red	js/app.js	/^        'red': '#e02222',$/;"	p
 App.layoutColorCodes.yellow	js/app.js	/^        'yellow': '#ffb848'$/;"	p
 App.runResponsiveHandlers	js/app.js	/^    var runResponsiveHandlers = function () {$/;"	f
+Autocomplete	js/bootstrap.autocomplete.js	/^  Autocomplete.prototype = {$/;"	c
+Autocomplete.constructor	js/bootstrap.autocomplete.js	/^    constructor: Autocomplete$/;"	p
+Autocomplete.formatItem	js/bootstrap.autocomplete.js	/^  , formatItem:function(item){$/;"	m
+Autocomplete.processObj	js/bootstrap.autocomplete.js	/^  , processObj:0$/;"	p
+Autocomplete.setValue	js/bootstrap.autocomplete.js	/^  , setValue:function(item){$/;"	m
 Csdb	inc/conn.php	/^class Csdb{		\/\/封装成类,对外目前就一个query接口$/;"	c
 Dropdown	js/bootstrap.js	/^  Dropdown.prototype.keydown = function (e) {$/;"	c
 Error_log	inc/error_log.php	/^class Error_log{$/;"	c
