@@ -104,23 +104,29 @@ function init_page() {
         del_mail(mid);
         //toggle_view('#mail-list-view');
     });
-/*    $('#mail-editor-touser').autocomplete({
+    $('#mail-editor-touser').autocomplete({
         source: function(query, process) {
-            $.post('mail.php', {'username':query},function(respData) {
+            $.post('mail.php', {'json':query},function(respData) {
                 return process(respData);
+                alert(respData);
                 //return("[{'username':'张永军'},{'username':'王呵呵'}]");
             });
         },
         formatItem: function(item) {
-            return item['username'];
+            return item['name'];
         },
         setValue:function(item) {
-            return {'data-value':item['username'], 'real-value':item['username']};
+            return {'data-value':item['name'], 'real-value':item['name']};
         }
-    }); */
+    });
 }
 
 function toggle_menu(menu) {
+    if (menu == '#menu-mail-draft') {
+        $('#list-column-user').html('收信人');
+    } else {
+        $('#list-column-user').html('发信人');
+    }
     $(menu).attr('class', 'list-group-item active');
     $(menu).siblings().attr('class', 'list-group-item');
 }            
@@ -221,14 +227,29 @@ function callbk_mail_list(data, status) {
         var innerhtml = '';
         for (var i = 0; i < obj.length; i++) {
             //var touser = eval(obj.touser);
-            if (obj[i].status == '草稿') {
-                innerhtml += '<tr onclick=set_draft_info(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
-            } else {
+            switch (obj[i].status) {
+            case '未读':
                 innerhtml += '<tr onclick=set_mail_info(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
+                innerhtml += '<td class="text-center">' + obj[i].date + '</td>';
+                innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
+                innerhtml += '<td class="text-center">';
+                innerhtml += '<span class="badge badge-warning">' + obj[i].status + '</span></td>';
+                break;
+            case '已读':
+                innerhtml += '<tr onclick=set_mail_info(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
+                innerhtml += '<td class="text-center">' + obj[i].date + '</td>';
+                innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
+                innerhtml += '<td class="text-center">';
+                innerhtml += '<span class="badge badge-success">' + obj[i].status + '</span></td>';
+                break;
+            default:
+                innerhtml += '<tr onclick=set_draft_info(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
+                innerhtml += '<td class="text-center">' + obj[i].date + '</td>';
+                innerhtml += '<td class="text-center">' + obj[i].touser + '</td>';
+                innerhtml += '<td class="text-center">';
+                innerhtml += '<span class="badge">' + obj[i].status + '</span></td>';
+                break;
             }
-            innerhtml += '<td class="text-center">' + obj[i].date + '</td>';
-            innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
-            innerhtml += '<td class="text-center">' + obj[i].status + '</td>';
             innerhtml += '<td>' + obj[i].content + '</td></tr>';
         }
         $('#mail-list-body').html(innerhtml); 
@@ -294,6 +315,7 @@ function callbk_mail_info(data, status) {
 
 // call back read draft
 function callbk_draft_info(data, status) {
+    alert(data);
     var obj = eval(data);
     var title = (obj[0].title == '') ? '未命名草稿' : obj[0].title;
     var touser = (obj[0].touser == '') ? '未指定' : obj[0].touser;
