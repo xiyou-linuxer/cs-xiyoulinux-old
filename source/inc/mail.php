@@ -275,7 +275,7 @@ class Mail{
 
 	private function get_mail_unread()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid order and cs_mail.isdraft=0 by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 
 		if ( $result == null ) {
@@ -302,7 +302,7 @@ class Mail{
 
 	private function get_mail_read()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -344,13 +344,21 @@ class Mail{
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
-		$result = $this->sub_title_content($result, array(30,30));
-		return json_encode($result);
+		for ( $i = 0; $i < count($result); $i++ ) {
+			foreach ( $result[$i] as $key=>$value ) {
+				if ( $value == "" ) {
+					$value=" ";
+				}
+				$new_result[$i]["$key"] = "$value";
+			}
+		}
+		$new_result = $this->sub_title_content($new_result, array(30,30));
+		return json_encode($new_result);
 	}
 
 	private function get_mail_all()			//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%$this->uid%' and cs_user.uid=cs_mail.fromuid order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' or cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";
 		$result = $this->link_result($sql, "get mail all error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -393,16 +401,17 @@ class Mail{
 		return json_encode($result);
 	}
 
-	public function get_name_match($json)
+	public function get_name_match($name)
 	{
-		$info = json_decode($json, true);
-		$name = $info["username"];
-
-		$match_arr = $this->link_result("select name from cs_user where name like '$name\_';");
-
-		if (is_array($match_arr))	
-			return json_encode(array("name" => $match_arr[0]));
-		return $match_arr;
+		$result = $this->link_result("select name from cs_user where name like '%$name%' limit 5;", "get name match error");
+	
+		if ( $result == null ) {
+			return json_encode(array("result"=>"false"));
+		}
+		for ( $i = 0; $i < count($result); $i++ ) {
+			$new_result[$i]["username"] = $result[$i]["name"];
+		}
+		return json_encode($new_result);
 	}
 }
 
