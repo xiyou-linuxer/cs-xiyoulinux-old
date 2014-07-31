@@ -3,7 +3,7 @@
 	require_once("inc/conn.php");
 	require_once("inc/function.php");	
 	
-	checkUser();
+	check_user();
 
 	date_default_timezone_set('PRC');
 	//$logfile = fopen("register.log", "a");
@@ -334,10 +334,10 @@ function get_avatar(){
 }
 
 function check_user(){
-	if (checkUser() == true)
-		print 'true';
-	else
+	if (checkUser() == false){
 		print 'false';
+		exit;
+	}
 }
 
 ?>
