@@ -73,7 +73,8 @@ jQuery.extend({
             return $.saveDraft();            
         });
         $('#btn-send-mail').click(function() {
-            return $.sendMail();            
+            $.sendMail();            
+            return false;
         });
         $('#btn-reply-mail').click(function() {
             $('#mail-editor-touser').val($('#mail-reader-fromuser').html());
@@ -87,8 +88,8 @@ jQuery.extend({
         $('#mail-editor-touser').autocomplete({
             source: function(query, process) {
                 $.post('mail.php', {'username':query},function(respData) {
-                        //return process(respData);
-                    return("[{'username':'张永军'},{'username':'王呵呵'}]");
+                    return process(respData);
+                    //return("[{'username':'张永军'},{'username':'王呵呵'}]");
                 });
             },
             formatItem:function(item) {
@@ -97,7 +98,7 @@ jQuery.extend({
             setValue:function(item) {
                 return {'data-value':item['username'], 'real-value':item['username']};
             }
-        });
+        }); 
     }
 }); 
 
@@ -135,7 +136,6 @@ jQuery.extend({
                 $('#tipsModal').modal({keyboard: true});
             }
         );
-        return false;
     }
 }); 
 
@@ -161,16 +161,11 @@ jQuery.extend({
                 $('#tipsModal').modal({keyboard: true});
             }
         );
-        return false;
     }
 }); 
 
 jQuery.extend({
     readMail:function(mail_id) {
-        $('#mail-reader-view').css({'display': 'block'});
-        $('#mail-reader-view').siblings().css({'display': 'none'});
-        localStorage.tag = 'mail-reader';
-        localStorage.mid = mail_id;
         $.post('mail.php',
             {
                 func: 'get_mail_info',
@@ -181,6 +176,33 @@ jQuery.extend({
                 $('#mail-reader-title').html(obj[0].title);
                 $('#mail-reader-fromuser').html(obj[0].fromuser);
                 $('#mail-reader-content').html(obj[0].content);
+                $.toggleView('#mail-reader-view');
+                localStorage.mid = mail_id;
+                localStorage.index = 'mail-reader';
+            }
+        );
+    }
+}); 
+
+jQuery.extend({
+    readDraft:function(mail_id) {
+        $.post('mail.php',
+            {
+                func: 'get_mail_info',
+                mid: mail_id
+            },
+            function(data, status) {
+                var obj = eval(data);
+                $('#mail-reader-title').html(obj[0].title);
+                $('#mail-reader-fromuser').html(obj[0].fromuser);
+                $('#mail-reader-content').html(obj[0].content);
+                $('#btn-delete-mail').html('删除草稿');
+                $('#btn-reply-mail').html('编辑草稿');
+                $('#mail-editor-title').val(obj[0].title);
+                $('#mail-editor-touser').val(obj[0].fromuser);
+                $('#mail-editor-content').val(obj[0].content);
+                $.toggleView('#mail-reader-view');
+                localStorage.mid = mail_id;
                 localStorage.index = 'mail-reader';
             }
         );
@@ -200,7 +222,6 @@ jQuery.extend({
                 if (obj.result == 'true') {
                     $('.modal-body').html('删除成功');
                     $('#btn-modal-close').click(function() {
-                        localStorage.index = 'mail-list-view';
                         location.href='mail.html';
                     });
                 } else if (obj.result == 'false') {
@@ -228,7 +249,7 @@ jQuery.extend({
                 } else {
                     for (var i = 0; i < obj.length; i++) {
                         //var touser = eval(obj.touser);
-                        innerhtml += '<tr onclick=$.readMail(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
+                        innerhtml += '<tr onclick=$.readDraft(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
                         innerhtml += '<td class="text-center">' + obj[i].date + '</td>';
                         innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
                         innerhtml += '<td class="text-center">' + obj[i].status + '</td>';
