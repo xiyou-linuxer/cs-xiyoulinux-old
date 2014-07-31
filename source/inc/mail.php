@@ -346,6 +346,7 @@ class Mail{
 	private function get_mail_draft()		//G
 	{
 		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		echo $sql;
 		$result = $this->link_result($sql, "get mail draft error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -357,14 +358,16 @@ class Mail{
 				}
 				$new_result[$i]["$key"] = "$value";
 			}
+			$new_result[$i]["status"] = "草稿";
 		}
 		$new_result = $this->sub_title_content($new_result, array(30,30));
+		var_dump($new_result);
 		return json_encode($new_result);
 	}
 
 	private function get_mail_all()			//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' or cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where (cs_mail.touser like '%\"$this->uid\":\"0\"%' or cs_mail.touser like '%\"$this->uid\":\"1\"%') and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";
 		$result = $this->link_result($sql, "get mail all error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
