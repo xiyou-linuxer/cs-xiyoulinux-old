@@ -107,7 +107,6 @@ function init_page() {
         source: function(query, process) {
             $.post('mail.php', {'json':query},function(respData) {
                 return process(respData);
-                alert(respData);
                 //return("[{'username':'张永军'},{'username':'王呵呵'}]");
             });
         },
@@ -314,7 +313,6 @@ function callbk_mail_info(data, status) {
 
 // call back read draft
 function callbk_draft_info(data, status) {
-    alert(data);
     var obj = eval(data);
     var title = (obj[0].title == '') ? '未命名草稿' : obj[0].title;
     var touser = (obj[0].touser == '') ? '未指定' : obj[0].touser;
