@@ -1,5 +1,8 @@
 jQuery.extend({
     pageInit:function() {
+        //if (getCookie("uid") == null) {
+          //  alert("hehe");
+       // }
         switch(localStorage.index) {
         case 'mail-editor':
             $.toggleMenu('#menu-mail-editor');
@@ -75,6 +78,10 @@ jQuery.extend({
             $('#mail-editor-content').val('');
             $.toggleView('#mail-editor-view');
         });
+
+        $('#btn-delete-mail').click(function() {
+            $.delMail(localStorage.mid);
+        });
     }
 }); 
 
@@ -139,6 +146,31 @@ jQuery.extend({
         );
     }
 }); 
+
+jQuery.extend({
+    delMail:function(mail_id) {
+        $.post('mail.php',
+            {
+                func: 'del_mail',
+                mid: mail_id
+            },
+            function(data, status) {
+                var obj = eval('(' + data + ')');
+                $('.modal-title').html('删除状态');
+                if (obj.result == 'true') {
+                    $('.modal-body').html('删除成功');
+                    $('#btn-modal-close').click(function() {
+                        $.toggleView('#mail-list-view');
+                    });
+                } else if (obj.result == 'false') {
+                    $('.modal-body').html('删除失败');                
+                }
+                $('#tipsModal').modal({keyboard: true});
+            }
+        );
+    }
+}); 
+
 
 jQuery.extend({
     getMailList:function(tag) {

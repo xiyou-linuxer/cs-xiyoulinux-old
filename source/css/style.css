@@ -8,14 +8,6 @@ body {
 	color:#ffffff;
 }
 
-.badge-warning {
-    background-color:#f89406;
-}
-
-.label-warning[href],.badge-warning[href] {
-    background-color:#c67605;
-}
-
 .sidebar-collapse {
     padding:0;
 }
@@ -32,7 +24,7 @@ body {
     padding: 10px;
 }
 
-#mail-editor,#mail-content {
+#mail-editor-view,#mail-reader-view {
     display:none;
 }
 
@@ -48,87 +40,62 @@ body {
     margin-bottom:0px !important;
 }
 
-
-/*
-ul.list-responsive>:hover {
-    #background:#222222;
+.badge {
+    padding: 1px 9px 2px;
+    font-size: 12.025px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #999999;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
 }
-
+.badge:hover {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.badge-error {
+    background-color: #b94a48;
+}
+.badge-error:hover {
+    background-color: #953b39;
+}
+.badge-warning {
+    background-color: #f89406;
+}
+.badge-warning:hover {
+    background-color: #c67605;
+}
+.badge-success {
+    background-color: #468847;
+}
+.badge-success:hover {
+    background-color: #356635;
+}
+.badge-info {
+    background-color: #3a87ad;
+}
+.badge-info:hover {
+    background-color: #2d6987;
+}
+.badge-inverse {
+    background-color: #333333;
+}
+.badge-inverse:hover {
+    background-color: #1a1a1a;
+}
 @media (max-width:480px) {
-ul.list-responsive {
-    display:block;
-    *display:block; 
-}
 
-ul.list-resoponsive>li:hover {
-    background:#00ee00;
-}
-
-ul.list-responsive>li {
-    display:block;
-    *display:block;
-    border:1px solid #222222;
-}
 }
 
 @media (max-width:768px) {
-ul.list-responsive {
-    display:block;
-    *display:block; 
-}
-
-ul.list-resoponsive:hover {
-    background:#00ee00;
-}
-
-ul.list-responsive>li {
-    display:block;
-    *display:block;
-    border:1px solid #222222;
-}
 }
 
 @media (min-width:780px) and (max-width:1200px) {
-.list-responsive ul {
-    display:inline-block;
-    *display:inline; 
-}
-
-.list-resoponsive:hover {
-    background:#00ee00;
-}
-
-.list-responsive li {
-    display:inline;
-    border:1px solid #222222;
-    border-left-width:0;
-    float:left;
-}
-.list-responsive li:first-child {
-    border-left-width:1px;
-}
-
 }
 
 @media (min-width:1200px) {
-.list-responsive ul {
-    display:inline-block;
-    *display:inline; 
 }
 
-.list-resoponsive ul:hover {
-    background:#00ee00;
-}
-
-.list-responsive  li {
-    display:inline;
-    border:1px solid #222222;
-    border-left-width:0;
-    float:left;
-}
-.list-responsive  li:first-child {
-    border-left-width:1px;
-}
-
-}
-*/
