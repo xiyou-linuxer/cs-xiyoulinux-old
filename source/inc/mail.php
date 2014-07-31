@@ -79,7 +79,7 @@ class Mail{
 
 	public function get_mail_count()		//G
 	{
-				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%';";
+				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 0 error");
 				$all_count = $result[0]["count(mid)"];
 
