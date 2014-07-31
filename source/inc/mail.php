@@ -77,48 +77,41 @@ class Mail{
 			"insert mail -> insert cs_mail error");
 	}
 
-	public function get_mail_count($tag = 0)		//G
+	public function get_mail_count()		//G
 	{
-		
-		switch($tag) {
-			case 0:
 				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%';";
 				$result = $this->link_result($sql,"get mail count -> tag = 0 error");
-				$count = $result[0]["count(mid)"];
-				break;
-			case 1: 
+				$all_count = $result[0]["count(mid)"];
+
 				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 1 error");
-				$count = 0;
+                $unread_count = 0;
+
 				for ( $i = 0; $i < count($result); $i++ ) {
 					$row_json = $result[$i]['touser'];
 					$result_json = json_decode($row_json);
 					foreach( $result_json as $key=>$value) {
 						if ( $key == $this->uid && $value == 0 )
-							$count ++;
+							$unread_count ++;
 					}
 				}
-				break;
-			case 2:
+				
 				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 2 error");
-				$count = 0;
+				$read_count = 0;
 				for ( $i = 0; $i < count($result); $i++ ) {
 					$row_json = $result[$i]['touser'];
 					$result_json = json_decode($row_json);
 					foreach( $result_json as $key=>$value) {
 						if ( $key == $this->uid && $value == 1 )
-							$count ++;
+							$read_count ++;
 					}
 				}
-				break;
-			case 3:
+
 				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%' and isdraft=1;";
 				$result = $this->link_result($sql,"get mail count -> tag = 3 error");
-				$count = $result[0]['count(mid)'];
-				break;
-		}
-		return json_encode(array("count"=>$count));
+				$draft_count = $result[0]['count(mid)'];
+		return json_encode(array("all"=>$all_count, "unread"=>$unread_count, "read"=>$read_count, "draft"=>$draft_count));
 	}
 
 	public function del_mail($mid)		//G
@@ -346,7 +339,6 @@ class Mail{
 	private function get_mail_draft()		//G
 	{
 		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
-		echo $sql;
 		$result = $this->link_result($sql, "get mail draft error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -361,7 +353,6 @@ class Mail{
 			$new_result[$i]["status"] = "草稿";
 		}
 		$new_result = $this->sub_title_content($new_result, array(30,30));
-		var_dump($new_result);
 		return json_encode($new_result);
 	}
 

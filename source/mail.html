@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>个人中心</title>
+    <meta http-equiv = "pragma" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="cs,xiyoulinux">
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -52,16 +53,16 @@
                         <span class="glyphicon glyphicon-edit"></span> 写站内信
                     </li>
                     <li class="list-group-item sidebar-menu-item" id="menu-mail-all">
-                        <span class="glyphicon glyphicon-list-alt"></span> 全部显示 <span class="badge badge-info">0</span>
+                        <span class="glyphicon glyphicon-list-alt"></span> 全部显示 <span class="badge badge-info" id="badge-all">0</span>
                     </li>
                     <li class="list-group-item sidebar-menu-item" id="menu-mail-unread">
-                        <span class="glyphicon glyphicon-inbox"></span> 未读信息 <span class="badge badge-warning">0</span>
+                        <span class="glyphicon glyphicon-inbox"></span> 未读信息 <span class="badge badge-warning" id="badge-unread">0</span>
                     </li>
                     <li class="list-group-item sidebar-menu-item" id="menu-mail-read">
-                        <span class="glyphicon glyphicon-bookmark"></span> 已读信息 <span class="badge badge-success">0</span>
+                        <span class="glyphicon glyphicon-bookmark"></span> 已读信息 <span class="badge badge-success" id="badge-read">0</span>
                     </li>
                     <li class="list-group-item sidebar-menu-item" id="menu-mail-draft">
-                        <span class="glyphicon glyphicon-file"></span> 草稿 <span class="badge">0</span>
+                        <span class="glyphicon glyphicon-file"></span> 草稿 <span class="badge" id="badge-draft">0</span>
                     </li>
 	            </ul>
             </div>
@@ -106,6 +107,27 @@
                         <a class="btn btn-success" id="btn-reply-mail">回复信息</a>
                     </div>
             </div><!--END MAIL CONTENT-->
+            
+            <div class="panel panel-default" id="mail-draft-view">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h3 class="text-center" id="mail-draft-title"></h3>
+                        </div>
+                    </div> <!--END PANEL HEADING-->
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span>收件人：</h4><span id="mail-draft-fromuser"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 id="mail-draft-content"></h4>
+                        </li>
+                    </ul> <!--END PANEL BODY-->
+                    <div class="panel-footer text-right">
+                        <a class="btn btn-danger" id="btn-delete-draft">删除草稿</a>
+                        <a class="btn btn-success" id="btn-edit-draft">编辑草稿</a>
+                    </div>
+            </div><!--END draft view-->
+
 
             <div class="panel panel-default" id="mail-editor-view">
                 <div class="panel-heading">
@@ -143,7 +165,7 @@
         </div>
     </div>
     <!-- 模态框（Modal） -->
-    <div class="modal fade" id="tipsModal" tabindex="-1" role="dialog" aria-labelledby="tipsModalTitle" aria-hidden="true">
+    <div class="modal fade" id="tips-modal" tabindex="-1" role="dialog" aria-labelledby="tips-modal-title" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -164,7 +186,7 @@
     <script src="js/bootstrap.autocomplete.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
-            $.pageInit();            
+            init_page();
         });
     </script>
 </body>

@@ -24,7 +24,7 @@ body {
     padding: 10px;
 }
 
-#mail-editor-view,#mail-reader-view {
+#mail-list-view,#mail-editor-view,#mail-reader-view {
     display:none;
 }
 
