@@ -1,85 +1,63 @@
 function init_page() {
     var menu = get_cookie('menu');
     var view = get_cookie('view');
-    var tag;
 
-    set_mail_num();
     //设置左侧导航菜单
-    switch(menu) {
-    case 'edit':
-        tag = -1;
-        toggle_menu('#menu-mail-editor');
-        break;
-    case 'unread':
-        tag = 1;
-        toggle_menu('#menu-mail-unread');
-        break;
-    case 'read':
-        tag = 2;
-        toggle_menu('#menu-mail-read');
-        break;
-    case 'draft':
-        tag = 4;
-        toggle_menu('#menu-mail-draft');
-        break;
-    default:
-        tag = 0;
-        toggle_menu('#menu-mail-all');
-        break;
-    }
+    toggle_menu(menu);
 
     //设置当前视图
+    set_mail_num();
     switch (view) {
     case 'editor':
         clear_editor();
-        toggle_view('#mail-editor-view');
+        toggle_view('editor');
         break;
     case 'reader':
         set_mail_info(get_cookie('mid'));
-        //toggle_view('#mail-reader-view');
+        //toggle_view('reader');
     case 'draft':
         set_draft_info(get_cookie('mid'));
-        //toggle_view('#mail-draft-view');
+        //toggle_view('draft');
         break;
     default:
-        set_mail_list(tag);
-        //toggle_view('#mail-list-view');
+        set_mail_list(menu);
+        //toggle_view('list');
         break;
     }
-
+    
     //初始化按钮单击事件
     $('#menu-mail-editor').click(function() {
         clear_editor();//清空表单
-        toggle_menu('#menu-mail-editor');
-        toggle_view('#mail-editor-view');
+        toggle_menu('edit');
+        toggle_view('editor');
         set_cookie('menu', 'edit');
         set_cookie('view', 'editor');
     });
     $('#menu-mail-all').click(function() {
-        set_mail_list(0);
-        toggle_menu('#menu-mail-all');
-        //toggle_view('#mddail-list-view');
+        set_mail_list('all');
+        toggle_menu('all');
+        //toggle_view('list');
         set_cookie('menu', 'all');
         set_cookie('view', 'list');
     });
     $('#menu-mail-unread').click(function() {
-        set_mail_list(1);
-        toggle_menu('#menu-mail-unread');
-        //toggle_view('#mail-list-view');
+        set_mail_list('unread');
+        toggle_menu('unread');
+        //toggle_view('list');
         set_cookie('menu', 'unread');
         set_cookie('view', 'list');
     });    
     $('#menu-mail-read').click(function() {
-        set_mail_list(2);
-        toggle_menu('#menu-mail-read');
-        //toggle_view('#mail-list-view');
+        set_mail_list('read');
+        toggle_menu('read');
+        //toggle_view('list');
         set_cookie('menu', 'read');
         set_cookie('view', 'list');
     });
     $('#menu-mail-draft').click(function() {
-        set_mail_list(4);
-        toggle_menu('#menu-mail-draft');
-        //toggle_view('#mail-list-view');
+        set_mail_list('draft');
+        toggle_menu('draft');
+        //toggle_view('list');
         set_cookie('menu', 'draft');
         set_cookie('view', 'list');
     });
@@ -91,7 +69,7 @@ function init_page() {
     });
     $('#btn-reply-mail').click(function() {
         clear_editor();
-        toggle_view('#mail-editor-view');
+        toggle_view('editor');
     });
     $('#btn-delete-mail').click(function() {
         var mid = get_cookie('mid');
@@ -120,18 +98,54 @@ function init_page() {
 }
 
 function toggle_menu(menu) {
-    if (menu == '#menu-mail-draft') {
+    var menu_id;
+    switch (menu) {
+    case 'edit':
+        menu_id = '#menu-mail-editor';
+        break;
+    case 'unread':
+        menu_id = '#menu-mail-unread';
+        break;
+    case 'read':
+        menu_id = '#menu-mail-read';
+        break;
+    case 'draft':
+        menu_id = '#menu-mail-draft';
+        break;
+    default:
+        menu_id = '#menu-mail-all';
+        break;
+    }
+
+    $(menu_id).attr('class', 'list-group-item active');
+    $(menu_id).siblings().attr('class', 'list-group-item');
+
+    if (menu_id == '#menu-mail-draft') {
         $('#list-column-user').html('收信人');
     } else {
         $('#list-column-user').html('发信人');
     }
-    $(menu).attr('class', 'list-group-item active');
-    $(menu).siblings().attr('class', 'list-group-item');
 }            
 
 function toggle_view(view) {
-    $(view).css({'display':'block'});
-    $(view).siblings().css({'display':'none'});
+    var view_id;
+    switch (view) {
+    case 'editor':
+        view_id = '#mail-editor-view';
+        break;
+    case 'reader': 
+        view_id = '#mail-reader-view';
+        break;
+    case 'draft':
+        view_id = '#mail-draft-view';
+        break;
+    default:
+        view_id = '#mail-list-view';
+        break;
+    }
+
+    $(view_id).css({'display':'block'});
+    $(view_id).siblings().css({'display':'none'});
 }            
 
 function clear_editor() {
@@ -191,7 +205,22 @@ function del_mail(pmid) {
     $.post('mail.php', param, callbk_del_mail);
 }
 
-function set_mail_list(ptag) {
+function set_mail_list(menu) {
+    var ptag;
+    switch (menu) {
+    case 'unread': 
+        ptag = 1;
+        break;
+    case 'read':
+        ptag = 2;
+        break;
+    case 'draft':
+        ptag = 4;
+        break;
+    default:
+        ptag = 0;
+        break;
+    }
     var param = {func: 'get_mail_list', tag: ptag};
     $.post('mail.php', param, callbk_mail_list); 
 }            
@@ -232,6 +261,7 @@ function callbk_mail_list(data, status) {
                 innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
                 innerhtml += '<td class="text-center">';
                 innerhtml += '<span class="badge badge-warning">' + obj[i].status + '</span></td>';
+                innerhtml += '<td>' + obj[i].content + '</td></tr>';
                 break;
             case '已读':
                 innerhtml += '<tr onclick=set_mail_info(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
@@ -239,6 +269,7 @@ function callbk_mail_list(data, status) {
                 innerhtml += '<td class="text-center">' + obj[i].fromuser + '</td>';
                 innerhtml += '<td class="text-center">';
                 innerhtml += '<span class="badge badge-success">' + obj[i].status + '</span></td>';
+                innerhtml += '<td>' + obj[i].content + '</td></tr>';
                 break;
             default:
                 innerhtml += '<tr onclick=set_draft_info(' + obj[i].mid + ');><td>' + obj[i].title + '</td>';
@@ -246,13 +277,13 @@ function callbk_mail_list(data, status) {
                 innerhtml += '<td class="text-center">' + obj[i].touser + '</td>';
                 innerhtml += '<td class="text-center">';
                 innerhtml += '<span class="badge">' + obj[i].status + '</span></td>';
+                innerhtml += '<td>' + obj[i].content + '</td></tr>';
                 break;
             }
-            innerhtml += '<td>' + obj[i].content + '</td></tr>';
         }
         $('#mail-list-body').html(innerhtml); 
     } 
-    toggle_view('#mail-list-view');
+    toggle_view('list');
 }
 
 // call back send mail
@@ -260,6 +291,9 @@ function callbk_send_mail(data, status) {
     var obj = eval('(' + data + ')');
     if (obj.result == 'true') {
         set_tips_modal('发送成功');
+        $('#btn-modal-close').click(function() {
+            set_mail_num();
+        });
     } else if (obj.result == 'false') {
         set_tips_modal('发送失败');                
     } else {
@@ -273,6 +307,9 @@ function callbk_save_draft(data, status) {
     var obj = eval('(' + data + ')');
     if (obj.result == 'true') {
         set_tips_modal('保存成功');
+        $('#btn-modal-close').click(function() {
+            set_mail_num();
+        });
     } else if (obj.result == 'false') {
         set_tips_modal('保存失败');
     }
@@ -285,8 +322,9 @@ function callbk_del_mail(data, status) {
     if (obj.result == 'true') {
         set_tips_modal('删除成功');
         $('#btn-modal-close').click(function() {
-            set_cookie('view', 'list');
-            location.href = 'mail.html';
+            set_mail_num();
+            set_mail_list(get_cookie('menu'));
+            toggle_view('list');
         });
     } else if (obj.result == 'false') {
         set_tips_modal('删除失败');
@@ -303,12 +341,13 @@ function callbk_mail_info(data, status) {
     $('#btn-reply-mail').click(function() {
         clear_editor();
         $('#mail-editor-touser').val($('#mail-reader-fromuser').html());
-        toggle_view('#mail-editor-view');
+        toggle_view('editor');
     });
     
-    toggle_view('#mail-reader-view');
+    toggle_view('reader');
     set_cookie('mid', obj[0].mid);
     set_cookie('view', 'reader');
+    set_mail_num();
 }
 
 // call back read draft
@@ -324,10 +363,11 @@ function callbk_draft_info(data, status) {
         $('#mail-editor-title').val(obj[0].title);
         $('#mail-editor-touser').val(obj[0].fromuser);
         $('#mail-editor-content').val(obj[0].content.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>'));
-        toggle_view('#mail-editor-view');
+        toggle_view('editor');
     });
-
-    toggle_view('#mail-draft-view');
+    
+    toggle_view('draft');
     set_cookie('mid', obj[0].mid);
     set_cookie('view', 'draft');
+    set_mail_num();
 }
