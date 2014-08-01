@@ -1,6 +1,7 @@
 <?php
 
-function checkUser($uid){
+function checkUser(){
+	$uid = $_COOKIE['uid'];
 	session_start();
 	if( !isset($_SESSION['identity']) )
 		return false;

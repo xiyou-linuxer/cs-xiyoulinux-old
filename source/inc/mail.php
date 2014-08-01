@@ -360,10 +360,14 @@ class Mail{
 			$touser = $result[$i]["touser"];
 			$touser = json_decode($touser);
 			foreach ( $touser as $key=>$value) {
+<<<<<<< HEAD
 				if ( $key != _empty_ )
 					$users[] = $this->uid_to_name($key);
 				else
 					$users[] = " ";
+=======
+				$users[] = $this->uid_to_name($key);
+>>>>>>> 45aefaed271e08be74d7d49b86e0d8cc803139b1
 			}
 			$user = implode(",",$users);
 			$new_result[$i]["touser"] = "$user";

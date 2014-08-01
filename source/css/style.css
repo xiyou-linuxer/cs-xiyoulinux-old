@@ -19,13 +19,34 @@ body {
     border:1px solid #222222;
 }
 
+.mail-user {
+    color:#24d1af;
+    
+}
+
+.mail-title {
+    color:#24d1af;
+
+}
+
 .mail-list-panel {
     margin:10px;
     padding: 10px;
 }
 
-#mail-editor-view,#mail-reader-view {
+#mail-list-view,#mail-editor-view,#mail-reader-view {
     display:none;
+}
+
+#mail-table {
+    table-layout:fixed !important;
+    width:100%;
+}
+
+#mail-table th,#mail-table td {
+    white-space:nowrap;
+    overflow:hidden !important;
+    text-overflow:ellipsis;
 }
 
 .textarea-custom {
