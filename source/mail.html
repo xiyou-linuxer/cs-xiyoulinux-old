@@ -143,13 +143,13 @@
                         <li class="list-group-item">
                             <div class="input-group">
                                 <span class="input-group-addon" >收件人</span> 
-                                <input type="text" name="touser" id="mail-editor-touser" class="form-control" placeholder="请输入收件人姓名"></input>
+                                <input type="text" name="touser" id="mail-editor-touser" class="form-control" placeholder="请输入收件人姓名" data-provide="typeahead" autocomplete="off"></input>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="input-group">
                                 <span class="input-group-addon" >标题</span> 
-                                <input type="text" name="title" id="mail-editor-title" class="form-control" placeholder="请输入信息标题"></input>
+                                <input type="text" name="title" id="mail-editor-title" class="form-control" placeholder="请输入信息标题" autocomplete="off"></input>
                             </div>
                         </li>
                         <li class="list-group-item">
@@ -184,6 +184,7 @@
     <script src="js/mail.js" type="text/javascript"></script>
     <script src="js/cookie.js" type="text/javascript"></script>
     <script src="js/bootstrap.autocomplete.js" type="text/javascript"></script>
+    <script src="js/bootstrap-typeahead.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             init_page();

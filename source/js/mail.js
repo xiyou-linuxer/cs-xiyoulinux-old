@@ -81,19 +81,55 @@ function init_page() {
         del_mail(mid);
         //toggle_view('#mail-list-view');
     });
-    $('#mail-editor-touser').autocomplete({
-        source: function(query, process) {
-            $.post('mail.php', {'json':query},function(respData) {
-                return process(respData);
-                //return("[{'username':'张永军'},{'username':'王呵呵'}]");
+
+    //收件人输入框自动完成功能
+    $('#mail-editor-touser').typeahead({
+        source: function(query, process) {//匹配最后一个逗号之后的内容
+            var pname = query.split(',');
+            var pname = pname[pname.length - 1];
+
+            var param = {func: 'get_name_match', json: pname};
+            $.post('mail.php', param, function (data) {
+                var objs = eval(data);
+                var name = new Array();
+                for (var i = 0; i < objs.length; i++) {
+                    name.push(objs[i].username);
+                }
+                process(name);
             });
         },
-        formatItem: function(item) {
-            return item['name'];
+        highlighter: function (item) {
+            var query = this.query.replace(/[\-\[\]{}()*+?., \\\^$|#\s]/g, '\\$&');
+            return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                return '<font style="color:#00ffff">' + match + '</font>';//高亮显示匹配字符
+            });
         },
-        setValue:function(item) {
-            return {'data-value':item['name'], 'real-value':item['name']};
+        matcher: function (item) {
+            var name = this.query.replace(/\s/ig, '').split(',');//除去多余的空格，匹配最后一个都好之后的内容
+            var query = name[name.length - 1];
+            return ~item.indexOf(query);
+        },
+        updater: function (item) {
+            var name = this.query.replace(/\s/ig, '').split(',');//去除多余空格
+            var result = '';
+            for (var i = 0; i < name.length - 1; i++) {
+                result += name[i] + ',';
+            }
+            result += item + ',';
+            return result;
         }
+    });
+    //失去焦点时，移除多余的空格和逗号
+    $('#mail-editor-touser').blur(function () {
+        var name = $('#mail-editor-touser').val().replace(/\s/ig, '').split(','); 
+        var result = '';
+        for (var i = 0; i < name.length; i++) {
+            if (name[i] != '') {
+                result += name[i] + ',';
+            }
+        }
+        result = result.substr(0, result.length - 1);
+        $('#mail-editor-touser').val(result);
     });
 }
 
@@ -291,14 +327,16 @@ function callbk_send_mail(data, status) {
     var obj = eval('(' + data + ')');
     if (obj.result == 'true') {
         set_tips_modal('发送成功');
-        $('#btn-modal-close').click(function() {
-            set_mail_num();
-        });
     } else if (obj.result == 'false') {
         set_tips_modal('发送失败');                
     } else {
         set_tips_modal('失败列表：' + obj.result);
     }
+    
+    $('#btn-modal-close').click(function() {
+        set_mail_num();
+    });
+
     show_tips_modal('发送状态');
 }
 
