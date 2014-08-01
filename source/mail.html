@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="cs,xiyoulinux">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="plugin/wysihtml5/css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet"></link>
     <link href="css/DT_bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -142,14 +143,14 @@
                         </li>
                         <li class="list-group-item">
                             <div class="input-group">
-                                <span class="input-group-addon"><div style="width:4em">收件人</div></span> 
+                                <span class="input-group-addon"><div class="label-user">收件人</div></span> 
                                 <input type="text" name="touser" id="mail-editor-touser" class="form-control mail-user" placeholder="请输入收件人姓名" data-provide="typeahead" autocomplete="off"></input>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="input-group">
-                                <span class="input-group-addon"><div style="width:4em;color:#24d1af"><strong>标题</strong></div></span> 
-                                <input type="text" name="title" id="mail-editor-title" class="form-control" placeholder="请输入信息标题" autocomplete="off" style="color:#24d1af"></input>
+                                <span class="input-group-addon"><div class="label-title"><strong>标题</strong></div></span> 
+                                <input type="text" name="title" id="mail-editor-title" class="form-control mail-title" placeholder="请输入信息标题" autocomplete="off"></input>
                             </div>
                         </li>
                         <li class="list-group-item">
@@ -181,13 +182,18 @@
     </div>
     <script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.js" type="text/javascript"></script>
-    <script src="js/mail.js" type="text/javascript"></script>
+
+    <!--typeahead-->
+    <script src="plugin/typeahead/js/bootstrap-typeahead.js" type="text/javascript"></script>
+    <!--wysihtml5-->
+    <script src="plugin/wysihtml5/js/wysihtml5-0.3.0.js"></script>
+    <script src="plugin/wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>
     <script src="js/cookie.js" type="text/javascript"></script>
-    <script src="js/bootstrap.autocomplete.js" type="text/javascript"></script>
-    <script src="js/bootstrap-typeahead.js" type="text/javascript"></script>
+    <script src="js/mail.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             init_page();
+	        $('#mail-editor-content').wysihtml5();
         });
     </script>
 </body>

@@ -100,9 +100,10 @@ function init_page() {
             });
         },
         highlighter: function (item) {
-            var query = this.query.replace(/[\-\[\]{}()*+?., \\\^$|#\s]/g, '\\$&');
+            var name = this.query.replace(/\s/ig, '').split(',');//除去多余的空格，匹配最后一个都好之后的内容
+            var query = name[name.length - 1];
             return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
-                return '<font style="color:#00ffff">' + match + '</font>';//高亮显示匹配字符
+                return match;//高亮显示匹配字符
             });
         },
         matcher: function (item) {
