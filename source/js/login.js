@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	$.ajax({url:'user.php',
+		type:'post',
+		data:'func=check_user',
+		success:function(data){
+			if(data.substring(0,4) == 'true')
+				window.location.href = 'user.html';
+		}
+	});
 	$("#login").click(function(){
 		$.ajax({url:'login.php',
 			type:'post',
