@@ -899,6 +899,9 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
         .attr('aria-hidden', false)
         that.$element.children().eq(0).css("position", "absolute").css({
             "margin":"0px",
+            "width": function () {
+                return  (that.$element.children().eq(0).height() * 1.7) + "px";
+            },
             "top": function () {
                 return (that.$element.height() - that.$element.children().eq(0).height()-40) / 2 + "px";
                 },

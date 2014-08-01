@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+$.fn.autocomplete.defaults.source	js/bootstrap.autocomplete.js	/^    source: []$/;"	p
 $.fn.dataTableExt.oApi.fnPagingInfo	js/DT_bootstrap.js	/^$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )$/;"	f
 $.fn.emulateTransitionEnd	js/bootstrap.js	/^  $.fn.emulateTransitionEnd = function (duration) {$/;"	f
 App	js/app.js	/^var App = function () {$/;"	f
@@ -42,6 +43,11 @@ App.layoutColorCodes.purple	js/app.js	/^        'purple': '#852b99',$/;"	p
 App.layoutColorCodes.red	js/app.js	/^        'red': '#e02222',$/;"	p
 App.layoutColorCodes.yellow	js/app.js	/^        'yellow': '#ffb848'$/;"	p
 App.runResponsiveHandlers	js/app.js	/^    var runResponsiveHandlers = function () {$/;"	f
+Autocomplete	js/bootstrap.autocomplete.js	/^  Autocomplete.prototype = {$/;"	c
+Autocomplete.constructor	js/bootstrap.autocomplete.js	/^    constructor: Autocomplete$/;"	p
+Autocomplete.formatItem	js/bootstrap.autocomplete.js	/^  , formatItem:function(item){$/;"	m
+Autocomplete.processObj	js/bootstrap.autocomplete.js	/^  , processObj:0$/;"	p
+Autocomplete.setValue	js/bootstrap.autocomplete.js	/^  , setValue:function(item){$/;"	m
 Csdb	inc/conn.php	/^class Csdb{		\/\/封装成类,对外目前就一个query接口$/;"	c
 Dropdown	js/bootstrap.js	/^  Dropdown.prototype.keydown = function (e) {$/;"	c
 Error_log	inc/error_log.php	/^class Error_log{$/;"	c
@@ -85,11 +91,17 @@ __construct	inc/mail.php	/^	public function __construct($uid)$/;"	f
 __destruct	inc/conn.php	/^	public function __destruct(){		\/\/自动释放$/;"	f
 able_app	plugin.php	/^function able_app($file){$/;"	f
 add_user	user.php	/^function add_user(){$/;"	f
+array	inc/mail.php	/^			$array = json_decode($result_json);$/;"	v
 array	inc/mail.php	/^		$array = $result->fetch_assoc();$/;"	v
 array	inc/mail.php	/^		$array = array();$/;"	v
-array	inc/mail.php	/^		$array = json_decode($result_json);$/;"	v
 back	checknum.php	/^	$back = ImageColorAllocate($im, 245,245,245);$/;"	v
 blog	user.php	/^    $blog = $_POST["blog"];$/;"	v
+callbk_del_mail	js/mail.js	/^function callbk_del_mail(data, status) {$/;"	f
+callbk_draft_info	js/mail.js	/^function callbk_draft_info(data, status) {$/;"	f
+callbk_mail_info	js/mail.js	/^function callbk_mail_info(data, status) {$/;"	f
+callbk_mail_list	js/mail.js	/^function callbk_mail_list(data, status) {$/;"	f
+callbk_save_draft	js/mail.js	/^function callbk_save_draft(data, status) {$/;"	f
+callbk_send_mail	js/mail.js	/^function callbk_send_mail(data, status) {$/;"	f
 chars	inc/function.php	/^    $chars = $string;  $/;"	v
 charset	inc/conn.php	/^		$this->charset = 'utf8';		$/;"	v
 charset	inc/conn.php	/^	private $charset;$/;"	v
@@ -101,6 +113,7 @@ checkUser	inc/function.php	/^function checkUser($uid){$/;"	f
 check_ok	inc/function.php	/^	$check_ok = true;$/;"	v
 check_user	user.php	/^function check_user(){$/;"	f
 checknum	login.php	/^		$checknum = $_POST['checknum'];$/;"	v
+clear_editor	js/mail.js	/^function clear_editor() {$/;"	f
 conn	login.php	/^	$conn = new Csdb();$/;"	v
 conn	plugin.php	/^					$conn = new Csdb();$/;"	v
 conn	plugin.php	/^		$conn = new Csdb();$/;"	v
@@ -122,6 +135,9 @@ dbName	inc/conn.php	/^		$this->dbName = 'cs_linux';$/;"	v
 dbName	inc/conn.php	/^	private $dbName;$/;"	v
 default	user.php	/^	$default = "http:\/\/xdth.sinaapp.com\/img\/man.jpg";$/;"	v
 del_mail	inc/mail.php	/^	public function del_mail($mid)		\/\/G$/;"	f
+del_mail	js/mail.js	/^function del_mail(pmid) {$/;"	f
+del_mail.param.func	js/mail.js	/^    var param = {func: 'del_mail', mid: pmid};$/;"	p
+del_mail.param.mid	js/mail.js	/^    var param = {func: 'del_mail', mid: pmid};$/;"	p
 del_user	user.php	/^function del_user(){$/;"	f
 deliver_privilege	user.php	/^function deliver_privilege(){$/;"	f
 disable_app	plugin.php	/^function disable_app($file){$/;"	f
@@ -136,22 +152,31 @@ func	mail.php	/^	$func = $_POST["func"];$/;"	v
 func	user.php	/^	$func = $_POST["func"];$/;"	v
 function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
 function.clearMenus	js/bootstrap.js	/^  function clearMenus(e) {$/;"	f
-getCookie	js/cookie.js	/^function getCookie(objName) {$/;"	f
 getCookie	js/user.js	/^function getCookie(str){$/;"	f
 getIP	inc/function.php	/^function getIP() {		\/\/获取IP$/;"	f
 get_app_list	plugin.php	/^function get_app_list(){$/;"	f
 get_avatar	user.php	/^function get_avatar(){$/;"	f
+get_cookie	js/cookie.js	/^function get_cookie(name) {$/;"	f
 get_date	inc/error_log.php	/^	private function get_date()$/;"	f
+get_draft_info	js/mail.js	/^function get_draft_info(pmid) {$/;"	f
+get_draft_info.param.func	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
+get_draft_info.param.mid	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
 get_filename	inc/error_log.php	/^	private function get_filename()$/;"	f
 get_mail_all	inc/mail.php	/^	private function get_mail_all()			\/\/G$/;"	f
 get_mail_count	inc/mail.php	/^	public function get_mail_count($tag = 0)		\/\/G$/;"	f
 get_mail_draft	inc/mail.php	/^	private function get_mail_draft()		\/\/G$/;"	f
 get_mail_info	inc/mail.php	/^	public function get_mail_info($mid)		\/\/G$/;"	f
+get_mail_info	js/mail.js	/^function get_mail_info(pmid) {$/;"	f
+get_mail_info.param.func	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
+get_mail_info.param.mid	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
 get_mail_list	inc/mail.php	/^	public function get_mail_list($tag = 0)$/;"	f
+get_mail_list	js/mail.js	/^function get_mail_list(ptag) {$/;"	f
+get_mail_list.param.func	js/mail.js	/^    var param = {func: 'get_mail_list', tag: ptag};$/;"	p
+get_mail_list.param.tag	js/mail.js	/^    var param = {func: 'get_mail_list', tag: ptag};$/;"	p
 get_mail_read	inc/mail.php	/^	private function get_mail_read()		\/\/G$/;"	f
 get_mail_send	inc/mail.php	/^	private function get_mail_send()		\/\/G$/;"	f
 get_mail_unread	inc/mail.php	/^	private function get_mail_unread()		\/\/G$/;"	f
-get_name_match	inc/mail.php	/^	public function get_name_match($json)$/;"	f
+get_name_match	inc/mail.php	/^	public function get_name_match($name)$/;"	f
 get_privilege	user.php	/^function get_privilege(){$/;"	f
 get_userinfo	user.php	/^function get_userinfo(){$/;"	f
 getlink	inc/mail.php	/^	private function getlink()$/;"	f
@@ -168,16 +193,19 @@ i	inc/function.php	/^    $i=0;$/;"	v
 i	inc/mail.php	/^				for ( $i = 0; $i < count($result); $i++ ) {$/;"	v
 i	inc/mail.php	/^		$i = 0;$/;"	v
 i	inc/mail.php	/^		for ( $i = 0; $i < count($result); $i ++ ) {$/;"	v
+i	inc/mail.php	/^		for ( $i = 0; $i < count($result); $i++ ) {$/;"	v
 i	inc/mail.php	/^		for ( $i = 0; $i < count($users); $i++ ) {$/;"	v
 i	inc/mail.php	/^		for( $i = 0; $i < count($users); $i++ ) {$/;"	v
 im	checknum.php	/^	$im = imagecreate(44,18);$/;"	v
-info	inc/mail.php	/^		$info = json_decode($json, true);$/;"	v
 infoArr	user.php	/^	$infoArr = array($/;"	v
+init_page	js/mail.js	/^function init_page() {$/;"	f
 inject_commen	inc/inject.php	/^function inject_commen($str)$/;"	f
 inject_email	inc/inject.php	/^function inject_email($str)$/;"	f
 inject_number	inc/inject.php	/^function inject_number($str)$/;"	f
 inject_zh	inc/inject.php	/^function inject_zh($str)$/;"	f
 insert_mail	inc/mail.php	/^	private function insert_mail($fromuid, $touid, $title, $content, $mid)$/;"	f
+isdraft	inc/mail.php	/^		$isdraft = $result[0]['isdraft'];$/;"	v
+isdraft	inc/mail.php	/^		if ( $isdraft == 1 ) {$/;"	v
 job	user.php	/^	$job = $_POST["job"];$/;"	v
 json	mail.php	/^			$json = $_POST["json"];		echo($mail->get_name_match($json));$/;"	v
 k	inc/function.php	/^        $k = $n\/3+$m\/2;  $/;"	v
@@ -185,9 +213,10 @@ key	inc/mail.php	/^						if ( $key == $this->uid && $value == 0 )$/;"	v
 key	inc/mail.php	/^						if ( $key == $this->uid && $value == 1 )$/;"	v
 key	inc/mail.php	/^					foreach( $result_json as $key=>$value) {$/;"	v
 key	inc/mail.php	/^				if ( $key == "touser" ) {$/;"	v
+key	inc/mail.php	/^				if( $key == $this->uid)$/;"	v
+key	inc/mail.php	/^			foreach ( $result[$i] as $key=>$value ) {$/;"	v
 key	inc/mail.php	/^			foreach ( $result[$i] as $key=>$value) {$/;"	v
-key	inc/mail.php	/^			if( $key == $this->uid)$/;"	v
-key	inc/mail.php	/^		foreach( $array as $key=>$value) {$/;"	v
+key	inc/mail.php	/^			foreach( $array as $key=>$value) {$/;"	v
 keys	inc/inject.php	/^		$keys = array_keys($string);$/;"	v
 l	inc/function.php	/^        $l = $n\/3+$m;$/;"	v
 len	checknum.php	/^	$len = strlen($randstr);$/;"	v
@@ -200,18 +229,17 @@ mail	mail.php	/^	$mail = new Mail($uid);$/;"	v
 mail	user.php	/^	$mail = $row['mail'];$/;"	v
 mail	user.php	/^    $mail = $_POST["mail"];$/;"	v
 major	user.php	/^    $major = $_POST["major"];$/;"	v
-match_arr	inc/mail.php	/^		$match_arr = $this->link_result("select name from cs_user where name like '$name\\_';");$/;"	v
 mid	inc/mail.php	/^				$mid = $value["mid"];$/;"	v
 mid	inc/mail.php	/^		$mid = $_POST["mid"];$/;"	v
 mid	inc/mail.php	/^		$mid = $array[0]["mid"];$/;"	v
 mid	mail.php	/^			$mid = $_POST["mid"];	echo($mail->del_mail($mid));$/;"	v
 mid	mail.php	/^            $mid = $_POST["mid"];    echo($mail->get_mail_info($mid));$/;"	v
-name	inc/mail.php	/^		$name = $info["username"];$/;"	v
 name	login.php	/^	$name = $_POST['name'];$/;"	v
 name	user.php	/^    $name = $_POST["name"];	$/;"	v
 name_to_uid	inc/mail.php	/^	private function name_to_uid($name)$/;"	f
 native	user.php	/^    $native = $_POST["native"];$/;"	v
-new_json	inc/mail.php	/^		$new_json = json_encode($array);$/;"	v
+new_json	inc/mail.php	/^			$new_json = json_encode($array);$/;"	v
+new_result	inc/mail.php	/^		$new_result = $this->sub_title_content($new_result, array(30,30));$/;"	v
 p	checknum.php	/^		$p = rand() % $len;$/;"	v
 password	login.php	/^	$password = $_POST['password'];$/;"	v
 password	login.php	/^	$password = md5($password);$/;"	v
@@ -262,6 +290,8 @@ result	inc/mail.php	/^				$result = $this->link_result($sql,"get mail count -> t
 result	inc/mail.php	/^				$result = $this->link_result($sql,"get mail count -> tag = 3 error");$/;"	v
 result	inc/mail.php	/^		$result = $link->query("select uid from cs_user where name = '$name';");$/;"	v
 result	inc/mail.php	/^		$result = $link->query($sql_str);$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result("select name from cs_user where name like '%$name%' limit 5;", "get name match error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "del mail error");$/;"	v
 result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail all error");$/;"	v
 result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail draft error");$/;"	v
 result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail info error");$/;"	v
@@ -269,7 +299,6 @@ result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail unread erro
 result	inc/mail.php	/^		$result = $this->link_result($sql, "save_draft error");$/;"	v
 result	inc/mail.php	/^		$result = $this->link_result($sql, "select touser from cs_mail error");$/;"	v
 result	inc/mail.php	/^		$result = $this->link_result($sql, "send mail error");$/;"	v
-result	inc/mail.php	/^		$result = $this->link_result($sql, "update touser json error");$/;"	v
 result	inc/mail.php	/^		$result = $this->sub_title_content($result, array(30,30));$/;"	v
 result	inc/mail.php	/^		if ( $result == 1 ) {$/;"	v
 result	inc/mail.php	/^		if ( $result == null ) {$/;"	v
@@ -280,7 +309,7 @@ result	user.php	/^	$result = $conn->query($query_str);$/;"	v
 result1	user.php	/^	$result1 = $conn->query($query_str1);$/;"	v
 result2	user.php	/^	$result2 = $conn->query($query_str2);	$/;"	v
 result_json	inc/mail.php	/^					$result_json = json_decode($row_json);$/;"	v
-result_json	inc/mail.php	/^		$result_json = $result[0]['touser'];$/;"	v
+result_json	inc/mail.php	/^			$result_json = $result[0]['touser'];$/;"	v
 row	inc/mail.php	/^				while( $row = $result->fetch_assoc() )$/;"	v
 row	login.php	/^	$row = $result->fetch_assoc();$/;"	v
 row	user.php	/^	$row = $result->fetch_assoc();$/;"	v
@@ -290,24 +319,35 @@ row1	user.php	/^    $row1 = $result1->fetch_assoc();$/;"	v
 row2	user.php	/^    $row2 = $result2->fetch_assoc();$/;"	v
 row_json	inc/mail.php	/^					$row_json = $result[$i]['touser'];$/;"	v
 save_draft	inc/mail.php	/^	public function save_draft()	\/\/G$/;"	f
+save_draft	js/mail.js	/^function save_draft() {$/;"	f
+save_draft.param.func	js/mail.js	/^        func: 'save_draft',$/;"	p
+save_draft.param.title	js/mail.js	/^        title: $('#mail-editor-title').val(),$/;"	p
 send_mail	inc/mail.php	/^	public function send_mail()		\/\/G$/;"	f
+send_mail	js/mail.js	/^function send_mail() {$/;"	f
+send_mail.param.func	js/mail.js	/^        func: 'send_mail',$/;"	p
+send_mail.param.title	js/mail.js	/^        title: $('#mail-editor-title').val(),$/;"	p
+set_cookie	js/cookie.js	/^function set_cookie(name, value) {$/;"	f
+set_editor	js/mail.js	/^function set_editor(touser,title, content) {$/;"	f
+set_tips_modal	js/mail.js	/^function set_tips_modal(tips) {$/;"	f
 sex	user.php	/^	$sex = $_POST["sex"];$/;"	v
 sex	user.php	/^	if( empty($name) || empty($password) || $sex=="" || empty($mail) || empty($grade) || empty($major) ){$/;"	v
 show_code	js/login.js	/^var show_code = false;$/;"	v
+show_tips_modal	js/mail.js	/^function show_tips_modal(title) {$/;"	f
 size	user.php	/^	$size = 150;$/;"	v
 sql	inc/mail.php	/^				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%' and isdraft=1;";$/;"	v
 sql	inc/mail.php	/^				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%';";$/;"	v
 sql	inc/mail.php	/^				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";$/;"	v
+sql	inc/mail.php	/^			$sql = "delete from cs_mail where mid=$mid;";$/;"	v
+sql	inc/mail.php	/^			$sql = "update cs_mail set touser='$new_json' where mid=$mid;";$/;"	v
 sql	inc/mail.php	/^		$sql = "insert into cs_mail(fromuid,title,content,isdraft,touser) values($fromuid,'$title','$content',1,'$user_json');";$/;"	v
 sql	inc/mail.php	/^		$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";$/;"	v
 sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,content from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";$/;"	v
-sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%$this->uid%' and cs_user.uid=cs_mail.fromuid order by sdate desc;";$/;"	v
-sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\\"$this->uid\\":\\"0\\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";$/;"	v
-sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\\"$this->uid\\":\\"1\\"%' and cs_mail.fromuid=cs_user.uid order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where (cs_mail.touser like '%\\"$this->uid\\":\\"0\\"%' or cs_mail.touser like '%\\"$this->uid\\":\\"1\\"%') and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\\"$this->uid\\":\\"0\\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\\"$this->uid\\":\\"1\\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";$/;"	v
 sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=0 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";$/;"	v
 sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";$/;"	v
-sql	inc/mail.php	/^		$sql = "select touser from cs_mail where mid=$mid";$/;"	v
-sql	inc/mail.php	/^		$sql = "update cs_mail set touser='$new_json' where mid=$mid;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select touser,isdraft from cs_mail where mid=$mid";$/;"	v
 sql	inc/mail.php	/^		$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";$/;"	v
 status	inc/mail.php	/^						$status = "已读";$/;"	v
 status	inc/mail.php	/^						$status = "未读";$/;"	v
@@ -334,6 +374,8 @@ tempuid	inc/mail.php	/^			if ( $tempuid == "" ) {$/;"	v
 tip	js/bootstrap.js	/^  Tooltip.prototype.tip = function () {$/;"	f
 title	inc/mail.php	/^		$title = $_POST["title"];$/;"	v
 title_len	inc/mail.php	/^		$title_len = $length_arr[0];$/;"	v
+toggle_menu	js/mail.js	/^function toggle_menu(menu) {$/;"	f
+toggle_view	js/mail.js	/^function toggle_view(view) {$/;"	f
 toname	inc/mail.php	/^		$toname = $_POST["touser"];$/;"	v
 touid	inc/mail.php	/^		$touid = array();$/;"	v
 touser	inc/mail.php	/^					$touser = json_decode($value);$/;"	v
@@ -360,7 +402,9 @@ user_json	inc/mail.php	/^		$user_json = json_encode($find);$/;"	v
 users	inc/mail.php	/^		$users=explode(',',$toname);$/;"	v
 val	inc/inject.php	/^			$val = $string[$key];$/;"	v
 value	inc/function.php	/^	while( $value = current($checkArr) ){$/;"	v
-value	inc/mail.php	/^				$value=2;$/;"	v
+value	inc/mail.php	/^					$value=" ";$/;"	v
+value	inc/mail.php	/^					$value=2;$/;"	v
+value	inc/mail.php	/^				if ( $value == "" ) {$/;"	v
 value	user.php	/^	while( $value = current($infoArr) ){$/;"	v
 var.Button	js/bootstrap.js	/^  Button.prototype.setState = function (state) {$/;"	c
 var.Carousel	js/bootstrap.js	/^  Carousel.prototype.keydown = function (e) {$/;"	c

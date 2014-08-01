@@ -53,15 +53,9 @@ class Mail{
 
 	private function uid_to_name($uid)
 	{
-		$link = $this->getlink();
-
-		$result - $link->query("select name from cs_user where uid = $uid;");
-
-		if ($result == false)
-			return $result;
-
-		$array = $result->fetch_assoc();
-		$uid = $array["name"];
+		$result = $this->link_result("select name from cs_user where uid=$uid", "select name error");
+		$name = $result[0]["name"];
+		return $name;
 	}
 
 	private function insert_mail($fromuid, $touid, $title, $content, $mid)
@@ -77,48 +71,42 @@ class Mail{
 			"insert mail -> insert cs_mail error");
 	}
 
-	public function get_mail_count($tag = 0)		//G
+	public function get_mail_count()		//G
 	{
-		
-		switch($tag) {
-			case 0:
-				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%';";
+		$sql = "select count(mid) from cs_mail where (touser like '%\"$this->uid\":\"0\"%' or touser like '%\"$this->uid\":\"1\"%') and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 0 error");
-				$count = $result[0]["count(mid)"];
-				break;
-			case 1: 
-				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";
+				$all_count = $result[0]["count(mid)"];
+
+				$sql = "select count(mid) from cs_mail where touser like '%\"$this->uid\":\"0\"%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 1 error");
-				$count = 0;
+                $unread_count = $result[0]["count(mid)"];
+/*
 				for ( $i = 0; $i < count($result); $i++ ) {
 					$row_json = $result[$i]['touser'];
 					$result_json = json_decode($row_json);
 					foreach( $result_json as $key=>$value) {
 						if ( $key == $this->uid && $value == 0 )
-							$count ++;
+							$unread_count ++;
 					}
 				}
-				break;
-			case 2:
-				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";
+*/	
+				$sql = "select count(mid) from cs_mail where touser like '%\"$this->uid\":\"1\"%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 2 error");
-				$count = 0;
+				$read_count = $result[0]["count(mid)"];
+/*
 				for ( $i = 0; $i < count($result); $i++ ) {
 					$row_json = $result[$i]['touser'];
 					$result_json = json_decode($row_json);
 					foreach( $result_json as $key=>$value) {
 						if ( $key == $this->uid && $value == 1 )
-							$count ++;
+							$read_count ++;
 					}
 				}
-				break;
-			case 3:
-				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%' and isdraft=1;";
+*/
+				$sql = "select count(mid) from cs_mail where fromuid=$this->uid and isdraft=1;";
 				$result = $this->link_result($sql,"get mail count -> tag = 3 error");
-				$count = $result[0]['count(mid)'];
-				break;
-		}
-		return json_encode(array("count"=>$count));
+				$draft_count = $result[0]['count(mid)'];
+		return json_encode(array("all"=>$all_count, "unread"=>$unread_count, "read"=>$read_count, "draft"=>$draft_count));
 	}
 
 	public function del_mail($mid)		//G
@@ -156,7 +144,8 @@ class Mail{
 		$toname = $_POST["touser"];
 		$title = $_POST["title"];
 		$content = $_POST["content"];
-		
+		$mid = $_POST["mid"];
+
 		if ( empty($toname) && empty($title) && empty($content) ) {
 			return json_encode(array("result"=>"false"));
 		}
@@ -168,7 +157,12 @@ class Mail{
 			$array[$tempuid] = "0";
 		}
 		$user_json = json_encode($array);
-		$sql = "insert into cs_mail(fromuid,title,content,isdraft,touser) values($fromuid,'$title','$content',1,'$user_json');";
+		if ( $mid != "" ) {
+			$sql = "update cs_mail set fromuid=$fromuid,title='$title',content='$content',isdraft=1,touser='$user_json' where mid=$mid;";
+		}
+		else {
+			$sql = "insert into cs_mail(fromuid,title,content,isdraft,touser) values($fromuid,'$title','$content',1,'$user_json');";
+		}
 		$result = $this->link_result($sql, "save_draft error");
 		if ( $result == 1 ) {
 			return json_encode(array("result"=>"true"));
@@ -201,7 +195,12 @@ class Mail{
 			}
 		}
 		$user_json = json_encode($find);
-		$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";
+		if ( $mid != "" ) {
+			$sql = "update cs_mail set fromuid=$fromuid,title='$title',content='$content',touser='$user_json' where mid=$mid;";
+		}
+		else {
+			$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";
+		}
 		$result = $this->link_result($sql, "send mail error");
         if ( $unfind == NULL ) {
             $str = ($result == true) ? "true":"false";
@@ -259,8 +258,6 @@ class Mail{
 			}
 			$touid[] = $value["touid"];
 		}
-		
-		var_dump($return_array);
 		return $return_array;
 	}
 
@@ -287,7 +284,7 @@ class Mail{
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
-		$result = $this->sub_title_content($result, array(30,30));
+		//$result = $this->sub_title_content($result, array(30,30));
 
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
@@ -313,7 +310,7 @@ class Mail{
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
-		$result = $this->sub_title_content($result, array(30,30));
+		//$result = $this->sub_title_content($result, array(30,30));
 		
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
@@ -339,14 +336,13 @@ class Mail{
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
-		$result = $this->sub_title_content($result, array(30,30));
+		//$result = $this->sub_title_content($result, array(30,30));
 		return json_encode($result);
 	}
 
 	private function get_mail_draft()		//G
 	{
 		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
-		echo $sql;
 		$result = $this->link_result($sql, "get mail draft error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -360,8 +356,17 @@ class Mail{
 			}
 			$new_result[$i]["status"] = "草稿";
 		}
-		$new_result = $this->sub_title_content($new_result, array(30,30));
-		var_dump($new_result);
+		for ( $i = 0; $i < count($result); $i++ ) {
+			$touser = $result[$i]["touser"];
+			$touser = json_decode($touser);
+			foreach ( $touser as $key=>$value) {
+				$users[] = $this->uid_to_name($key);
+			}
+			$user = implode(",",$users);
+			$new_result[$i]["touser"] = "$user";
+			unset($users);
+		}
+		//$new_result = $this->sub_title_content($new_result, array(30,30));
 		return json_encode($new_result);
 	}
 
@@ -372,7 +377,7 @@ class Mail{
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
-		$result = $this->sub_title_content($result, array(30,30));
+		//$result = $this->sub_title_content($result, array(30,30));
 
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
@@ -396,6 +401,10 @@ class Mail{
 
 	public function get_mail_info($mid)		//G
 	{
+		$sql = "select isdraft from cs_mail where mid=$mid;";
+		$result = $this->link_result($sql, "select isdraft error");
+		$isdraft = $result[0]['isdraft'];
+
 		$sql = "select mid,title,sdate as date,name as fromuser,content from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";
 		$result = $this->link_result($sql, "get mail info error");
 		if ( $result == null ) {
@@ -403,12 +412,23 @@ class Mail{
 		}
 		$touser_json = $this->link_result("select touser from cs_mail where mid=$mid;", "select touser error");
 		$touser = json_decode($touser_json[0]["touser"]);
-		$touser->{$this->uid} = "1";
-		$touser_json = json_encode($touser);
-		$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";
-		$this->link_result($sql, "update mail info error");
-		return json_encode($result);
+		if ( $isdraft == 0 ) {
+			$touser->{$this->uid} = "1";
+			$touser_json = json_encode($touser);
+			$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";
+			$this->link_result($sql, "update mail info error");
+			return json_encode($result);
+		}
+		else {
+			foreach ( $touser as $key=>$value) {
+				$users[] = $this->uid_to_name($key);
+			}
+			$users = implode(",",$users );
+			$result[0]["touser"] = "$users";
+			return json_encode($result);
+		}
 	}
+
 
 	public function get_name_match($name)
 	{
