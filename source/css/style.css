@@ -19,6 +19,16 @@ body {
     border:1px solid #222222;
 }
 
+.mail-user {
+    color:#24d1af;
+    
+}
+
+.mail-title {
+    color:#24d1af;
+
+}
+
 .mail-list-panel {
     margin:10px;
     padding: 10px;

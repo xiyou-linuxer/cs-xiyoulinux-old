@@ -1,4 +1,5 @@
 function init_page() {
+    set_cookie('uid', 1001);
     var menu = get_cookie('menu');
     var view = get_cookie('view');
 
@@ -257,6 +258,7 @@ function set_mail_list(menu) {
         ptag = 0;
         break;
     }
+
     var param = {func: 'get_mail_list', tag: ptag};
     $.post('mail.php', param, callbk_mail_list); 
 }            
@@ -283,6 +285,7 @@ function callbk_mail_num(data, status) {
 
 //call ball get mail list
 function callbk_mail_list(data, status) {
+    alert(data);
     if (data == '{"result":"false"}') { 
         $('#mail-list-body').html('');
     } else {
