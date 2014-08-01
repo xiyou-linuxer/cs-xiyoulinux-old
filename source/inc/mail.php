@@ -424,7 +424,10 @@ class Mail{
 		}
 		else {
 			foreach ( $touser as $key=>$value) {
-				$users[] = $this->uid_to_name($key);
+				if ( $key != _empty_ )
+					$users[] = $this->uid_to_name($key);
+				else
+					$users[] = " ";
 			}
 			$users = implode(",",$users );
 			$result[0]["touser"] = "$users";
