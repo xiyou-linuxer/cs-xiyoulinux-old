@@ -285,7 +285,6 @@ function callbk_mail_num(data, status) {
 
 //call ball get mail list
 function callbk_mail_list(data, status) {
-    alert(data);
     if (data == '{"result":"false"}') { 
         $('#mail-list-body').html('');
     } else {
