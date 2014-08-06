@@ -77,7 +77,7 @@ CREATE TABLE `cs_user` (
 -- [title] title
 -- [content] content
 -- [isdraft] point to whether draft
--- [touser] json string,like {'name' => 'status'}
+-- [touser] json string,like {'uid' => 'status'}
 -- --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `cs_mail`;
 

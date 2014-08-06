@@ -1,0 +1,458 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+$.fn.autocomplete.defaults.source	js/bootstrap.autocomplete.js	/^    source: []$/;"	p
+$.fn.dataTableExt.oApi.fnPagingInfo	js/DT_bootstrap.js	/^$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )$/;"	f
+$.fn.emulateTransitionEnd	js/bootstrap.js	/^  $.fn.emulateTransitionEnd = function (duration) {$/;"	f
+App	js/app.js	/^var App = function () {$/;"	f
+App._calculateFixedSidebarViewportHeight	js/app.js	/^    var _calculateFixedSidebarViewportHeight = function () {$/;"	f
+App.handleAccordions	js/app.js	/^    var handleAccordions = function () {$/;"	f
+App.handleChoosenSelect	js/app.js	/^    var handleChoosenSelect = function () {$/;"	f
+App.handleDesktopTabletContents	js/app.js	/^    var handleDesktopTabletContents = function () {$/;"	f
+App.handleDropdowns	js/app.js	/^    var handleDropdowns = function () {$/;"	f
+App.handleFancybox	js/app.js	/^    var handleFancybox = function () {$/;"	f
+App.handleFixInputPlaceholderForIE	js/app.js	/^    var handleFixInputPlaceholderForIE = function () {$/;"	f
+App.handleFixedSidebar	js/app.js	/^    var handleFixedSidebar = function () {$/;"	f
+App.handleFixedSidebarHoverable	js/app.js	/^    var handleFixedSidebarHoverable = function () {$/;"	f
+App.handleGoTop	js/app.js	/^    var handleGoTop = function () {$/;"	f
+App.handleHorizontalMenu	js/app.js	/^    var handleHorizontalMenu = function () {$/;"	f
+App.handleInit	js/app.js	/^    var handleInit = function() {$/;"	f
+App.handlePopovers	js/app.js	/^    var handlePopovers = function () {$/;"	f
+App.handlePortletTools	js/app.js	/^    var handlePortletTools = function () {$/;"	f
+App.handleResponsive	js/app.js	/^    var handleResponsive = function () {$/;"	f
+App.handleResponsiveOnInit	js/app.js	/^    var handleResponsiveOnInit = function () {$/;"	f
+App.handleResponsiveOnResize	js/app.js	/^    var handleResponsiveOnResize = function () {$/;"	f
+App.handleScrollers	js/app.js	/^    var handleScrollers = function () {$/;"	f
+App.handleSidebarAndContentHeight	js/app.js	/^    var handleSidebarAndContentHeight = function () {$/;"	f
+App.handleSidebarMenu	js/app.js	/^    var handleSidebarMenu = function () {$/;"	f
+App.handleSidebarState	js/app.js	/^    var handleSidebarState = function () {$/;"	f
+App.handleSidebarToggler	js/app.js	/^    var handleSidebarToggler = function () {$/;"	f
+App.handleTabs	js/app.js	/^    var handleTabs = function () {$/;"	f
+App.handleTabs.fixTabHeight	js/app.js	/^        var fixTabHeight = function(tab) {$/;"	f
+App.handleTheme	js/app.js	/^    var handleTheme = function () {$/;"	f
+App.handleTooltips	js/app.js	/^    var handleTooltips = function () {$/;"	f
+App.handleUniform	js/app.js	/^    var handleUniform = function () {$/;"	f
+App.layoutColorCodes.blue	js/app.js	/^        'blue': '#4b8df8',$/;"	p
+App.layoutColorCodes.green	js/app.js	/^        'green': '#35aa47',$/;"	p
+App.layoutColorCodes.grey	js/app.js	/^        'grey': '#555555',$/;"	p
+App.layoutColorCodes.light-grey	js/app.js	/^        'light-grey': '#fafafa',$/;"	p
+App.layoutColorCodes.purple	js/app.js	/^        'purple': '#852b99',$/;"	p
+App.layoutColorCodes.red	js/app.js	/^        'red': '#e02222',$/;"	p
+App.layoutColorCodes.yellow	js/app.js	/^        'yellow': '#ffb848'$/;"	p
+App.runResponsiveHandlers	js/app.js	/^    var runResponsiveHandlers = function () {$/;"	f
+Autocomplete	js/bootstrap.autocomplete.js	/^  Autocomplete.prototype = {$/;"	c
+Autocomplete.constructor	js/bootstrap.autocomplete.js	/^    constructor: Autocomplete$/;"	p
+Autocomplete.formatItem	js/bootstrap.autocomplete.js	/^  , formatItem:function(item){$/;"	m
+Autocomplete.processObj	js/bootstrap.autocomplete.js	/^  , processObj:0$/;"	p
+Autocomplete.setValue	js/bootstrap.autocomplete.js	/^  , setValue:function(item){$/;"	m
+Csdb	inc/conn.php	/^class Csdb{		\/\/封装成类,对外目前就一个query接口$/;"	c
+Dropdown	js/bootstrap.js	/^  Dropdown.prototype.keydown = function (e) {$/;"	c
+Error_log	inc/error_log.php	/^class Error_log{$/;"	c
+Mail	inc/mail.php	/^class Mail{$/;"	c
+Popover	js/bootstrap.js	/^  Popover.prototype.setContent = function () {$/;"	c
+Popover.Popover	js/bootstrap.js	/^  Popover.prototype.hasContent = function () {$/;"	c
+Popover.Popover.Popover	js/bootstrap.js	/^  Popover.prototype.arrow = function () {$/;"	c
+Popover.Popover.Popover.tip	js/bootstrap.js	/^  Popover.prototype.tip = function () {$/;"	m
+Popover.Popover.function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+Popover.Popover.getContent	js/bootstrap.js	/^  Popover.prototype.getContent = function () {$/;"	m
+Popover.setContent	js/bootstrap.js	/^  Popover.prototype.setContent = function () {$/;"	m
+ScrollSpy	js/bootstrap.js	/^  ScrollSpy.prototype.getScrollHeight = function () {$/;"	c
+ScrollSpy.function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+ScrollSpy.getScrollHeight	js/bootstrap.js	/^  ScrollSpy.prototype.getScrollHeight = function () {$/;"	m
+ScrollSpy.refresh	js/bootstrap.js	/^  ScrollSpy.prototype.refresh = function () {$/;"	m
+TableManaged	js/table-managed.js	/^var TableManaged = function () {$/;"	f
+Tooltip	js/bootstrap.js	/^  Tooltip.prototype.init = function (type, element, options) {$/;"	c
+Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.setContent = function () {$/;"	c
+Tooltip.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.disable = function () {$/;"	c
+Tooltip.Tooltip.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.hide = function () {$/;"	c
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.toggleEnabled = function () {$/;"	c
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.fixTitle = function () {$/;"	c
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.toggle = function (e) {$/;"	c
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.destroy = function () {$/;"	c
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.getPosition	js/bootstrap.js	/^  Tooltip.prototype.getPosition = function ($element) {$/;"	m
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.getViewportAdjustedDelta	js/bootstrap.js	/^  Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {$/;"	m
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.hasContent	js/bootstrap.js	/^  Tooltip.prototype.hasContent = function () {$/;"	m
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.var.delta.left	js/bootstrap.js	/^    var delta = { top: 0, left: 0 }$/;"	p
+Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.Tooltip.var.delta.top	js/bootstrap.js	/^    var delta = { top: 0, left: 0 }$/;"	p
+Tooltip.this.var.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.getDefaults = function () {$/;"	c
+Tooltip.this.var.Tooltip.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.enter = function (obj) {$/;"	c
+Tooltip.this.var.Tooltip.getDelegateOptions	js/bootstrap.js	/^  Tooltip.prototype.getDelegateOptions = function () {$/;"	m
+Tooltip.this.var.Tooltip.getOptions	js/bootstrap.js	/^  Tooltip.prototype.getOptions = function (options) {$/;"	m
+Tooltip.this.var.Tooltip.options.delay.show	js/bootstrap.js	/^        show: options.delay,$/;"	p
+Tooltip.validate	js/bootstrap.js	/^  Tooltip.prototype.validate = function () {$/;"	m
+Tooltip.var.Tooltip	js/bootstrap.js	/^  Tooltip.prototype.applyPlacement = function (offset, placement) {$/;"	c
+__construct	inc/conn.php	/^	public function __construct(){	\/\/自动初始化$/;"	f
+__construct	inc/error_log.php	/^	public function __construct($error_content = null)$/;"	f
+__construct	inc/mail.php	/^	public function __construct($uid)$/;"	f
+__destruct	inc/conn.php	/^	public function __destruct(){		\/\/自动释放$/;"	f
+able_app	plugin.php	/^function able_app($file){$/;"	f
+add_user	user.php	/^function add_user(){$/;"	f
+array	inc/mail.php	/^			$array = json_decode($result_json);$/;"	v
+array	inc/mail.php	/^		$array = $result->fetch_assoc();$/;"	v
+array	inc/mail.php	/^		$array = array();$/;"	v
+back	checknum.php	/^	$back = ImageColorAllocate($im, 245,245,245);$/;"	v
+blog	user.php	/^    $blog = $_POST["blog"];$/;"	v
+callbk_del_mail	js/mail.js	/^function callbk_del_mail(data, status) {$/;"	f
+callbk_draft_info	js/mail.js	/^function callbk_draft_info(data, status) {$/;"	f
+callbk_mail_info	js/mail.js	/^function callbk_mail_info(data, status) {$/;"	f
+callbk_mail_list	js/mail.js	/^function callbk_mail_list(data, status) {$/;"	f
+callbk_save_draft	js/mail.js	/^function callbk_save_draft(data, status) {$/;"	f
+callbk_send_mail	js/mail.js	/^function callbk_send_mail(data, status) {$/;"	f
+chars	inc/function.php	/^    $chars = $string;  $/;"	v
+charset	inc/conn.php	/^		$this->charset = 'utf8';		$/;"	v
+charset	inc/conn.php	/^	private $charset;$/;"	v
+checkApp	plugin.php	/^function checkApp($path){$/;"	f
+checkArr	inc/function.php	/^function checkArr($checkArr){	\/\/检查对应类型，参数是数组$/;"	f
+checkArr	user.php	/^	$checkArr = array($/;"	v
+checkStr	inc/function.php	/^function checkStr($type,$desStr){	\/\/看代码都懂$/;"	f
+checkUser	inc/function.php	/^function checkUser($uid){$/;"	f
+check_ok	inc/function.php	/^	$check_ok = true;$/;"	v
+check_user	user.php	/^function check_user(){$/;"	f
+checknum	login.php	/^		$checknum = $_POST['checknum'];$/;"	v
+clear_editor	js/mail.js	/^function clear_editor() {$/;"	f
+conn	login.php	/^	$conn = new Csdb();$/;"	v
+conn	plugin.php	/^					$conn = new Csdb();$/;"	v
+conn	plugin.php	/^		$conn = new Csdb();$/;"	v
+conn	user.php	/^	$conn = new Csdb();$/;"	v
+connect	inc/conn.php	/^	private function connect($h,$u,$p,$d,$c){$/;"	f
+content	inc/error_log.php	/^		$content = $content."".$this->get_filename().":".$this->content."\\r\\n \\r\\n \\r\\n \\r\\n";$/;"	v
+content	inc/error_log.php	/^		$content = $this->get_date()."\\r\\n";$/;"	v
+content	inc/error_log.php	/^		$this->content = $error_content;$/;"	v
+content	inc/error_log.php	/^	private $content;$/;"	v
+content	inc/mail.php	/^		$content = $_POST["content"];$/;"	v
+content	plugin.php	/^	$content = file_get_contents($path);$/;"	v
+content_len	inc/mail.php	/^		$content_len = $length_arr[1];$/;"	v
+count	inc/mail.php	/^				$count = $result[0]["count(mid)"];$/;"	v
+count	inc/mail.php	/^				$count = $result[0]['count(mid)'];$/;"	v
+count	inc/mail.php	/^				$count = 0;$/;"	v
+daddslashes	inc/inject.php	/^function daddslashes($string, $force = 1) $/;"	f
+date	inc/error_log.php	/^		$date =	date('r');$/;"	v
+dbName	inc/conn.php	/^		$this->dbName = 'cs_linux';$/;"	v
+dbName	inc/conn.php	/^	private $dbName;$/;"	v
+default	user.php	/^	$default = "http:\/\/xdth.sinaapp.com\/img\/man.jpg";$/;"	v
+del_mail	inc/mail.php	/^	public function del_mail($mid)		\/\/G$/;"	f
+del_mail	js/mail.js	/^function del_mail(pmid) {$/;"	f
+del_mail.param.func	js/mail.js	/^    var param = {func: 'del_mail', mid: pmid};$/;"	p
+del_mail.param.mid	js/mail.js	/^    var param = {func: 'del_mail', mid: pmid};$/;"	p
+del_user	user.php	/^function del_user(){$/;"	f
+deliver_privilege	user.php	/^function deliver_privilege(){$/;"	f
+disable_app	plugin.php	/^function disable_app($file){$/;"	f
+file	inc/error_log.php	/^\/\/		$file = fopen("error.log", "a+");$/;"	v
+file_path	inc/error_log.php	/^		$file_path = $_SERVER['PHP_SELF'];$/;"	v
+flag	user.php	/^				$flag = true;$/;"	v
+flag	user.php	/^	$flag = false;$/;"	v
+font	checknum.php	/^		$font = ImageColorAllocate($im, rand(100,255),rand(0,100),rand(100,255));$/;"	v
+force	inc/inject.php	/^function daddslashes($string, $force = 1) $/;"	v
+fromuid	inc/mail.php	/^		$fromuid = $this->uid;$/;"	v
+func	mail.php	/^	$func = $_POST["func"];$/;"	v
+func	user.php	/^	$func = $_POST["func"];$/;"	v
+function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+function.clearMenus	js/bootstrap.js	/^  function clearMenus(e) {$/;"	f
+getCookie	js/user.js	/^function getCookie(str){$/;"	f
+getIP	inc/function.php	/^function getIP() {		\/\/获取IP$/;"	f
+get_app_list	plugin.php	/^function get_app_list(){$/;"	f
+get_avatar	user.php	/^function get_avatar(){$/;"	f
+get_cookie	js/cookie.js	/^function get_cookie(name) {$/;"	f
+get_date	inc/error_log.php	/^	private function get_date()$/;"	f
+get_draft_info	js/mail.js	/^function get_draft_info(pmid) {$/;"	f
+get_draft_info.param.func	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
+get_draft_info.param.mid	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
+get_filename	inc/error_log.php	/^	private function get_filename()$/;"	f
+get_mail_all	inc/mail.php	/^	private function get_mail_all()			\/\/G$/;"	f
+get_mail_count	inc/mail.php	/^	public function get_mail_count($tag = 0)		\/\/G$/;"	f
+get_mail_draft	inc/mail.php	/^	private function get_mail_draft()		\/\/G$/;"	f
+get_mail_info	inc/mail.php	/^	public function get_mail_info($mid)		\/\/G$/;"	f
+get_mail_info	js/mail.js	/^function get_mail_info(pmid) {$/;"	f
+get_mail_info.param.func	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
+get_mail_info.param.mid	js/mail.js	/^    var param = {func: 'get_mail_info', mid: pmid};$/;"	p
+get_mail_list	inc/mail.php	/^	public function get_mail_list($tag = 0)$/;"	f
+get_mail_list	js/mail.js	/^function get_mail_list(ptag) {$/;"	f
+get_mail_list.param.func	js/mail.js	/^    var param = {func: 'get_mail_list', tag: ptag};$/;"	p
+get_mail_list.param.tag	js/mail.js	/^    var param = {func: 'get_mail_list', tag: ptag};$/;"	p
+get_mail_read	inc/mail.php	/^	private function get_mail_read()		\/\/G$/;"	f
+get_mail_send	inc/mail.php	/^	private function get_mail_send()		\/\/G$/;"	f
+get_mail_unread	inc/mail.php	/^	private function get_mail_unread()		\/\/G$/;"	f
+get_name_match	inc/mail.php	/^	public function get_name_match($name)$/;"	f
+get_privilege	user.php	/^function get_privilege(){$/;"	f
+get_userinfo	user.php	/^function get_userinfo(){$/;"	f
+getlink	inc/mail.php	/^	private function getlink()$/;"	f
+github	user.php	/^    $github = $_POST["github"];$/;"	v
+grade	user.php	/^    $grade = $_POST["grade"];$/;"	v
+grav_url	user.php	/^	$grav_url = "http:\/\/www.gravatar.com\/avatar\/" .md5(strtolower(trim($mail))) .$/;"	v
+handle	plugin.php	/^	$handle = opendir("plugin");$/;"	v
+handleTheme.resetLayout	js/app.js	/^        var resetLayout = function () {$/;"	f
+handleTheme.setColor	js/app.js	/^        var setColor = function (color) {$/;"	f
+handleTheme.setLayout	js/app.js	/^        var setLayout = function () {$/;"	f
+host	inc/conn.php	/^		$this->host = 'localhost';$/;"	v
+host	inc/conn.php	/^	private $host;$/;"	v
+i	inc/function.php	/^    $i=0;$/;"	v
+i	inc/mail.php	/^				for ( $i = 0; $i < count($result); $i++ ) {$/;"	v
+i	inc/mail.php	/^		$i = 0;$/;"	v
+i	inc/mail.php	/^		for ( $i = 0; $i < count($result); $i ++ ) {$/;"	v
+i	inc/mail.php	/^		for ( $i = 0; $i < count($result); $i++ ) {$/;"	v
+i	inc/mail.php	/^		for ( $i = 0; $i < count($users); $i++ ) {$/;"	v
+i	inc/mail.php	/^		for( $i = 0; $i < count($users); $i++ ) {$/;"	v
+im	checknum.php	/^	$im = imagecreate(44,18);$/;"	v
+infoArr	user.php	/^	$infoArr = array($/;"	v
+init_page	js/mail.js	/^function init_page() {$/;"	f
+inject_commen	inc/inject.php	/^function inject_commen($str)$/;"	f
+inject_email	inc/inject.php	/^function inject_email($str)$/;"	f
+inject_number	inc/inject.php	/^function inject_number($str)$/;"	f
+inject_zh	inc/inject.php	/^function inject_zh($str)$/;"	f
+insert_mail	inc/mail.php	/^	private function insert_mail($fromuid, $touid, $title, $content, $mid)$/;"	f
+isdraft	inc/mail.php	/^		$isdraft = $result[0]['isdraft'];$/;"	v
+isdraft	inc/mail.php	/^		if ( $isdraft == 1 ) {$/;"	v
+job	user.php	/^	$job = $_POST["job"];$/;"	v
+json	mail.php	/^			$json = $_POST["json"];		echo($mail->get_name_match($json));$/;"	v
+k	inc/function.php	/^        $k = $n\/3+$m\/2;  $/;"	v
+key	inc/mail.php	/^						if ( $key == $this->uid && $value == 0 )$/;"	v
+key	inc/mail.php	/^						if ( $key == $this->uid && $value == 1 )$/;"	v
+key	inc/mail.php	/^					foreach( $result_json as $key=>$value) {$/;"	v
+key	inc/mail.php	/^				if ( $key == "touser" ) {$/;"	v
+key	inc/mail.php	/^				if( $key == $this->uid)$/;"	v
+key	inc/mail.php	/^			foreach ( $result[$i] as $key=>$value ) {$/;"	v
+key	inc/mail.php	/^			foreach ( $result[$i] as $key=>$value) {$/;"	v
+key	inc/mail.php	/^			foreach( $array as $key=>$value) {$/;"	v
+keys	inc/inject.php	/^		$keys = array_keys($string);$/;"	v
+l	inc/function.php	/^        $l = $n\/3+$m;$/;"	v
+len	checknum.php	/^	$len = strlen($randstr);$/;"	v
+link	inc/conn.php	/^		$this->link = new mysqli($h,$u,$p,$d);		$/;"	v
+link	inc/conn.php	/^	private $link;$/;"	v
+link	inc/mail.php	/^		$link = $this->getlink();$/;"	v
+link_result	inc/mail.php	/^	private function link_result($sql_str, $error_str)$/;"	f
+lower_str	inc/inject.php	/^	$lower_str = strtolower($str);$/;"	v
+mail	mail.php	/^	$mail = new Mail($uid);$/;"	v
+mail	user.php	/^	$mail = $row['mail'];$/;"	v
+mail	user.php	/^    $mail = $_POST["mail"];$/;"	v
+major	user.php	/^    $major = $_POST["major"];$/;"	v
+mid	inc/mail.php	/^				$mid = $value["mid"];$/;"	v
+mid	inc/mail.php	/^		$mid = $_POST["mid"];$/;"	v
+mid	inc/mail.php	/^		$mid = $array[0]["mid"];$/;"	v
+mid	mail.php	/^			$mid = $_POST["mid"];	echo($mail->del_mail($mid));$/;"	v
+mid	mail.php	/^            $mid = $_POST["mid"];    echo($mail->get_mail_info($mid));$/;"	v
+name	login.php	/^	$name = $_POST['name'];$/;"	v
+name	user.php	/^    $name = $_POST["name"];	$/;"	v
+name_to_uid	inc/mail.php	/^	private function name_to_uid($name)$/;"	f
+native	user.php	/^    $native = $_POST["native"];$/;"	v
+new_json	inc/mail.php	/^			$new_json = json_encode($array);$/;"	v
+new_result	inc/mail.php	/^		$new_result = $this->sub_title_content($new_result, array(30,30));$/;"	v
+p	checknum.php	/^		$p = rand() % $len;$/;"	v
+password	login.php	/^	$password = $_POST['password'];$/;"	v
+password	login.php	/^	$password = md5($password);$/;"	v
+password	user.php	/^	$password = md5($password);$/;"	v
+password	user.php	/^    $password = $_POST["password"];$/;"	v
+permisson	user.php	/^	$permisson = 0;$/;"	v
+phone	user.php	/^	$phone = $_POST["phone"];$/;"	v
+pwd	inc/conn.php	/^		$this->pwd = 'pwd_linux';$/;"	v
+pwd	inc/conn.php	/^	private $pwd;$/;"	v
+qq	user.php	/^    $qq = $_POST["qq"];	$/;"	v
+query	inc/conn.php	/^	public function query($query_string){$/;"	f
+query	login.php	/^	$query = "SELECT `uid`,`password` FROM `cs_user` WHERE `name`='$name';";$/;"	v
+query	user.php	/^	$query = "SELECT `mail` FROM `cs_user` WHERE `uid`=$uid;";$/;"	v
+query_str	user.php	/^			$query_str = "UPDATE `cs_user` set `".key($infoArr)."`=$value;";$/;"	v
+query_str	user.php	/^	$query_str = "DELETE FROM `cs_user` WHERE uid='$uid';";$/;"	v
+query_str	user.php	/^	$query_str = "INSERT INTO `cs_user`(`name`,`permisson`,`password`,`sex`,`phone`,`mail`,`qq`,`wechat`,`blog`,`github`,`native`,`grade`,`major`,`workplace`,`job`) VALUES ('$name','$permisson','$password','$sex','$phone','$mail','$qq','$wechat','$blog','$github','$native','$grade','$major','$workplace','$job');";$/;"	v
+query_str	user.php	/^	$query_str = "SELECT * FROM `cs_user` WHERE uid=$uid;";$/;"	v
+query_str	user.php	/^	$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";$/;"	v
+query_str	user.php	/^	$query_str = "SELECT * FROM `cs_user` where name='$name';";$/;"	v
+query_str	user.php	/^	$query_str = "SELECT * FROM `cs_user` where uid='$uid';";$/;"	v
+query_str1	user.php	/^	$query_str1 = "SELECT * FROM `cs_user` WHERE uid=$uid_now;";$/;"	v
+query_str1	user.php	/^	$query_str1 = "UPDATE `cs_user` SET permisson=0 WHERE uid=$uid_now;";$/;"	v
+query_str2	user.php	/^	$query_str2 = "SELECT * FROM `cs_user` WHERE uid=$uid_next;";$/;"	v
+query_str2	user.php	/^	$query_str2 = "UPDATE `cs_user` SET permisson=1 WHERE uid=$uid_next;";	$/;"	v
+randcolor	checknum.php	/^		$randcolor = ImageColorallocate($im,rand(0,255),rand(0,255),rand(0,255));$/;"	v
+randstr	checknum.php	/^	$randstr = "0123456789abcdefghijklmnopqrstuvwxyz";$/;"	v
+realip	inc/function.php	/^		$realip = $_SERVER['HTTP_CLIENT_IP']; $/;"	v
+realip	inc/function.php	/^		$realip = $_SERVER['HTTP_X_FORWARDED_FOR']; $/;"	v
+realip	inc/function.php	/^		$realip = $_SERVER['REMOTE_ADDR']; $/;"	v
+remove_repeat	inc/mail.php	/^	private function remove_repeat($array)$/;"	f
+result	inc/conn.php	/^		$result = $this->link->query($query_string);$/;"	v
+result	inc/function.php	/^		$result = (preg_match("\/^[\\d-]+$\/",$desStr) > 0);$/;"	v
+result	inc/function.php	/^		$result = (preg_match("\/^[\\x{4e00}-\\x{9fa5}]+$\/u",$desStr) > 0);$/;"	v
+result	inc/function.php	/^		$result = (preg_match("\/^\\d+$\/",$desStr) > 0);$/;"	v
+result	inc/function.php	/^		$result = (preg_match("\/^\\w+$\/",$desStr) > 0);$/;"	v
+result	inc/function.php	/^		$result = (preg_match("\/^\\w+@\\w+\\.com$\/",$desStr) > 0);$/;"	v
+result	inc/function.php	/^		$result = (preg_match("\/^\\w+\\.\\w+$\/",$desStr) > 0);$/;"	v
+result	inc/function.php	/^		$result = key($checkArr);$/;"	v
+result	inc/function.php	/^	$result = false;$/;"	v
+result	inc/mail.php	/^				$result = $this->get_mail_all();$/;"	v
+result	inc/mail.php	/^				$result = $this->get_mail_draft();$/;"	v
+result	inc/mail.php	/^				$result = $this->get_mail_read();$/;"	v
+result	inc/mail.php	/^				$result = $this->get_mail_send();$/;"	v
+result	inc/mail.php	/^				$result = $this->get_mail_unread();$/;"	v
+result	inc/mail.php	/^				$result = $this->link_result($sql,"get mail count -> tag = 0 error");$/;"	v
+result	inc/mail.php	/^				$result = $this->link_result($sql,"get mail count -> tag = 1 error");$/;"	v
+result	inc/mail.php	/^				$result = $this->link_result($sql,"get mail count -> tag = 2 error");$/;"	v
+result	inc/mail.php	/^				$result = $this->link_result($sql,"get mail count -> tag = 3 error");$/;"	v
+result	inc/mail.php	/^		$result = $link->query("select uid from cs_user where name = '$name';");$/;"	v
+result	inc/mail.php	/^		$result = $link->query($sql_str);$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result("select name from cs_user where name like '%$name%' limit 5;", "get name match error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "del mail error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail all error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail draft error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail info error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "get mail unread error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "save_draft error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "select touser from cs_mail error");$/;"	v
+result	inc/mail.php	/^		$result = $this->link_result($sql, "send mail error");$/;"	v
+result	inc/mail.php	/^		$result = $this->sub_title_content($result, array(30,30));$/;"	v
+result	inc/mail.php	/^		if ( $result == 1 ) {$/;"	v
+result	inc/mail.php	/^		if ( $result == null ) {$/;"	v
+result	login.php	/^	$result = $conn->query($query);$/;"	v
+result	plugin.php	/^	$result = (preg_match("\/\\bapp_name: (.+)\\b\/",$content,$matches) > 0);$/;"	v
+result	user.php	/^	$result = $conn->query($query);$/;"	v
+result	user.php	/^	$result = $conn->query($query_str);$/;"	v
+result1	user.php	/^	$result1 = $conn->query($query_str1);$/;"	v
+result2	user.php	/^	$result2 = $conn->query($query_str2);	$/;"	v
+result_json	inc/mail.php	/^					$result_json = json_decode($row_json);$/;"	v
+result_json	inc/mail.php	/^			$result_json = $result[0]['touser'];$/;"	v
+row	inc/mail.php	/^				while( $row = $result->fetch_assoc() )$/;"	v
+row	login.php	/^	$row = $result->fetch_assoc();$/;"	v
+row	user.php	/^	$row = $result->fetch_assoc();$/;"	v
+row	user.php	/^	while( $row = $result->fetch_assoc() ){$/;"	v
+row	user.php	/^    $row = $result->fetch_assoc();$/;"	v
+row1	user.php	/^    $row1 = $result1->fetch_assoc();$/;"	v
+row2	user.php	/^    $row2 = $result2->fetch_assoc();$/;"	v
+row_json	inc/mail.php	/^					$row_json = $result[$i]['touser'];$/;"	v
+save_draft	inc/mail.php	/^	public function save_draft()	\/\/G$/;"	f
+save_draft	js/mail.js	/^function save_draft() {$/;"	f
+save_draft.param.func	js/mail.js	/^        func: 'save_draft',$/;"	p
+save_draft.param.title	js/mail.js	/^        title: $('#mail-editor-title').val(),$/;"	p
+send_mail	inc/mail.php	/^	public function send_mail()		\/\/G$/;"	f
+send_mail	js/mail.js	/^function send_mail() {$/;"	f
+send_mail.param.func	js/mail.js	/^        func: 'send_mail',$/;"	p
+send_mail.param.title	js/mail.js	/^        title: $('#mail-editor-title').val(),$/;"	p
+set_cookie	js/cookie.js	/^function set_cookie(name, value) {$/;"	f
+set_editor	js/mail.js	/^function set_editor(touser,title, content) {$/;"	f
+set_tips_modal	js/mail.js	/^function set_tips_modal(tips) {$/;"	f
+sex	user.php	/^	$sex = $_POST["sex"];$/;"	v
+sex	user.php	/^	if( empty($name) || empty($password) || $sex=="" || empty($mail) || empty($grade) || empty($major) ){$/;"	v
+show_code	js/login.js	/^var show_code = false;$/;"	v
+show_tips_modal	js/mail.js	/^function show_tips_modal(title) {$/;"	f
+size	user.php	/^	$size = 150;$/;"	v
+sql	inc/mail.php	/^				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%' and isdraft=1;";$/;"	v
+sql	inc/mail.php	/^				$sql = "select count(mid) from cs_mail where touser like '%$this->uid%';";$/;"	v
+sql	inc/mail.php	/^				$sql = "select touser from cs_mail where touser like '%$this->uid%' and isdraft=0;";$/;"	v
+sql	inc/mail.php	/^			$sql = "delete from cs_mail where mid=$mid;";$/;"	v
+sql	inc/mail.php	/^			$sql = "update cs_mail set touser='$new_json' where mid=$mid;";$/;"	v
+sql	inc/mail.php	/^		$sql = "insert into cs_mail(fromuid,title,content,isdraft,touser) values($fromuid,'$title','$content',1,'$user_json');";$/;"	v
+sql	inc/mail.php	/^		$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,content from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where (cs_mail.touser like '%\\"$this->uid\\":\\"0\\"%' or cs_mail.touser like '%\\"$this->uid\\":\\"1\\"%') and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\\"$this->uid\\":\\"0\\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\\"$this->uid\\":\\"1\\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=0 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";$/;"	v
+sql	inc/mail.php	/^		$sql = "select touser,isdraft from cs_mail where mid=$mid";$/;"	v
+sql	inc/mail.php	/^		$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";$/;"	v
+status	inc/mail.php	/^						$status = "已读";$/;"	v
+status	inc/mail.php	/^						$status = "未读";$/;"	v
+status	inc/mail.php	/^					$status = $touser->{"$this->uid"};$/;"	v
+status	inc/mail.php	/^					else if ( $status == 1 ) {$/;"	v
+status	inc/mail.php	/^					if ( $status == 0 ) {$/;"	v
+status	inc/mail.php	/^					if ( $status == 1 ) {$/;"	v
+status	plugin.php	/^					$status = $conn->query("SELECT `status` FROM `cs_app` where name='$file';");$/;"	v
+status	plugin.php	/^		$status = $conn->query("update `cs_app` set status=0 where name='$file';");$/;"	v
+status	plugin.php	/^		$status = $conn->query("update `cs_app` set status=1 where name='$file';");$/;"	v
+str	checknum.php	/^		$str=substr($randstr,$p,1);$/;"	v
+str	inc/function.php	/^        $str = $str . "...";$/;"	v
+str	inc/function.php	/^    $str = mb_substr($string,$start,$l,'utf-8');$/;"	v
+str	inc/inject.php	/^    $str = daddslashes($str);$/;"	v
+str	inc/mail.php	/^            $str = ($result == true) ? "true":"false";$/;"	v
+str	inc/mail.php	/^            $str = implode(",",$unfind);$/;"	v
+string	inc/inject.php	/^		$string = htmlspecialchars(addslashes(trim($string)));$/;"	v
+sub_title_content	inc/mail.php	/^	private function sub_title_content($info, $length_arr)	\/\/g$/;"	f
+substr_utf8	inc/function.php	/^function substr_utf8($string,$start,$length, $flag)  $/;"	f
+tag	mail.php	/^			$tag = $_POST["tag"];	echo($mail->get_mail_count($tag));$/;"	v
+tag	mail.php	/^			$tag = $_POST["tag"];    echo ($mail->get_mail_list($tag));$/;"	v
+tempuid	inc/mail.php	/^			$tempuid = $this->name_to_uid($users[$i]);$/;"	v
+tempuid	inc/mail.php	/^			if ( $tempuid == "" ) {$/;"	v
+tip	js/bootstrap.js	/^  Tooltip.prototype.tip = function () {$/;"	f
+title	inc/mail.php	/^		$title = $_POST["title"];$/;"	v
+title_len	inc/mail.php	/^		$title_len = $length_arr[0];$/;"	v
+toggle_menu	js/mail.js	/^function toggle_menu(menu) {$/;"	f
+toggle_view	js/mail.js	/^function toggle_view(view) {$/;"	f
+toname	inc/mail.php	/^		$toname = $_POST["touser"];$/;"	v
+touid	inc/mail.php	/^		$touid = array();$/;"	v
+touser	inc/mail.php	/^					$touser = json_decode($value);$/;"	v
+touser	inc/mail.php	/^		$touser = json_decode($touser_json[0]["touser"]);$/;"	v
+touser_json	inc/mail.php	/^		$touser_json = $this->link_result("select touser from cs_mail where mid=$mid;", "select touser error");$/;"	v
+touser_json	inc/mail.php	/^		$touser_json = json_encode($touser);$/;"	v
+transitionEnd	js/bootstrap.js	/^  function transitionEnd() {$/;"	f
+uid	inc/mail.php	/^		$this->uid = $uid;$/;"	v
+uid	inc/mail.php	/^		$uid = $array["name"];$/;"	v
+uid	inc/mail.php	/^	private $uid;$/;"	v
+uid	mail.php	/^		$uid = $_COOKIE["uid"];$/;"	v
+uid	user.php	/^	$uid = $_COOKIE["uid"];$/;"	v
+uid	user.php	/^	$uid = $_COOKIE['uid'];$/;"	v
+uid	user.php	/^	$uid = $_POST['uid'];$/;"	v
+uid_next	user.php	/^	$uid_next = $_POST['uid_next'];$/;"	v
+uid_now	user.php	/^	$uid_now = $_POST['uid_now'];$/;"	v
+uid_to_name	inc/mail.php	/^	private function uid_to_name($uid)$/;"	f
+unfind	inc/mail.php	/^        if ( $unfind == NULL ) {$/;"	v
+update_userinfo	user.php	/^function update_userinfo(){$/;"	f
+user	inc/conn.php	/^		$this->user = 'cs_linux';$/;"	v
+user	inc/conn.php	/^	private $user;$/;"	v
+user_json	inc/mail.php	/^		$user_json = json_encode($array);$/;"	v
+user_json	inc/mail.php	/^		$user_json = json_encode($find);$/;"	v
+users	inc/mail.php	/^		$users=explode(',',$toname);$/;"	v
+val	inc/inject.php	/^			$val = $string[$key];$/;"	v
+value	inc/function.php	/^	while( $value = current($checkArr) ){$/;"	v
+value	inc/mail.php	/^					$value=" ";$/;"	v
+value	inc/mail.php	/^					$value=2;$/;"	v
+value	inc/mail.php	/^				if ( $value == "" ) {$/;"	v
+value	user.php	/^	while( $value = current($infoArr) ){$/;"	v
+var.Button	js/bootstrap.js	/^  Button.prototype.setState = function (state) {$/;"	c
+var.Carousel	js/bootstrap.js	/^  Carousel.prototype.keydown = function (e) {$/;"	c
+var.Carousel.Carousel	js/bootstrap.js	/^  Carousel.prototype.to = function (pos) {$/;"	c
+var.Carousel.cycle	js/bootstrap.js	/^  Carousel.prototype.cycle = function (e) {$/;"	m
+var.Carousel.getItemIndex	js/bootstrap.js	/^  Carousel.prototype.getItemIndex = function (item) {$/;"	m
+var.Carousel.var.Carousel.Carousel.Carousel	js/bootstrap.js	/^  Carousel.prototype.pause = function (e) {$/;"	c
+var.Carousel.var.Carousel.Carousel.Carousel.next	js/bootstrap.js	/^  Carousel.prototype.next = function () {$/;"	m
+var.Carousel.var.Carousel.Carousel.Carousel.prev	js/bootstrap.js	/^  Carousel.prototype.prev = function () {$/;"	m
+var.Carousel.var.Carousel.Carousel.Carousel.slide	js/bootstrap.js	/^  Carousel.prototype.slide = function (type, next) {$/;"	m
+var.Collapse	js/bootstrap.js	/^  Collapse.prototype.dimension = function () {$/;"	c
+var.Collapse	js/bootstrap.js	/^  var Collapse = function (element, options) {$/;"	m
+var.Modal	js/bootstrap.js	/^  Modal.prototype.toggle = function (_relatedTarget) {$/;"	c
+var.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.hide = function (e) {$/;"	c
+var.Modal.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.hideModal = function () {$/;"	c
+var.Modal.Modal.enforceFocus	js/bootstrap.js	/^  Modal.prototype.enforceFocus = function () {$/;"	m
+var.Modal.Modal.escape	js/bootstrap.js	/^  Modal.prototype.escape = function () {$/;"	m
+var.Modal.Modal.var.Modal.Modal.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.removeBackdrop = function () {$/;"	c
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.backdrop = function (callback) {$/;"	c
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.checkScrollbar = function () {$/;"	c
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.resetScrollbar = function () {$/;"	c
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.setScrollbar	js/bootstrap.js	/^  Modal.prototype.setScrollbar = function () {$/;"	m
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.Modal.Modal	js/bootstrap.js	/^  Modal.prototype.measureScrollbar = function () { \/\/ thx walsh$/;"	c
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.Modal.Modal.Modal.function.Plugin	js/bootstrap.js	/^  function Plugin(option, _relatedTarget) {$/;"	f
+var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.var.Modal.Modal.var.Modal.Modal.Modal.Modal.Modal.var.this.$backdrop	js/bootstrap.js	/^      this.$backdrop.removeClass('in')$/;"	m
+var.Modal.show	js/bootstrap.js	/^  Modal.prototype.show = function (_relatedTarget) {$/;"	m
+var.Popover	js/bootstrap.js	/^  var Popover = function (element, options) {$/;"	c
+var.Tab	js/bootstrap.js	/^  var Tab = function (element) {$/;"	m
+var.Tab.Affix	js/bootstrap.js	/^  Affix.prototype.getPinnedOffset = function () {$/;"	c
+var.Tab.Affix	js/bootstrap.js	/^  var Affix = function (element, options) {$/;"	m
+var.Tab.Affix.checkPosition	js/bootstrap.js	/^  Affix.prototype.checkPosition = function () {$/;"	m
+var.Tab.Affix.checkPositionWithEventLoop	js/bootstrap.js	/^  Affix.prototype.checkPositionWithEventLoop = function () {$/;"	m
+var.Tab.Tab	js/bootstrap.js	/^  Tab.prototype.activate = function (element, container, callback) {$/;"	c
+var.Tab.var.Tab.Affix.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+var.Tab.var.Tab.Affix.getPinnedOffset	js/bootstrap.js	/^  Affix.prototype.getPinnedOffset = function () {$/;"	m
+var.Tooltip	js/bootstrap.js	/^  var Tooltip = function (element, options) {$/;"	c
+var.relatedTarget.relatedTarget	js/bootstrap.js	/^      var relatedTarget = { relatedTarget: this }$/;"	p
+var.var.Button.Button	js/bootstrap.js	/^  Button.prototype.toggle = function () {$/;"	c
+var.var.Button.function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+var.var.Button.setState	js/bootstrap.js	/^  Button.prototype.setState = function (state) {$/;"	m
+var.var.Carousel.keydown	js/bootstrap.js	/^  Carousel.prototype.keydown = function (e) {$/;"	m
+var.var.Collapse.Collapse	js/bootstrap.js	/^  Collapse.prototype.show = function () {$/;"	c
+var.var.Collapse.var.var.Collapse.Collapse.Collapse	js/bootstrap.js	/^  Collapse.prototype.hide = function () {$/;"	c
+var.var.Collapse.var.var.Collapse.Collapse.Collapse.function.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+var.var.Collapse.var.var.Collapse.Collapse.Collapse.toggle	js/bootstrap.js	/^  Collapse.prototype.toggle = function () {$/;"	m
+var.var.Modal.toggle	js/bootstrap.js	/^  Modal.prototype.toggle = function (_relatedTarget) {$/;"	m
+var.var.Tab.Plugin	js/bootstrap.js	/^  function Plugin(option) {$/;"	f
+wechat	user.php	/^    $wechat = $_POST["wechat"];$/;"	v
+workplace	user.php	/^	$workplace = $_POST["workplace"];$/;"	v
+write_content	inc/error_log.php	/^	private function write_content()$/;"	f
+wrongCode	js/login.js	/^function wrongCode(){$/;"	f
