@@ -24,14 +24,14 @@ $user_obj = json_decode($user_json);
             </div> <!--END PANEL HEADING-->
             <ul class="list-group">
                 <li class="list-group-item">
-                <h5>消息来自：<?php echo $user_obj->name;?> &nbsp;&nbsp;发送时间: <?php echo $mail_obj->sdate;?></h5>
+                <h4>消息来自：<?php echo $user_obj->name;?> &nbsp;&nbsp;发送时间: <?php echo $mail_obj->sdate;?></h4>
                 </li>
                 <li class="list-group-item">
                     <h4><?php echo $mail_obj->content;?></h4>
                 </li>
             </ul> <!--END PANEL BODY-->
-            <div class="panel-footer text-center">
-                <a href="#">回复信息</a>
+            <div class="panel-footer text-right">
+            <a class="btn btn-success" href="mail.php<?php echo '?select='. $_GET['select'] .'&action=write&touser=' . $user_obj->name;?>">回复信息</a>
             </div>
         </div>
     </div>

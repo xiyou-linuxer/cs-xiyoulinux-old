@@ -3,7 +3,8 @@ session_start();
 
 require_once('inc/user.php');
 require_once('inc/mail.php');
-require_once('config.php');
+define('INCLUDE_READ_MAIL_PHP', 'true');
+define('INCLUDE_WRITE_MAIL_PHP', 'true');
 
 $_SESSION['uid'] = 1002;
 
@@ -42,7 +43,7 @@ if (!isset($_GET['select'])) {
             <li><a href="app/faq"><span class="glyphicon glyphicon-comment"></span><strong> 问答</strong></a></li>
             <li><a href="app/activity"><span class="glyphicon glyphicon-certificate"></span><strong> 活动</strong></a></li>
 	        <li class="active">
-                <a href="mail.php">
+                <a href="mail.php?select=all">
                     <span class="glyphicon glyphicon-envelope"></span>
                     <strong> 站内信<span class="badge badge-warning badge-mail"><?php include_once('mail-tip.php');?></span></strong>
                 </a>
@@ -63,7 +64,7 @@ if (!isset($_GET['select'])) {
                 <!-- begin sidebar toggler button -->
             </li>
             <li class="start" id="menu_write">
-                <a href="index.html">
+            <a href="mail.php?select=<?php echo $_GET['select'];?>&action=write">
                 <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-edit"></span>
                 <span class="title">写站内信</span>
                 <span class="selected"></span>
@@ -112,6 +113,8 @@ if (!isset($_GET['select'])) {
 <?php
 if ($_GET['action'] == 'read' && isset($_GET['mid'])) {
     include('read-mail.php');
+} else if ($_GET['action'] == 'write') {
+    include('write-mail.php');
 } else {
     include('mail-list.php');
 }
