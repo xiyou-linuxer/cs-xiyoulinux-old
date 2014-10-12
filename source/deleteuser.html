@@ -50,7 +50,7 @@
 			<li class="name">
 			<span style="margin-left:30px;" name="name"></span>
 			</li>
-			<li class="start" id="add_user" style="background:rgba(239,239,239,0.3);">
+			<li class="start" id="add_user">
                 <a href="adduser.html">
                 <span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-user"></span>
 				<span class="title">添加用户</span>
@@ -58,7 +58,7 @@
                 </a>
             </li>
 
-			<li class="start" id="delete_user" >
+			<li class="start" id="delete_user "style="background:rgba(239,239,239,0.3);" >
 				<a href="deleteuser.html">
 				<span style="color:#ffffff;margin:auto 3px;" class="glyphicon glyphicon-trash"></span>
 				<span class="title">删除用户</span>
@@ -95,21 +95,18 @@
 	<div class = "page-container row">
 		<div class ="col-md-8 col-md-offset-3 panel panel-default" id="infor">
 
-			<form  class="form-inline"  role="form">
+			<form  class="form-inline"  role="form" method="post" action="js/deleteuser.js">
 
 				<div class="form-group">
 						<label>级别</label>
 						<select id="delete_id">
-							<option>2012</option>
-							<option>2013</option>
 						</select>
 				</div>
 
 				<div class="form-group" style="margin-left:20px">
 					<label>成员姓名</label>
 					<select class="select-name" id="delete_name">
-						<option>阿斯蒂芬</option>
-						<option>发动机对以及</option>
+						<option>先选择年份</option>
 					</select>
 				</div>
 

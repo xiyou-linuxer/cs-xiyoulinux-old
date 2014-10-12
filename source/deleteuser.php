@@ -2,33 +2,50 @@
 require_once("inc/inject.php");
 require_once("inc/conn.php");
 
-$func = $_POST["func"];
-$name = $_POST["name"];
-$year = $_POST["year"];
+if(isset($_POST["func"]))
+	$func = $_POST["func"];
+if(isset($_POST["name"]))
+	$name = $_POST["name"];
+if(isset($_POST["year"]))
+	$year = $_POST["year"];
 
 //过滤
 $inject = new Inject;
-$name = $inject->jundge($name, "zh");
-$year = $inject->jundge($year, "number");
+if(isset($name))
+	$name = $inject->jundge($name, "zh");
+if(isset($year))
+	$year = $inject->jundge($year, "number");
 
 //判断运行的函数
-switch($func = "default")
-{
-case "get_year":
-	return get_year();
-case "get_name":
-	return get_name($year);
-case "delete_user":
-	return delete_user($year, $name);
-default:
-	return "<o_o>";
-}
+if(isset($func))
+	switch($func)
+	{
+		case "get_year":
+			$years = get_year();
+			foreach($years as $year)
+				echo ".".$year;
+			break;
+		case "get_name":
+			/*
+			foreach($_POST as $post)
+				echo $post;*/
+			$names = get_name($year);
+			foreach($names as $name)
+				echo ".".$name;
+			break;
+		case "delete_user":
+			echo delete_user($year, $name);
+			break;
+		default:
+			echo "<o_o>";
+	}
+
 
 //得到所有年份
 function get_year()
 {
 	$link = new Csdb;
-	$sql = "select distinct grade from cs_user order by asc";
+	$sql = "select distinct grade from cs_user order by grade desc";
 	$result = $link->query($sql);
 	
 	if ($result == false)
@@ -36,12 +53,11 @@ function get_year()
 
 	if (is_object($result))
 	{
-		if ($result->rows > 0)
-		{
 			while($row = $result->fetch_assoc())
+				//$years[] = $row["grade"];
 				$years[] = $row["grade"];
-		}
-		return $years;
+			//	return json_encode($years);
+			return $years;
 	}
 	return $result;
 }
@@ -50,7 +66,7 @@ function get_year()
 function get_name($year)
 {
 	$link = new Csdb;
-	$sql = "select name grade from cs_user where grade=".$year." order by asc";
+	$sql = "select name from cs_user where grade=".$year." order by name";
 	$result = $link->query($sql);
 
 	if ($result == false)
@@ -58,12 +74,10 @@ function get_name($year)
 	
 	if(is_object($result))
 	{
-		if($result->rows > 0)
-		{
 			while ($row = $result->fetch_assoc())
 				$names[] = $row["name"];
-		}
-		return $names;
+			//return json_encode($names);
+			return $names;
 	}
 
 	return $result;
@@ -73,11 +87,11 @@ function get_name($year)
 function delete_user($year,$name)
 {
 	$link = new Csdb;
-	$sql = "delete * from cs_user where grade=$year and name=$name;";
+	$sql = "delete from cs_user where grade=$year and name='$name';";
 	$result = $link->query($sql);
 
 	if(!$result)
-		exit("删除信息出错");
+		return("删除信息出错");
 	return "删除成功";
 
 }

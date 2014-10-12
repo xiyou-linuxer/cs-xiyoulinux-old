@@ -3,35 +3,47 @@ $(document).ready(function(){
 		{
 			func:"get_year"
 		},
-		function(years)
+		function(info)
 		{
-			for(year in years)
+			var years = info.split(".");
+			for(index in years)
 			{
-				$("#delete_year").append("<option>" + year + "</option>");
+				if (index == 0)
+					continue;
+				$("#delete_id").append("<option>" + years[index] + "</option>");	
+
 			}
-		});
+			$("delete_id").addClass("focus");
+		}
+		);
+$("#delete_id").focus(function(){
 	$.post("deleteuser.php",
 		{
 			func:"get_name",
-			year:$("#delete_year option:selected").val()
+			year:$("#delete_id option:selected").val()
 		},
-		function(names)
+		function(info)
 		{
-			for(name in names)
+			$("#delete_name").empty();
+			var names = info.split(".");
+			for(index in names)
 			{
-				$("#delete_name").append("<option>" + name + "</option>");
+				if (index == 0)
+					continue;
+				$("#delete_name").append("<option>" + names[index] + "</option>");
 			}
 		}
 		);
+		});
 	$("#delete").click(function(){
 		$.post("deleteuser.php",
 			{
 				func:"delete_user",
-				year:$("#delete_year option:selected").val(),
+				year:$("#delete_id option:selected").val(),
 				name:$("#delete_name option:selected").val()
 			},
 			function(data){
-				alert(""+ data);
+				alert(""+ data);	
 			}
 			);
 	});

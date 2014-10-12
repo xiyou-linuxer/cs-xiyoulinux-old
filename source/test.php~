@@ -1,0 +1,21 @@
+<?php
+
+require_once("inc/conn.php");
+
+$link = new Csdb;
+	$sql = "select distinct grade from cs_user order by grade";
+	$result = $link->query($sql);
+	
+	if ($result == false)
+		exit("查询年份错误");
+
+	if (is_object($result))
+	{
+			while($row = $result->fetch_assoc())
+				//$years[] = $row["grade"];
+				$years[] = $row;
+		echo json_encode($years)."--------".$_POST['func'];
+	}
+//	echo $result;
+
+?>

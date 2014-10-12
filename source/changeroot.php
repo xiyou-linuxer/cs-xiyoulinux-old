@@ -2,36 +2,50 @@
 require_once("inc/inject.php");
 require_once("inc/conn.php");
 
-if (isset($_COOKIE["uid"]))
+if(isset($_COOKIE["uid"]))
 	$uid = $_COOKIE["uid"];
 
-$func = $_POST["func"];
-$name = $_POST["name"];
-$year = $_POST["year"];
+if(isset($_POST["func"]))
+	$func = $_POST["func"];
+if(isset($_POST["name"]))
+	$name = $_POST["name"];
+if(isset($_POST["year"]))
+	$year = $_POST["year"];
 
 //过滤
 $inject = new Inject;
-$name = $inject->jundge($name, "zh");
-$year = $inject->jundge($year, "number");
+if(isset($name))
+	$name = $inject->jundge($name, "zh");
+if(isset($year))
+	$year = $inject->jundge($year, "number");
 
 //判断运行的函数
-switch($func = "default")
-{
-case "get_year":
-	return get_year();
-case "get_name":
-	return get_name($year);
-case "change_user":
-	return change_user($year, $name);
-default:
-	return "<o_o>";
-}
+if(isset($func))
+	switch($func)
+	{
+		case "get_year":
+			$years = get_year();
+			foreach($years as $year)
+				echo ".".$year;
+			break;
+		case "get_name":
+			$names = get_name($year);
+			foreach($names as $name)
+				echo ".".$name;
+			break;
+		case "change_user":
+			echo change_user($year, $name);
+			break;
+		default:
+			echo "<o_o>";
+	}
+
 
 //得到所有年份
 function get_year()
 {
 	$link = new Csdb;
-	$sql = "select distinct grade from cs_user order by asc";
+	$sql = "select distinct grade from cs_user order by grade desc";
 	$result = $link->query($sql);
 	
 	if ($result == false)
@@ -39,12 +53,11 @@ function get_year()
 
 	if (is_object($result))
 	{
-		if ($result->num > 0)
-		{
 			while($row = $result->fetch_assoc())
+				//$years[] = $row["grade"];
 				$years[] = $row["grade"];
-		}
-		return $years;
+			//	return json_encode($years);
+			return $years;
 	}
 	return $result;
 }
@@ -53,7 +66,7 @@ function get_year()
 function get_name($year)
 {
 	$link = new Csdb;
-	$sql = "select name grade from cs_user where grade=".$year." order by asc";
+	$sql = "select name from cs_user where grade=".$year." order by name";
 	$result = $link->query($sql);
 
 	if ($result == false)
@@ -61,35 +74,33 @@ function get_name($year)
 	
 	if(is_object($result))
 	{
-		if($result->num > 0)
-		{
 			while ($row = $result->fetch_assoc())
 				$names[] = $row["name"];
-		}
-		return $names;
+			//return json_encode($names);
+			return $names;
 	}
 
 	return $result;
 }
 
-//根据级别和姓名删除成员信息
+//根据级别和姓名移交超级用户
 function change_user($year,$name)
 {
 	$link = new Csdb;
-	$sql = "select uid from cs_user where year=$year and name=$name";
+	$sql = "select uid from cs_user where year=$year and name='$name'";
 	$result = $link->query($sql);
 	if (!$result)
-		exit("查询uid出错");
+		exit("查询用户出错");
+
 	$info = $result->fetch_assoc();
 	$new_root_uid = $info["uid"];
-
-	$sql = "update cs_user set permisson = case uid
-		when $uid then 0
-		when $new_root_uid then 1 end;";
-	$result = $link->query($sql);
+	$sql = "update cs_user set permission = case uid
+			when $uid then 0
+			when $new_root_uid then 1 end";
+	$result = $link->quiry($sql);
 
 	if(!$result)
-		exit("移交信息出错");
+		return("移交出错");
 	return "移交成功";
 
 }

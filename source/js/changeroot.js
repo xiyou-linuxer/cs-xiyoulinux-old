@@ -1,37 +1,49 @@
 $(document).ready(function(){
-	$.post("changeuser.php",
+	$.post("changeroot.php",
 		{
 			func:"get_year"
 		},
-		function(years)
+		function(info)
 		{
-			for(year in years)
+			var years = info.split(".");
+			for(index in years)
 			{
-				$("#change_year").append("<option>" + year + "</option>");
+				if (index == 0)
+					continue;
+				$("#change_year").append("<option>" + years[index] + "</option>");	
+
 			}
-		});
-	$.post("changeuser.php",
+			$("change_year").addClass("focus");
+		}
+		);
+$("#change_year").focus(function(){
+	$.post("changeroot.php",
 		{
 			func:"get_name",
 			year:$("#change_year option:selected").val()
 		},
-		function(names)
+		function(info)
 		{
-			for(name in names)
+			$("#change_name").empty();
+			var names = info.split(".");
+			for(index in names)
 			{
-				$("#change_name").append("<option>" + name + "</option>");
+				if (index == 0)
+					continue;
+				$("#change_name").append("<option>" + names[index] + "</option>");
 			}
 		}
 		);
+		});
 	$("#change").click(function(){
-		$.post("changeuser.php",
+		$.post("changeroot.php",
 			{
 				func:"change_user",
 				year:$("#change_year option:selected").val(),
 				name:$("#change_name option:selected").val()
 			},
 			function(data){
-				alert(""+ data);
+				alert(""+ data);	
 			}
 			);
 	});
