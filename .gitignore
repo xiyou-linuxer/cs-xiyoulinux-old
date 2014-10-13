@@ -6,3 +6,6 @@ source/inc/test.php
 source/test.html
 source/js/test.js
 source/test.php
+source/*.php~
+source/*.html~
+source/js/*.js~

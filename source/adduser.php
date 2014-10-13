@@ -36,6 +36,10 @@ jundge($name, $native, $major, $sex, $grade);
 //连接数据库
 $link = new Csdb;
 //插入记录
+if ($sex = "女")
+	$sex = 0;
+else 
+	$sex = 1;
 $sql = "insert into cs_user(name,password,sex,mail,grade,major) value($name,"000000",$sex,$mail,$grade,$major);";
 $result = $link->query($sql);
 //判断返回结果
