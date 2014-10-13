@@ -16,9 +16,22 @@ $(document).ready(function(){
 			}
 		
 			//$("#app").addClass("autofocus");
+		$.post("appmanager.php",
+		{
+			func:"get_status",
+			name:$("#app_name option:selected").val()
+		},
+		function(status)
+		{
+			if (status == 1)
+				$("#app").text("点击下线");
+			if (status == 0)
+				$("#app").text("点击上线");
 		}
 		);
-	$("#app_name").focus(function()
+		}
+		);
+	$("#app_name").change(function()
 	{
 		$.post("appmanager.php",
 		{

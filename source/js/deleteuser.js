@@ -14,9 +14,28 @@ $(document).ready(function(){
 
 			}
 			$("delete_id").addClass("focus");
+	
+			$.post("deleteuser.php",
+			{
+				func:"get_name",
+				year:$("#delete_id option:selected").val()
+			},
+			function(info)
+			{
+				$("#delete_name").empty();
+				var names = info.split(".");
+				for(index in names)
+				{
+					if (index == 0)
+						continue;
+					$("#delete_name").append("<option>" + names[index] + "</option>");
+				}
+			}
+		);
 		}
 		);
-$("#delete_id").focus(function(){
+	
+$("#delete_id").change(function(){
 	$.post("deleteuser.php",
 		{
 			func:"get_name",

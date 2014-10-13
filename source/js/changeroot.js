@@ -13,11 +13,29 @@ $(document).ready(function(){
 				$("#change_year").append("<option>" + years[index] + "</option>");	
 
 			}
-			$("change_year").addClass("focus");
+			
+		$.post("changeroot.php",
+		{
+			func:"get_name",
+			year:$("#change_year option:selected").val()
+		},
+		function(info)
+		{
+			$("#change_name").empty();
+			var names = info.split(".");
+			for(index in names)
+			{
+				if (index == 0)
+					continue;
+				$("#change_name").append("<option>" + names[index] + "</option>");
+			}
 		}
 		);
-$("#change_year").focus(function(){
-	$.post("changeroot.php",
+
+		}
+		);
+	$("#change_year").change(function(){
+		$.post("changeroot.php",
 		{
 			func:"get_name",
 			year:$("#change_year option:selected").val()
