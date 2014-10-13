@@ -57,7 +57,11 @@ $(document).ready(function(){
 		},
 		function(data)
 		{
-			alert("" + data);
+			alert("" + data );
+			if ($("#app").text() == "点击上线")
+				$("#app").text("点击下线");
+			else
+				$("#app").text("点击上线");
 		}
 		);
 });
