@@ -54,9 +54,7 @@ function get_year()
 	if (is_object($result))
 	{
 			while($row = $result->fetch_assoc())
-				//$years[] = $row["grade"];
 				$years[] = $row["grade"];
-			//	return json_encode($years);
 			return $years;
 	}
 	return $result;
@@ -76,7 +74,6 @@ function get_name($year)
 	{
 			while ($row = $result->fetch_assoc())
 				$names[] = $row["name"];
-			//return json_encode($names);
 			return $names;
 	}
 

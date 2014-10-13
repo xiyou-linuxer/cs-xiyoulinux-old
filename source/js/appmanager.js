@@ -3,15 +3,24 @@ $(document).ready(function(){
 		{
 			func:"get_app_name"
 		},
-		function(names)
+		function(info)
 		{
-			for(name in names)
+			var names = info.split(".");
+		
+			$("app_name").empty();
+			for(index in names)
 			{
-				$("#app_name").append("<option>" + name + "</option>");
+				if (index == 0)
+					continue;
+				$("#app_name").append("<option>" + names[index] + "</option>");
 			}
+		
+			//$("#app").addClass("autofocus");
 		}
 		);
-	$.post("appmanager.php",
+	$("#app_name").focus(function()
+	{
+		$.post("appmanager.php",
 		{
 			func:"get_status",
 			name:$("#app_name option:selected").val()
@@ -22,16 +31,24 @@ $(document).ready(function(){
 				$("#app").text("点击下线");
 			if (status == 0)
 				$("#app").text("点击上线");
-		},
+		}
 		);
-	$.post("appmanager.php",
-			{
-				func:"change_status",
-				$("#app_name option:selected").val()
-			},
-			function($data)
-			{
-				alert("" + data);
-			}
-			);
+	});
+
+
+	$("#app").click(function(){
+		$.post("appmanager.php",
+		{
+			func:"change_status",
+			name:$("#app_name option:selected").val()
+		},
+		function(data)
+		{
+			alert("" + data);
+		}
+		);
+});
+
+
+
 });

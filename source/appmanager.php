@@ -3,12 +3,19 @@
 require_once("inc/conn.php");
 require_once("inc/inject.php");
 
-$func = $_POST["func"];
-$name = $_POST["name"];		//应用名
-
 $inject = new Inject;
-$func = $inject->jundge($func);
-$name = $inject->jundge($name);
+
+if (isset($_POST{"func"}))
+{
+	$func = $_POST["func"];
+	$func = $inject->jundge($func);
+}
+if (isset($_POST["name"]))
+{
+	$name = $_POST["name"];		//应用名
+	$name = $inject->jundge($name);
+
+}
 
 function jundge($func, $name)
 {
@@ -17,25 +24,33 @@ function jundge($func, $name)
 	if (!$name)
 		exit("<o_o>");
 }
+if (isset($func) && isset($name))
+	jundge($func, $name);
 
-jundge($func, $name);
-
-switch($func)
+if (isset($func))
 {
-	case "get_app_name":
-		get_name();
-	case "change_status":
-		change_status($name);
-	case "get_status":
-		get_status($name);
-	default:
-		exit("<o_o>");
+	switch($func)
+	{
+		case "get_app_name":
+			$names = get_name();
+			foreach($names as $name)
+				echo ".".$name;
+			break;
+		case "change_status":
+			echo change_status($name);
+			break;
+		case "get_status":
+			echo get_status($name);
+			break;
+		default:
+			exit("<o_o>");
+	}
 }
 
 function get_name()
 {	
 	$link = new Csdb;
-	$sql = "select name from cs_app order by asc";
+	$sql = "select name from cs_app order by name";
 	$result = $link->query($sql);
 
 	if ($result == false)
@@ -43,9 +58,8 @@ function get_name()
 
 	if (is_object($result))
 	{
-		if($result->rows)
-			while($row = $result->fetch_assoc())
-				$names[] = $row["name"];
+		while($row = $result->fetch_assoc())
+			$names[] = $row["name"];
 		return $names;
 	}
 	return $result;
@@ -54,7 +68,7 @@ function get_name()
 function get_status($name)
 {
 	$link = new Csdb;
-	$sql = "select status from cs_app where name=$name;";
+	$sql = "select status from cs_app where name='$name';";
 	$result = $link->query($sql);
 
 	if ($result == false)
@@ -72,7 +86,7 @@ function get_status($name)
 function change_status($name)
 {
 	$link = new Csdb;
-	$sql = "update cs_app set status=1-status where name=$name";
+	$sql = "update cs_app set status=1-status where name='$name'";
 	$result = $link->query($sql);
 
 	if ($result == false)
