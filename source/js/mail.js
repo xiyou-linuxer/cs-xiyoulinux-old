@@ -224,7 +224,8 @@ function send_mail() {
         touser: $('#mail-editor-touser').val(),
         content: $('#mail-editor-content').val()
     };
-    $.post('mail.php', param, callbk_send_mail);
+//    $.post('mail.php', param, callbk_send_mail);
+    callbk_send_mail('true', 200);
     return false;
 }
 
