@@ -7,8 +7,9 @@ class Error_log{
 	public function __construct($error_content = null)
 	{
 		$this->content = $error_content;
-		if ($this->content != null)
-			$this->write_content();
+		if ($this->content != null) {
+            //	$this->write_content();
+        }
 	}
 
 	private function get_filename()
@@ -28,9 +29,9 @@ class Error_log{
 		// code..
 		$content = $this->get_date()."\r\n";
 		$content = $content."".$this->get_filename().":".$this->content."\r\n \r\n \r\n \r\n";
-		$file = fopen("error.log", "a+");
-		fwrite($file, $content);
-		fclose($file);
+//		$file = fopen("error.log", "a+");
+//		fwrite($file, $content);
+//		fclose($file);
 	}
 
 }

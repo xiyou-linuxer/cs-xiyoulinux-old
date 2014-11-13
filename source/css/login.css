@@ -1,0 +1,43 @@
+html {
+}
+
+body {
+    padding-top: 20px;
+    font-size: 16px;
+    font-family: "微软雅黑",monospace,serif;
+    background-image: url('../img/bg.jpg'); 
+}
+
+h1 {
+    font-weight: 320;
+    font-size: 32px;
+}
+	
+.panel {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.margin-base-vertical {
+    text-align:center;
+    margin: 30px 0;
+}
+
+.btn-submit {
+    color:#fff;
+    background-color:#1abc9c !important;
+    border-color:#16a085 !important;
+}
+
+.btn-submit:hover, .btn-submit:focus{
+    color:#fff;
+    background-color:#24d1af !important
+}
+
+.btn-submit:active, .btn-submit.active {
+    color:#fff;
+    background-color:#16a085 !important
+}
+
+#login_form{
+    margin-top: 10%;
+}

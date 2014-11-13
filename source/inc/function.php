@@ -1,5 +1,15 @@
 <?php
 
+function checkUser(){
+	$uid = $_COOKIE['uid'];
+	session_start();
+	if( !isset($_SESSION['identity']) )
+		return false;
+	if( crypt($uid,'cs_linux_2012') != $_SESSION['identity'] )
+		return false;
+	return true;
+}
+
 function getIP() {		//获取IP
 	if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))  
 		$realip = $_SERVER['HTTP_X_FORWARDED_FOR']; 
@@ -52,5 +62,28 @@ function checkStr($type,$desStr){	//看代码都懂
 	}
 	return $result;
 }
+
+function substr_utf8($string,$start,$length, $flag)  
+{
+    $chars = $string;  
+    $i=0;
+    do{
+        if (preg_match ("/[0-9a-zA-Z]/", $chars[$i])){
+            $m++;  
+        }  
+        else {
+            $n++;
+        } 
+
+        $k = $n/3+$m/2;  
+        $l = $n/3+$m;
+        $i++;
+    } while($k < $length);
+    $str = mb_substr($string,$start,$l,'utf-8');
+    if ($flag > 0 && strlen($str) < strlen($string)) {
+        $str = $str . "...";
+    }
+    return $str;  
+} 
 
 ?>

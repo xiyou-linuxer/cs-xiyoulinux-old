@@ -1,0 +1,151 @@
+body {
+	padding-top:50px;
+}
+.navbar .xylinux {
+	color:#ffffff;
+}
+.navbar-text a.active {
+	color:#ffffff;
+}
+
+.sidebar-collapse {
+    padding:0;
+}
+
+.sidebar-list > li {
+    cursor:pointer;
+    color:#ffffff;
+    background:#222222;
+    border:1px solid #222222;
+}
+
+.mail-user {
+    color:#428bca;
+    font: normal bold 14px/20px arial, sans-serif;    
+}
+
+input::-webkit-input-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+input:-moz-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+input::-moz-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+input:-ms-input-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+
+.mail-user::-webkit-input-placeholder {
+    color:#428bca !important;
+}
+.mail-user:-moz-placeholder {
+    color:#428bca !important;
+}
+.mail-user::-moz-placeholder {
+    color:#428bca !important;
+}
+.mail-user:-ms-input-placeholder {
+    color:#428bca;
+}
+
+.label-title,.label-user {
+    width:4em;
+}
+.label-user,.label-title, .mail-title {
+    color:#555555 !important;
+    font: normal bold 14px/20px arial, sans-serif;    
+}
+
+.mail-list-panel {
+    margin:10px;
+    padding: 10px;
+}
+
+#mail-list-view,#mail-editor-view,#mail-reader-view {
+    display:none;
+}
+
+#mail-table {
+    table-layout:fixed !important;
+    width:100%;
+}
+
+#mail-table th,#mail-table td {
+    white-space:nowrap;
+    overflow:hidden !important;
+    text-overflow:ellipsis;
+}
+
+.textarea-custom {
+    font-family:inherit;
+    font-weight:500;
+    line-height:1.1;
+    font-size:18px;
+    color:inherit;
+}
+
+.list-bottom-no-margin {
+    margin-bottom:0px !important;
+}
+
+.badge {
+    padding: 1px 9px 2px;
+    font-size: 12.025px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #999999;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+.badge:hover {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.badge-error {
+    background-color: #b94a48;
+}
+.badge-error:hover {
+    background-color: #953b39;
+}
+.badge-warning {
+    background-color: #f89406;
+}
+.badge-warning:hover {
+    background-color: #c67605;
+}
+.badge-success {
+    background-color: #468847;
+}
+.badge-success:hover {
+    background-color: #356635;
+}
+.badge-info {
+    background-color: #3a87ad;
+}
+.badge-info:hover {
+    background-color: #2d6987;
+}
+.badge-inverse {
+    background-color: #333333;
+}
+.badge-inverse:hover {
+    background-color: #1a1a1a;
+}
+@media (max-width:480px) {
+
+}
+
+@media (max-width:768px) {
+}
+
+@media (min-width:780px) and (max-width:1200px) {
+}
+
+@media (min-width:1200px) {
+}
+
