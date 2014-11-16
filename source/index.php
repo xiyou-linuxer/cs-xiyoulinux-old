@@ -9,7 +9,9 @@ include('footer.php');
 
 $tpl->display('header.html');
 $tpl->display('aside.html');
-$tpl->display('index.html');
+$tpl->display('content.html');
+$tpl->display('mini_aside.html');
+$tpl->display('chat.html');
 $tpl->display('footer.html');
 
 ?>
