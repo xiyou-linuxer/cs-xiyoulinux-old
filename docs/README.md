@@ -22,9 +22,9 @@ cs-xiyoulinux
 	```
 	
 
-* 1. 添加该页面用到的样式文件，以数组的形式替换header.html模板中的style_list变量
+* - 添加该页面用到的样式文件，以数组的形式替换header.html模板中的style_list变量
 
-	2. 如果页面不需要单独引用任何的外部css文件，可省略改代码段
+  - 如果页面不需要单独引用任何的外部css文件，可省略改代码段
 
 	```vim
 	$style_list = array (
@@ -43,8 +43,8 @@ cs-xiyoulinux
 	```
 
 
-* 1. 添加该页面用到的js脚本文件，以数组的形式替换footer.html模板中的script_list变量
-  2. 如果页面不需要单独引用任何的外部JS文件，可省略改代码段
+* - 添加该页面用到的js脚本文件，以数组的形式替换footer.html模板中的script_list变量
+  - 如果页面不需要单独引用任何的外部JS文件，可省略改代码段
   
   ```vim
 
@@ -65,8 +65,10 @@ $tpl->assign('script_list', $script_list);
 
 
 * 获取必要的数据，并给相应的模板变量赋值
+	```vim
 
 	[[data] assign]
+	```
 
 
 * **注意这里，header,aside,模板,footer必须以这样的次序，并且一个都不能少（特殊页面除外，如登录页面）**
