@@ -96,7 +96,8 @@ class User{
 	public function update_userinfo($uid,$password,$phoen,$mail,$qq,$wechat,
 		$blog,$github,$native,$major,$workplace,$job){
 
-		$this->check_user($uid);
+		if ( $this->check_user($uid) )
+			return false;
 
 		$checkArr = array(
 			"$uid" => 'digit', 
