@@ -9,8 +9,8 @@ function get_cookie(name) {
     return null;
 }
 
-function set_cookie(name, value) {
+function set_cookie(name, value, expire) {
     var exp = new Date();
-    exp.setTime(exp.getTime() + 10*60*1000);
+    exp.setTime(exp.getTime() + expire);
     document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 }

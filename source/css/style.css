@@ -20,13 +20,42 @@ body {
 }
 
 .mail-user {
-    color:#24d1af;
-    
+    color:#428bca;
+    font: normal bold 14px/20px arial, sans-serif;    
 }
 
-.mail-title {
-    color:#24d1af;
+input::-webkit-input-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+input:-moz-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+input::-moz-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
+input:-ms-input-placeholder {
+    font: italic normal 14px/20px arial, sans-serif;    
+}
 
+.mail-user::-webkit-input-placeholder {
+    color:#428bca !important;
+}
+.mail-user:-moz-placeholder {
+    color:#428bca !important;
+}
+.mail-user::-moz-placeholder {
+    color:#428bca !important;
+}
+.mail-user:-ms-input-placeholder {
+    color:#428bca;
+}
+
+.label-title,.label-user {
+    width:4em;
+}
+.label-user,.label-title, .mail-title {
+    color:#555555 !important;
+    font: normal bold 14px/20px arial, sans-serif;    
 }
 
 .mail-list-panel {
