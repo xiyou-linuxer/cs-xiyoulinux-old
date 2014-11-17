@@ -25,7 +25,7 @@ if ( $action == 'login' ) {
 		exit;
 	}
 
-	require_once("../inc/conn.php");
+	require_once("inc/conn.php");
 
 	$conn = new Csdb();
 	$query = "SELECT `uid`,`password` FROM `cs_user` WHERE `name`='$name';";
