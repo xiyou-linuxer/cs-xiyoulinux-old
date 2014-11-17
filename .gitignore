@@ -10,3 +10,4 @@ source/*.php~
 source/*.html~
 source/js/*.js~
 source/init.php
+.idea/*
