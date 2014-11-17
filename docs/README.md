@@ -25,8 +25,8 @@ cs-xiyoulinux
 * - 添加该页面用到的样式文件，以数组的形式替换header.html模板中的style_list变量
 
   - 如果页面不需要单独引用任何的外部css文件，可省略改代码段
-
-	```vim
+  
+  ```vim
 	$style_list = array (
 
    	 'css/stylesheet1.css',
@@ -40,7 +40,7 @@ cs-xiyoulinux
 	);
 
 	$tpl->assign('style_list', $style_list);
-	```
+  	```
 
 
 * - 添加该页面用到的js脚本文件，以数组的形式替换footer.html模板中的script_list变量
