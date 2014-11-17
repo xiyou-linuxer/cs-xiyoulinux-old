@@ -6,7 +6,7 @@
 	//$logfile = fopen("register.log", "a");
 	//fwrite($logfile, date('Y-m-d H:i:s') . "\t" . getIP() . "\t");	
 	$conn = new Csdb();
-	$func = $_POST["func"];
+	$func = $_GET["func"];
 	switch($func){
 	case 'add_user':
 	//	fwrite($logfile,"add_user\r\n");
@@ -161,7 +161,7 @@ function get_userinfo(){
 	unset($com[0]['password']);
 	if( is_object($result) )
 		$result->close();
-	echo json_encode($com);
+	return json_encode($com);
 }
 function update_userinfo(){
     $password = $_POST["password"];
@@ -300,12 +300,12 @@ function deliver_privilege(){
 		$result2->close();
 }
 function get_avatar(){
-	$uid = $_POST['uid'];
+	$uid = $_COOKIE['uid'];
 	global $conn;
 	$query = "SELECT `mail` FROM `cs_user` WHERE `uid`=$uid;";
 	$result = $conn->query($query);
-	if( $result->num_rows <= 0){
-		print 'false';
+    if( $result->num_rows <= 0){
+		return 'false';
 		exit;
 	}
 	$row = $result->fetch_assoc();
@@ -314,7 +314,7 @@ function get_avatar(){
 	$size = 150;
 	$grav_url = "http://www.gravatar.com/avatar/" .md5(strtolower(trim($mail))) .
 		"?d=" .urlencode($default) . "&s=" . $size;
-	print $grav_url;
+	return $grav_url;
 }
 function check_user(){
 	if (checkUser() == false){

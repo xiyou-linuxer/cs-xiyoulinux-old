@@ -1,19 +1,19 @@
 $(document).ready(function(){
-	$.ajax({url:'user.php',
-		type:'post',
-		data:'func=check_user',
-		success:function(data){
-			if(data.substring(0,4) == 'true')
-				window.location.href = 'user.html';
-		}
-	});
-	$("#login").click(function(){
-		$.ajax({url:'login.php',
-			type:'post',
-			data:'name='+$('[name=name]').val()+'&password='+$('[name=password]').val()+'&checknum='+$('[name=checknum]').val(),
-			success:function(data){
+	$('#btn-login').click(function(){
+        var param = {
+            action: 'login',
+            name: $('[name=username]').val(),
+            password: $('[name=password]').val(),
+            checknum: $('[name=checknum]').val()
+        };
+		$.post('login.server.php', param, function(data){
 				if(data.substring(0,4) == 'true' ){
-					window.location.href = 'user.html';
+					var last_page = get_cookie('last_page');
+					if (last_page == undefined) {
+						location.href = 'index.php';
+					} else {
+						location.href = last_page;
+					}
 				}else{
 					if(data.substring(5,6) == '1'){
 						wrongCode();
@@ -37,9 +37,19 @@ $(document).ready(function(){
 						break;
 					}
 				}
-			}
-		});
+			});
+
+        return false;
 	});
+
+    $('#btn-logout').click(function(){
+        var param = {
+            action: 'logout'
+        };
+        $.post('login.server.php', param, function() {
+			location.href = 'index.php';
+        });
+    });
 });
 
 var show_code = false;

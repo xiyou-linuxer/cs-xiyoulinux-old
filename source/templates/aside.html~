@@ -1,25 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-11-13 18:04:58
-         compiled from "./templates/aside.html" */ ?>
-<?php /*%%SmartyHeaderCode:11917982315464824aa21b13-82197638%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    'e8a7851f261e1480c4454b4c46e53cc3fd7eb535' => 
-    array (
-      0 => './templates/aside.html',
-      1 => 1415872467,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '11917982315464824aa21b13-82197638',
-  'function' => 
-  array (
-  ),
-  'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5464824aa2a193_99978356',
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5464824aa2a193_99978356')) {function content_5464824aa2a193_99978356($_smarty_tpl) {?><section>
+<section>
 
 <section class="hbox stretch">
 
@@ -267,4 +246,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 </aside>
 
-<!-- /.aside --><?php }} ?>
+<!-- /.aside -->
