@@ -96,14 +96,14 @@ CREATE TABLE `cs_mail` (
 -- [cs_app_list] table name
 -- --------------------------------------------------------------------------------
 -- columns
--- [appid] app id ,the key of app 
+-- [aid] app id ,the key of app 
 -- [name]  app name
 -- [status]  app status 0: not active; 1: activei
 -- --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `cs_app`;
 
 CREATE TABLE `cs_app` (
-	appid		INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	aid		INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	name    CHAR(32)		NOT NULL UNIQUE,
 	status  INT(1)			NOT NULL DEFAULT 1,
 	icon	CHAR(32)		NOT NULL		 
@@ -127,13 +127,11 @@ DROP TABLE IF EXISTS `cs_updata_info`;
 CREATE TABLE `cs_updata_info`(
 	mid			INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	uid			INT UNSIGNED	NOT NULL,
-	appid		INT UNSIGNED	NOT NULL,
 	rdate		TIMESTAMP		NOT NULL DEFAULT now(),
-	mdescribe	VARCHAR(64)		NOT NULL,
-	action		INT(1)			NOT NULL,
+	aid			CHAR(32)		NOT NULL,
+	describe	VARCHAR(64)	,
+	action		INT(1) NOT NULL,
 	message		VARCHAR(255)	NOT NULL,
-	INDEX		cs_user(uid),
-	INDEX		cs_app(appid),
-	FOREIGN KEY(uid) REFERENCES cs_user(uid) ON DELETE CASCADE,
-	FOREIGN KEY(appid) REFERENCES cs_app(appid) ON DELETE CASCADE
+	FOREIGN KEY(uid) REFERENCE cs_user(uid) ON DELETE CASCADE,
+	FOREIGN KEY(aid) REFERENCE cs_app(aid) ON DELETE CASCADE
 )AUTO_INCREMENT=1,DEFAULT CHARSET=utf8;
