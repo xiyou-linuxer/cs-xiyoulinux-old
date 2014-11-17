@@ -172,13 +172,9 @@ class Mail{
 		}
 	}
 
-	public function send_mail()		//G
+	public function send_mail($title, $toname, $content,$mid='')		//G
 	{
 		$fromuid = $this->uid;
-		$toname = $_POST["touser"];
-		$title = $_POST["title"];
-		$content = $_POST["content"];
-		$mid = $_POST["mid"];
 
 		if ( empty($title) || empty($toname) || empty($content)  ) {
 			return json_encode(array("result"=>"false"));

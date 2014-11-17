@@ -1,32 +1,31 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-11-13 18:46:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-11-17 12:34:31
          compiled from "./templates/signin.html" */ ?>
-<?php /*%%SmartyHeaderCode:96059970454648b81a7ec50-14048063%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:169295157054697ad7162b05-44458519%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '09ef8a4dd13d8310064d9d352671ecc7c13addee' => 
+    'c5477b0fe4e046d99834423e6813be40eb8e06c0' => 
     array (
       0 => './templates/signin.html',
-      1 => 1415875586,
+      1 => 1416151600,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '96059970454648b81a7ec50-14048063',
+  'nocache_hash' => '169295157054697ad7162b05-44458519',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_54648b81aa1fa0_55397316',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_54697ad717f2c5_57527134',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54648b81aa1fa0_55397316')) {function content_54648b81aa1fa0_55397316($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_54697ad717f2c5_57527134')) {function content_54697ad717f2c5_57527134($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
   <title>西邮linux内部平台</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="js/jPlayer/jplayer.flat.css" type="text/css" />
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="css/animate.css" type="text/css" />
   <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
@@ -53,18 +52,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <header class="wrapper text-center">
           <strong>Sign in to get in touch</strong>
         </header>
-        <form action="index.html">
+        <form method="POST" action="">
           <div class="form-group">
-            <input type="email" placeholder="Email" class="form-control rounded input-lg text-center no-border">
+            <input type="text" name="username" placeholder="请输入您的姓名" class="form-control rounded input-lg text-center no-border">
           </div>
           <div class="form-group">
-             <input type="password" placeholder="Password" class="form-control rounded input-lg text-center no-border">
+             <input type="password" name="password" placeholder="请输入密码" class="form-control rounded input-lg text-center no-border">
           </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign in</span></button>
-          <div class="text-center m-t m-b"><a href="#"><small>Forgot password?</small></a></div>
+          <button type="submit" id="btn-login" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
+          <div class="text-center m-t m-b"><a href="#"><small>密码忘记?</small></a></div>
           <div class="line line-dashed"></div>
-          <p class="text-muted text-center"><small>Do not have an account?</small></p>
-          <a href="signup.html" class="btn btn-lg btn-info btn-block rounded">Create an account</a>
+          <p class="text-muted text-center"><small>还没有账户?</small></p>
+          <a href="signup.html" class="btn btn-lg btn-info btn-block rounded">创建一个账户</a>
         </form>
       </section>
     </div>
@@ -92,17 +91,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   <?php echo '<script'; ?>
  src="js/slimscroll/jquery.slimscroll.min.js"><?php echo '</script'; ?>
 >
-    <?php echo '<script'; ?>
+  <?php echo '<script'; ?>
  src="js/app.plugin.js"><?php echo '</script'; ?>
 >
   <?php echo '<script'; ?>
- type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"><?php echo '</script'; ?>
+ type="text/javascript" src="js/cookie.js"><?php echo '</script'; ?>
 >
   <?php echo '<script'; ?>
- type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"><?php echo '</script'; ?>
->
-  <?php echo '<script'; ?>
- type="text/javascript" src="js/jPlayer/demo.js"><?php echo '</script'; ?>
+ type="text/javascript" src="js/login.js"><?php echo '</script'; ?>
 >
 </body>
 </html>

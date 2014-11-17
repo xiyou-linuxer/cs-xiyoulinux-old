@@ -17,6 +17,15 @@ cs-xiyoulinux
  	 	- init.php
  	 	
  	 		初始化smarty模板
+ 	 	- header.php
+ 	 	
+ 	 		初始导航栏
+ 	 	- aside.php
+ 	 	
+ 	 		初始化侧栏
+ 	 	- footer.php
+ 	 	
+ 	 		初始化footer
  	 	- index.php
  	 	
  	 		将主页面分成不同的文件，分别引用来显示
@@ -31,6 +40,9 @@ cs-xiyoulinux
  	 		- content.html
  	 		
  	 			中间主页面块显示的内容。目前是最新动态。
+ 	 		- footer.html
+ 	 		
+ 	 			文档末尾，包括基本的script标签以及文档闭合标签。
  	 		- mini_aside.html
  	 		
  	 			中间主页面右边小块。

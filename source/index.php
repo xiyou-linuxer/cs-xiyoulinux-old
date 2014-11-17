@@ -5,8 +5,6 @@ include('header.php');
 include('aside.php');
 include('footer.php');
 
-
-
 $tpl->display('header.html');
 $tpl->display('aside.html');
 $tpl->display('content.html');

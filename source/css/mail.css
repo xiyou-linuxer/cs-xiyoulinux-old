@@ -37,21 +37,12 @@ input:-ms-input-placeholder {
     font: normal bold 14px/20px arial, sans-serif;
 }
 
-.mail-list-panel {
-    margin:10px;
-    padding: 10px;
-}
-
-#mail-list-view,#mail-reader-view,#mail-draft-view {
-    display:none;
-}
-
-#mail-table {
+#DataTables_Table_0 {
     table-layout:fixed !important;
     width:100%;
 }
 
-#mail-table th,#mail-table td {
+#DataTables_Table_0 th,#DataTables_Table_0 td {
     white-space:nowrap;
     overflow:hidden !important;
     text-overflow:ellipsis;
