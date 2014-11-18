@@ -3,13 +3,13 @@
 	require_once("inc/function.php");	
 	
 class User{
-	private $uid;
-		
-	public __construct($uid){
-		$this->$uid = $uid;
+	private $conn;
+
+	public function __construct(){
+		$this->conn = new Csdb();
 	}	
 		
-	private function add_user($name,$password,$sex,$phone,$mail,$qq,$wechat,
+	public function add_user($name,$password,$sex,$phone,$mail,$qq,$wechat,
 		$blog,$github,$native,$grade,$major,$workplace,$job)
 	{
 		$permisson = 0;
@@ -35,9 +35,8 @@ class User{
 		);
 		if( !checkArr($checkArr) )
 			return false;
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` where name='$name';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows > 0 ){
 			if( is_object($result) )
 				$result->close();
@@ -48,18 +47,16 @@ class User{
 		if( is_object($result) )
 			$result->close();
 
-		if( $conn->query($query_str) )
+		if( $this->conn->query($query_str) )
 			return true;
 		return false;
 	}
-	function del_user(){
-		$uid = $this->uid;
+	public function del_user($uid){
 		if( !checkStr('digit',$uid) )
 			return false;
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
 			if( is_object($result) )
 				$result->close();
@@ -70,20 +67,19 @@ class User{
 		if( is_object($result) )
 			$result->close();
 
-		if( $conn->query($query_str) )
+		if( $this->conn->query($query_str) )
 			return true;
 		return false;
 		
 	}
-	function get_userinfo($uid){
+	public function get_userinfo($uid){
 		if( !checkStr('digit',$uid) ){
 			echo 'false';
 			exit;
 		}	
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
 			if( is_object($result) )
 				$result->close();
@@ -97,9 +93,12 @@ class User{
 			$result->close();
 		return json_encode($com);
 	}
-	function update_userinfo($uid,$password,$phoen,$mail,$qq,$wechat,
+	public function update_userinfo($uid,$password,$phoen,$mail,$qq,$wechat,
 		$blog,$github,$native,$major,$workplace,$job){
-		
+
+		if ( $this->check_user($uid) )
+			return false;
+
 		$checkArr = array(
 			"$uid" => 'digit', 
 			"$password" => 'normal',
@@ -117,9 +116,8 @@ class User{
 		if( !checkArr($checkArr) )
 			return false;
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` where uid='$uid';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
 			if( is_object($result) )
 				$result->close();
@@ -143,7 +141,7 @@ class User{
 		while( $value = current($infoArr) ){
 			if( $value != "''" ){
 				$query_str = "UPDATE `cs_user` set `".key($infoArr)."`=$value;";
-				if( !$conn->query($query_str) )
+				if( !$this->conn->query($query_str) )
 					return false;
 				else
 					$flag = true;
@@ -156,14 +154,12 @@ class User{
 			return true;
 		return false;
 	}
-	function get_privilege(){
-		$uid = $this->uid;
+	public function get_privilege($uid){
 		if( !checkStr('digit',$uid) )
 			return false;
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` WHERE uid=$uid;";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
 			if( is_object($result) )
 				$result->close();
@@ -175,15 +171,14 @@ class User{
 		if( is_object($result) )
 			$result->close();	
 	}
-	function deliver_privilege($uid_now,$uid_next){
+	public function deliver_privilege($uid_now,$uid_next){
 		if( !checkStr('digit',$uid_now) || !checkStr('digit',$uid_next) )
 			return false;
 		
-		global $conn;
 		$query_str1 = "SELECT * FROM `cs_user` WHERE uid=$uid_now;";
 		$query_str2 = "SELECT * FROM `cs_user` WHERE uid=$uid_next;";
-		$result1 = $conn->query($query_str1);
-		$result2 = $conn->query($query_str2);	
+		$result1 = $this->conn->query($query_str1);
+		$result2 = $this->conn->query($query_str2);	
 		if( $result1->num_rows <= 0 || $result2->num_rows <= 0){
 			echo 'false';
 			if( is_object($result1) )
@@ -198,8 +193,8 @@ class User{
 			return false;
 		$query_str1 = "UPDATE `cs_user` SET permisson=0 WHERE uid=$uid_now;";
 		$query_str2 = "UPDATE `cs_user` SET permisson=1 WHERE uid=$uid_next;";	
-		$conn->query($query_str1);
-		$conn->query($query_str2);
+		$this->conn->query($query_str1);
+		$this->conn->query($query_str2);
 		return true;
 		
 		if( is_object($result1) )
@@ -207,11 +202,9 @@ class User{
 		if( is_object($result2) )
 			$result2->close();
 	}
-	function get_avatar(){
-		$uid = $this->uid;
-		global $conn;
+	public function get_avatar($uid){
 		$query = "SELECT `mail` FROM `cs_user` WHERE `uid`=$uid;";
-		$result = $conn->query($query);
+		$result = $this->conn->query($query);
 		if( $result->num_rows <= 0)
 			return false;
 		$row = $result->fetch_assoc();
@@ -222,8 +215,8 @@ class User{
 			"?d=" .urlencode($default) . "&s=" . $size;
 		return $grav_url;
 	}
-	function check_user(){
-		if (checkUser() == false)
+	private function check_user($uid){
+		if (checkUser($uid) == false)
 			return false;
 	}
 }
