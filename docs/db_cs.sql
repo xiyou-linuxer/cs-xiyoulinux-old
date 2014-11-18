@@ -20,7 +20,7 @@
 -- CREATE DATABASE `cs_linux` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
-use `cs_team`;
+use `cs_linux`;
 
 
 -- --------------------------------------------------------------------------------
