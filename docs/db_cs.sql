@@ -86,7 +86,7 @@ CREATE TABLE `cs_mail` (
 	fromuid INT UNSIGNED  NOT NULL DEFAULT 1000,
 	sdate   TIMESTAMP      NOT NULL DEFAULT now(),
 	title   CHAR(64)      NOT NULL,
-	content TEXT          NOT NULL
+	content TEXT          NOT NULL,
 	isdraft INT(1)		NOT NULL DEFAULT 0,
 	touser	MEDIUMTEXT	NOT NULL
 ) AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
