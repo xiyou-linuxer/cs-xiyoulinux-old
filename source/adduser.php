@@ -42,9 +42,10 @@ else
 	$sex = 1;
 $sql = "insert into cs_user(name,password,sex,mail,grade,major) value($name,"000000",$sex,$mail,$grade,$major);";
 $result = $link->query($sql);
+
 //判断返回结果
 if (!$result)
-	return("数据插入错误");
-return ("数据插入正确");
+	echo("数据插入错误");
+echo ("数据插入正确");
 
 ?>
