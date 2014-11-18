@@ -132,6 +132,7 @@ CREATE TABLE `cs_updata_info`(
 	mdescribe	VARCHAR(64)		NOT NULL,
 	action		INT(1)			NOT NULL,
 	message		VARCHAR(255)	NOT NULL,
+	href		VARCHAR(128)	NOT NULL,
 	INDEX		cs_user(uid),
 	INDEX		cs_app(appid),
 	FOREIGN KEY(uid) REFERENCES cs_user(uid) ON DELETE CASCADE,
