@@ -98,6 +98,8 @@ CREATE TABLE `cs_mail` (
 -- columns
 -- [appid] app id ,the key of app 
 -- [name]  app name
+-- [index_file]  app index file
+-- [icon]  app icon number in iconfile
 -- [status]  app status 0: not active; 1: activei
 -- --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `cs_app`;
@@ -106,9 +108,9 @@ CREATE TABLE `cs_app` (
 	appid		INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	name    CHAR(32)		NOT NULL UNIQUE,
 	status  INT(1)			NOT NULL DEFAULT 1,
-	icon	CHAR(32)		NOT NULL		 
+	icon	INT				NOT NULL,		 
+	index_file	CHAR(32)		NOT NULL		 
 )AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
-
 
 -- --------------------------------------------------------------------------------
 -- create user center message updata table
