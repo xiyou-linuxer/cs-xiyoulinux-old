@@ -1,6 +1,6 @@
 <?php
 
-    include('/usr/local/lib/php/smarty/Smarty.class.php');
+    include('/usr/share/php/smarty/Smarty.class.php');
 
     session_start();
 

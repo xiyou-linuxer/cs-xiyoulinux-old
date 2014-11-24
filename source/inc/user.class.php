@@ -3,48 +3,18 @@
 	require_once("inc/function.php");	
 	
 class User{
-	private $uid;
-	private $name;
-	private $permisson;
-	private $password;
-	private $sex;
-	private $phone;
-	private $mail;
-	private $qq;
-	private $wechat;
-	private $blog;
-	private $github;
-	private $native;
-	private $grade;
-	private $major;
-	private $workplace;
-	private $job;
-		
-	public __construct($uid){
-		$this->$uid = $uid;
+	private $conn;
+
+	public function __construct(){
+		$this->conn = new Csdb();
 	}	
 		
-	private function add_user()
+	public function add_user($name,$password,$sex,$phone,$mail,$qq,$wechat,
+		$blog,$github,$native,$grade,$major,$workplace,$job)
 	{
-		$name = $_POST["name"];	
 		$permisson = 0;
-		$password = $_POST["password"];
-		$sex = $_POST["sex"];
-		$phone = $_POST["phone"];
-		$mail = $_POST["mail"];
-		$qq = $_POST["qq"];	
-		$wechat = $_POST["wechat"];
-		$blog = $_POST["blog"];
-		$github = $_POST["github"];
-		$native = $_POST["native"];
-		$grade = $_POST["grade"];
-		$major = $_POST["major"];
-		$workplace = $_POST["workplace"];
-		$job = $_POST["job"];
-		if( empty($name) || empty($password) || $sex=="" || empty($mail) || empty($grade) || empty($major) ){
-			echo 'false';
-			exit;
-		}
+		if( empty($name) || empty($password) || $sex=="" || empty($mail) || empty($grade) || empty($major) )
+			return false;
 		$password = md5($password);
 		
 		$checkArr = array(
@@ -63,69 +33,57 @@ class User{
 			"$workplace" => 'chinese',
 			"$job"  => 'chinese'
 		);
-		if( !checkArr($checkArr) ){
-			echo 'false';
-			exit;
-		}
-		global $conn;
+		if( !checkArr($checkArr) )
+			return false;
 		$query_str = "SELECT * FROM `cs_user` where name='$name';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows > 0 ){
-			echo 'false';
 			if( is_object($result) )
 				$result->close();
-			exit;
+			return false;
 		}
 		$query_str = "INSERT INTO `cs_user`(`name`,`permisson`,`password`,`sex`,`phone`,`mail`,`qq`,`wechat`,`blog`,`github`,`native`,`grade`,`major`,`workplace`,`job`) VALUES ('$name','$permisson','$password','$sex','$phone','$mail','$qq','$wechat','$blog','$github','$native','$grade','$major','$workplace','$job');";
 		
-		if( $conn->query($query_str) )
-			echo 'true';
-		else
-			echo 'false';
 		if( is_object($result) )
 			$result->close();
+
+		if( $this->conn->query($query_str) )
+			return true;
+		return false;
 	}
-	function del_user(){
-		$uid = $_POST['uid'];
-		if( !checkStr('digit',$uid) ){
-			echo 'false';
-			exit;
-		}
+	public function del_user($uid){
+		if( !checkStr('digit',$uid) )
+			return false;
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
-			echo 'false';
 			if( is_object($result) )
 				$result->close();
-			exit;
+			return false;
 		}
 		$query_str = "DELETE FROM `cs_user` WHERE uid='$uid';";
 		
-		if( $conn->query($query_str) )
-			echo 'true';
-		else
-			echo 'false';
-		
 		if( is_object($result) )
 			$result->close();
+
+		if( $this->conn->query($query_str) )
+			return true;
+		return false;
+		
 	}
-	function get_userinfo(){
-		$uid = $_COOKIE['uid'];
+	public function get_userinfo($uid){
 		if( !checkStr('digit',$uid) ){
 			echo 'false';
 			exit;
 		}	
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
-			echo 'false';
 			if( is_object($result) )
 				$result->close();
-			exit;
+			return false;
 		}
 		while( $row = $result->fetch_assoc() ){
 			$com[] = $row;
@@ -133,22 +91,14 @@ class User{
 		unset($com[0]['password']);
 		if( is_object($result) )
 			$result->close();
-		echo json_encode($com);
+		return json_encode($com);
 	}
-	function update_userinfo(){
-		$password = $_POST["password"];
-		$phone = $_POST["phone"];
-		$mail = $_POST["mail"];
-		$qq = $_POST["qq"];	
-		$wechat = $_POST["wechat"];
-		$blog = $_POST["blog"];
-		$github = $_POST["github"];
-		$native = $_POST["native"];
-		$major = $_POST["major"];
-		$workplace = $_POST["workplace"];
-		$job = $_POST["job"];
-		$uid = $_COOKIE["uid"];
-		
+	public function update_userinfo($uid,$password,$phoen,$mail,$qq,$wechat,
+		$blog,$github,$native,$major,$workplace,$job){
+
+		if ( $this->check_user($uid) )
+			return false;
+
 		$checkArr = array(
 			"$uid" => 'digit', 
 			"$password" => 'normal',
@@ -163,19 +113,15 @@ class User{
 			"$workplace" => 'chinese',
 			"$job"  => 'chinese'
 		);
-		if( !checkArr($checkArr) ){
-			echo 'false';
-			exit;
-		}
+		if( !checkArr($checkArr) )
+			return false;
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` where uid='$uid';";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
-			echo 'false';
 			if( is_object($result) )
 				$result->close();
-			exit;
+			return false;
 		}	
 		
 		$infoArr = array(
@@ -195,57 +141,44 @@ class User{
 		while( $value = current($infoArr) ){
 			if( $value != "''" ){
 				$query_str = "UPDATE `cs_user` set `".key($infoArr)."`=$value;";
-				if( !$conn->query($query_str) ){
-					echo 'false';
-					exit;
-				}else
+				if( !$this->conn->query($query_str) )
+					return false;
+				else
 					$flag = true;
 			}
 			next($infoArr);
 		}
-		if($flag)
-			echo 'true';
-		else
-			echo 'false';
 		if( is_object($result) )
 			$result->close();
+		if($flag)
+			return true;
+		return false;
 	}
-	function get_privilege(){
-		$uid = $_POST['uid'];
-		if( !checkStr('digit',$uid) ){
-			echo 'false';
-			exit;
-		}
+	public function get_privilege($uid){
+		if( !checkStr('digit',$uid) )
+			return false;
 		
-		global $conn;
 		$query_str = "SELECT * FROM `cs_user` WHERE uid=$uid;";
-		$result = $conn->query($query_str);
+		$result = $this->conn->query($query_str);
 		if( $result->num_rows <= 0 ){
-			echo 'false';
 			if( is_object($result) )
 				$result->close();
-			exit;
+			return false;
 		}
 		$row = $result->fetch_assoc();
-		echo $row['permisson'];
+		return $row['permisson'];
 		
 		if( is_object($result) )
 			$result->close();	
 	}
-	function deliver_privilege(){
-		$uid_now = $_POST['uid_now'];
-		$uid_next = $_POST['uid_next'];
+	public function deliver_privilege($uid_now,$uid_next){
+		if( !checkStr('digit',$uid_now) || !checkStr('digit',$uid_next) )
+			return false;
 		
-		if( !checkStr('digit',$uid_now) || !checkStr('digit',$uid_next) ){
-			echo 'false';
-			exit;
-		}
-		
-		global $conn;
 		$query_str1 = "SELECT * FROM `cs_user` WHERE uid=$uid_now;";
 		$query_str2 = "SELECT * FROM `cs_user` WHERE uid=$uid_next;";
-		$result1 = $conn->query($query_str1);
-		$result2 = $conn->query($query_str2);	
+		$result1 = $this->conn->query($query_str1);
+		$result2 = $this->conn->query($query_str2);	
 		if( $result1->num_rows <= 0 || $result2->num_rows <= 0){
 			echo 'false';
 			if( is_object($result1) )
@@ -256,43 +189,35 @@ class User{
 		}
 		$row1 = $result1->fetch_assoc();
 		$row2 = $result2->fetch_assoc();
-		if($row1['permisson'] != '1' ||$row2['permisson'] != '0'){
-			echo 'false';
-			exit;
-		}
+		if($row1['permisson'] != '1' ||$row2['permisson'] != '0')
+			return false;
 		$query_str1 = "UPDATE `cs_user` SET permisson=0 WHERE uid=$uid_now;";
 		$query_str2 = "UPDATE `cs_user` SET permisson=1 WHERE uid=$uid_next;";	
-		$conn->query($query_str1);
-		$conn->query($query_str2);
-		echo 'true';
+		$this->conn->query($query_str1);
+		$this->conn->query($query_str2);
+		return true;
 		
 		if( is_object($result1) )
 			$result1->close();
 		if( is_object($result2) )
 			$result2->close();
 	}
-	function get_avatar(){
-		$uid = $_POST['uid'];
-		global $conn;
+	public function get_avatar($uid){
 		$query = "SELECT `mail` FROM `cs_user` WHERE `uid`=$uid;";
-		$result = $conn->query($query);
-		if( $result->num_rows <= 0){
-			print 'false';
-			exit;
-		}
+		$result = $this->conn->query($query);
+		if( $result->num_rows <= 0)
+			return false;
 		$row = $result->fetch_assoc();
 		$mail = $row['mail'];
 		$default = "http://xdth.sinaapp.com/img/man.jpg";
 		$size = 150;
 		$grav_url = "http://www.gravatar.com/avatar/" .md5(strtolower(trim($mail))) .
 			"?d=" .urlencode($default) . "&s=" . $size;
-		print $grav_url;
+		return $grav_url;
 	}
-	function check_user(){
-		if (checkUser() == false){
-			print 'false';
-			exit;
-		}
+	private function check_user($uid){
+		if (checkUser($uid) == false)
+			return false;
 	}
 }
 ?>

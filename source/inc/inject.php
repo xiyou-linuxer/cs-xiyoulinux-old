@@ -45,12 +45,6 @@ class Inject
 	{
 	    $str = $this->daddslashes($str);
 	
-/*	$lower_str = strtolower($str);
-	
-		if (preg_match("/select|insert|update|delete|drop|alter|grant|exec|\'|\/\*|\/\/|\.\.\/|\.\/|union|into|load_file|outfile/", $lower_str, $matches))
-			return $matches[0];
-		return false;
-	 */
 		return $str;
 	}
 
