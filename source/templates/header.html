@@ -12,8 +12,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <link rel="stylesheet" href="js/jPlayer/jplayer.flat.css" type="text/css" />
-
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -25,15 +23,15 @@
     <link rel="stylesheet" href="css/font.css" type="text/css" />
 
     <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <{foreach item=item from=$style_list}>
+
+    <link rel="stylesheet" href="<{$item}>" type="text/css" />
+    <{/foreach}>
 
     <!--[if lt IE 9]>
-
     <script src="js/ie/html5shiv.js"></script>
-
     <script src="js/ie/respond.min.js"></script>
-
     <script src="js/ie/excanvas.js"></script>
-
     <![endif]-->
 
 </head>
@@ -52,7 +50,7 @@
 
     </a>
 
-    <a href="index.html" class="navbar-brand text-lt">
+    <a href="index.php" class="navbar-brand text-lt">
 
         <i class="icon-screen-desktop"></i>
 
@@ -116,7 +114,7 @@
 
                 <i class="icon-bell"></i>
 
-                <span class="badge badge-sm up bg-danger count"><{$mail_count}></span>
+                <span class="badge badge-sm up bg-danger count"><{$header_mail_count}></span>
 
             </a>
 
@@ -126,49 +124,47 @@
 
                     <div class="panel-heading b-light bg-light">
 
-                        <strong>你有 <span class="count"><{$mail_count}></span> 条站内信</strong>
+                        <strong>你有 <span class="count"><{$header_mail_count}></span> 条站内信</strong>
 
                     </div>
 
                     <div class="list-group list-group-alt">
 
-                        <a href="#" class="media list-group-item">
+                    <{section name=n loop=$header_mail_list}>
+                        <a href="mail-view.php?mid=<{$header_mail_list[n].mid}>" class="media list-group-item">
 
-                    <span class="pull-left thumb-sm">
+                            <span class="pull-left thumb-sm">
 
-                      <img src="images/a0.png" alt="..." class="img-circle">
+                                <img src="<{$header_mail_list[n].fromuser_avatar}>" alt="头像" class="img-circle">
 
-                    </span>
+                            </span>
 
-                    <span class="media-body block m-b-none">
+                            <span class="media-body block m-b-none">
 
-                      益达快还钱！<br>
+                                <{$header_mail_list[n].title}><br>
 
-                      <small class="text-muted">10 分钟以前</small>
+                                <small class="text-muted"><{$header_mail_list[n].date}></small>
 
-                    </span>
-
-                        </a>
-
-                        <a href="#" class="media list-group-item">
-
-                    <span class="media-body block m-b-none">
-
-                      喂喂喂，测试测试...<br>
-
-                      <small class="text-muted">1 小时以前</small>
-
-                    </span>
+                            </span>
 
                         </a>
+                    <{sectionelse}>
+                        <a href="#" class="media list-group-item">
+                            <span class="media-body block m-b-none">
 
+                                暂时没有任何提醒
+
+                            </span>
+
+                        </a>
+                    <{/section}>
                     </div>
 
                     <div class="panel-footer text-sm">
 
-                        <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                        <a href="mail.php" class="pull-right"><i class="fa fa-cog"></i></a>
 
-                        <a href="#notes" data-toggle="class:show animated fadeInRight">查看所有站内信</a>
+                        <a href="mail.php" data-toggle="class:show animated fadeInRight">查看所有站内信</a>
 
                     </div>
 
@@ -184,11 +180,11 @@
 
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
 
-                <img src="images/a0.png" alt="...">
+                  <img src="<{$user_avatar}>" alt="加载中">
 
               </span>
 
-              <{$username}><b class="caret"></b>
+              <{$header_username}><b class="caret"></b>
 
             </a>
 
@@ -198,13 +194,13 @@
 
                     <span class="arrow top"></span>
 
-                    <a href="#">Settings</a>
+                    <a href="#">设置</a>
 
                 </li>
 
                 <li>
 
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.html">个人中心</a>
 
                 </li>
 
@@ -214,7 +210,7 @@
 
                         <span class="badge bg-danger pull-right"><{$mail_count}></span>
 
-                        Notifications
+                        提醒
 
                     </a>
 
@@ -226,7 +222,7 @@
 
                 <li>
 
-                    <a href="modal.lockme.html" data-toggle="ajaxModal">退出</a>
+                    <a id="btn-logout" data-toggle="ajaxModal">退出</a>
 
                 </li>
 
