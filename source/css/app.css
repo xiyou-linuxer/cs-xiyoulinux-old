@@ -2426,6 +2426,10 @@ fieldset[disabled] .btn-dark.active {
 .bg-success .auto .list-group-item.active {
   background-color: #15a25a !important;
 }
+.bg-red {
+  background-color: #ef6565;
+  color: #eaf6f9;
+}
 .bg-info {
   background-color: #4cb6cb;
   color: #eaf6f9;

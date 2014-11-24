@@ -29,6 +29,9 @@ cs-xiyoulinux
  	 	- index.php
  	 	
  	 		将主页面分成不同的文件，分别引用来显示
+ 	 	- load_adduser.php
+ 	 	
+ 	 		加载小组负责人管理页面
  	 		
  	 	- **templates**
  	 		- header.html
@@ -52,3 +55,6 @@ cs-xiyoulinux
  	 		- footer.html
  	 		
  	 			补齐上面的html标签，以及引用js文件。
+ 	 		- admin_adduser.html
+ 	 		
+ 	 			小组负责人管理页面。这是添加用户页面

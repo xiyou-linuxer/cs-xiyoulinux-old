@@ -37,7 +37,8 @@ class Csdb{
 
 	function __destruct()
 	{
-		$this->res->free();
+		if( is_object($this->res) )
+			$this->res->free();
 		$this->db->close();
 	}
 }

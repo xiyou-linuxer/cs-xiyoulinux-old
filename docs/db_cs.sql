@@ -53,8 +53,8 @@ CREATE TABLE `cs_user` (
 	permisson   INT(1)    NOT NULL DEFAULT 0,
 	password    CHAR(32)  NOT NULL, 
 	sex         INT(1)    NOT NULL, 
-	phone       CHAR(20)  NULL, 
-	mail        CHAR(50)  NOT NULL, 
+	phone       CHAR(20)  NULL UNIQUE, 
+	mail        CHAR(50)  NOT NULL UNIQUE, 
 	qq          CHAR(12)  NULL, 
 	wechat      CHAR(32)  NULL,
 	blog        CHAR(128) NULL, 
@@ -77,7 +77,7 @@ CREATE TABLE `cs_user` (
 -- [title] title
 -- [content] content
 -- [isdraft] point to whether draft
--- [touser] json string,like {'uid' => 'status'}
+-- [touid] json string,like {'uid' => 'status'}
 -- --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `cs_mail`;
 
@@ -86,22 +86,57 @@ CREATE TABLE `cs_mail` (
 	fromuid INT UNSIGNED  NOT NULL DEFAULT 1000,
 	sdate   TIMESTAMP      NOT NULL DEFAULT now(),
 	title   CHAR(64)      NOT NULL,
-	content TEXT          NOT NULL
+	content TEXT          NOT NULL,
 	isdraft INT(1)		NOT NULL DEFAULT 0,
-	touser	MEDIUMTEXT	NOT NULL
-) AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
+	touid	MEDIUMTEXT	NOT NULL
+)AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
 
 -- --------------------------------------------------------------------------------
 -- create app list table
 -- [cs_app_list] table name
 -- --------------------------------------------------------------------------------
 -- columns
+-- [appid] app id ,the key of app 
 -- [name]  app name
--- [status]  app status 0: not active; 1: active
+-- [index_file]  app index file
+-- [icon]  app icon number in iconfile
+-- [status]  app status 0: not active; 1: activei
 -- --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `cs_app`;
 
 CREATE TABLE `cs_app` (
-	name    CHAR(32)      NOT NULL,
-	status  INT(1)        NOT NULL DEFAULT 1
+	appid		INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	name    CHAR(32)		NOT NULL UNIQUE,
+	status  INT(1)			NOT NULL DEFAULT 1,
+	icon	INT				NOT NULL,		 
+	index_file	CHAR(32)		NOT NULL		 
 )AUTO_INCREMENT=1, DEFAULT CHARSET=utf8; 
+
+-- --------------------------------------------------------------------------------
+-- create user center message updata table
+-- [cs_updata_info] table name
+-- --------------------------------------------------------------------------------
+-- columns
+-- [mid] message id, the key of the table
+-- [uid] id of user
+-- [rdata] release time of the message
+-- [app] name of app
+-- [message] content of updata message
+-- --------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `cs_updata_info`;
+
+CREATE TABLE `cs_updata_info`(
+	mid			INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	uid			INT UNSIGNED	NOT NULL,
+	appid		INT UNSIGNED	NOT NULL,
+	rdate		TIMESTAMP		NOT NULL DEFAULT now(),
+	mdescribe	VARCHAR(64)		NOT NULL,
+	action		INT(1)			NOT NULL,
+	message		VARCHAR(255)	NOT NULL,
+	href		VARCHAR(128)	NOT NULL,
+	INDEX		cs_user(uid),
+	INDEX		cs_app(appid),
+	FOREIGN KEY(uid) REFERENCES cs_user(uid) ON DELETE CASCADE,
+	FOREIGN KEY(appid) REFERENCES cs_app(appid) ON DELETE CASCADE
+)AUTO_INCREMENT=1,DEFAULT CHARSET=utf8;

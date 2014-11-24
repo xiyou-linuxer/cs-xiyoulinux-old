@@ -1,3 +1,7 @@
+<section>
+
+<section class="hbox stretch">
+
 <!-- .aside -->
 
 <aside class="bg-black dk aside hidden-print" id="nav">
@@ -28,7 +32,7 @@
 
     <li>
 
-        <a href="index.html">
+        <a href="index.php">
 
             <i class="icon-home"></i>
 
@@ -182,7 +186,7 @@
 
                         </span>
 
-            <i class="icon-wallet icon">
+            <i class="icon-notebook icon">
 
             </i>
 
@@ -194,8 +198,12 @@
 
             <li >
 
-                <a href="mail-read.php" class="auto">
+                <a href="#" class="auto">
+
                     <i class="fa fa-angle-right text-xs"></i>
+
+
+
                     <span>已读</span>
 
                 </a>
@@ -204,7 +212,7 @@
 
             <li >
 
-                <a href="mail-unread.php" class="auto">
+                <a href="#" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -219,6 +227,64 @@
         </ul>
 
     </li>
+
+
+<!--  小组负责人管理权限  -->
+    <li >
+
+        <a href="#" class="auto">
+
+                        <span class="pull-right text-muted">
+
+                          <i class="fa fa-angle-left text"></i>
+
+                          <i class="fa fa-angle-down text-active"></i>
+
+                        </span>
+
+            <i class="icon-settings icon">
+
+            </i>
+
+            <span>管理</span>
+
+        </a>
+
+        <ul class="nav dk text-sm">
+
+            <li>
+                <a href="load_adduser.php"> <i class="icon-plus icon text-success"></i>
+                    <span class="font-bold">添加用户</span>
+                </a>
+            </li>
+            <li>
+                <a href="deluser.php"> <i class="fa fa-trash-o icon text-danger"></i>
+                    <span class="font-bold">删除用户</span>
+                </a>
+            </li>
+            <li>
+                <a href="reflash.php">
+                    <i class="icon-refresh icon text-info"></i>
+                    <span class="font-bold">权限移交</span>
+                </a>
+            </li>
+            <li>
+                <a href="app_manager.php">
+                    <i class="icon-grid icon text-primary-lter"></i>
+                    <span class="font-bold">应用管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="env.php">
+                    <i class="icon-envelope icon text-info"></i>
+                    <span class="font-bold">站内信</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </li>
+
 
 
 
@@ -239,3 +305,10 @@
 </aside>
 
 <!-- /.aside -->
+<section id="content">
+
+    <section class="hbox stretch">
+
+        <section class="vbox">
+        <!--<section class="scrollable padder-lg w-f-md" id="bjax-target">-->
+            <section class="scrollable wrapper-lg" id="bjax-target">
