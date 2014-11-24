@@ -2,8 +2,6 @@
 
 chdir(dirname(__FILE__));
 require_once("../inc/conn.php");
-$a = new Get();
-print_r($a->get(0) );
 
 class Get{
 	private $conn;
