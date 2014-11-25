@@ -1,0 +1,160 @@
+              <p><strong>"<{$search}>"搜索结果如下：</strong></p>
+          <div class="row">
+            <div class="col-sm-9 portlet">
+              <section class="panel panel-default">
+                <header class="panel-heading">
+                  相关信息
+                  <span class="badge bg-info">
+                       <{$quesnum}>
+                  </span>
+                </header>
+                  <ul class="list-group alt">
+                    <{section name =times loop = $quesArray }>
+                    <li class="list-group-item">
+                      <div class="media">
+                      <span class="pull-left thumb-sm"><img src="<{$quesArray[times].picture}>" alt="" class="img-circle"></span>
+                           <div class="col-sm-9">
+                            <a href="#"><strong class="block"><{$quesArray[times].title}></strong></a>
+                            <a href="#"><small><{$quesArray[times].writer}></small></a>
+                          </div>
+                          <div class="col-sm-10">
+                            <small><p align="left"><{$quesArray[times].answer}></p></small>
+                        <p align="right">
+                           <small><{$quesArray[times].time}></small>
+                         </p>  
+                        </div>
+                       </div>
+                    </li>
+                      
+                   <{/section}>
+                   
+             <!--       <li class="list-group-item">
+                      <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/w.png" alt="..." class="img-circle"></span>
+                           <div class="col-sm-9">
+                            <a href="#"><strong class="block">vim配置怎么做?</strong></a>
+                            <a href="#"><small>lili</small></a>
+                          </div>
+                          <div class="col-sm-10">
+                            <small><p align="left">自己些一个.vimrc文件,自己配去。vim本来就是很强大，很方便的编辑器，加上我的代码后肯定会如虎添翼，或许读者使用其他编程语言，可以根据自己的需要进行修改，配置文件里面已经加上注释。
+ 读者感兴趣的话直接复制下面的代码到文本文件，然后把文件改名为“ .vimrc” (不要忘记前面的“.”)，然后把文件放到用户文件夹的根目录下面即可。重新打开vim即>    可看到效果</p></small>
+                            <p align="right">
+                             <small>2011年10月11日</small>
+                            </p>
+                           </div>
+                       </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/w.png" alt="..." class="img-circle"></span>
+                           <div class="col-sm-9">
+                            <a href="#"><strong class="block">vim配置怎么做?</strong></a>
+                            <a href="#"><small>lili</small></a>
+                          </div>
+                          <div class="col-sm-10">
+                            <small><p align="left">自己些一个.vimrc文件,自己配去。vim本来就是很强大，很方便的编辑器，加上我的代码后肯定会如虎添翼，或许读者使用其他编程语言，可以根据自己的需要进行修改，配置文件里面已经加上注释。
+ 读者感兴趣的话直接复制下面的代码到文本文件，然后把文件改名为“ .vimrc” (不要忘记前面的“.”)，然后把文件放到用户文件夹的根目录下面即可。重新打开vim即>    可看到效果</p></small>
+                            <p align="right">
+                              <small>2011年10月11日</small>
+                            </p>
+                          </div>
+                       </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/w.png" alt="..." class="img-circle"></span>
+                           <div class="col-sm-9">
+                            <a href="#"><strong class="block">ftp服务器</strong></a>
+                            <a href="#"><small>项目介绍</small></a>
+                          </div>
+                          <div class="col-sm-10">
+                            <small><p align="left">根据阅读ftp协议，实现ftp服务器的重构建。任务：1.学习vim配置 2.学习gcc使用 ......</p></small>
+                            <p align="right">
+                              <small>2011年10月11日</small>
+                            </p>
+                          </div>
+                       </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/w.png" alt="..." class="img-circle"></span>
+                           <div class="col-sm-9">
+                            <a href="#"><strong class="block">招聘信息</strong></a>
+                            <a href="#"><small>公司：百度</small></a>
+                          </div>
+                          <div class="col-sm-10">
+                            <small><p align="left">详请：需要C++工程师，java工程师，php工程师，自己能独立完成vim配置，熟悉掌握gcc，gdb使用等基本技能。需要内推的同学请发送简历至2313414@qq.com</p></small>
+                            <p align="right">
+                              <small>2011年10月11日</small>
+                            </p>
+                          </div>
+                       </div>
+                    </li>-->
+                </ul>
+              </section>
+            </div>
+            <div class="col-sm-3 portlet">
+              <section class="panel panel-default">
+                <header class="panel-heading">
+                  相关成员
+                  <span class="badge bg-info">
+                        <{$mannum}>
+                  </span>
+                </header>
+                <ul class="list-group alt">
+                  <{section name =times loop = $manArray }>
+                  <li class="list-group-item">
+                    <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/a1.png" alt="..." class="img-circle"></span>
+                      <div class="pull-right <{$manArray[times].type}>  m-t-sm">
+                        <i class="fa fa-circle"></i>
+                      </div>
+                      <div class="media-body">
+                        <div><a href="#"><{$manArray[times].manname}></a></div>
+                        <small class="text-muted"><{$manArray[times].inf}></small>
+                      </div>
+                    </div>
+                  </li>
+                  <{/section}>
+                <!-- <li class="list-group-item">
+                    <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/m11.jpg" alt="..." class="img-circle"></span>
+                      <div class="pull-right text-muted m-t-sm">
+                        <i class="fa fa-circle"></i>
+                      </div>
+                      <div class="media-body">
+                        <div><a href="#">益达</a></div>
+                        <small class="text-muted">西邮Linux 2011级</small>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/m0.jpg" alt="..." class="img-circle"></span>
+                      <div class="pull-right text-warning m-t-sm">
+                        <i class="fa fa-circle"></i>
+                      </div>
+                      <div class="media-body">
+                        <div><a href="#">立翔</a></div>
+                        <small class="text-muted">西邮Linux 2012级</small>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="media">
+                      <span class="pull-left thumb-sm"><img src="images/p0.jpg" alt="..." class="img-circle"></span>
+                      <div class="pull-right text-danger m-t-sm">
+                        <i class="fa fa-circle"></i>
+                      </div>
+                      <div class="media-body">
+                        <div>
+                        <small class="text-muted">对不起，没有相关成员信息</small>
+                      </div>
+                    </div>
+                  </li>-->
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+      </section>
