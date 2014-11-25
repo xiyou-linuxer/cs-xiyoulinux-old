@@ -3,10 +3,11 @@ include_once('init.php');
 include_once('header.php');
 include_once('aside.php');
 include_once('footer.php');
+include_once('inc/conn.php');
 //session_start();
 $search = trim($_GET['wd']);
 $uidarray = array();
-$con = mysql_connect("localhost", "root", "15237325183");
+/*$con = mysql_connect("localhost", "root", "15237325183");
 if (!$con)
 {
   die('Could not connect: ' . mysql_error());
@@ -14,20 +15,21 @@ if (!$con)
 mysql_query("SET NAMES 'UTF8'"); 
 mysql_query("SET CHARACTER SET UTF8"); 
 mysql_query("SET CHARACTER_SET_RESULTS=UTF8'"); 
-mysql_select_db("cs_linux", $con);
+mysql_select_db("cs_linux", $con);*/
+$conn = new Csdb;
 $sql = "select * from `cs_updata_info` where message like '%" . $search . "%';";
-$result = mysql_query($sql);
-
-if(mysql_num_rows($result)==0)
+$result = $conn->query($sql);
+if($result->num_rows==0)
 {
-    $tpl->assign('mannum', mysql_num_rows($result));
-    $tpl->assign('quesnum', mysql_num_rows($result));
+    $tpl->assign('mannum', $result->num_rows);
+    $tpl->assign('quesnum', $result->num_rows);
     $searcharray[] = array("picture"=>"","title"=>"", "writer"=>"","answer"=>"没有相关搜索结果。。。","time"=>"");
     $manArray[] = array("type"=>"","manname"=>"", "inf"=>"无相关人物信息");
 }
 else
 {
-        $tpl->assign('quesnum',mysql_num_rows($result));
+        print $result->num_rows;
+        $tpl->assign('quesnum',$result->num_rows);
         while($row = mysql_fetch_array($result))
         {
                 if($row['appid'] == 1)
@@ -38,7 +40,7 @@ else
                   $picture = "images/p.png";
                 $uid= $row['uid'];
                 $sql = "select * from `cs_user` where uid = '$uid'";
-                $namesql = mysql_query($sql);
+                $namesql = $conn->query($sql);
                 $rowi = mysql_fetch_array($namesql);
                 if($row['action'] != 1)
                 {
@@ -54,7 +56,7 @@ else
         } 
         $tpl->assign('mannum', count($uidarray));      
 }
-mysql_close($con);
+//mysql_close($con);
 $script_list = array('js/search.js');
 $tpl->assign('script_list',$script_list);
 $tpl->assign('search', $search);
