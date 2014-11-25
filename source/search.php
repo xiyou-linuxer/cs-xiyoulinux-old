@@ -4,7 +4,6 @@ include_once('header.php');
 include_once('aside.php');
 include_once('footer.php');
 include_once('inc/conn.php');
-//session_start();
 $search = trim($_GET['wd']);
 $uidarray = array();
 /*$con = mysql_connect("localhost", "root", "15237325183");
@@ -28,7 +27,6 @@ if($result->num_rows==0)
 }
 else
 {
-        print $result->num_rows;
         $tpl->assign('quesnum',$result->num_rows);
         while($row = mysql_fetch_array($result))
         {
@@ -48,7 +46,6 @@ else
                 }      
                 if(in_array($uid,$uidarray))
                 {
-                 // echo "aaa";
                   continue;
                 }    
                 $uidarray[] = $uid; 
@@ -56,12 +53,9 @@ else
         } 
         $tpl->assign('mannum', count($uidarray));      
 }
-//mysql_close($con);
 $script_list = array('js/search.js');
 $tpl->assign('script_list',$script_list);
 $tpl->assign('search', $search);
-//$tpl->assign('quesnum', 4);
-//$tpl->assign('mannum', 3);
 $tpl->assign('quesArray', $searcharray);
 $tpl->assign('manArray', $manArray);
 $tpl->display('header.html');
