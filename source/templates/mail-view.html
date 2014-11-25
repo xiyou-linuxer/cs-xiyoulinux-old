@@ -1,5 +1,4 @@
-          <section class="vbox">          
-            <section class="scrollable wrapper">
+
                 <div class="panel panel-default" id="mail-reader-view">
                   <div class="panel-heading">
                     <div class="panel-title">
@@ -9,16 +8,20 @@
 
                   <ul class="list-group">
                     <li class="list-group-item">
+                        <{if $mail_isdraft == 'true'}>
+                            <span>收件人：</h4><span><{$mail_touser}></span>
+                      <{else}>
                             <span>信息来自：</h4><span><{$mail_fromuser}></span>
                             <span style="margin-left: 30px">发送时间：</h4><span><{$mail_date}></span>
+                      <{/if}>
                     </li>
                     <li class="list-group-item">
                       <h4><{$mail_content}></h4>
                     </li>
                   </ul> <!--END PANEL BODY-->
                   <div class="panel-footer text-right">
-                    <a class="btn btn-danger" id="btn-delete-mail">删除信息</a>
-                    <a class="btn btn-success" id="btn-reply-mail">回复信息</a>
+                    <a class="btn btn-danger" id="btn-delete-mail"><{$btn_del_caption}></a>
+                    <a class="btn btn-success" id="btn-reply-mail"><{$btn_edit_caption}></a>
                   </div>
                 </div><!--END MAIL CONTENT-->
 
@@ -40,5 +43,3 @@
 
             </section>
           </section>
-          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
-

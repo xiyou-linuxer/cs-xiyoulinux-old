@@ -3,6 +3,7 @@
 include_once('init.php');
 include('header.php');
 include('aside.php');
+include('chat.php');
 include('footer.php');
 
 $style_list = array (
@@ -19,8 +20,20 @@ $script_list = array (
 );
 $tpl->assign('script_list', $script_list);
 
+$mid = $_COOKIE['mid'];
+$mail_class = new Mail($_COOKIE['uid']);
+$json_str   = $mail_class->get_mail_info($mid);
+$mail_info  = json_decode($json_str);
+
+if ($mail_info[0]->isdraft == 'true') {
+    $tpl->assign('mail_title', $mail_info[0]->title);
+    $tpl->assign('mail_touser', $mail_info[0]->touser);
+    $tpl->assign('mail_content', $mail_info[0]->content);
+}
+
 $tpl->display('header.html');
 $tpl->display('aside.html');
 $tpl->display('mail-edit.html');
+$tpl->display('chat.html');
 $tpl->display('footer.html');
 ?>

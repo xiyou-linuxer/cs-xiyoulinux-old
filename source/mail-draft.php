@@ -13,7 +13,7 @@ $tpl->assign('style_list', $style_list);
 
 $mail = new Mail($_COOKIE['uid']);
 
-$json = $mail->get_mail_list(1);
+$json = $mail->get_mail_list(4);
 $mail_objects = json_decode($json);
 
 if (!isset($mail_objects->result)) {
@@ -33,7 +33,7 @@ if (!isset($mail_objects->result)) {
 
 $last_page = basename($_SERVER['SCRIPT_FILENAME']);
 setcookie('last_page',$last_page, time()+3600);
-setcookie('mail_type','unread', time()+3600);
+setcookie('mail_type','draft', time()+3600);
 
 $tpl->display('header.html');
 $tpl->display('aside.html');
