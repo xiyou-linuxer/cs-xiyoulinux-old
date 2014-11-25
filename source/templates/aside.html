@@ -198,7 +198,21 @@
 
             <li >
 
-                <a href="#" class="auto">
+                <a href="mail-edit.php" class="auto">
+
+                    <i class="fa fa-angle-right text-xs"></i>
+
+
+
+                    <span>写信</span>
+
+                </a>
+
+            </li>
+
+            <li >
+
+                <a href="mail-read.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -212,7 +226,7 @@
 
             <li >
 
-                <a href="#" class="auto">
+                <a href="mail-unread.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -224,12 +238,27 @@
 
             </li>
 
+            <li >
+
+                <a href="mail-draft.php" class="auto">
+
+                    <i class="fa fa-angle-right text-xs"></i>
+
+
+
+                    <span>草稿</span>
+
+                </a>
+
+            </li>
+
         </ul>
 
     </li>
 
 
 <!--  小组负责人管理权限  -->
+    <{if $aside_privilege == '1'}>
     <li >
 
         <a href="#" class="auto">
@@ -284,8 +313,7 @@
         </ul>
 
     </li>
-
-
+    <{/if}>
 
 
 </ul>

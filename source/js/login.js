@@ -6,8 +6,8 @@ $(document).ready(function(){
             password: $('[name=password]').val(),
             checknum: $('[name=checknum]').val()
         };
-		$.post('login.server.php', param, function(data){
-				if(data.substring(0,4) == 'true' ){
+		$.post('server/login.server.php', param, function(data){
+				if(data == 'true' ){
 					var last_page = get_cookie('last_page');
 					if (last_page == undefined) {
 						location.href = 'index.php';
@@ -46,7 +46,7 @@ $(document).ready(function(){
         var param = {
             action: 'logout'
         };
-        $.post('login.server.php', param, function() {
+        $.post('server/login.server.php', param, function() {
 			location.href = 'index.php';
         });
     });

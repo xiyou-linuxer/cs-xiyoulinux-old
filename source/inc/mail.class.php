@@ -427,7 +427,8 @@ class Mail{
 			}
 			$users = implode(",",$users );
 			$result[0]["touser"] = "$users";
-			return json_encode($result);
+            $result[0]["isdraft"] = "true";
+            return json_encode($result);
 		}
 	}
 

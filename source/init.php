@@ -1,6 +1,6 @@
 <?php
 
-    include('/usr/share/php/smarty/Smarty.class.php');
+    include('/usr/local/lib/php/smarty/Smarty.class.php');
 
     session_start();
 
@@ -11,15 +11,16 @@
     $tpl->cache_dir = './cache/';
     $tpl->left_delimiter = '<{';
     $tpl->right_delimiter = '}>';
-    
-    if( !isset($_COOKIE['uid']) ) {
+
+    if(!isset($_SESSION['uid']) ) {
         $tpl->display('signin.html');
         exit;
 	}
 
-    setcookie('uid', $_COOKIE['uid'], time()+100);
-    $last_page = basename($_SERVER['SCRIPT_FILENAME']);
-    if ($last_page != 'mail-view.php') {
-        setcookie('last_page',$last_page, time()+3600);
-    }
+    setcookie('uid', $_SESSION['uid'], time()+3600);
+
+//    $last_page = basename($_SERVER['SCRIPT_FILENAME']);
+//    if ($last_page != 'mail-view.php') {
+//        setcookie('last_page',$last_page, time()+3600);
+//    }
 ?>

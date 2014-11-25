@@ -3,6 +3,7 @@
 include_once('init.php');
 include('header.php');
 include('aside.php');
+include('chat.php');
 include('footer.php');
 
 $style_list = array (
@@ -30,8 +31,13 @@ if (!isset($mail_objects->result)) {
     $tpl->assign('mail_list', $mail_list);
 }
 
+$last_page = basename($_SERVER['SCRIPT_FILENAME']);
+setcookie('last_page',$last_page, time()+3600);
+setcookie('mail_type','read', time()+3600);
+
 $tpl->display('header.html');
 $tpl->display('aside.html');
 $tpl->display('mail-list.html');
+$tpl->display('chat.html');
 $tpl->display('footer.html');
 ?>

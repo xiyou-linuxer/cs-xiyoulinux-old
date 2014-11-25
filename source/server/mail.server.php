@@ -18,22 +18,33 @@ $mail = new Mail($_COOKIE['uid']);
 
 $action = $_POST['action'];
 
-if ( $action == 'del_mail' ) {
-    if ( isset($_POST['mid']) ) {
-    	echo $mail->del_mail($_POST['mid']);
-    	exit;
-    }
-
-    echo $json_error;
-    exit;
-}
-
-if ( $action == 'send_mail' ) {
-	$title = $_POST['title'];
-	$touser = $_POST['touser'];
-	$content = $_POST['content'];
-
-	echo $mail->send_mail($title, $touser, $content);
-	exit;
+switch( $action ) {
+	case "del_mail":
+		if( isset($_POST['mid']) ) {
+			echo $mail->del_mail($_POST['mid']);
+			exit;
+		}
+		break;
+	case "send_mail":	//发送邮件 当包含mid时只做更新不做插入
+		$title = $_POST['title'];
+		$touser = $_POST['touser'];
+		$content = $_POST['content'];
+		if ( isset($_POST['mid']) ) {
+			echo $mail->del_mail($title, $touser, $content, $_POST['mid']);
+		}
+		else {
+			echo $mail->send_mail($title, $touser, $content);
+		}
+		exit;
+		break;
+	case "auto_complete":	//发送邮件时根据用户输入自动匹配
+		$username = $_POST['username'];
+		echo $mail->get_name_match($username);
+		exit;
+		break;
+	case "save_draft":	
+		echo $mail->save_draft();
+		exit;
+		break;
 }
 ?>
