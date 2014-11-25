@@ -11,10 +11,10 @@ class Csdb{
 	
 	function __construct()
 	{
-		$hostname = "";
-		$dbuser = "";
-		$dbpwd = "";
-		$dbname = "";
+		$hostname = "localhost";
+		$dbuser = "root";
+		$dbpwd = "jk213";
+		$dbname = "cs_linux";
 		$charName = "utf8";
 
 		$this->db = new mysqli($hostname, $dbuser, $dbpwd, $dbname);
@@ -24,7 +24,7 @@ class Csdb{
 			echo "链接失败".mysqli_connect_errno();
 			exit();
 		}
-		$this->db->query("set name $charName;");
+		$this->db->query("set names $charName;");
 
 		return $this->db;
 	}

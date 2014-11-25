@@ -1,5 +1,3 @@
-          <section class="vbox">          
-            <section class="scrollable wrapper">
 
               <div class="panel panel-default" id="mail-editor-view">
                 <div class="panel-heading">
@@ -10,22 +8,19 @@
                 <form class="form" method="post" action="mail.php">
                   <ul class="list-group list-bottom-no-margin">
                     <li class="list-group-item">
-                      <input type="hidden" name="func" value="send_mail"></input>
-                    </li>
-                    <li class="list-group-item">
                       <div class="input-group">
                         <span class="input-group-addon"><div class="label-user">收件人</div></span>
-                        <input type="text" name="touser" id="mail-editor-touser" class="form-control mail-user" placeholder="请输入收件人姓名" data-provide="typeahead" autocomplete="off"></input>
+                        <input type="text" name="touser" id="mail-editor-touser" value="<{$mail_touser}>" class="form-control mail-user" placeholder="请输入收件人姓名" data-provide="typeahead" autocomplete="off"></input>
                       </div>
                     </li>
                     <li class="list-group-item">
                       <div class="input-group">
                         <span class="input-group-addon"><div class="label-title"><strong>标题</strong></div></span>
-                        <input type="text" name="title" id="mail-editor-title" class="form-control mail-title" placeholder="请输入信息标题" autocomplete="off"></input>
+                        <input type="text" name="title" id="mail-editor-title" value="<{$mail_title}>"  class="form-control mail-title" placeholder="请输入信息标题" autocomplete="off"></input>
                       </div>
                     </li>
                     <li class="list-group-item">
-                      <textarea name="content" class="form-control textarea-custom" id="mail-editor-content" rows=10 ></textarea>
+                      <textarea name="content" class="form-control textarea-custom" id="mail-editor-content" rows=10 ><{$mail_content}></textarea>
                     </li>
                     <li class="list-group-item text-right">
                       <button class="btn btn-warning" id="btn-save-draft">保存草稿</button>
