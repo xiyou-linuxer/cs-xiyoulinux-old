@@ -1,5 +1,5 @@
 <?php
-require_once('user.class.php');
+require_once('../inc/user.class.php');
 
 $func = $_POST['func'];
 $uid = $_POST['uid'];
