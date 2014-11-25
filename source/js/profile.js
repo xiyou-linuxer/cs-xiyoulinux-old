@@ -1,9 +1,8 @@
 $(document).ready(function(){
     getWorkplace();
     $("#submit-info").click(function(){
-        //alert('grade:' + $("#grade-btn").text() +'\nuid:'+ getCookie('uid') + "\nphone" + $("#phone").val() + "\nmail:" + $("#mail").val() + "\nworkplace" + $("#workplace-btn").text() + "\njob:" + $("#job").val() + "\nmajor:" + $("#major").val() + "\nqq:" + $("#qq").val() + "\nwechat" + $("#wechat").val() + "\nblog" + $("#blog").val() + "\ngithub" + $("#github").val());
         $.post(
-            'inc/user.profile.php',
+            'server/user.server.php',
             {
                 func:'update_userinfo',
                 uid:getCookie('uid'),
