@@ -53,9 +53,15 @@ function checkStr($type,$desStr){	//看代码都懂
 	case 'normal':
 		$result = (preg_match("/^\w+$/",$desStr) > 0);
 		break;
-	case 'site':
+    case 'site':
+        $result = (preg_match("/^[a-zA-z]+:\/\/[^\s]*$/",$desStr) > 0);
+        break;
+	/*case 'site':
 		$result = (preg_match("/^\w+\.\w+$/",$desStr) > 0);
-		break;
+        if (!$result)
+            echo "destr:".$desStr."type:".$type;
+		break;*/
+
 	default:
 		break;
 	}
