@@ -8,7 +8,12 @@ include_once('init.php');
 //$Dynamics_time = '1小时';
 //$Dynamics_contents = "挖掘机到底哪家强?";
 
-
+$script_list = array(
+	'js/jquery.mousewheel.js',
+	'js/fresh.js'
+);
+$tpl->assign('script_list', $script_list);
+	
 $Dynamics_array = array(
 array( "name" => "林达意", "action" => "提问", "time" => "1小时前", "contents" => "挖掘机到底哪家强？" ),
 array( "name" => "李翔", "action" => "回答", "time" => "1小时前","contents" => "挖掘机到底哪家强?</br>皇家西邮！" ),
