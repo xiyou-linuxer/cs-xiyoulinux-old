@@ -4,7 +4,6 @@ include_once('init.php');
 include ('header.php');
 include ('aside.php');
 include ('footer.php');
-include ("./inc/get_userinfo.php");
 
 if(isset($_COOKIE['uid']))
 	$uid = $_COOKIE['uid'];
