@@ -1,6 +1,6 @@
 <?php
-	require_once("inc/conn.php");
-	require_once("inc/function.php");	
+	require_once("conn.php");
+	require_once("function.php");
 	
 class User{
 	private $conn;
@@ -21,14 +21,14 @@ class User{
 			"$name" => "chinese",
 			"$password" => 'normal',
 			"$sex" => 'digit',
-			"$phone"	=> 'phone',
+			"$phone"=> 'phone',
 			"$mail" => 'mail',
 			"$qq" => 'normal',
 			"$wechat" => 'normal',
 			"$blog" => 'site',
 			"$github" => 'site',
 			"$native" => 'chinese',
-			"$grade" => 'chinese',
+			"$grade" => 'digit',
 			"$major" => 'chinese',
 			"$workplace" => 'chinese',
 			"$job"  => 'chinese'
@@ -43,7 +43,6 @@ class User{
 			return false;
 		}
 		$query_str = "INSERT INTO `cs_user`(`name`,`permisson`,`password`,`sex`,`phone`,`mail`,`qq`,`wechat`,`blog`,`github`,`native`,`grade`,`major`,`workplace`,`job`) VALUES ('$name','$permisson','$password','$sex','$phone','$mail','$qq','$wechat','$blog','$github','$native','$grade','$major','$workplace','$job');";
-		
 		if( is_object($result) )
 			$result->close();
 
@@ -93,7 +92,37 @@ class User{
 			$result->close();
 		return json_encode($com);
 	}
-	public function update_userinfo($uid,$password,$phoen,$mail,$qq,$wechat,
+
+    public function update_userinfo($uid,$phone,$mail,$qq,$wechat,$blog,$github,$native,$major,$workplace,$job)
+    {
+        if ( $this->check_user($uid) )
+            return false;
+        
+	$checkArr = array(
+            "$uid" => 'digit',
+            "$phone" => 'phone',
+            "$mail" => 'mail',
+            "$qq" => 'normal',
+            "$wechat" => 'normal',
+            "$blog" => 'site',
+            "$github" => 'site',
+            "$native" => 'chinese',
+            "$major" => 'chinese',
+            "$workplace" => 'chinese',
+            "$job"  => 'chinese'
+        );
+        if( !checkArr($checkArr) )
+            return false;
+        $sql = "UPDATE `cs_user` SET phone='$phone',mail='$mail',qq='$qq',wechat='$wechat', blog='$blog',github='$github',native='$native',major='$major',workplace='$workplace',job='$job' WHERE uid='$uid'";
+
+        $link = new Csdb();
+        $result = $link->query($sql);
+
+        if ($result)
+            return true;
+        return false;
+    }
+	/*public function update_userinfo($uid,$password,$phone,$mail,$qq,$wechat,
 		$blog,$github,$native,$major,$workplace,$job){
 
 		if ( $this->check_user($uid) )
@@ -154,6 +183,7 @@ class User{
 			return true;
 		return false;
 	}
+	*/
 	public function get_privilege($uid){
 		if( !checkStr('digit',$uid) )
 			return false;
@@ -209,10 +239,8 @@ class User{
 			return false;
 		$row = $result->fetch_assoc();
 		$mail = $row['mail'];
-		$default = "http://xdth.sinaapp.com/img/man.jpg";
 		$size = 150;
-		$grav_url = "http://www.gravatar.com/avatar/" .md5(strtolower(trim($mail))) .
-			"?d=" .urlencode($default) . "&s=" . $size;
+		$grav_url = "http://gravatar.duoshuo.com/avatar/" .md5(strtolower(trim($mail))) . "?d=mm&s=" . $size;
 		return $grav_url;
 	}
 	private function check_user($uid){

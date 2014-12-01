@@ -1,15 +1,9 @@
 $(document).ready(function() {
         $('#bt_search').click(function() {
-                if($('#searchinf').val() != "")
+                if($('#search_inf').val() != "")
                 {
-                        location.href = 'search.php?wd=' + $('#searchinf').val();
-                        var param = {
-                                search_html: $('#searchinf').val()
-                        };
-                        
-                        $.post('test.php', param, function() {
-                                
-                        });
+                        location.href = 'search.php?wd=' + $('#search_inf').val();
+                    
                         }
                         return false;
                                         });

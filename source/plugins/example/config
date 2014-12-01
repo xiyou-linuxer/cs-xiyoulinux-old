@@ -1,5 +1,15 @@
 <document>
-	<name>x</name>
-	<icon>1</icon>
-	<index>xxx</index>
+    <aside>
+		<icon>icon-grid</icon>
+		<dis_name>测试项目</dis_name>
+		<dis_number>
+			<use>1</use>
+			<mysql_field></mysql_field>
+		</dis_number>
+		<load_file>project.php</load_file>
+    </aside>
+	<plug>
+		<use>1</use>
+		<dis_name>小组项目</dis_name>
+	</plug>
 </document>

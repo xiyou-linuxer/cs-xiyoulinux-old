@@ -24,8 +24,7 @@ if (!isset($mail_objects->result)) {
             'title'=>$mail->title,
             'date'=>$mail->date,
             'fromuser'=>$mail->fromuser,
-            'status'=>$mail->status,
-            'thumbnail'=>$mail->content);
+            'status'=>$mail->status);
         array_push($mail_list, $item);
     }
     $tpl->assign('mail_list', $mail_list);

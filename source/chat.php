@@ -1,47 +1,38 @@
 <?php
-include_once("inc/conn.php");
+
 include_once('init.php');
-include ('header.php');
-include ('aside.php');
-include ('footer.php');
+include_once("inc/conn.php");
+include_once('inc/user.class.php');
+//include ('header.php');
+//include ('aside.php');
+//include ('footer.php');
 
 if(isset($_COOKIE['uid']))
 	$uid = $_COOKIE['uid'];
 
 $conn = new Csdb;
+$user = new User;
 $time = time()-600;
-$sql = "select * from 'cs_user','cs_online' where 'cs_online.uid'='cs_user.uid' and cs_online.time >'$time';";
-$result = $conn->query($sql);
-if($result->num_rows){
-	$user_info_online = $result->fetch_array();
-	
-$i = 0;
-$count = count($user_info_online,COUNT_NORMAL);
-for($i = 0; $i < $count; $i++){
-	$user_info_online[$i]['status']="text-success hidden-nav-xs";
-}
-$sql = "select * from 'cs_user','cs_online' where 'cs_online.uid'='cs_user.uid' and cs_online.time <'$time';";
-$result1 = $conn->query($sql1);
-if($result1->num_rows){
-	$user_info_offline = $result->fetch_array();
+$sql = "select cs_user.name,cs_user.uid,cs_user.workplace,cs_online.time from cs_user,cs_online where cs_online.uid=cs_user.uid and cs_online.time >".$time.";";
+$result = $conn->query($sql) or die(mysql_error());
 
-$i = 0;
-$count = count($user_info_offline,COUNT_NORMAL);
-for($i = 0; $i < $count; $i++){
-	$user_info_offline[$i]['status']="text-muted hidden-nav-xs";
+if($result->num_rows){
+	while( ($row = $result->fetch_assoc()) ){
+		$row['status'] = "on b-light right sm";
+		$row['avatar'] = $user->get_avatar($row['uid']);
+		$user_list[] = $row;
 	}
 }
-array_push($user_info_online,$user_info_offline);
-$user_list = $user_info_online;
+$sql1 = "select cs_user.name,cs_user.uid,cs_user.workplace,cs_online.time from cs_user,cs_online where cs_online.uid=cs_user.uid and cs_online.time <".$time.";";
+$result1 = $conn->query($sql1);
+
+if($result1->num_rows){
+	while( ($row1 = $result1->fetch_assoc()) ){
+		$row1['status'] = "off b-light right sm";
+		$row1['avatar'] = $user->get_avatar($row1['uid']);
+	$user_list[]=$row1;
+	}
+}
+//var_dump($user_list);
 $tpl->assign('user_list',$user_list);
-
-$tpl->display('header.html');
-$tpl->display('aside.html');
-$tpl->display('index_content.html');
-$tpl->display('mini_aside.html');
-$tpl->display('chat.html');
-$tpl->display('footer.html');
-
-
-
 ?>

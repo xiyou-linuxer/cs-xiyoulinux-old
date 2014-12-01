@@ -11,10 +11,10 @@ class Csdb{
 	
 	function __construct()
 	{
-		$hostname = "localhost";
-		$dbuser = "root";
-		$dbpwd = "jk213";
-		$dbname = "cs_linux";
+		$hostname = "";
+		$dbuser = "";
+		$dbpwd = "";
+		$dbname = "";
 		$charName = "utf8";
 
 		$this->db = new mysqli($hostname, $dbuser, $dbpwd, $dbname);

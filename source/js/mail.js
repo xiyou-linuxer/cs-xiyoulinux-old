@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    (function($) {
+        $.urlGET = function(name) {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+    })(jQuery);
     //初始化按钮单击事件
     $('#btn-save-draft').click(function() {
         return save_draft();
@@ -6,17 +16,9 @@ $(document).ready(function () {
     $('#btn-send-mail').click(function() {
         return send_mail();            
     });
-    $('#btn-reply-mail').click(function() {
-        location.href = 'mail-edit.php';
-    });
     $('#btn-delete-mail').click(function() {
-        var mid = get_cookie('mid');
+        var mid = $.urlGET('mid');
         del_mail(mid);
-    });
-    $('#btn-delete-draft').click(function() {
-        var mid = get_cookie('mid');
-        del_mail(mid);
-        //toggle_view('#mail-list-view');
     });
 
     //收件人输入框自动完成功能

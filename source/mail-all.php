@@ -13,7 +13,7 @@ $tpl->assign('style_list', $style_list);
 
 $mail = new Mail($_COOKIE['uid']);
 
-$json = $mail->get_mail_list(2);
+$json = $mail->get_mail_list(0);
 $mail_objects = json_decode($json);
 
 if (!isset($mail_objects->result)) {

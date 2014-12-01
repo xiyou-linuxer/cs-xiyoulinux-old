@@ -1,15 +1,19 @@
 $(document).ready(function(){
 	$("#adduser").click(function(){
-		$.post("adduser.php",
+        //alert($('[name=email]').val());
+		$.post("server/admin_adduser.server.php",
 			{
 				name:$('[name=name]').val(),
-				native:$('[name=native]').val(),
-				major:$('[name=major]').val(),
-				sex:$('[name=sex]').val(),
-				grade.$('[name=grade]').val()
+				native:$('[name=native] option:selected').text(),
+				major:$('[name=major] option:selected').text(),
+				sex:$('[name=sex]').parent('.active').children('input').val(),
+				grade:$('[name=grade] option:selected').text(),
+                qq:$('[name=QQnum]').val(),
+                mail:$('[name=email]').val(),
+                tel:$('[name=telphone]').val()
 			},
 			function(data){
-				alert("" + $('[name=name]').val() + "添加" + "data");
+				alert("" + $('[name=name]').val() + '信息' +data);
 			}
 			);
 	});

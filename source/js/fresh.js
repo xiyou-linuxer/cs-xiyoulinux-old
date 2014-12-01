@@ -1,19 +1,18 @@
-var before_top;
 var times = 0;
-var start = 0;
 
 $(document).ready(function(){
-	$("#bjax-target").mousewheel(function(){
-		var top = $(".row").offset().top;
-		if(top != before_top)
-			before_top = top;
-		else if(before_top != 90){
+	$('#bjax-target').scroll(function(){
+		viewH = $(this).height();
+		contentH = $(this).get(0).scrollHeight;
+		scrollTop = $(this).scrollTop();
+		if ((contentH - viewH - scrollTop <= 100) || (contentH - viewH < scrollTop)){
 			++times;
-			if( times == 9 ){
+			if( times == 1 ){
+				var mid = $(".comment-item:last").attr("mid");
 				$.ajax({
 					type: "post",
-					data: {"start": start},
-					url: "get.php",
+					data: {"mid": mid},
+					url: "server/fresh.asy.php",
 					success: function(data){
 						if( data.substr(0,5) != 'false'){
 							$(".comment-item:last").after(data);
@@ -25,11 +24,9 @@ $(document).ready(function(){
 							$(".comment-item:last").prev().prev().slideDown();			
 						}
 						times = 0;
-						start += 3;
 					}
 				});
-				console.log(top + " - " + before_top);
 			}
-		}
+		}	
 	});
 });

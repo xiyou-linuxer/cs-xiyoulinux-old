@@ -1,14 +1,18 @@
-                <{section name=n loop=$mail_list}>
+<!-- /.aside -->
+<section id="content">
+    <section class="hbox stretch">
+        <section class="vbox">
+            <section class="scrollable wrapper-lg" id="bjax-target">   
+<{section name=n loop=$mail_list}>
                 <{if $smarty.section.n.first}>
                 <div class="panel panel-default">
                   <table class="table table-striped m-b-none dataTable no-footer" data-ride="datatables" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
                     <thead>
                     <tr role="row">
-                      <th style="width: 30%;">标题</th>
-                      <th style="width: 15%;text-align: center;">时间</th>
+                      <th>标题</th>
+                      <th style="width: 200px;text-align: center;">时间</th>
                       <th style="width: 15%;text-align: center;">发件人</th>
                       <th style="width: 150px;text-align: center;">状态</th>
-                      <th style="">预览</th>
                     </tr>
                     </thead>
                     <tbody style="cursor:pointer;">
@@ -18,7 +22,6 @@
                         <td class="text-center"><{$mail_list[n].date}></td>
                         <td class="text-center"><{$mail_list[n].fromuser}></td>
                         <td class="text-center"><{$mail_list[n].status}></td>
-                        <td><{$mail_list[n].thumbnail}></td>
                       </tr>
                 <{if $smarty.section.n.last}>
                     </tbody>

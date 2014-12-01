@@ -16,9 +16,10 @@ $github = $_POST['github'];
 $native = "西安";
 $grade = trim($grade);
 $workplace = trim($workplace);
-$user = new User();
-//var_dump($user->update_userinfo('1001','11111111','24124@111.com','123123123','123213','','',$native,'计算机科学与技术','杭州','天猫工程师'));
 
+$user = new User();
+/*var_dump($user->update_userinfo('1012','11111111','24124@111.com','123123123','123213','','',$native,'计算机科学与技术','杭州','天猫工程师'));
+*/
 switch($func)
 {
     case 'update_userinfo':

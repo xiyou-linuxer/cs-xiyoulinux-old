@@ -1,4 +1,9 @@
-	<!-- 最新动态内容 index_content.html -->
+<!-- /.aside -->
+<section id="content">
+    <section class="hbox stretch">
+        <section class="vbox">
+            <section class="scrollable wrapper-lg" id="bjax-target">
+<!-- 最新动态内容 index_content.html -->
 	<div class="row">
 		<div class="col-sm-8">
 			<!--  第二部分  -->
@@ -7,27 +12,27 @@
 				<section class="comment-list block">
 					<!--  comment-item-id-1  -->
 					<{section name=times loop=$Dynamics_array}>
-					<article class="comment-item">
+					<article class="comment-item" mid="<{$Dynamics_array[times].mid}>">
 						<a class="pull-left thumb-sm avatar">
-							<img src="images/a9.png" alt="..."></a>
+							<img src="<{$Dynamics_array[times].avatar}>" alt="..."></a>
 						<span class="arrow left"></span>
 						<section class="comment-body panel panel-default">
 							<header class="panel-heading">
-								<a href="#">
+								<a href="<{$Dynamics_array[times].profile}>">
 									<{$Dynamics_array[times].name}></a>
-									<label class="label 
-									<{if $Dynamics_array[times].action eq "提问"}> bg-info <{/if}>
-									<{if $Dynamics_array[times].action eq "回答"}> bg-dark <{/if}>
-									<{if $Dynamics_array[times].action eq "发表"}> bg-red <{/if}>
-									 m-l-xs">
-										<{$Dynamics_array[times].action}></label>
+									<label class="label <{$Dynamics_array[times].actioncolor}> m-l-xs">
+										<{$Dynamics_array[times].actiontext}></label>
 										<span class="text-muted m-l-sm pull-right"> <i class="fa fa-clock-o"></i>
 											<{$Dynamics_array[times].time}></span>
 										</header>
 										<div class="panel-body">
 											<h4>
-												<{$Dynamics_array[times].contents}></h4>
-												<div class="line pull-in"></div>			
+												<a href="<{$Dynamics_array[times].href}>"><{$Dynamics_array[times].mdescribe}></a></h4>
+												<div class="panel-body">
+													<blockpanel-bodyquote>
+													<p><{$Dynamics_array[times].message}></p>
+													</blockquote>
+												</div>
 										</div>
 									</section>
 					</article>

@@ -1,3 +1,8 @@
+<!-- /.aside -->
+<section id="content">
+    <section class="hbox stretch">
+        <section class="vbox">
+            <section class="scrollable wrapper-lg" id="bjax-target">   
 <!-- 管理员应用管理页面 -->
 <div class="row">
 	<section class="panel panel-default">
@@ -13,15 +18,17 @@
 
 			<div class="panel-body">
 
-				<form class="form-inline col-sm-6" role="form" action="server/admin_online.php">
+				<form class="form-inline col-sm-6" role="form" action="server/admin_online.php" method="post">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">下线</label>
 						<div class="col-sm-10">
-							<select style="width:260px" class="chosen-select">
+							<select name="onlineapp" style="width:260px" class="chosen-select">
 								<optgroup label="目前运行应用">
-									<option value="CT">问答</option>
-									<option value="CT">招聘</option>
-									<option value="CT">活动</option>
+									<{section name =times loop = $onlineapp }>
+									<option value="CT"><{$onlineapp[times].app}></option>
+								<!--	<option value="CT">招聘</option>
+									<option value="CT">活动</option>-->
+									<{/section}>
 								</optgroup>
 							</select>
 						</div>
@@ -33,15 +40,17 @@
 					</div>
 				</form>
 
-				<form class="form-inline col-sm-6" role="form" action="server/admin_offline.php">
+				<form class="form-inline col-sm-6" role="form" action="server/admin_offline.php" method="post">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">上线</label>
 						<div class="col-sm-10">
-							<select style="width:260px" class="chosen-select">
+							<select name="offlineapp" style="width:260px" class="chosen-select">
 								<optgroup label="目前下线应用">
-									<option value="CT">讲座</option>
-									<option value="CT">项目</option>
-									<option value="CT">基金</option>
+								        <{section name =times loop = $offlineapp }>
+									<option value="CT"><{$offlineapp[times].app}></option>
+									<!--<option value="CT">项目</option>
+									<option value="CT">基金</option>-->
+									<{/section}>
 								</optgroup>
 							</select>
 						</div>

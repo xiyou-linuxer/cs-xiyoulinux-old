@@ -12,7 +12,8 @@ $style_list = array (
 $tpl->assign('style_list', $style_list);
 
 $script_list = array (
-'js/chosen/chosen.jquery.min.js'
+'js/chosen/chosen.jquery.min.js',
+'js/appmanager.js'
 );
 $tpl->assign('script_list', $script_list);
 

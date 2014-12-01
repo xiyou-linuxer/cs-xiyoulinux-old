@@ -36,114 +36,29 @@
 
             <i class="icon-home"></i>
 
-            <b class="badge bg-info pull-right">10</b>
+ <!--           <b class="badge bg-info pull-right">10</b>-->
 
             <span class="font-bold">主页</span>
 
         </a>
 
     </li>
-
+<{section name=n loop=$aside_app_list}>
     <li>
 
-        <a href="find.html">
+        <a href="http://cs.xiyoulinux.org/plugins/<{$aside_app_list[n].app_home}>">
 
-            <i class="icon-magnifier icon text-success"></i>
+            <i class="<{$aside_app_list[n].app_icon}> icon text-success"></i>
 
-            <b class="badge bg-info pull-right">3</b>
-
-            <span class="font-bold">乱逛</span>
+            <{if $aside_app_list[n].update_status == 'true'}>
+            <b class="badge bg-info pull-right"><{$aside_app_list[n].update_number}></b>
+            <{/if}>
+            <span class="font-bold"><{$aside_app_list[n].app_name}></span>
 
         </a>
 
     </li>
-
-    <li>
-
-        <a href="question.html">
-
-            <i class="icon-question icon text-info"></i>
-
-            <span class="font-bold">问答</span>
-
-        </a>
-
-    </li>
-
-    <li>
-
-        <a href="project.html">
-
-            <i class="icon-grid icon text-primary-lter"></i>
-
-            <span class="font-bold">项目</span>
-
-        </a>
-
-    </li>
-
-    <li>
-
-        <a href="project.html">
-
-            <i class="icon-share icon text-info"></i>
-
-            <span class="font-bold">讲座</span>
-
-        </a>
-
-    </li>
-
-    <li>
-
-        <a href="project.html">
-
-            <i class="icon-envelope icon text-danger"></i>
-
-            <span class="font-bold">邮件列表</span>
-
-        </a>
-
-    </li>
-
-    <li>
-
-        <a href="project.html">
-
-            <i class="icon-directions icon text-info"></i>
-
-            <span class="font-bold">招聘信息</span>
-
-        </a>
-
-    </li>
-
-    <li>
-
-        <a href="project.html">
-
-            <i class="icon-pin icon text-primary-lter"></i>
-
-            <span class="font-bold">活动公告</span>
-
-        </a>
-
-    </li>
-
-    <li>
-
-        <a href="project.html">
-
-            <i class="icon-wallet icon text-info"></i>
-
-            <span class="font-bold">基金</span>
-
-        </a>
-
-    </li>
-
-
-
+<{/section}>
     <li class="m-b hidden-nav-xs"></li>
 
 </ul>
@@ -164,7 +79,7 @@
 
     <li>
 
-        <a href="#">
+        <a href="profile.php">
 
             <i class="icon-user icon"></i>
 
@@ -186,12 +101,13 @@
 
                         </span>
 
-            <i class="icon-notebook icon">
+            <i class="icon-notebook icon"></i>
 
-            </i>
-
+            
             <span>站内信</span>
-
+            <{if $aside_unread_count > 0}>
+            <b class="badge bg-info" style="margin-left:1em;"><{$aside_unread_count}></b>
+            <{/if}>
         </a>
 
         <ul class="nav dk text-sm">
@@ -212,11 +128,31 @@
 
             <li >
 
-                <a href="mail-read.php" class="auto">
+                <a href="mail-all.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
+                    <span>全部</span>
 
+                </a>
+
+            </li>
+            <li >
+
+                <a href="mail-send.php" class="auto">
+
+                    <i class="fa fa-angle-right text-xs"></i>
+
+                    <span>已发</span>
+
+                </a>
+
+            </li>
+            <li >
+
+                <a href="mail-read.php" class="auto">
+
+                    <i class="fa fa-angle-right text-xs"></i>
 
                     <span>已读</span>
 
@@ -230,9 +166,11 @@
 
                     <i class="fa fa-angle-right text-xs"></i>
 
-
-
                     <span>未读</span>
+
+                    <{if $aside_unread_count > 0}>
+                    <b class="badge bg-info" style="margin-left:2em;"><{$aside_unread_count}></b>
+                    <{/if}>
 
                 </a>
 
@@ -303,13 +241,6 @@
                     <span class="font-bold">应用管理</span>
                 </a>
             </li>
-            <li>
-                <a href="load_env.php">
-                    <i class="icon-envelope icon text-info"></i>
-                    <span class="font-bold">站内信</span>
-                </a>
-            </li>
-
         </ul>
 
     </li>
@@ -331,12 +262,3 @@
 </section>
 
 </aside>
-
-<!-- /.aside -->
-<section id="content">
-
-    <section class="hbox stretch">
-
-        <section class="vbox">
-        <!--<section class="scrollable padder-lg w-f-md" id="bjax-target">-->
-            <section class="scrollable wrapper-lg" id="bjax-target">

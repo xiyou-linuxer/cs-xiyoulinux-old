@@ -159,6 +159,9 @@ a:hover .caret-white {
 .input-s-lg {
   width: 250px;
 }
+.input-s-box{
+  width: 30%;
+}
 .input-lg {
   height: 45px;
 }

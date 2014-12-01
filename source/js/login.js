@@ -7,7 +7,8 @@ $(document).ready(function(){
             checknum: $('[name=checknum]').val()
         };
 		$.post('server/login.server.php', param, function(data){
-				if(data == 'true' ){
+				if(data.substring(0,4) == 'true' ){
+					$.get("server/online.server.php?uid="+data.substring(5)+"&time="+(Math.ceil((new Date().getTime())/1000)),function(){});
 					var last_page = get_cookie('last_page');
 					if (last_page == undefined) {
 						location.href = 'index.php';
@@ -16,7 +17,7 @@ $(document).ready(function(){
 					}
 				}else{
 					if(data.substring(5,6) == '1'){
-						wrongCode();
+				//		wrongCode();
 						data = data.substring(6);
 					}
 					switch(data.substring(5,6)){
@@ -28,7 +29,7 @@ $(document).ready(function(){
 						break;
 					case '4':
 						alert('验证码错误 !!');
-						$('img').attr('src','checknum.php');
+						//$('img').attr('src','checknum.php');
 						break;
 					case '5':
 						alert('密码错误 !!');
@@ -46,6 +47,7 @@ $(document).ready(function(){
         var param = {
             action: 'logout'
         };
+	$.get("server/online.server.php?uid="+get_cookie('uid')+"&time="+(Math.ceil((new Date().getTime())/1000)-600),function(){});
         $.post('server/login.server.php', param, function() {
 			location.href = 'index.php';
         });

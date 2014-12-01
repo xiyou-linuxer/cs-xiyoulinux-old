@@ -1,8 +1,7 @@
 <?php
+    session_start();
 
     include('/usr/local/lib/php/smarty/Smarty.class.php');
-
-    session_start();
 
     $tpl = new Smarty();
     $tpl->template_dir = './templates/';
@@ -15,7 +14,7 @@
     if(!isset($_SESSION['uid']) ) {
         $tpl->display('signin.html');
         exit;
-	}
+    }
 
     setcookie('uid', $_SESSION['uid'], time()+3600);
 
