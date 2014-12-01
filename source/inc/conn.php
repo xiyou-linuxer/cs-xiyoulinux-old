@@ -11,7 +11,7 @@ class Csdb{
 	
 	function __construct()
 	{
-		$hostname = "";
+		$hostname = "localhost";
 		$dbuser = "";
 		$dbpwd = "";
 		$dbname = "";
