@@ -125,7 +125,39 @@
             </ul>
         </header>
         <section class="scrollable" id="activity-scroll">
-            <div class="tab-content">
+	 	<div class="clo-sm-11">
+            <section class="comment-list block">
+                <!--  comment-item-id-1  -->
+                <{section name=times loop=$Dynamics_array}>
+                <article class="comment-item" mid="<{$Dynamics_array[times].mid}>">
+                    <a class="pull-left thumb-sm avatar">
+                        <img src="<{$Dynamics_array[times].avatar}>" alt="..."></a>
+                    <span class="arrow left"></span>
+                    <section class="comment-body panel panel-default">
+                        <header class="panel-heading">
+                            <a href="#">
+                                <{$Dynamics_array[times].name}></a>
+                            <label class="label <{$Dynamics_array[times].actioncolor}> m-l-xs">
+                                <{$Dynamics_array[times].actiontext}></label>
+										<span class="text-muted m-l-sm pull-right"> <i class="fa fa-clock-o"></i>
+											<{$Dynamics_array[times].time}></span>
+                        </header>
+                        <div class="panel-body">
+                            <h4>
+                                <{$Dynamics_array[times].mdescribe}></h4>
+                            <div class="panel-body">
+                                <blocpanel-bodykquote>
+                                    <p><{$Dynamics_array[times].message}></p>
+                                    </blockquote>
+                            </div>
+                            <div class="line pull-in"></div>
+                        </div>
+                    </section>
+                </article>
+                <{/section}>
+            </section>
+		</div>
+            <!--<div class="tab-content">
                 <div class="tab-pane active" id="activity">
                     <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border" id="activity-ul">
 
@@ -151,7 +183,6 @@
                                             <p><{$Dynamics_array[times].message}></p>
                                             </blockquote>
                                     </div>
-                                    <div class="line pull-in"></div>
                                 </div>
                             </section>
                         </li>
@@ -160,7 +191,7 @@
                     </ul>
                 </div>
               
-            </div>
+            </div>-->
         </section>
     </section>
 </aside>

@@ -44,6 +44,11 @@ $("#change-password").click(function(){
 var times = 0;
 function scrollLoad(){
 	$('#activity-scroll').scroll(function(){
+		if($('#info-btn').length > 0)
+			uid = $('#info-btn').attr('href').substr(20);
+		else 
+			uid = getCookie('uid');
+
 		viewH = $(this).height();
 		contentH = $(this).get(0).scrollHeight;
 		scrollTop = $(this).scrollTop();
@@ -53,17 +58,18 @@ function scrollLoad(){
 			{
 			$.post('server/profile.fresh.php',
 				{
-					mid:$('#activity-ul:last').children('li').attr('mid')
+					uid:uid,
+					mid:$('.comment-item:last').attr('mid')
 				},
 				function(data){
 					if (data.substr(0,5) != 'false'){
-					$('#activity-ul:last').children('li').after(data);
-					$('#acticity-ul:last').children('li').hide();
-					$('#acticity-ul:last').children('li').prev().hide();
-					$('#acticity-ul:last').children('li').prev().pre().hide();
-					$('#acticity-ul:last').children('li').slideDown();
-					$('#acticity-ul:last').children('li').prev().slideDown();
-					$('#acticity-ul:last').children('li').prev().prev().slideDown();
+					$('.comment-item:last').after(data);
+					$('.comment-item:last').hide();
+					$('.comment-item:last').prev().hide();
+					$('.comment-item:last').prev().prev().hide();
+					$('.comment-item:last').slideDown();
+					$('.comment-item:last').prev().slideDown();
+					$('.comment-item:last').prev().prev().slideDown();
 				}
 				times = 0;
 			}

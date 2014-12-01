@@ -6,7 +6,7 @@
 	$uid = $_SESSION["uid"];
 
 	$updata = new Updata;
-	$updata -> insert_updata($uid, 0, $msg, "bg-red", "发表动态", "", "#");
+	$updata -> insert_updata($uid, 0, $msg, "label-success", "发表动态", "", "#");
 
 	echo "<script>window.location.href = 'index.php';</script>"
 ?>

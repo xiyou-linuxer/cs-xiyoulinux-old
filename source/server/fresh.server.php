@@ -10,7 +10,7 @@ class GetArt{
 		$this->conn = new Csdb();
 	}
 
-	public function get($arg, $arg1, $arg2 = ""){
+	public function get($arg, $arg1, $arg2 = "", $arg3 = ""){
 		switch($arg){
 		case 'index':
 			$query_str = "select * from cs_updata_info order by mid desc limit $arg1," . ($arg1+1)  . ";";
@@ -20,6 +20,12 @@ class GetArt{
 			break;
 		case 'uid':
 			$query_str = "select * from cs_updata_info where uid=$arg1 order by mid desc limit $arg2," . ($arg2+1)  . " ;";
+			break;
+		case 'uid_mid':
+			$query_str = "select * from cs_updata_info where uid=$arg1 and mid<$arg2 order by mid desc limit $arg3," . ($arg3+1)  . " ;";
+			break;
+		default:
+			return false;
 			break;
 		}
 		$mresult = $this->conn->query($query_str)->fetch_assoc();

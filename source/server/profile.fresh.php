@@ -2,12 +2,12 @@
 
 require_once("/usr/share/nginx/html/cs/server/fresh.server.php");
 
-function get_message($a, $mid, $start){
-	$m = $a->get("uid", $mid, $start);
+function get_message($a, $uid, $mid, $start){
+	$m = $a->get("uid_mid", $uid, $mid, $start);
 
 	if(!$m)
 		return 'false';
-	$result="<li class='list-group-item' mid=" . $m['mid']  . ">
+	$result="<article class='comment-item' mid=" . $m['mid']  . ">
 			<a class='pull-left thumb-sm avatar'>
 				<img src='" . $m['avatar']  . "' alt='...'></a>
 			<span class='arrow left'></span>
@@ -23,17 +23,18 @@ function get_message($a, $mid, $start){
 			<h4><a href=".$m['href']." </a>".$m['mdescribe']."</br>".$m['message']."</h4>
 			<div class='line pull-in'></div></div>
 			</section>
-			</li>";
+			</article>";
 
 	return $result;
 }
 
 $mid = $_POST['mid'];
+$uid = $_POST['uid'];
 $result = "";
 $a = new GetArt();
 
 for($i = 0; $i < 5; ++$i){
-	$b = get_message($a, $mid, $i);
+	$b = get_message($a, $uid, $mid, $i);
 	if($b == 'false'){
 		if($result == "")
 			$result = 'false';
