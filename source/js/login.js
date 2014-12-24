@@ -8,13 +8,13 @@ $(document).ready(function(){
         };
 		$.post('server/login.server.php', param, function(data){
 				if(data.substring(0,4) == 'true' ){
-					$.get("server/online.server.php?uid="+data.substring(5)+"&time="+(Math.ceil((new Date().getTime())/1000)),function(){});
-					var last_page = get_cookie('last_page');
-					if (last_page == undefined) {
+					$.get("server/online.server.php?uid="+data.substring(5)+"&logout=false",function(){});
+				//	var last_page = get_cookie('last_page');
+				//	if (last_page == undefined) {
 						location.href = 'index.php';
-					} else {
-						location.href = last_page;
-					}
+				//	} else {
+				//		location.href = last_page;
+				//	}
 				}else{
 					if(data.substring(5,6) == '1'){
 				//		wrongCode();
@@ -47,7 +47,7 @@ $(document).ready(function(){
         var param = {
             action: 'logout'
         };
-	$.get("server/online.server.php?uid="+get_cookie('uid')+"&time="+(Math.ceil((new Date().getTime())/1000)-600),function(){});
+	$.get("server/online.server.php?uid="+get_cookie('uid')+"&logout=true",function(){});
         $.post('server/login.server.php', param, function() {
 			location.href = 'index.php';
         });

@@ -104,10 +104,7 @@ $tpl->assign('mannum', count($uidarray));
 $tpl->assign('search', $search);
 $tpl->assign('quesArray', $searcharray);
 $tpl->assign('manArray', $manArray);
-$tpl->display('header.html');
-$tpl->display('aside.html');
-$tpl->display('search.html');
-$tpl->display('chat.html');
-$tpl->display('footer.html');
+
+$tpl->display('search.tpl');
 ?>
 

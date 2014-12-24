@@ -1,6 +1,5 @@
 <?php
-require_once('init.php');
-require_once('/usr/share/nginx/html/cs/server/fresh.server.php');
+require_once('server/fresh.server.php');
 
 $script_list = array(
 	'js/fresh.js'

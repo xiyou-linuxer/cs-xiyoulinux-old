@@ -1,7 +1,7 @@
 <?php
-
-require("../inc/smtp.class.php");
-require_once("../inc/conn.php");
+require_once(dirname(dirname(__FILE__)) . '/config.php');
+require_once(BASE_PATH . "/inc/smtp.class.php");
+require_once(BASE_PATH . "/inc/conn.php");
 
 
 $conn = new Csdb();

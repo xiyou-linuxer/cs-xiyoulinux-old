@@ -1,7 +1,7 @@
 <?php
     session_start();
-
-    include('/usr/local/lib/php/smarty/Smarty.class.php');
+    include('config.php');
+    include(SMARTY_HOME_PATH . '/Smarty.class.php');
 
     $tpl = new Smarty();
     $tpl->template_dir = './templates/';
@@ -12,12 +12,13 @@
     $tpl->right_delimiter = '}>';
 
     if(!isset($_SESSION['uid']) ) {
-        $tpl->display('signin.html');
+        $tpl->display('signin.tpl');
         exit;
     }
 
     setcookie('uid', $_SESSION['uid'], time()+3600);
 
+    $tpl->assign('SITE_DOMAIN', SITE_DOMAIN);
 //    $last_page = basename($_SERVER['SCRIPT_FILENAME']);
 //    if ($last_page != 'mail-view.php') {
 //        setcookie('last_page',$last_page, time()+3600);

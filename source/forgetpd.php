@@ -1,3 +1,3 @@
 <?php
-include('templates/forgetpd.html');
+include('templates/forgetpd.tpl');
 ?>

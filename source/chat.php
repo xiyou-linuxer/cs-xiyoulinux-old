@@ -1,6 +1,4 @@
 <?php
-
-include_once('init.php');
 include_once("inc/conn.php");
 include_once('inc/user.class.php');
 //include ('header.php');

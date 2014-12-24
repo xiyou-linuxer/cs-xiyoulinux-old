@@ -1,6 +1,6 @@
 <?php
-
-require_once("/usr/share/nginx/html/cs/server/fresh.server.php");
+require_once(dirname(dirname(__FILE__)) . '/config.php');
+require_once(BASE_PATH . "/server/fresh.server.php");
 
 function get_message($a, $uid, $mid, $start){
 	$m = $a->get("uid_mid", $uid, $mid, $start);

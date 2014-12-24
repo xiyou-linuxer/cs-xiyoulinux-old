@@ -1,5 +1,7 @@
 <?php
-	include('../inc/online.class.php');
+	require_once(dirname(dirname(__FILE__)) . '/config.php');
+	require_once(BASE_PATH . '/inc/online.class.php');
+
 	$online = new Online();
 	
 	$uid=$_GET['uid'];

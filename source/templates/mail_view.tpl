@@ -1,0 +1,58 @@
+<{include file="header.tpl"}>
+<{include file="header_nav.tpl"}>
+<{include file="aside.tpl"}>
+<!-- /.aside -->
+<section id="content">
+    <section class="hbox stretch">
+        <section class="vbox">
+            <section class="scrollable wrapper-lg" id="bjax-target">   
+                <div class="panel panel-default" id="mail_reader-view">
+                  <div class="panel-heading">
+                    <div class="panel-title">
+                      <h3 class="text-center" id="mail_reader-title"><{$mail_title}></h3>
+                    </div>
+                  </div> <!--END PANEL HEADING-->
+
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                        <{if $mail_isdraft == 'true'}>
+                            <span>收件人：</h4><span><{$mail_touser}></span>
+			<{else if $fromuid == $uid}>
+                            <span>收件人：</h4><span><{$mail_touser}></span>
+			<{else}>
+                            <span>信息来自：</h4><span><{$mail_fromuser}></span>
+                            <span style="margin-left: 30px">发送时间：</h4><span><{$mail_date}></span>
+                      <{/if}>
+                    </li>
+                    <li class="list-group-item">
+                      <h4><{$mail_content}></h4>
+                    </li>
+                  </ul> <!--END PANEL BODY-->
+                  <div class="panel-footer text-right">
+                    <a class="btn btn-danger" id="btn-delete-mail"><{$btn_del_caption}></a>
+                    <a class="btn btn-success" href="mail_edit.php<{$mail_edit_param}>"><{$btn_edit_caption}></a>
+                  </div>
+                </div><!--END MAIL CONTENT-->
+
+              <!-- 模态框（Modal） -->
+              <div class="modal fade" id="tips-modal" tabindex="-1" role="dialog" aria-labelledby="tips-modal-title" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title text-center" id="tips-modal-title"></h4>
+                    </div>
+                    <div class="modal-body text-center"></div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="btn-modal-close">关闭</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+              </div>
+
+            </section>
+          </section>
+<{include file="chat.tpl"}>
+<{include file="script.tpl"}>
+<script type="text/javascript" src="js/mail.js"></script>
+<{include file="footer.tpl"}>

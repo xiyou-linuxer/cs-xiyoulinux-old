@@ -1,15 +1,15 @@
 <?php
-require_once("inc/conn.php");
+require_once("config.php");
+require_once(BASE_PATH . "/inc/conn.php");
+require_once(SMARTY_HOME_PATH . '/Smarty.class.php');
 
-    include('/usr/local/lib/php/smarty/Smarty.class.php');
-
-    $tpl = new Smarty();
-    $tpl->template_dir = './templates/';
-    $tpl->compile_dir = './templates_c/';
-    $tpl->config_dir = './configs/';
-    $tpl->cache_dir = './cache/';
-    $tpl->left_delimiter = '<{';
-    $tpl->right_delimiter = '}>';
+$tpl = new Smarty();
+$tpl->template_dir = BASE_PATH . '/templates/';
+$tpl->compile_dir = BASE_PATH . '/templates_c/';
+$tpl->config_dir = BASE_PATH . '/configs/';
+$tpl->cache_dir = BASE_PATH . '/cache/';
+$tpl->left_delimiter = '<{';
+$tpl->right_delimiter = '}>';
 
 
 $token = trim($_GET["token"]);
@@ -34,8 +34,8 @@ if($token == $verify){
 	if($nowtime < $time){
 		$tpl->assign('verify',$verify);
 		$tpl->assign('time',$time);
-		$tpl->display('templates/reset.html');
-//	include('templates/reset.html');
+		$tpl->display('templates/reset.tpl');
+//	include('templates/reset.tpl');
 	} else {
 		print 'false2';
 		exit;

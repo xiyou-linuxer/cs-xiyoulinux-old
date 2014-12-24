@@ -8,10 +8,6 @@ require_once('chat.php');
 require_once('footer.php');
 require_once('server/fresh.server.php');
 
-$script_list = array(
-    'js/profile.js'
-);
-
 $uid = $_COOKIE['uid'];
 $current_uid = $_COOKIE['uid'];
 if(isset($_GET['uid']))
@@ -50,11 +46,8 @@ $tpl->assign("avatar", $avatar);
 $tpl->assign( "Dynamics_array", $Dynamics_array );
 $tpl->assign('info', $info);
 $tpl->assign('modifyPasswdUrl', $modifyPasswdUrl);
-$tpl->display('header.html');
-$tpl->display('aside.html');
-$tpl->display('profile.html');
-$tpl->display('chat.html');
-$tpl->display('footer.html')
+
+$tpl->display('profile.tpl');
 ?>
 
 

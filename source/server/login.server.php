@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once(dirname(dirname(__FILE__)) . '/config.php');
+require_once(BASE_PATH . "/inc/conn.php");
 
 if ( !isset($_POST['action']) ) {
     return;
@@ -30,8 +32,6 @@ if ( $action == 'login' ) {
 		print 'false2';
 		exit;
 	}
-
-	require_once("../inc/conn.php");
 
 	$conn = new Csdb();
 	$query = "SELECT `uid`,`password` FROM `cs_user` WHERE `name`='$name';";

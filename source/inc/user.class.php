@@ -195,6 +195,7 @@ class User{
 				$result->close();
 			return false;
 		}
+		
 		$row = $result->fetch_assoc();
 		return $row['permisson'];
 		

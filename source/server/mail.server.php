@@ -1,6 +1,8 @@
 <?php
-include('../inc/mail.class.php');
 session_start();
+require_once(dirname(dirname(__FILE__)) . '/config.php');
+require_once(BASE_PATH . '/inc/mail.class.php');
+
 
 $json_error = json_encode(array("result"=>"false"));
 

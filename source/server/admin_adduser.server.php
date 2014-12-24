@@ -1,5 +1,6 @@
 <?php
-require_once('../inc/user.class.php');
+require_once(dirname(dirname(__FILE__)) . '/config.php');
+require_once(BASE_PATH . '/inc/user.class.php');
 
 if (!isset($_POST['name']) || !isset($_POST['sex']) || !isset($_POST['mail']) || !isset($_POST['grade']) || !isset($_POST['major']) || !isset($_POST['native']))
 {
