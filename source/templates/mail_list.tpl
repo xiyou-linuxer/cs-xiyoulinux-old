@@ -1,0 +1,60 @@
+<{include file="header.tpl"}>
+<link rel="stylesheet" href="css/mail.css" type="text/css" />
+<{include file="header_nav.tpl"}>
+<{include file="aside.tpl"}>
+<!-- /.aside -->
+<section id="content">
+    <section class="hbox stretch">
+        <section class="vbox">
+            <section class="scrollable wrapper-lg" id="bjax-target">   
+<{section name=n loop=$mail_list}>
+                <{if $smarty.section.n.first}>
+                <div class="panel panel-default">
+                  <table class="table table-striped m-b-none dataTable no-footer" data-ride="datatables" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" style="width: 100%;">
+                    <thead>
+                    <tr role="row">
+                      <th>标题</th>
+                      <th style="width: 200px;text-align: center;">时间</th>
+                      <th style="width: 15%;text-align: center;">发件人</th>
+                      <th style="width: 150px;text-align: center;">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody style="cursor:pointer;">
+                <{/if}>
+                      <tr  onclick="location.href='mail_view.php?mid=<{$mail_list[n].mid}>'">
+                        <td><{$mail_list[n].title}></td>
+                        <td class="text-center"><{$mail_list[n].date}></td>
+                        <td class="text-center"><{$mail_list[n].fromuser}></td>
+                        <td class="text-center"><{$mail_list[n].status}></td>
+                      </tr>
+                <{if $smarty.section.n.last}>
+                    </tbody>
+                  </table>
+                </div><!--END MAIL LIST-->
+                <{/if}>
+                <{sectionelse}>
+                  <div>你还没有没有任何信息</div>
+                <{/section}>
+
+              <!-- 模态框（Modal） -->
+              <div class="modal fade" id="tips-modal" tabindex="-1" role="dialog" aria-labelledby="tips-modal-title" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title text-center" id="tips-modal-title"></h4>
+                    </div>
+                    <div class="modal-body text-center"></div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="btn-modal-close">关闭</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+              </div>
+
+</section>
+
+</section>
+<{include file="chat.tpl"}>
+<{include file="script.tpl"}>
+<{include file="footer.tpl"}>

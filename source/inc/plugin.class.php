@@ -8,28 +8,27 @@ class Plugin{
 	public function __construct(){
 		$this->conn = new Csdb();
 	}
-
-	function get_app_list(){
-		$handle = opendir("../plugins");
+	public function get_app_list(){
+		$handle = opendir("/usr/share/nginx/html/cs/plugins");
 		$list = "";
 		if($handle){
 			while (false !== ($file = readdir($handle))){
 				if($file != '..' && $file != '.'){
-					$list .= "$file: ";
-					$xml = $this->parse_app("../plugins/$file/config");
-					if( is_file("../plugins/$file/config") && $xml){
-						$status = $this->conn->query("SELECT status FROM cs_app where name='$xml->name';");
+					$xml = $this->parse_app("/usr/share/nginx/html/cs/plugins/$file/config");
+					if( $xml ){
+						$status = $this->conn->query("SELECT status FROM cs_app where name='$file';");
 						$status = $status->fetch_array();
 						$status = $status[0];
 						if($status == '1')
-							$list .= ' 已启用';
+							$status = 'on';
 						else if($status == '0')
-							$list .= ' 未启用';
+							$status = 'off';
 						else{
-							$this->conn->query("insert into cs_app values(NULL,'$xml->name',
-								0,$xml->icon,'$xml->index');");
+							//$this->conn->query("insert into cs_app values(NULL,'$xml->name',0,$xml->icon,'$xml->index');");
+							$status = 'off';
 						}
-						$list .= "\n";
+						$xml['status'] = $status;
+						$list[] = $xml;
 					}
 					else{
 						print "配置错误 !\n";
@@ -39,27 +38,40 @@ class Plugin{
 			}
 		}else
 			return false;
-		print $list;
-		return true;
+		return $list;
 	}
-
 	public function change_app($file,$status){
-		if( is_file("../plugins/$file/config") && $this->parse_app("../plugins/$file/config")){	
-			$this->conn = new Csdb();
+		if( is_file("../plugins/$file/config") ){	
 			$query_str = "update `cs_app` set status=$status where name='$file';";
 			$result = $this->conn->query($query_str);
 			if($result)
-				print ' 已启用';
-			else
-				print ' 未启用';
+				return true;
+			return false;
 		}
 	}
 
 	private function parse_app($path){
 		$xml = simplexml_load_file($path);
-		if(!$xml->icon || !$xml->name || !$xml->index)
-			return false;
-		return $xml;
+		return $this->simplexml2array($xml);
+	}
+	private function simplexml2array($obj){    
+	    if( count($obj) >= 1 ){
+		$result = $keys = array();
+		
+		foreach( $obj as $key=>$value){   
+		    isset($keys[$key]) ? ($keys[$key] += 1) : ($keys[$key] = 1);
+		    
+		    if( $keys[$key] == 1 )
+			$result[$key] = $this->simplexml2array($value);
+		    elseif( $keys[$key] == 2 )
+			$result[$key] = array($result[$key], $this->simplexml2array($value));
+		    else if( $keys[$key] > 2 )
+			$result[$key][] = $this->simplexml2array($value);
+		}
+		return $result;
+	    }
+	    else if( count($obj) == 0 )
+		return (string)$obj;
 	}
 }
 

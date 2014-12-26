@@ -73,16 +73,16 @@ class Mail{
 
 	public function get_mail_count()		//G
 	{
-		$sql = "select count(mid) from cs_mail where (touser like '%\"$this->uid\":\"0\"%' or touser like '%\"$this->uid\":\"1\"%') and isdraft=0;";
+		$sql = "select count(mid) from cs_mail where (touid like '%\"$this->uid\":\"0\"%' or touid like '%\"$this->uid\":\"1\"%') and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 0 error");
 				$all_count = $result[0]["count(mid)"];
 
-				$sql = "select count(mid) from cs_mail where touser like '%\"$this->uid\":\"0\"%' and isdraft=0;";
+				$sql = "select count(mid) from cs_mail where touid like '%\"$this->uid\":\"0\"%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 1 error");
                 $unread_count = $result[0]["count(mid)"];
 /*
 				for ( $i = 0; $i < count($result); $i++ ) {
-					$row_json = $result[$i]['touser'];
+					$row_json = $result[$i]['touid'];
 					$result_json = json_decode($row_json);
 					foreach( $result_json as $key=>$value) {
 						if ( $key == $this->uid && $value == 0 )
@@ -90,12 +90,12 @@ class Mail{
 					}
 				}
 */	
-				$sql = "select count(mid) from cs_mail where touser like '%\"$this->uid\":\"1\"%' and isdraft=0;";
+				$sql = "select count(mid) from cs_mail where touid like '%\"$this->uid\":\"1\"%' and isdraft=0;";
 				$result = $this->link_result($sql,"get mail count -> tag = 2 error");
 				$read_count = $result[0]["count(mid)"];
 /*
 				for ( $i = 0; $i < count($result); $i++ ) {
-					$row_json = $result[$i]['touser'];
+					$row_json = $result[$i]['touid'];
 					$result_json = json_decode($row_json);
 					foreach( $result_json as $key=>$value) {
 						if ( $key == $this->uid && $value == 1 )
@@ -104,6 +104,7 @@ class Mail{
 				}
 */
 				$sql = "select count(mid) from cs_mail where fromuid=$this->uid and isdraft=1;";
+				//echo $sql;
 				$result = $this->link_result($sql,"get mail count -> tag = 3 error");
 				$draft_count = $result[0]['count(mid)'];
 		return json_encode(array("all"=>$all_count, "unread"=>$unread_count, "read"=>$read_count, "draft"=>$draft_count));
@@ -111,15 +112,15 @@ class Mail{
 
 	public function del_mail($mid)		//G
 	{
-		$sql = "select touser,isdraft from cs_mail where mid=$mid";
-		$result = $this->link_result($sql, "select touser from cs_mail error");
+		$sql = "select touid,isdraft from cs_mail where mid=$mid";
+		$result = $this->link_result($sql, "select touid from cs_mail error");
 
 		$isdraft = $result[0]['isdraft'];
 		if ( $isdraft == 1 ) {
 			$sql = "delete from cs_mail where mid=$mid;";
 		}
 		else {
-			$result_json = $result[0]['touser'];
+			$result_json = $result[0]['touid'];
 			$array = json_decode($result_json);
 			foreach( $array as $key=>$value) {
 				if( $key == $this->uid)
@@ -127,7 +128,7 @@ class Mail{
 				$array->{$key} = "$value";
 			}
 			$new_json = json_encode($array);
-			$sql = "update cs_mail set touser='$new_json' where mid=$mid;";
+			$sql = "update cs_mail set touid='$new_json' where mid=$mid;";
 		}
 		$result = $this->link_result($sql, "del mail error");
 		if ( $result == 1 ) {
@@ -145,7 +146,6 @@ class Mail{
 		$title = $_POST["title"];
 		$content = $_POST["content"];
 		$mid = $_POST["mid"];
-
 		if ( empty($toname) && empty($title) && empty($content) ) {
 			return json_encode(array("result"=>"false"));
 		}
@@ -158,10 +158,10 @@ class Mail{
 		}
 		$user_json = json_encode($array);
 		if ( $mid != "" ) {
-			$sql = "update cs_mail set fromuid=$fromuid,title='$title',content='$content',isdraft=1,touser='$user_json' where mid=$mid;";
+			$sql = "update cs_mail set fromuid=$fromuid,title='$title',content='$content',isdraft=1,touid='$user_json' where mid=$mid;";
 		}
 		else {
-			$sql = "insert into cs_mail(fromuid,title,content,isdraft,touser) values($fromuid,'$title','$content',1,'$user_json');";
+			$sql = "insert into cs_mail(fromuid,title,content,isdraft,touid) values($fromuid,'$title','$content',1,'$user_json');";
 		}
 		$result = $this->link_result($sql, "save_draft error");
 		if ( $result == 1 ) {
@@ -192,10 +192,10 @@ class Mail{
 		}
 		$user_json = json_encode($find);
 		if ( $mid != "" ) {
-			$sql = "update cs_mail set fromuid=$fromuid,title='$title',content='$content',touser='$user_json' where mid=$mid;";
+			$sql = "update cs_mail set fromuid=$fromuid,title='$title',content='$content',touid='$user_json' where mid=$mid;";
 		}
 		else {
-			$sql = "insert into cs_mail(fromuid,title,content,touser) values($fromuid,'$title','$content','$user_json');";
+			$sql = "insert into cs_mail(fromuid,title,content,touid) values($fromuid,'$title','$content','$user_json');";
 		}
 		$result = $this->link_result($sql, "send mail error");
         if ( $unfind == NULL ) {
@@ -274,7 +274,7 @@ class Mail{
 
 	private function get_mail_unread()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touid,content,fromuid from cs_mail,cs_user where cs_mail.touid like '%\"$this->uid\":\"0\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 
 		if ( $result == null ) {
@@ -284,9 +284,9 @@ class Mail{
 
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
-				if ( $key == "touser" ) {
-					$touser = json_decode($value);
-					$status = $touser->{"$this->uid"};
+				if ( $key == "touid" ) {
+			/**/	$touid = json_decode($value);
+					$status = $touid->{"$this->uid"};
 					if ( $status == 0 ) {
 						$status = "未读";
 					}
@@ -301,7 +301,7 @@ class Mail{
 
 	private function get_mail_read()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where cs_mail.touser like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touid,content,fromuid from cs_mail,cs_user where cs_mail.touid like '%\"$this->uid\":\"1\"%' and cs_mail.fromuid=cs_user.uid and cs_mail.isdraft=0 order by sdate desc;";
 		$result = $this->link_result($sql, "get mail unread error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -310,9 +310,9 @@ class Mail{
 		
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
-				if ( $key == "touser" ) {
-					$touser = json_decode($value);
-					$status = $touser->{"$this->uid"};
+				if ( $key == "touid" ) {
+					$touid = json_decode($value);
+					$status = $touid->{"$this->uid"};
 					if ( $status == 1 ) {
 						$status = "已读";
 					}
@@ -327,8 +327,11 @@ class Mail{
 
 	private function get_mail_send()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=0 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touid,content,fromuid from cs_user,cs_mail where cs_mail.isdraft=0 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail draft error");
+		for($i = 0; $i < count($result); $i ++) {
+			$result[$i]["status"] = "已发";
+		}
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
@@ -338,7 +341,7 @@ class Mail{
 
 	private function get_mail_draft()		//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touid,content,fromuid from cs_user,cs_mail where cs_mail.isdraft=1 and cs_mail.fromuid=$this->uid and cs_mail.fromuid=cs_user.uid order by sdate desc;";
 		$result = $this->link_result($sql, "get mail draft error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -353,16 +356,16 @@ class Mail{
 			$new_result[$i]["status"] = "草稿";
 		}
 		for ( $i = 0; $i < count($result); $i++ ) {
-			$touser = $result[$i]["touser"];
-			$touser = json_decode($touser);
-			foreach ( $touser as $key=>$value) {
+			$touid = $result[$i]["touid"];
+			$touid = json_decode($touid);
+			foreach ( $touid as $key=>$value) {
 				if ( $key != _empty_ )
 					$users[] = $this->uid_to_name($key);
 				else
 					$users[] = " ";
 			}
 			$user = implode(",",$users);
-			$new_result[$i]["touser"] = "$user";
+			$new_result[$i]["touid"] = "$user";
 			unset($users);
 		}
 		//$new_result = $this->sub_title_content($new_result, array(30,30));
@@ -371,7 +374,7 @@ class Mail{
 
 	private function get_mail_all()			//G
 	{
-		$sql = "select mid,title,sdate as date,name as fromuser,touser,content from cs_mail,cs_user where (cs_mail.touser like '%\"$this->uid\":\"0\"%' or cs_mail.touser like '%\"$this->uid\":\"1\"%') and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";
+		$sql = "select mid,title,sdate as date,name as fromuser,touid,content,fromuid from cs_mail,cs_user where (cs_mail.touid like '%\"$this->uid\":\"0\"%' or cs_mail.touid like '%\"$this->uid\":\"1\"%') and cs_user.uid=cs_mail.fromuid and cs_mail.isdraft=0 order by sdate desc;";
 		$result = $this->link_result($sql, "get mail all error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
@@ -380,9 +383,9 @@ class Mail{
 
 		for ( $i = 0; $i < count($result); $i ++ ) {
 			foreach ( $result[$i] as $key=>$value) {
-				if ( $key == "touser" ) {
-					$touser = json_decode($value);
-					$status = $touser->{"$this->uid"};
+				if ( $key == "touid" ) {
+					$touid = json_decode($value);
+					$status = $touid->{"$this->uid"};
 					if ( $status == 0 ) {
 						$status = "未读";
 					}
@@ -404,22 +407,23 @@ class Mail{
 		$result = $this->link_result($sql, "select isdraft error");
 		$isdraft = $result[0]['isdraft'];
 
-		$sql = "select mid,title,sdate as date,name as fromuser,content from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";
+		$sql = "select mid,title,sdate as date,name as fromuser,content,fromuid from cs_mail,cs_user where cs_mail.mid=$mid and cs_user.uid=cs_mail.fromuid;";
 		$result = $this->link_result($sql, "get mail info error");
 		if ( $result == null ) {
 			return json_encode(array("result"=>"false"));
 		}
-		$touser_json = $this->link_result("select touser from cs_mail where mid=$mid;", "select touser error");
-		$touser = json_decode($touser_json[0]["touser"]);
+		$touid_sql = "select touid from cs_mail where mid=$mid;";
+		$touid_json = $this->link_result($touid_sql, "select touid error");
+		$touid = json_decode($touid_json[0]["touid"]);
 		if ( $isdraft == 0 ) {
-			$touser->{$this->uid} = "1";
-			$touser_json = json_encode($touser);
-			$sql = "update cs_mail set touser='$touser_json' where mid=$mid;";
+			$touid->{$this->uid} = "1";
+			$touid_json = json_encode($touid);
+			$sql = "update cs_mail set touid='$touid_json' where mid=$mid;";
 			$this->link_result($sql, "update mail info error");
 			return json_encode($result);
 		}
 		else {
-			foreach ( $touser as $key=>$value) {
+			foreach ( $touid as $key=>$value) {
 				if ( $key != _empty_ )
 					$users[] = $this->uid_to_name($key);
 				else
@@ -427,7 +431,9 @@ class Mail{
 			}
 			$users = implode(",",$users );
 			$result[0]["touser"] = "$users";
-			return json_encode($result);
+            		$result[0]["isdraft"] = "true";
+			
+            		return json_encode($result);
 		}
 	}
 

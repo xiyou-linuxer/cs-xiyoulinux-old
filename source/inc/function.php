@@ -45,7 +45,8 @@ function checkStr($type,$desStr){	//看代码都懂
 		$result = (preg_match("/^[\d-]+$/",$desStr) > 0);
 		break;
 	case 'mail':
-		$result = (preg_match("/^\w+@\w+\.com$/",$desStr) > 0);
+		//$result = (preg_match("/^\w+@\w+\.com$/",$desStr) > 0);
+		$result = (preg_match("/^\w+@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]*([\.][a-z]*)?$/",$desStr) > 0);
 		break;
 	case 'chinese':
 		$result = (preg_match("/^[\x{4e00}-\x{9fa5}]+$/u",$desStr) > 0);
@@ -53,9 +54,15 @@ function checkStr($type,$desStr){	//看代码都懂
 	case 'normal':
 		$result = (preg_match("/^\w+$/",$desStr) > 0);
 		break;
-	case 'site':
+    case 'site':
+        $result = (preg_match("/^[a-zA-z]+:\/\/[^\s]*$/",$desStr) > 0);
+        break;
+	/*case 'site':
 		$result = (preg_match("/^\w+\.\w+$/",$desStr) > 0);
-		break;
+        if (!$result)
+            echo "destr:".$desStr."type:".$type;
+		break;*/
+
 	default:
 		break;
 	}

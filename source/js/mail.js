@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    (function($) {
+        $.urlGET = function(name) {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+    })(jQuery);
     //初始化按钮单击事件
     $('#btn-save-draft').click(function() {
         return save_draft();
@@ -6,17 +16,9 @@ $(document).ready(function () {
     $('#btn-send-mail').click(function() {
         return send_mail();            
     });
-    $('#btn-reply-mail').click(function() {
-        location.href = 'mail-edit.php';
-    });
     $('#btn-delete-mail').click(function() {
-        var mid = get_cookie('mid');
+        var mid = $.urlGET('mid');
         del_mail(mid);
-    });
-    $('#btn-delete-draft').click(function() {
-        var mid = get_cookie('mid');
-        del_mail(mid);
-        //toggle_view('#mail-list-view');
     });
 
     //收件人输入框自动完成功能
@@ -25,8 +27,8 @@ $(document).ready(function () {
             var pname = query.split(',');
             var pname = pname[pname.length - 1];
 
-            var param = {func: 'get_name_match', json: pname};
-            $.post('mail.php', param, function (data) {
+            var param = {action: 'auto_complete', username: pname};
+            $.post('server/mail.server.php', param, function (data) {
                 var objs = eval(data);
                 var name = new Array();
                 for (var i = 0; i < objs.length; i++) {
@@ -84,12 +86,12 @@ function show_tips_modal(title) {
 
 function save_draft() {
     var param = {
-        func: 'save_draft',
+        action: 'save_draft',
         title: $('#mail-editor-title').val(),
         touser: $('#mail-editor-touser').val(),
         content: $('#mail-editor-content').val()
     };
-    $.post('mail.php', param, callbk_save_draft);
+    $.post('server/mail.server.php', param, callbk_save_draft);
     return false;
 }
  
@@ -104,25 +106,11 @@ function send_mail() {
     return false;
 }
 
-function set_mail_info(pmid) {
-    var param = {func: 'get_mail_info', mid: pmid};
-    $.post('mail.php', param, callbk_mail_info);
-}
-
-function set_draft_info(pmid) {
-    var param = {func: 'get_mail_info', mid: pmid};
-    $.post('mail.php', param, callbk_draft_info);
-}
 
 function del_mail(mid) {
     var param = {action: 'del_mail', mid: mid};
     $.post('server/mail.server.php', param, callbk_del_mail);
 }
-
-function set_mail_num(ptag) {
-    var param = {func: 'get_mail_count', tag: ptag};
-    $.post('mail.php', param, callbk_mail_num); 
-}            
 
 // call back send mail
 function callbk_send_mail(data, status) {
@@ -173,44 +161,4 @@ function callbk_del_mail(data, status) {
         set_tips_modal('删除失败');
     }
     show_tips_modal('删除状态');
-}
-
-// call back read mail
-function callbk_mail_info(data, status) {
-    var obj = eval(data);
-    $('#mail-reader-title').html(obj[0].title);
-    $('#mail-reader-fromuser').html(obj[0].fromuser);
-    $('#mail-reader-content').html(obj[0].content.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>'));
-    $('#btn-reply-mail').click(function() {
-        clear_editor();
-        $('#mail-editor-touser').val($('#mail-reader-fromuser').html());
-        toggle_view('editor');
-    });
-    
-    toggle_view('reader');
-    set_cookie('mid', obj[0].mid);
-    set_cookie('view', 'reader');
-    set_mail_num();
-}
-
-// call back read draft
-function callbk_draft_info(data, status) {
-    var obj = eval(data);
-    var title = (obj[0].title == '') ? '未命名草稿' : obj[0].title;
-    var touser = (obj[0].touser == '') ? '未指定' : obj[0].touser;
-    var content = (obj[0].content == '') ? '未填写' : obj[0].content;
-    $('#mail-draft-title').html(title);
-    $('#mail-draft-fromuser').html(touser);
-    $('#mail-draft-content').html(content);
-    $('#btn-edit-draft').click(function() {
-        $('#mail-editor-title').val(obj[0].title);
-        $('#mail-editor-touser').val(obj[0].fromuser);
-        $('#mail-editor-content').val(obj[0].content.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>'));
-        toggle_view('editor');
-    });
-    
-    toggle_view('draft');
-    set_cookie('mid', obj[0].mid);
-    set_cookie('view', 'draft');
-    set_mail_num();
 }
