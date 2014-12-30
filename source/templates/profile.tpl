@@ -63,19 +63,7 @@
 					</div>
 				    </div>
 				</div>
-                                <!--    <div class="input-group ">
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="workplace-btn">
-                                                <{if $info.workplace == null}>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<{else}><{$info.workplace}><{/if}>
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" id="workplace-ul">
-                                            </ul>
-                                        </div>
-                                        <input id="job" class="form-control" value="<{$info.job}>" <{if $info.issame != true}>disabled<{/if}>>
-                                    </div>
-                                </div>-->
-                                <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
+                               <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>届别及专业</label>
                                     <div class="input-group ">
                                             <div class="input-group-btn">
@@ -161,42 +149,7 @@
                 <{/section}>
             </section>
 		</div>
-            <!--<div class="tab-content">
-                <div class="tab-pane active" id="activity">
-                    <ul class="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border" id="activity-ul">
-
-                        <{section name=times loop=$Dynamics_array}>
-                        <li class="list-group-item" mid="<{$Dynamics_array[times].mid}>">
-                            <a class="pull-left thumb-sm avatar">
-                                <img src="<{$Dynamics_array[times].avatar}>" alt="..."></a>
-                            <span class="arrow left"></span>
-                            <section class="comment-body panel panel-default">
-                                <header class="panel-heading">
-                                    <a href="#">
-                                        <{$Dynamics_array[times].name}></a>
-                                    <label class="label <{$Dynamics_array[times].actioncolor}> m-l-xs">
-                                        <{$Dynamics_array[times].actiontext}></label>
-										<span class="text-muted m-l-sm pull-right"> <i class="fa fa-clock-o"></i>
-											<{$Dynamics_array[times].time}></span>
-                                </header>
-                                <div class="panel-body">
-                                    <h4>
-                                        <{$Dynamics_array[times].mdescribe}></h4>
-                                    <div class="panel-body">
-                                        <blocpanel-bodykquote>
-                                            <p><{$Dynamics_array[times].message}></p>
-                                            </blockquote>
-                                    </div>
-                                </div>
-                            </section>
-                        </li>
-                        <{/section}>
-
-                    </ul>
-                </div>
-              
-            </div>-->
-        </section>
+       </section>
     </section>
 </aside>
 

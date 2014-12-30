@@ -1,7 +1,3 @@
-<{include file="header.tpl"}>
-<link rel="stylesheet" href="js/chosen/chosen.css" type="text/css" />
-<{include file="header_nav.tpl"}>
-<{include file="aside.tpl"}>
 <!-- /.aside -->
 <section id="content">
     <section class="hbox stretch">
@@ -19,36 +15,31 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">选择级别</label>
 							<div class="col-sm-4">
-								<select style="width:260px" class="chosen-select">
-									<optgroup label="2004 - 2020">
-										<option value="04">2004级</option>
-										<option value="05">2005级</option>
-										<option value="06">2006级</option>
-										<option value="07">2007级</option>
-										<option value="08">2008级</option>
-										<option value="09">2009级</option>
-										<option value="10">2010级</option>
-										<option value="11">2011级</option>
-										<option value="12">2012级</option>
-										<option value="13">2013级</option>
-										<option value="14">2014级</option>
-										<option value="15">2015级</option>
-										<option value="16">2016级</option>
-										<option value="17">2017级</option>
-										<option value="18">2018级</option>
-										<option value="19">2019级</option>
-										<option value="20">2020级</option>
-									</optgroup>
+								<select style="width:260px" class="chosen-select" id="grade-select">
+									<!--<optgroup label="2004 - 2020" id="grade-list">
+										<option value="2004">2004级</option>
+										<option value="2005">2005级</option>
+										<option value="2006">2006级</option>
+										<option value="2007">2007级</option>
+										<option value="2008">2008级</option>
+										<option value="2009">2009级</option>
+										<option value="2010">2010级</option>
+										<option value="2011">2011级</option>
+										<option value="2012">2012级</option>
+										<option value="2013">2013级</option>
+										<option value="2014">2014级</option>
+										<option value="2015">2015级</option>
+									</optgroup>-->
 								</select>
 							</div>
 							<label class="col-sm-2 control-label">选择成员</label>
 							<div class="col-sm-4">
-								<select style="width:260px" class="chosen-select">
-									<optgroup label="04级成员">
+								<select style="width:260px" class="chosen-select" id="member-select">
+									<!--<optgroup label="04级成员" id="member-list">
 										<option value="CT">王聪</option>
 										<option value="CT">孔建军</option>
 										<option value="CT">辛龙</option>
-									</optgroup>
+									</optgroup>-->
 								</select>
 							</div>
 						</div>
@@ -57,7 +48,7 @@
 						<div class="form-group">
 							<div class="col-sm-6"></div>
 							<div class="col-sm-4 col-sm-offset-2">
-								<button type="submit" class="btn btn-danger">确认删除</button>
+								<button type="button" class="btn btn-danger" id="submit">确认删除</button>
 							</div>
 						</div>
 					</form>
@@ -67,7 +58,3 @@
 
 	</section>
 </section>
-<{include file="chat.tpl"}>
-<{include file="script.tpl"}>
-<script type="text/javascript" src="js/chosen/chosen.jquery.min.js"></script>
-<{include file="footer.tpl"}>
