@@ -74,15 +74,17 @@ $(document).ready(
                 $.post(
                     'server/admin_tool.server.php',
                     {
-                        func:deleteUser,
+                        func:'deleteUser',
                         uid:$('#member-select').val()
                     },
                     function(info){
-                        if (info == true){
-                            alert('成功删除');
+                        //console.log($('#member-select').val());
+                        if (info == 1){
+                            alert('删除成功');
                         }else{
                             alert('删除失败');
                         }
+                        location.reload();
                     }
                 );
             });

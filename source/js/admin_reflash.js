@@ -80,10 +80,10 @@ $(document).ready(
                         now_uid:get_cookie("uid")
                     },
                     function(info){
-                        if (info == true){
-                            alert('成功删除');
+                        if (info == 1){
+                            alert('移交成功');
                         }else{
-                            alert('删除失败');
+                            alert('移交失败');
                         }
                     }
                 );

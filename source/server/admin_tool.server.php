@@ -9,6 +9,7 @@
 
 require_once('../inc/admin.class.php');
 require_once('../inc/user.class.php');
+require_once('../inc/function.php');
 
 $admin = new Admin();
 $user = new User();
@@ -28,45 +29,126 @@ switch($func){
         echo $admin->getAllGrade();
         break;
     case 'getMemberByGrade':
-        if (!isset($grade))
-            echo false;
-        echo $admin->getMemberNameByGrade($grade);
+        echo getMemberByGrade($grade);
         break;
     case 'deleteUser':
-        if (!isset($name)){
-            echo false;
-        }
-        echo $user->del_user(uid);
+        echo deleteUser($uid);
         break;
     case 'addUser':
-        if (!isset($_POST['name']) || !isset($_POST['sex']) || !isset($_POST['mail']) || !isset($_POST['grade']) || !isset($_POST['major']) || !isset($_POST['native']) || !isset($_POST['tel'])){
-            echo false;
-        }else{
-            $name = $_POST['name'];
-            $sex = $_POST['sex'];
-            $mail = $_POST['mail'];
-            $grade = $_POST['grade'];
-            $major = $_POST['major'];
-            $tel = $_POST['tel'];
-            $native = $_POST['native'];
-            $qq = $_POST['qq'];
-        }
-        if (addUser($name, $sex, $mail, $grade, $major, $tel, $native, $qq)){
-            echo true;
-        }else
-            echo false;
+        echo addUser();
         break;
     case 'reflash':
-        if (!isset($_POST['now_uid']) || !isset($_POST['next_uid'])){
-            echo false;
-        }else{
-            $now_uid = $_POST['now_uid'];
-            $next_uid = $_POST['next_uid'];
-        }
-        echo $user->deliver_privilege($now_uid, $next_uid);
+        echo reflash();
         break;
+    case 'checkMailCanUse':
+        echo checkMailCanUse();
+        break;
+    case 'checkPhoneCanUse':
+        echo checkPhoneCanUse();
     default :
         break;
+}
+
+/**
+ * 对Admin的getMemberNameByGrade进行在封装,有利于本文件内的调用
+ * @param $grade 届别
+ * @return int|string 失败 null 成功返回json
+ */
+function getMemberByGrade($grade){
+    if (!isset($grade))
+        return ;
+    $admin = new Admin();
+    $result = $admin->getMemberNameByGrade($grade);
+    if (is_bool($result)){
+        return ;
+    }
+    return $result;
+}
+
+/**
+ * 删除用户
+ * @param $uid
+ * @return int 成功返回1， 其他返回0
+ */
+function deleteUser($uid){
+    if (!isset($uid)){
+        return 0;
+    }
+    $user = new User();
+    return boolean2Num($user->del_user($uid));
+}
+
+/**
+ * 添加用户
+ * @return int 成功返回1 其余返回0
+ */
+function addUser(){
+    if (!isset($_POST['name']) || !isset($_POST['sex']) || !isset($_POST['mail']) || !isset($_POST['grade']) || !isset($_POST['major']) || !isset($_POST['native']) || !isset($_POST['tel'])){
+        return 0;
+    }else{
+        $name = $_POST['name'];
+        $sex = $_POST['sex'];
+        $mail = $_POST['mail'];
+        $grade = $_POST['grade'];
+        $major = $_POST['major'];
+        $tel = $_POST['tel'];
+        $native = $_POST['native'];
+        $qq = $_POST['qq'];
+    }
+    return boolean2Num(addPackingUser($name, $sex, $mail, $grade, $major, $tel, $native, $qq));
+
+}
+
+/**
+ * 移交权限
+ * @return bool|int 成功返回1 其余返回0
+ */
+function reflash(){
+    if (!isset($_POST['now_uid']) || !isset($_POST['next_uid'])){
+        return 0;
+    }else{
+        $now_uid = $_POST['now_uid'];
+        $next_uid = $_POST['next_uid'];
+    }
+    $user = new User();
+    return $user->deliver_privilege($now_uid, $next_uid);
+}
+
+/**
+ * 检查邮箱是否能够使用
+ * @return int 能够使用返回1 其余返回0
+ */
+function checkMailCanUse(){
+    if (!isset($_POST['mail'])){
+        return 0;
+    }else{
+        $mail = $_POST['mail'];
+    }
+    if (!checkStr('mail', $mail)){
+        return 0;
+    }
+
+    $user = new User();
+    return boolean2Num(!$user->check_data($mail, 'mail'));
+}
+
+/**
+ * 检查手机号是否可用
+ * @return int 可用返回 1  其余返回0
+ */
+function checkPhoneCanUse(){
+    if (!isset($_POST['phone'])){
+        return 0;
+    }else{
+        $phone = $_POST['phone'];
+    }
+
+    if (!checkStr('phone', $phone)){
+        return 0;
+    }
+
+    $user = new User();
+    return boolean2Num(!$user->check_data($phone, 'phone'));
 }
 
 //var_dump(addUser("测试测",1,"2342422247@qq.com", 2014, "计算科学与技术", '', '', ''));
@@ -82,9 +164,24 @@ switch($func){
  * @param $native 籍贯 选填
  * @param $qq qq号 选填
  */
-function addUser($name, $sex, $mail, $grade, $major, $phone, $native, $qq){
+function addPackingUser($name, $sex, $mail, $grade, $major, $phone, $native, $qq){
     $user = new User();
     return $user->add_user($name, '000000', $sex, $phone, $mail, $qq, '', '', '',
         $native, $grade, $major, '', '');
+}
+
+/**
+ * 将boolean值转化为数字
+ * @param $boolean
+ * @return int 返回 0:值为false  1:代表值为true 2:传入值非boolean类型
+ */
+function boolean2Num($boolean){
+    if (!is_bool($boolean)){
+        return 2;
+    }
+    if ($boolean){
+        return 1;
+    }
+    return 0;
 }
 ?>
