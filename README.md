@@ -1,75 +1,69 @@
 cs-xiyoulinux
 =============
 
-
 ###西邮linux兴趣小组内部交流平台项目
 
 
+本项目为西邮linux兴趣小组11~12级成员合作开发的小组内部交流平台项目
+
+
+###文件结构
+
  - doc目录
 
-	关于该项目的**文档**
+	关于该项目的**需求文档**、**接口文档**等等
 	
  - source目录
  
  	该项目的**源代码**
- 	 - ###**源码目录关键文件说明**
- 	 
- 	 	- init.php
- 	 	
- 	 		初始化smarty模板
- 	 	- header.php
- 	 	
- 	 		初始并加载导航栏
- 	 	- aside.php
- 	 	
- 	 		初始化并加载侧栏
- 	 	- footer.php
- 	 	
- 	 		初始化并加载footer
- 	 	- index.php
- 	 	
- 	 		将主页面分成不同的文件，分别引用来显示
 
- 	 	- load_ 前缀仅负责加载相应地管理页面，内容从templates里面加载。
- 	 	
- 	 	     load前缀文件名 |      加载的页面         |加载页面源代码
-		  ----------------|------------------------|------------
-		  load_adduser.php|**添加用户**页面   |templates/admin_adduser.html
-		  load_deluser.php|**删除用户**页面   |templates/admin_deluser.html
-		  load_appmanager.php|**应用管理**页面|templates/admin_appmanager.html
-		  load_reflash.php|**权限移交**页面   |templates/admin_reflash.html
+  	- init.php
+  	
+  		初始化smarty模板、登录判别
+  	- header.php
+  	
+  		包含init.php文件、顶部导航栏模板变量赋值
+  	- aside.php
+  	
+  		左侧导航栏模板变量赋值
+  	- footer.php
+  	
+  		暂无。。。
+	--config.php
+		项目运行环境配置文件，详情请参见[配置文件](readme.md)
 
-		- mail- 前缀页面说明
+  	- 管理后台模块
+  	
+  	  文件名               |功能                    |模板页面
+	  ---------------------|------------------------|------------
+	  load_adduser.php     |**添加用户**页面        |templates/admin_adduser.tpl
+	  load_deluser.php     |**删除用户**页面        |templates/admin_deluser.tpl
+	  load_appmanager.php  |**应用管理**页面        |templates/admin_appmanager.tpl
+	  load_reflash.php     |**权限移交**页面        |templates/admin_reflash.tpl
 
-			 mail前缀文件名 | 功能说明
-		  ----------------|--------------------
-		  	 mail-edit.php|
-		 	 mail-read.php|
-		   mail-unread.php|
-		  	 mail-view.php| 	 
-		  	 		
- 	 	- ####templates目录(非常重要，所有静态内容都从中加载)
- 	 		- header.html
- 	 		
- 	 			该网页的头，引用的css文件。以及包含最上面的的搜索栏、站内信提醒、用户登录头像。
- 	 		- aside.html
- 	 		
- 	 			最左侧边栏，包含各个应用的按钮。
- 	 		- content.html
- 	 		
- 	 			中间主页面块显示的内容。目前是最新动态。
- 	 		- footer.html
- 	 		
- 	 			文档末尾，包括基本的script标签以及文档闭合标签。
- 	 		- mini_aside.html
- 	 		
- 	 			中间主页面右边小块。
- 	 		- chat.html
- 	 		
- 	 			最右侧的在线列表块。
- 	 		- footer.html
- 	 		
- 	 			补齐上面的html标签，以及引用js文件。
- 	 		- admin_ 前缀页面说明，见load_前缀说明。
+	- 站内信模块
 
- 	 	- ####server目录(非常重要，负责处理所有的后台逻辑)
+	  文件名               | 功能                   |模板页面
+	  ---------------------|------------------------|-------------
+	  mail_edit.php        |**写站内信**页面        |templates/mail_edit.tpl
+	  mail_all.php         |**所有站内信**页面      |templates/mail_list.tpl
+	  mail_unread.php      |**未读站内信**页面      |templates/mail_list.tpl
+	  mail_read.php        |**已读站内信**页面      |templates/mail_list.tpl
+	  mail_draft.php       |**站内信草稿**页面      |templates/mail_list.tpl
+	  mail_view.php        |**站内信阅读**页面      |templates/mail_view.tpl	 
+	  	 		
+  	- ####templates目录(存放smarty模板文件)
+  	
+	  文件名               |描述
+	  ---------------------|-------------------------------------
+ 	  header.tpl           |文档类型、head标签(包含页面设置，共用css文件等。***[未闭合]***)
+  	  header_nav.tpl       |head标签闭合、body标签（***[未闭合]***）、header标签（顶部导航栏）
+  	  aside.tpl            |aside标签（左侧导航栏）
+  	  chat.tpl             |aside标签（右侧在线成员列表）
+  	  script.tpl           |共用js文件加载、共用js代码
+	  footer.tpl           |body标签闭合、html标签闭合
+
+  	- ####server目录(异步请求处理脚本文件)
+  	
+	  文件名               |描述
+          ---------------------|--------------------------------------
