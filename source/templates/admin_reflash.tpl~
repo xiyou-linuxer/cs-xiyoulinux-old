@@ -1,7 +1,3 @@
-<{include file="header.tpl"}>
-<link rel="stylesheet" href="js/chosen/chosen.css" type="text/css" />
-<{include file="header_nav.tpl"}>
-<{include file="aside.tpl"}>
 <!-- /.aside -->
 <section id="content">
     <section class="hbox stretch">
@@ -67,8 +63,3 @@
 
 	</section>
 </section>
-<{include file="chat.tpl"}>
-<{include file="script.tpl"}>
-<script type="text/javascript" src="js/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="js/admin_reflash.js"></script>
-<{include file="footer.tpl"}>
