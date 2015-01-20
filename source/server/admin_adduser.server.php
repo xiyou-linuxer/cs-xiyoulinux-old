@@ -1,8 +1,7 @@
 <?php
-require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(BASE_PATH . '/inc/user.class.php');
+require_once('../inc/user.class.php');
 
-if (!isset($_POST['name']) || !isset($_POST['sex']) || !isset($_POST['mail']) || !isset($_POST['grade']) || !isset($_POST['major']) || !isset($_POST['native']))
+if (!isset($_POST['name']) || !isset($_POST['sex']) || !isset($_POST['mail']) || !isset($_POST['grade']) || !isset($_POST['major']) || !isset($_POST['native']) || !isset($_POST['tel']))
 {
     echo "缺少必要信息";
     return ;
@@ -19,13 +18,13 @@ $qq = $_POST['qq'];
 
 
 $user = new User();
-$result = $user->add_user($name, '000000', $sex,$tel, $mail, $qq, '', '','',$native,$grade,$major, '','');
+$result = $user->add_user($name, '000000', $sex,$tel, $mail, $qq, '', '','',$native,$grade,$major, $native,'');
 //$result = $user->add_user('测试', '000000', '1','11111', '1212321@213.com', '11111111111', '', '','','西安', 14, '及试卷及', '','');
 if ($result){
     echo '插入成功';
     return ;
 }else {
-    echo '插入失败';
+    echo '插入错误';
     return;
 }
 ?>

@@ -29,7 +29,7 @@ $(document).ready(function () {
 
             var param = {action: 'auto_complete', username: pname};
             $.post('server/mail.server.php', param, function (data) {
-                var objs = eval(data);
+                var objs = JSON.parse(data);
                 var name = new Array();
                 for (var i = 0; i < objs.length; i++) {
                     name.push(objs[i].username);
@@ -72,7 +72,10 @@ $(document).ready(function () {
         $('#mail-editor-touser').val(result);
     });
 
-    $('#mail-editor-content').wysihtml5();
+    $('#mail-editor-content').wysihtml5({
+        "link" : false,
+        "image" : false
+    });
 });
 
 function set_tips_modal(tips) {
@@ -84,23 +87,48 @@ function show_tips_modal(title) {
     $('#tips-modal').modal({keyboard: true});
 }
 
+function html_encoding(s){
+    return (typeof s != "string") ? s : 
+         s.replace(/"|&|'|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g,
+             function($0){
+                 var c = $0.charCodeAt(0), r = ["&#"];
+                 c = (c == 0x20) ? 0xA0 : c;
+                 r.push(c); r.push(";");
+                        
+                 return r.join("");
+         });
+}
 function save_draft() {
+    var mail_title = $('#mail-editor-title').val();
+    var mail_touser = $('#mail-editor-touser').val();
+    var mail_content =  $('#mail-editor-content').val();
+    mail_title = html_encoding(mail_title);
+    mail_touser = html_encoding(mail_touser);
+    mail_content = html_encoding(mail_content);
+    
     var param = {
         action: 'save_draft',
-        title: $('#mail-editor-title').val(),
-        touser: $('#mail-editor-touser').val(),
-        content: $('#mail-editor-content').val()
+        title: mail_title,
+        touser: mail_touser,
+        content: mail_content
     };
     $.post('server/mail.server.php', param, callbk_save_draft);
     return false;
 }
  
 function send_mail() {
+    var mail_title = $('#mail-editor-title').val();
+    var mail_touser = $('#mail-editor-touser').val();
+    var mail_content =  $('#mail-editor-content').val();
+    mail_title = html_encoding(mail_title);
+    mail_touser = html_encoding(mail_touser);
+    mail_content = html_encoding(mail_content);
+
     var param = {
         action: 'send_mail',
-        title: $('#mail-editor-title').val(),
-        touser: $('#mail-editor-touser').val(),
-        content: $('#mail-editor-content').val()
+        title: mail_title,
+        touser: mail_touser,
+        content: mail_content
     };
     $.post('server/mail.server.php', param, callbk_send_mail);
     return false;
@@ -124,7 +152,7 @@ function callbk_send_mail(data, status) {
     }
     
     $('#btn-modal-close').click(function() {
-        set_mail_num();
+        location.href = 'mail_edit.php';
     });
 
     show_tips_modal('发送状态');
@@ -136,7 +164,6 @@ function callbk_save_draft(data, status) {
     if (obj.result == 'true') {
         set_tips_modal('保存成功');
         $('#btn-modal-close').click(function() {
-            set_mail_num();
         });
     } else if (obj.result == 'false') {
         set_tips_modal('保存失败');

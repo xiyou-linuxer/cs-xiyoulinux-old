@@ -12,15 +12,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/bootstrap.css" type="text/css" />
 
-    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/animate.css" type="text/css" />
 
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/font-awesome.min.css" type="text/css" />
 
-    <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/simple-line-icons.css" type="text/css" />
 
-    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/font.css" type="text/css" />
 
-    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/app.css" type="text/css" />
 

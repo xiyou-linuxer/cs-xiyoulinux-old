@@ -11,6 +11,7 @@ class Online {
 		$result = $link->query($sql_str);
 		if ($result == false)
 			echo $error_str;
+		$array = array();
 		if (is_object($result))
 		{
 			if($result->num_rows > 0)
@@ -32,13 +33,11 @@ class Online {
 	}
 
 	public function insert_online($uid, $time) {
-		echo "insert";
 		$sql = "insert into cs_online values($uid, '$time');";
 		$this->link_result($sql, "insert online error");
 	}
 
 	public function update_online($uid, $time) {
-		echo "update";
 		$sql = "update cs_online set time='$time' where uid=$uid;";
 		$this->link_result($sql, "update online error");
 	}

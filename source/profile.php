@@ -25,7 +25,7 @@ $info['infouid'] = $infouid;
 $avatar = $user->get_avatar($infouid);
 
 $a  = new GetArt();
-for($i = 0; $i < 5; ++$i){
+for($i = 0; $i < 10; ++$i){
     $tmp = $a->get('uid', $infouid, $i);
     if($tmp == false)
         break;
@@ -41,11 +41,11 @@ $temp_str = $result_info['uid'].$result_info['password'].$temp_time;
 $token = md5($temp_str);
 $modifyPasswdUrl = "reset_key.php?uid=".$result_info['uid']."&token=".$token."&time=".$temp_time;
 
-$tpl->assign('script_list', $script_list);
 $tpl->assign("avatar", $avatar);
 $tpl->assign( "Dynamics_array", $Dynamics_array );
 $tpl->assign('info', $info);
 $tpl->assign('modifyPasswdUrl', $modifyPasswdUrl);
+$tpl->assign('dir', SITE_DOMAIN);
 
 $tpl->display('profile.tpl');
 ?>

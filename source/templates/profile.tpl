@@ -17,7 +17,7 @@
                     </a>
                     <div>
                         <div class="h3 m-t-xs m-b-xs"><small class="text-muted"><{if $info.sex == 1}><i class="fa fa-male"><{else}><i class="fa fa-female"><{/if}></i></small><{$info.name}></div>
-                        <small class="text-muted"><i class="fa fa-map-marker"></i><{if $info.native != null}><{$info.native}>,<{/if}>中国</small>
+                        <small class="text-muted"><i class="fa fa-map-marker"></i><{if $info.native != null}><i id="city"><{$info.native}></i>,<{/if}>中国</small>
                     </div>
                 </div>
 
@@ -32,13 +32,13 @@
                 </div>
                 <{else}>
                 <div class="btn-group btn-group-justified m-b">
-                    <a class="btn btn-success btn-rounded" id="info-btn" href="mail-edit.php?touid=<{$info.infouid}>">
+                    <a class="btn btn-success btn-rounded" id="info-btn" href="mail_edit.php?touid=<{$info.infouid}>">
                         <i class="fa fa-comment-o" id="info">发站内信</i>
                     </a>
                 </div>
                 <{/if}>
                 <div>
-                    <form class="form-horizontal" data-validate="parsley">
+                    <form class="form-horizontal" data-validate="parsley" id="person-info">
                         <section class="panel panel-default">
                             <header class="panel-heading">
                                 <strong>个人信息</strong>
@@ -46,23 +46,23 @@
                             <div class="panel-body">
                                 <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>手机号</label>
-                                    <input id="phone" type="text" class="form-control" value="<{$info.phone}>" <{if $info.issame != true}>disabled<{/if}>>
+                                    <input id="phone" type="text" class="form-control" value="<{$info.phone}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^[\d-]+$/" btvd-class="btvdclass" btvd-err="您的输入格式错误</br>类似:12345678901">
                                 </div>
                                 <div class="form-group" style="padding-top: 1px;padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>邮箱</label>
-                                    <input id="mail" class="form-control" value="<{$info.mail}>" <{if $info.issame != true}>disabled<{/if}>>
+                                    <input id="mail" class="form-control" value="<{$info.mail}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/" btvd-class="btvdclass" btvd-err="输入格式:/^[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/">
                                 </div>
                                 <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>工作地点及职位</label>
-				    <div class="row">
-					<div class="col-md-5" style="padding-right:0px">
-						<input type="text" class="form-control" id="workplace" placeholder="工作地点" value="<{$info.workplace}>" <{if $info.issame != true}>disabled<{/if}>>
-					</div>
-					<div class="col-md-7" style="padding-left:0px">
-						<input type="text" class="form-control" id="job" placeholder="职位" value="<{$info.job}>"<{if $info.issame != true}>disabled<{/if}>>
-					</div>
-				    </div>
-				</div>
+                                    <div class="row">
+                                        <div class="col-md-5" style="padding-right:0px">
+                                            <input type="text" class="form-control" id="workplace" placeholder="工作地点" value="<{$info.workplace}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^[\x{4e00}-\x{9fa5}]+$/u" btvd-class="btvdclass" btvd-err="输入格式:/^[\x{4e00}-\x{9fa5}]+$/u">
+                                        </div>
+                                        <div class="col-md-7" style="padding-left:0px">
+                                            <input type="text" class="form-control" id="job" placeholder="职位" value="<{$info.job}>"<{if $info.issame != true}>disabled<{/if}> btvd-el="/^[\x{4e00}-\x{9fa5}]+$/u" btvd-class="btvdclass" btvd-err="输入格式:/^[\x{4e00}-\x{9fa5}]+$/u">
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--    <div class="input-group ">
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="workplace-btn">
@@ -78,32 +78,32 @@
                                 <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>届别及专业</label>
                                     <div class="input-group ">
-                                            <div class="input-group-btn">
+                                        <div class="input-group-btn">
                                             <button type="button" class="btn btn-default" id="grade-btn">
                                                 <{$info.grade}>
-                                              <!--  <span class="caret"></span>-->
+                                                <!--  <span class="caret"></span>-->
                                             </button>
                                         </div>
-                                        <input id="major" class="form-control" value="<{$info.major}>" <{if $info.issame != true}>disabled<{/if}>>
+                                        <input id="major" class="form-control" value="<{$info.major}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^[\x{4e00}-\x{9fa5}]+$/u" btvd-class="btvdclass" btvd-err="输入格式:/^[\x{4e00}-\x{9fa5}]+$/u">
                                     </div>
                                 </div>
                                 <div class="form-group pull-in clearfix">
                                     <div class="col-sm-6">
                                         <label>QQ号</label>
-                                        <input id="qq" type="text" class="form-control" placeholder="" value="<{$info.qq}>" <{if $info.issame != true}>disabled<{/if}>>
+                                        <input id="qq" type="text" class="form-control" placeholder="" value="<{$info.qq}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^\w+$/" btvd-class="btvdclass" btvd-err="输入格式:/^\w+$/">
                                     </div>
                                     <div class="col-sm-6">
                                         <label>微信</label>
-                                        <input id="wechat" type="text" class="form-control" placeholder="" value="<{$info.wechat}>" <{if $info.issame != true}>disabled<{/if}>>
+                                        <input id="wechat" type="text" class="form-control" placeholder="" value="<{$info.wechat}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^\w+$/" btvd-class="btvdclass" btvd-err="输入格式:/^\w+$/">
                                     </div>
                                 </div>
                                 <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>博客</label>
-                                    <input id="blog" type="text" class="form-control" value="<{$info.blog}>" <{if $info.issame != true}>disabled<{/if}>>
+                                    <input id="blog" type="text" class="form-control" value="<{$info.blog}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^[a-zA-z]+:\/\/[^\s]*$/" btvd-class="btvdclass" btvd-err="输入格式:/^[a-zA-z]+:\/\/[^\s]*$/">
                                 </div>
                                 <div class="form-group" style="padding-left: 15px;padding-right: 15px; position:relative; min-height: 1px">
                                     <label>github</label>
-                                    <input id="github" type="text" class="form-control" value="<{$info.github}>" <{if $info.issame != true}>disabled<{/if}>>
+                                    <input id="github" type="text" class="form-control" value="<{$info.github}>" <{if $info.issame != true}>disabled<{/if}> btvd-el="/^[a-zA-z]+:\/\/[^\s]*$/" btvd-class="btvdclass" btvd-err="输入格式:/^[a-zA-z]+:\/\/[^\s]*$/">
                                 </div>
 
                             </div>
@@ -125,7 +125,7 @@
     <section class="vbox">
         <header class="header bg-light lt">
             <ul class="nav nav-tabs nav-white">
-                <li class="active"><a href="#activity" data-toggle="tab">个人中心</a></li>
+                <li class="active"><a href="#activity" data-toggle="tab">相关动态</a></li>
             </ul>
         </header>
         <section class="scrollable" id="activity-scroll">
@@ -150,11 +150,10 @@
                             <h4>
                                 <{$Dynamics_array[times].mdescribe}></h4>
                             <div class="panel-body">
-                                <blocpanel-bodykquote>
+                                <blockpanel-bodyquote>
                                     <p><{$Dynamics_array[times].message}></p>
                                     </blockquote>
                             </div>
-                            <div class="line pull-in"></div>
                         </div>
                     </section>
                 </article>

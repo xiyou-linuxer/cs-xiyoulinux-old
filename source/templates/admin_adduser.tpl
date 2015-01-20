@@ -51,40 +51,40 @@
               <div class="col-sm-10">
                 <select name="native" style="width:260px" class="chosen-select">
                   <optgroup label="">
-                    <option value="AZ">北京市</option>
-                    <option value="CO">天津市</option>
-                    <option value="AL">河北省</option>
-                    <option value="AL">河南省</option>
-                    <option value="AL">山西省</option>
-                    <option value="AL">山东省</option>
-                    <option value="TN">青海省</option>
-                    <option value="TN">甘肃省</option>
-                    <option value="TN">陕西省</option>
-                    <option value="AR">黑龙江省</option>
-                    <option value="IL">吉林省</option>
-                    <option value="IA">辽宁省</option>
-                    <option value="NE">四川省</option>
-                    <option value="NM">重庆省</option>
-                    <option value="KS">贵州省</option>
-                    <option value="KY">云南省</option>
-                    <option value="MO">上海市</option>
-                    <option value="OK">江苏省</option>
-                    <option value="SD">浙江省</option>
-                    <option value="TX">安徽省</option>
-                    <option value="TN">福建省</option>
-                    <option value="WI">江西省</option>
-                    <option value="CT">湖南省</option>
-                    <option value="MO">湖北省</option>
-                    <option value="OK">广东省</option>
-                    <option value="SD">海南省</option>
-                    <option value="TX">台湾省</option>
-                    <option value="WI">香港特别行政区</option>
-                    <option value="CT">澳门特别行政区</option>
-                    <option value="LA">西藏自治区</option>
-                    <option value="AL">广西壮族自治区</option>
-                    <option value="ND">宁夏回族自治区</option>
-                    <option value="WY">内蒙古自治区</option>
-                    <option value="MS">新疆维吾尔族自治区</option>
+                    <option value="北京市">北京市</option>
+                    <option value="天津市">天津市</option>
+                    <option value="河北省">河北省</option>
+                    <option value="河南省">河南省</option>
+                    <option value="山西省">山西省</option>
+                    <option value="山东省">山东省</option>
+                    <option value="青海省">青海省</option>
+                    <option value="甘肃省">甘肃省</option>
+                    <option value="陕西省">陕西省</option>
+                    <option value="黑龙江省">黑龙江省</option>
+                    <option value="吉林省">吉林省</option>
+                    <option value="辽宁省">辽宁省</option>
+                    <option value="四川省">四川省</option>
+                    <option value="重庆省">重庆省</option>
+                    <option value="贵州省">贵州省</option>
+                    <option value="云南省">云南省</option>
+                    <option value="上海市">上海市</option>
+                    <option value="江苏省">江苏省</option>
+                    <option value="浙江省">浙江省</option>
+                    <option value="安徽省">安徽省</option>
+                    <option value="福建省">福建省</option>
+                    <option value="江西省">江西省</option>
+                    <option value="湖南省">湖南省</option>
+                    <option value="湖北省">湖北省</option>
+                    <option value="广东省">广东省</option>
+                    <option value="海南省">海南省</option>
+                    <option value="台湾省">台湾省</option>
+                    <option value="香港">香港特别行政区</option>
+                    <option value="澳门">澳门特别行政区</option>
+                    <option value="西藏">西藏自治区</option>
+                    <option value="广西">广西壮族自治区</option>
+                    <option value="宁夏">宁夏回族自治区</option>
+                    <option value="内蒙古">内蒙古自治区</option>
+                    <option value="新疆">新疆维吾尔族自治区</option>
                   </optgroup>
                 </select>
               </div>
@@ -103,66 +103,66 @@
               <div class="col-sm-10">
                 <select name="major" style="width:260px" class="chosen-select">
                   <optgroup label="计算机学院">
-                    <option value="HI">计算机科学与技术</option>
-                    <option value="AK">软件工程</option>
-                    <option value="HI">网络工程</option>
+                    <option value="计算机科学与技术">计算机科学与技术</option>
+                    <option value="软件工程">软件工程</option>
+                    <option value="网络工程">网络工程</option>
                   </optgroup>
                   <optgroup label="通信与信息工程学院">
-                    <option value="NV">通信工程</option>
-                    <option value="OR">信息工程</option>
-                    <option value="WA">信息安全</option>
-                    <option value="CA">电子信息科学与技术</option>
-                    <option value="CA">信息对抗技术</option>
-                    <option value="CA">广播电视工程</option>
-                    <option value="CA">物联网工程</option>
+                    <option value="通信工程">通信工程</option>
+                    <option value="信息工程">信息工程</option>
+                    <option value="信息安全">信息安全</option>
+                    <option value="电子信息科学与技术">电子信息科学与技术</option>
+                    <option value="信息对抗技术">信息对抗技术</option>
+                    <option value="广播电视工程">广播电视工程</option>
+                    <option value="物联网工程">物联网工程</option>
                   </optgroup>
                   <optgroup label="电子工程学院">
-                    <option value="AZ">电子信息工程</option>
-                    <option value="CO">电子科学与技术</option>
-                    <option value="ID">光电信息工程</option>
-                    <option value="MT">光信息科学与技术</option>
-                    <option value="NE">微电子</option>
-                    <option value="NM">集成电路设计与集成系统</option>
-                    <option value="ND">电磁场与无线技术</option>
+                    <option value="电子信息工程">电子信息工程</option>
+                    <option value="电子科学与技术">电子科学与技术</option>
+                    <option value="光电信息工程">光电信息工程</option>
+                    <option value="光信息科学与技术">光信息科学与技术</option>
+                    <option value="微电子">微电子</option>
+                    <option value="集成电路设计与集成系统">集成电路设计与集成系统</option>
+                    <option value="电磁场与无线技术">电磁场与无线技术</option>
                   </optgroup>
                   <optgroup label="自动化学院">
-                    <option value="AL">测控技术与仪器</option>
-                    <option value="AR">电气工程及其自动化</option>
-                    <option value="IL">自动化</option>
-                    <option value="IA">智能科学与技术</option>
-                    <option value="KS">智能传感网络</option>
+                    <option value="测控技术与仪器">测控技术与仪器</option>
+                    <option value="电气工程及其自动化">电气工程及其自动化</option>
+                    <option value="自动化">自动化</option>
+                    <option value="智能科学与技术">智能科学与技术</option>
+                    <option value="智能传感网络">智能传感网络</option>
                   </optgroup>
                   <optgroup label="经济与管理学院">
-                    <option value="CT">物流管理</option>
-                    <option value="DE">经济学</option>
-                    <option value="FL">工商管理</option>
-                    <option value="GA">人力资源管理</option>
-                    <option value="IN">市场营销</option>
-                    <option value="ME">商务策划与管理</option>
-                    <option value="MD">会计学</option>
-                    <option value="MA">财务管理</option>
-                    <option value="MI">信息管理与信息系统</option>
-                    <option value="NH">国际经济与贸易</option>
-                    <option value="NY">电子商务</option>
-                    <option value="NC">工程管理</option>
-                    <option value="OH">工业工程</option>
+                    <option value="物流管理">物流管理</option>
+                    <option value="经济学">经济学</option>
+                    <option value="工商管理">工商管理</option>
+                    <option value="人力资源管理">人力资源管理</option>
+                    <option value="市场营销">市场营销</option>
+                    <option value="商务策划与管理">商务策划与管理</option>
+                    <option value="会计学">会计学</option>
+                    <option value="财务管理">财务管理</option>
+                    <option value="信息管理与信息系统">信息管理与信息系统</option>
+                    <option value="国际经济与贸易">国际经济与贸易</option>
+                    <option value="电子商务">电子商务</option>
+                    <option value="工程管理">工程管理</option>
+                    <option value="工业工程">工业工程</option>
                   </optgroup>
                   <optgroup label="理学院">
-                    <option value="CT">信息与计算科学</option>
-                    <option value="DE">应用物理</option>
+                    <option value="信息与计算科学">信息与计算科学</option>
+                    <option value="应用物理">应用物理</option>
                   </optgroup>
                   <optgroup label="人文社科学院">
-                    <option value="CT">行政管理</option>
-                    <option value="DE">公共事业管理</option>
-                    <option value="FL">社会工作</option>
+                    <option value="行政管理">行政管理</option>
+                    <option value="公共事业管理">公共事业管理</option>
+                    <option value="社会工作">社会工作</option>
                   </optgroup>
                   <optgroup label="外国语学院">
-                    <option value="CT">英语</option>
-                    <option value="DE">商务英语</option>
+                    <option value="英语">英语</option>
+                    <option value="商务英语">商务英语</option>
                   </optgroup>
                   <optgroup label="数字艺术学院">
-                    <option value="CT">数字媒体艺术</option>
-                    <option value="DE">广播电视编导</option>
+                    <option value="数字媒体艺术">数字媒体艺术</option>
+                    <option value="广播电视编导">广播电视编导</option>
                   </optgroup>
                 </select>
               </div>
@@ -180,27 +180,27 @@
               <div class="col-sm-10">
                 <select name="grade" style="width:260px" class="chosen-select">
                   <optgroup label="">
-                    <option value="AZ">04</option>
-                    <option value="CO">05</option>
-                    <option value="AL">06</option>
-                    <option value="AL">07</option>
-                    <option value="AL">08</option>
-                    <option value="AL">09</option>
-                    <option value="TN">10</option>
-                    <option value="TN">11</option>
-                    <option value="TN">12</option>
-                    <option value="AR">13</option>
-                    <option value="IL">14</option>
-                    <option value="IA">15</option>
-                    <option value="NE">16</option>
-                    <option value="NM">17</option>
-                    <option value="KS">18</option>
-                    <option value="KY">19</option>
-                    <option value="MO">20</option>
-                    <option value="OK">21</option>
-                    <option value="SD">22</option>
-                    <option value="TX">23</option>
-                    <option value="TN">24</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
                   </optgroup>
                 </select>
               </div>

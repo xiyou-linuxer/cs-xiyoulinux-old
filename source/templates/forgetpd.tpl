@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <title>找回密码 - CS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="js/jPlayer/jplayer.flat.css" type="text/css" />
-  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="css/font.css" type="text/css" />
-  <link rel="stylesheet" href="css/app.css" type="text/css" />  
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/js/jPlayer/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/font.css" type="text/css" />
+  <link rel="stylesheet" href="<{$SITE_DOMAIN}>/css/app.css" type="text/css" />  
     <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
     <script src="js/ie/respond.min.js"></script>
@@ -20,7 +20,7 @@
 <body class="bg-info dker">
   <section id="content" class="m-t-lg wrapper-md animated fadeInDown">
     <div class="container aside-xl">
-      <a class="navbar-brand block" href="index.php"><span class="h1 font-bold">Xiyou Linux Group</span></a>
+      <a class="navbar-brand block" href="<{$SITE_DOMAIN}>/index.php"><span class="h1 font-bold">Xiyou Linux Group</span></a>
       <section class="m-b-lg">
         <header class="wrapper text-center">
           <strong>填写以下信息找回密码</strong>
@@ -64,16 +64,16 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
   <!-- / footer -->
-  <script src="js/jquery.min.js"></script>
+  <script src="<{$SITE_DOMAIN}>/js/jquery.min.js"></script>
   <!-- Bootstrap -->
-  <script src="js/bootstrap.js"></script>
+  <script src="<{$SITE_DOMAIN}>/js/bootstrap.js"></script>
   <!-- App -->
-  <script src="js/app.js"></script>  
-  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/app.plugin.js"></script>
-  <script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script type="text/javascript" src="js/jPlayer/demo.js"></script>
+  <script src="<{$SITE_DOMAIN}>/js/app.js"></script>  
+  <script src="<{$SITE_DOMAIN}>/js/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<{$SITE_DOMAIN}>/js/app.plugin.js"></script>
+  <script type="text/javascript" src="<{$SITE_DOMAIN}>/js/jPlayer/jquery.jplayer.min.js"></script>
+  <script type="text/javascript" src="<{$SITE_DOMAIN}>/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+  <script type="text/javascript" src="<{$SITE_DOMAIN}>/js/jPlayer/demo.js"></script>
   <script>
   </script>
   <script>
@@ -91,7 +91,7 @@
                         		name: $('#username').val(),
                         		email: $('#email').val()
 				};
-				$.post('server/forgetpd.server.php', param, function(data) {
+				$.post('<{$SITE_DOMAIN}>/server/forgetpd.server.php', param, function(data) {
                         		$('#tips_message').html(data);
 					$('#example').modal({keyboard:true});
                 		});
@@ -102,7 +102,7 @@
 
                 $('#signingo').click(function() {
                        
-                        window.location = 'index.php';
+                        window.location = '<{$SITE_DOMAIN}>/index.php';
                         return false;
                 });
 

@@ -13,8 +13,7 @@ $qq = $_POST['qq'];
 $wechat = $_POST['wechat'];
 $blog = $_POST['blog'];
 $github = $_POST['github'];
-//$native = "西安";
-$native = null;
+$native = $_POST["native"];;
 $grade = trim($grade);
 $workplace = trim($workplace);
 

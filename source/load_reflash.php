@@ -6,6 +6,14 @@ include('aside.php');
 include('chat.php');
 include('footer.php');
 
-$tpl->display('admin_reflash.tpl');
+include_once('access_ctl.php');
+
+if (checkPermisson() == 1)
+        $tpl->display('admin_reflash.tpl');
+else{
+        echo "<script language=\"javacript\">";
+        echo "document.loaction=\"index.php\"";
+        echo "</script>";
+}
 
 ?>

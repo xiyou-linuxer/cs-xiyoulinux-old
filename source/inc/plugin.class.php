@@ -1,5 +1,5 @@
 <?php
-
+require_once(dirname(dirname(__FILE__)) . "/config.php");
 require_once("conn.php");
 
 class Plugin{
@@ -8,40 +8,39 @@ class Plugin{
 	public function __construct(){
 		$this->conn = new Csdb();
 	}
-	public function get_app_list(){
-		$handle = opendir("/usr/share/nginx/html/cs/plugins");
-		$list = "";
+	public function flush_app_list(){
+		$handle = opendir(BASE_PATH . "/app");
 		if($handle){
 			while (false !== ($file = readdir($handle))){
 				if($file != '..' && $file != '.'){
-					$xml = $this->parse_app("/usr/share/nginx/html/cs/plugins/$file/config");
+					$xml = $this->parse_app(BASE_PATH . "/app/$file/config");
 					if( $xml ){
-						$status = $this->conn->query("SELECT status FROM cs_app where name='$file';");
-						$status = $status->fetch_array();
-						$status = $status[0];
-						if($status == '1')
-							$status = 'on';
-						else if($status == '0')
-							$status = 'off';
-						else{
-							//$this->conn->query("insert into cs_app values(NULL,'$xml->name',0,$xml->icon,'$xml->index');");
-							$status = 'off';
+						$status = $this->conn->query("SELECT * FROM cs_app where name='$file';");
+						if($status->num_rows == 0){
+                                                        $attr = json_encode($xml);
+							$this->conn->query("insert into cs_app values(NULL,'$file',1,'$attr');");
 						}
-						$xml['status'] = $status;
-						$list[] = $xml;
 					}
-					else{
-						print "配置错误 !\n";
+					else
 						return false;
-					}
 				}
 			}
 		}else
 			return false;
+		return true;
+	}
+	public function get_app_list(){
+		$this->flush_app_list();
+		$result = $this->conn->query("select name,attr from cs_app where status=1;");
+		$list = "";
+		while( ($arr = $result->fetch_assoc()) )
+			$list[] = $arr;
+		if($list === "")
+			return false;
 		return $list;
 	}
 	public function change_app($file,$status){
-		if( is_file("../plugins/$file/config") ){	
+		if( is_file(BASE_PATH . "/app/$file/config") ){	
 			$query_str = "update `cs_app` set status=$status where name='$file';";
 			$result = $this->conn->query($query_str);
 			if($result)

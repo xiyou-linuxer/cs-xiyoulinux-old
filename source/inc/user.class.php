@@ -23,8 +23,8 @@ class User{
 			"$sex" => 'digit',
 			"$phone"=> 'phone',
 			"$mail" => 'mail',
-			"$qq" => 'normal',
-			"$wechat" => 'normal',
+			"$qq" => 'qq',
+			"$wechat" => 'weixin',
 			"$blog" => 'site',
 			"$github" => 'site',
 			"$native" => 'chinese',
@@ -35,6 +35,14 @@ class User{
 		);
 		if( !checkArr($checkArr) )
 			return false;
+
+        if (checkStr('mail', $mail))
+            return false;
+
+        if (!empty($phone) && checkStr('phone', $phone)){
+            return false;
+        }
+
 		$query_str = "SELECT * FROM `cs_user` where name='$name';";
 		$result = $this->conn->query($query_str);
 		if( $result->num_rows > 0 ){
@@ -73,9 +81,8 @@ class User{
 	}
 	public function get_userinfo($uid){
 		if( !checkStr('digit',$uid) ){
-			echo 'false';
-			exit;
-		}	
+			return false;
+		}
 		
 		$query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
 		$result = $this->conn->query($query_str);
@@ -102,8 +109,8 @@ class User{
             "$uid" => 'digit',
             "$phone" => 'phone',
             "$mail" => 'mail',
-            "$qq" => 'normal',
-            "$wechat" => 'normal',
+            "$qq" => 'qq',
+            "$wechat" => 'weixin',
             "$blog" => 'site',
             "$github" => 'site',
             "$native" => 'chinese',
@@ -195,7 +202,6 @@ class User{
 				$result->close();
 			return false;
 		}
-		
 		$row = $result->fetch_assoc();
 		return $row['permisson'];
 		
@@ -211,13 +217,13 @@ class User{
 		$result1 = $this->conn->query($query_str1);
 		$result2 = $this->conn->query($query_str2);	
 		if( $result1->num_rows <= 0 || $result2->num_rows <= 0){
-			echo 'false';
 			if( is_object($result1) )
 				$result1->close();
 			if( is_object($result2) )
 				$result2->close();
-			exit;
-		}
+            return false;
+
+        }
 		$row1 = $result1->fetch_assoc();
 		$row2 = $result2->fetch_assoc();
 		if($row1['permisson'] != '1' ||$row2['permisson'] != '0')
@@ -226,13 +232,14 @@ class User{
 		$query_str2 = "UPDATE `cs_user` SET permisson=1 WHERE uid=$uid_next;";	
 		$this->conn->query($query_str1);
 		$this->conn->query($query_str2);
-		return true;
-		
+
 		if( is_object($result1) )
 			$result1->close();
 		if( is_object($result2) )
 			$result2->close();
-	}
+        return true;
+
+    }
 	public function get_avatar($uid){
 		$query = "SELECT `mail` FROM `cs_user` WHERE `uid`=$uid;";
 		$result = $this->conn->query($query);
@@ -248,5 +255,27 @@ class User{
 		if (checkUser($uid) == false)
 			return false;
 	}
+
+    /*by liaoshengxin 2015.01.14  22:17*/
+    /***检查是否存在邮箱或者手机，若存在则返回true,不存在则返回false***/
+    public function check_data($data,$tag){
+        if($tag == 'phone'){
+            $sql = "select * from cs_user where phone='$data';";
+            $result = $this->conn->query($sql);
+            if($result->num_rows > 0)
+                return true;
+            else
+                return false;
+        }
+        else if($tag == 'mail') {
+            $sql = "select * from cs_user where mail='$data';";
+            $result = $this->conn->query($sql);
+            if($result->num_rows > 0)
+                return true;
+            else
+                return false;
+        }
+        return true;
+    }
 }
 ?>

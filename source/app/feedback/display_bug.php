@@ -1,10 +1,11 @@
 <?php
 
-include_once('../../init.php');
-include('../../header.php');
-include('../../aside.php');
-include('../../chat.php');
-include('../../footer.php');
+include_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+include_once(BASE_PATH . '/init.php');
+include(BASE_PATH . '/header.php');
+include(BASE_PATH . '/aside.php');
+include(BASE_PATH . '/chat.php');
+include(BASE_PATH . '/footer.php');
 include('bug.class.php');
 $get_display = $_GET['bug_name'];
 $bug = new Bug();
@@ -16,9 +17,9 @@ $bug_info = array("title"=>$conseq['title'],"author"=>$conseq['name'],"modifytim
 //$bug_info = array( "title" => "bug标题", “author” => "lili", "status" => "1", "modifytime" => "2014/1/1" , "content" => "content", "method" => "method"  );
 $tpl->assign('bug', $bug_info);
 
-$tpl->display('header.html');
-$tpl->display('aside.html');
-$tpl->display('feedback/buginfo.html');
-$tpl->display('chat.html');
-$tpl->display('footer.html');
+$tpl->display('header.tpl');
+$tpl->display('aside.tpl');
+$tpl->display('feedback/buginfo.tpl');
+$tpl->display('chat.tpl');
+$tpl->display('footer.tpl');
 ?>

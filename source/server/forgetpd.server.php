@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(BASE_PATH . "/inc/smtp.class.php");
-require_once(BASE_PATH . "/inc/conn.php");
+
+require("../inc/smtp.class.php");
+require_once("../inc/conn.php");
 
 
 $conn = new Csdb();
@@ -26,10 +26,10 @@ $time = date('Y-m-d H:i');
 
 $smtpserver = "smtp.exmail.qq.com";
 $smtpserverport = 25;
-$smtpusermail = "fatty_liao@xiyoulinux.org";
+$smtpusermail = "cs@xiyoulinux.org";
 $smtpemailto = $userinfo['mail'];
-$smtpuser = "fatty_liao@xiyoulinux.org";
-$smtppass = "Niangnan1022";
+$smtpuser = "cs@xiyoulinux.org";
+$smtppass = "!Cs_linux2006";
 
 $mailsubject = "找回密码";
 $mailbody =  "亲爱的".$name."：\n\n您在".$time."提交了找回密码请求。请点击下面的链接重置密码

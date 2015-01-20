@@ -1,6 +1,8 @@
 $(document).ready(function(){
     getWorkplace();
     scrollLoad();
+    //使输入框自动验证
+    $("input").focusout($("#person-info").validation());
     $("#submit-info").click(function(){
         //alert('grade:' + $("#grade-btn").text() +'\nuid:'+ getCookie('uid') + "\nphone" + $("#phone").val() + "\nmail:" + $("#mail").val() + "\nworkplace" + $("#workplace-btn").text() + "\njob:" + $("#job").val() + "\nmajor:" + $("#major").val() + "\nqq:" + $("#qq").val() + "\nwechat" + $("#wechat").val() + "\nblog" + $("#blog").val() + "\ngithub" + $("#github").val());
         $.post(
@@ -17,7 +19,8 @@ $(document).ready(function(){
                 wechat:$("#wechat").val(),
                 blog:$("#blog").val(),
                 github:$("#github").val(),
-                grade:$("#grade-btn").text()
+                grade:$("#grade-btn").text(),
+		native:$("#city").text()
             },
             function (data) {
                 if (data == 1)

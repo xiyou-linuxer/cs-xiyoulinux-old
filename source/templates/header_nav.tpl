@@ -119,7 +119,7 @@
                     <div class="list-group list-group-alt">
 
                     <{section name=n loop=$header_mail_list}>
-                        <a href="mail_view.php?mid=<{$header_mail_list[n].mid}>" class="media list-group-item">
+                        <a href="<{$SITE_DOMAIN}>/mail_view.php?mid=<{$header_mail_list[n].mid}>" class="media list-group-item">
 
                             <span class="pull-left thumb-sm">
 
@@ -137,7 +137,7 @@
 
                         </a>
                     <{sectionelse}>
-                        <a href="mail_unread.php" class="media list-group-item">
+                        <a href="<{$SITE_DOMAIN}>/mail_unread.php" class="media list-group-item">
                             <span class="media-body block m-b-none">
 
                                 暂时没有任何未读站内信
@@ -150,9 +150,9 @@
 
                     <div class="panel-footer text-sm">
 
-                        <a href="mail_unread.php" class="pull-right"><i class="fa fa-cog"></i></a>
+                        <a href="<{$SITE_DOMAIN}>/mail_all.php" class="pull-right"><i class="fa fa-cog"></i></a>
 
-                        <a href="mail_unread.php" data-toggle="class:show animated fadeInRight">查看所有站内信</a>
+                        <a href="<{$SITE_DOMAIN}>/mail_all.php">查看所有站内信</a>
 
                     </div>
 
@@ -179,13 +179,13 @@
             <ul class="dropdown-menu animated fadeInRight">
                 <li>
 
-                    <a href="profile.php?id=<{$header_user_id}>">个人中心</a>
+                    <a href="<{$SITE_DOMAIN}>/profile.php?id=<{$header_user_id}>">个人中心</a>
 
                 </li>
 
                 <li>
 
-                    <a href="mail_all.php">
+                    <a href="<{$SITE_DOMAIN}>/mail_all.php">
 
 		<{if $header_mail_count > 0}>
                         <span class="badge bg-danger pull-right"><{$header_mail_count}></span>

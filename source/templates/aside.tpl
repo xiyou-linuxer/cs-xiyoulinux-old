@@ -32,7 +32,7 @@
 
     <li>
 
-        <a href="index.php">
+        <a href="<{$SITE_DOMAIN}>/index.php">
 
             <i class="icon-home"></i>
 
@@ -46,7 +46,7 @@
 <{section name=n loop=$aside_app_list}>
     <li>
 
-        <a href="http://cs.xiyoulinux.org/plugins/<{$aside_app_list[n].app_home}>">
+        <a href="<{$SITE_DOMAIN}>/app/<{$aside_app_list[n].app_home}>">
 
             <i class="<{$aside_app_list[n].app_icon}> icon text-success"></i>
 
@@ -79,7 +79,7 @@
 
     <li>
 
-        <a href="profile.php">
+        <a href="<{$SITE_DOMAIN}>/profile.php">
 
             <i class="icon-user icon"></i>
 
@@ -105,7 +105,7 @@
 
             
             <span>站内信</span>
-            <{if $aside_unread_count > 0}>
+            <{if $aside_unread_count > 0 }>
             <b class="badge bg-info" style="margin-left:1em;"><{$aside_unread_count}></b>
             <{/if}>
         </a>
@@ -114,7 +114,7 @@
 
             <li >
 
-                <a href="mail_edit.php" class="auto">
+                <a href="<{$SITE_DOMAIN}>/mail_edit.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -128,7 +128,7 @@
 
             <li >
 
-                <a href="mail_all.php" class="auto">
+                <a href="<{$SITE_DOMAIN}>/mail_all.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -139,7 +139,7 @@
             </li>
             <li >
 
-                <a href="mail_send.php" class="auto">
+                <a href="<{$SITE_DOMAIN}>/mail_send.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -150,7 +150,7 @@
             </li>
             <li >
 
-                <a href="mail_read.php" class="auto">
+                <a href="<{$SITE_DOMAIN}>/mail_read.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -162,7 +162,7 @@
 
             <li >
 
-                <a href="mail_unread.php" class="auto">
+                <a href="<{$SITE_DOMAIN}>/mail_unread.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -178,7 +178,7 @@
 
             <li >
 
-                <a href="mail_draft.php" class="auto">
+                <a href="<{$SITE_DOMAIN}>/mail_draft.php" class="auto">
 
                     <i class="fa fa-angle-right text-xs"></i>
 
@@ -220,23 +220,23 @@
         <ul class="nav dk text-sm">
 
             <li>
-                <a href="load_adduser.php"> <i class="icon-plus icon text-success"></i>
+                <a href="<{$SITE_DOMAIN}>/load_adduser.php"> <i class="icon-plus icon text-success"></i>
                     <span class="font-bold">添加用户</span>
                 </a>
             </li>
             <li>
-                <a href="load_deluser.php"> <i class="fa fa-trash-o icon text-danger"></i>
+                <a href="<{$SITE_DOMAIN}>/load_deluser.php"> <i class="fa fa-trash-o icon text-danger"></i>
                     <span class="font-bold">删除用户</span>
                 </a>
             </li>
             <li>
-                <a href="load_reflash.php">
+                <a href="<{$SITE_DOMAIN}>/load_reflash.php">
                     <i class="icon-refresh icon text-info"></i>
                     <span class="font-bold">权限移交</span>
                 </a>
             </li>
             <li>
-                <a href="load_appmanager.php">
+                <a href="<{$SITE_DOMAIN}>/load_appmanager.php">
                     <i class="icon-grid icon text-primary-lter"></i>
                     <span class="font-bold">应用管理</span>
                 </a>

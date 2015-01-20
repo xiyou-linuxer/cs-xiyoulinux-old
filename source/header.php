@@ -33,6 +33,7 @@ if (!isset($mail_objects->result)) {
     $tpl->assign('header_mail_list', $mail_list);
 }
 
+$tpl->assign('SITE_DOMAIN', SITE_DOMAIN);
 $tpl->assign('header_mail_count', $unread_mail_count);
 $tpl->assign('header_username', $username);
 $tpl->assign('header_user_id', $_COOKIE['uid']);

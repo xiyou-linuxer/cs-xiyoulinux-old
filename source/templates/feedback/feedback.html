@@ -63,17 +63,13 @@
                       <a href="#" class="panel-toggle text-muted"><i class="fa fa-caret-down text-active"></i><i class="fa fa-caret-up text"></i></a>
                     </li>
                   </ul>
-                  关于“<{$GET_SEARCH}>”的bug：
+                  关于“<{$POST_SEARCH}>”的bug：
                 </header>
                 <section class="panel-body" style="overflow-y:auto">
 		<{section name=times loop=$search_bug}>
                   <article class="media">
                     <div class="media-body">
-			<span class="label <{if $commited_bug[times].status eq "0"}>label-info">新发布</span><{/if}>
-					 <{if $commited_bug[times].status eq "1"}>label-danger">修复中</span><{/if}>
-					 <{if $commited_bug[times].status eq "2"}>label-success">已修复</span><{/if}>
-					 <{if $commited_bug[times].status eq "3"}>label-default">已关闭</span><{/if}>
-
+		      <span class="label label-success">已修复</span>
                       <a href="<{$SITE_DOMAIN}>/app/feedback/display_bug.php?bug_name=<{$search_bug[times].bugid}>" class="h5"><{$search_bug[times].name}></a>
                     </div>
                   </article>
@@ -83,7 +79,7 @@
               </section>
 	      <{/if}>
 
-	     <section class="panel panel-info portlet-item bug-list-panel">
+	     <section class="panel panel-success portlet-item bug-list-panel">
                 <header class="panel-heading">
                   <ul class="nav nav-pills pull-right">
                     <li>
@@ -104,7 +100,7 @@
 		<{/section}>
                 </section>
               </section>
-	      <section  class="panel panel-success portlet-item bug-list-panel">
+	      <section  class="panel panel-info portlet-item bug-list-panel">
                 <header class="panel-heading">
                   <ul class="nav nav-pills pull-right">
                     <li>
@@ -140,9 +136,9 @@
 		<{section name=times loop=$commited_bug}>
                   <article class="media">
                     <div class="media-body">
-		      <span class="label <{if $commited_bug[times].status eq "0"}>label-info">新发布</span><{/if}>
+		      <span class="label <{if $commited_bug[times].status eq "0"}>label-success">新发布</span><{/if}>
 					 <{if $commited_bug[times].status eq "1"}>label-danger">修复中</span><{/if}>
-					 <{if $commited_bug[times].status eq "2"}>label-success">已修复</span><{/if}>
+					 <{if $commited_bug[times].status eq "2"}>label-info">已修复</span><{/if}>
 					 <{if $commited_bug[times].status eq "3"}>label-default">已关闭</span><{/if}>
                       <a href="<{$SITE_DOMAIN}>/app/feedback/display_bug.php?bug_name=<{$commited_bug[times].bugid}>" class="h5"><{$commited_bug[times].name}></a>
                     </div>
@@ -167,6 +163,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		      <h4 class="modal-title text-center" >提示</h4>
                     </div>
                     <div class="modal-body text-center">
 			<h5 class="modal-title text-center" id="tips-modal-title"></h5>
@@ -203,7 +200,15 @@
                         }
 			return false;
                       });
-                   });
+		      $('#btn-modal-close').click(function() {
+			if($('#bug-content').val()!="" && $('#bug-method').val()!="" && $('#bug-title').val()!="")
+			{
+                        	window.location = '<{$SITE_DOMAIN}>/app/feedback/feedback.php';
+                        	return false;
+			}
+                      });
+
+                  });
              </script>
             </section>
           </section>
