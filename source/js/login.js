@@ -7,6 +7,7 @@ $(document).ready(function(){
             checknum: $('[name=checknum]').val()
         };
 		$.post('server/login.server.php', param, function(data){
+console.log(data);
 				if(data.substring(0,4) == 'true' ){
 					$.get("server/online.server.php?uid="+data.substring(5)+"&logout=false",function(){});
 				//	var last_page = get_cookie('last_page');

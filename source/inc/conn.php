@@ -1,4 +1,5 @@
 <?php
+include_once(dirname(dirname(__FILE__)) . '/config.php');
 class Csdb{
 	private $hostname;
 	private $dbuser;
@@ -11,12 +12,12 @@ class Csdb{
 	
 	function __construct()
 	{
-		$hostname = "localhost";
-		$dbuser = "root";
-		$dbpwd = "cs-linux";
-		$dbname = "cs_linux";
-		$charName = "utf8";
-
+		$hostname = MYSQL_DB_HOST;
+		$dbuser = MYSQL_DB_USER;
+		$dbpwd = MYSQL_DB_PASSWORD;
+		$dbname = MYSQL_DB_NAME;
+		$charName = MYSQL_DB_CHARSET;
+		
 		$this->db = new mysqli($hostname, $dbuser, $dbpwd, $dbname);
 
 		if (mysqli_connect_errno())

@@ -11,9 +11,9 @@ define('BASE_PATH', dirname(__FILE__));
 define('SITE_DOMAIN','http://cs.xiyoulinux.org');
 
 /*数据库用户名*/
-define('MYSQL_USER_NAME', 'root');
+define('MYSQL_USER_NAME', '***');
 /*数据库密码*/
-define('MYSQL_USER_PASSWORD', 'cs-linux');
+define('MYSQL_USER_PASSWORD', '***');
 /*数据库名*/
 define('MYSQL_DB_NAME', 'cs_linux');
 /*数据库字符集*/
