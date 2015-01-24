@@ -10,6 +10,7 @@
 require_once('../inc/admin.class.php');
 require_once('../inc/user.class.php');
 require_once('../inc/function.php');
+require_once('../inc/plugin.class.php');
 
 $admin = new Admin();
 $user = new User();
@@ -24,29 +25,92 @@ if (isset($_POST['uid'])){
     $uid = $_POST['uid'];
 }
 
-switch($func){
-    case 'getAllGrade':
-        echo $admin->getAllGrade();
-        break;
-    case 'getMemberByGrade':
-        echo getMemberByGrade($grade);
-        break;
-    case 'deleteUser':
-        echo deleteUser($uid);
-        break;
-    case 'addUser':
-        echo addUser();
-        break;
-    case 'reflash':
-        echo reflash();
-        break;
-    case 'checkMailCanUse':
-        echo checkMailCanUse();
-        break;
-    case 'checkPhoneCanUse':
-        echo checkPhoneCanUse();
-    default :
-        break;
+if (isset($func)){
+    switch($func){
+        case 'getAllGrade':
+            echo $admin->getAllGrade();
+            break;
+        case 'getMemberByGrade':
+            echo getMemberByGrade($grade);
+            break;
+        case 'deleteUser':
+            echo deleteUser($uid);
+            break;
+        case 'addUser':
+            echo addUser();
+            break;
+        case 'reflash':
+            echo reflash();
+            break;
+        case 'checkMailCanUse':
+            echo checkMailCanUse();
+            break;
+        case 'checkPhoneCanUse':
+            echo checkPhoneCanUse();
+            break;
+        case 'getAppList':
+            echo getAppList();
+            break;
+        case 'changeAppStatus':
+            echo changeAppStatus();
+            break;
+        case 'flush':
+            echo flushAppList();
+            break;
+        default :
+            break;
+    }
+}
+
+/*
+ * 刷新应用
+ * @return int 成功返回1  其余返回0
+ * */
+function flushAppList(){
+        $plugin = new Plugin();
+        if ($plugin = $plugin->flush_app_list()){
+                return 1;
+        }
+        return 0;
+}
+
+//$plugin = new Plugin();
+//var_dump($plugin->change_app('feedback', 1));
+/**
+ * 获取应用列表
+ * @return string
+ */
+function getAppList(){
+    $plugin = new Plugin();
+    $list = $plugin->get_all_app_list();
+
+    foreach($list as $row){
+        $json = json_decode($row['attr'], true);
+
+        if ($row['status'] == '1'){
+            $onlineapp[] = array('dis_name'=>$json['aside']['dis_name'], 'name'=>$row['name']);
+        }else{
+            $offlineapp[] = array('dis_name'=>$json['aside']['dis_name'], 'name'=>$row['name']);
+        }
+   }
+    $result = array("online"=>$onlineapp, "offline"=>$offlineapp);
+    return json_encode($result);
+}
+
+/**
+ * @return int 返回 1:代表成功 其余失败
+ */
+function changeAppStatus(){
+    if (!isset($_POST['name']) || !isset($_POST['status'])){
+        return 0;
+    }
+    $name = $_POST['name'];
+    $status = $_POST['status'];
+    $plugin = new Plugin();
+    if ($plugin->change_app($name, $status)){
+        return 1;
+    }
+    return 0;
 }
 
 /**
@@ -124,6 +188,11 @@ function checkMailCanUse(){
     }else{
         $mail = $_POST['mail'];
     }
+
+    if (is_null($mail) || $mail == ''){
+            return 1;
+    }
+
     if (!checkStr('mail', $mail)){
         return 0;
     }
@@ -143,15 +212,19 @@ function checkPhoneCanUse(){
         $phone = $_POST['phone'];
     }
 
+    if (is_null($phone) || ($phone == '')){
+            return 1;
+    }
+
     if (!checkStr('phone', $phone)){
-        return 0;
+        return 1;
     }
 
     $user = new User();
     return boolean2Num(!$user->check_data($phone, 'phone'));
 }
-
-//var_dump(addUser("测试测",1,"2342422247@qq.com", 2014, "计算科学与技术", '', '', ''));
+ 
+//var_dump(addPackingUser("测试测是",1,"qasdasd23@qq.com", 2014, "计算科学与技术", '', '', ''));
 
 /**
  * 新添用户接口,对user.class.php里的add_user进行再封装

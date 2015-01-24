@@ -6,7 +6,7 @@ include('aside.php');
 include('chat.php');
 include('footer.php');
 
-include_onec('access_ctl.php');
+include_once('access_ctl.php');
 if (checkPermisson() == 1){
         $tpl->display('admin_adduser.tpl');
 }else{

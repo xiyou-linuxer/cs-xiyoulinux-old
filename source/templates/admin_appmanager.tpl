@@ -12,57 +12,60 @@
 	<section class="panel panel-default">
 		<div class="panel-body">
 
-			<div class="col-sm-2">
-				<button class="btn btn-info">
+                <h4 class="m-t-none">
+                应用管理
+                <button class="btn btn-info" id="flush-btn">
+                        <a href="#">刷新列表</a>
+                </button>
+                <h4>
+                      <!--  <div class="col-sm-2">
+
+                       		<button class="btn btn-info">
 					<a href="server/admin_appscan.php">应用管理</a>
 				</button>
-			</div>
+                        </div>-->
+                </div>
 
 			<div class="line line-dashed b-b line-lg pull-in col-sm-12"></div>
 
 			<div class="panel-body">
 
-				<form class="form-inline col-sm-6" role="form" action="server/admin_online.php" method="post">
+				<form class="form-inline col-sm-6" role="form" >
 					<div class="form-group">
 						<label class="col-sm-2 control-label">下线</label>
 						<div class="col-sm-10">
-							<select name="onlineapp" style="width:260px" class="chosen-select">
-								<optgroup label="目前运行应用">
-									<{section name =times loop = $onlineapp }>
-									<option value="CT"><{$onlineapp[times].app}></option>
-								<!--	<option value="CT">招聘</option>
-									<option value="CT">活动</option>-->
-									<{/section}>
-								</optgroup>
+							<select name="onlineapp" style="width:260px" class="chosen-select" id="online-select">
+							<!--	<optgroup label="目前运行应用">
+									<option value="CT"><{$onlineapp[times]}></option>
+									<option value="CT">招聘</option>
+									<option value="CT">活动</option>
+								</optgroup>-->
 							</select>
 						</div>
 					</div>
 					<div class="line line-dashed b-b line-lg pull-in col-sm-12"></div>
 
 					<div class="col-sm-offset-3">
-						<button type="submit" class="btn btn-danger">确认下线</button>
+						<button type="button" id="offline-btn" class="btn btn-danger">确认下线</button>
 					</div>
 				</form>
 
-				<form class="form-inline col-sm-6" role="form" action="server/admin_offline.php" method="post">
+				<form class="form-inline col-sm-6" role="form" >
 					<div class="form-group">
 						<label class="col-sm-2 control-label">上线</label>
 						<div class="col-sm-10">
-							<select name="offlineapp" style="width:260px" class="chosen-select">
-								<optgroup label="目前下线应用">
-								        <{section name =times loop = $offlineapp }>
-									<option value="CT"><{$offlineapp[times].app}></option>
-									<!--<option value="CT">项目</option>
-									<option value="CT">基金</option>-->
-									<{/section}>
-								</optgroup>
+							<select name="offlineapp" style="width:260px" class="chosen-select" id="offline-select">
+								<!--<optgroup label="目前下线应用">
+									<option value="CT">项目</option>
+									<option value="CT">基金</option>
+                                                                </optgroup>-->
 							</select>
 						</div>
 					</div>
 					<div class="line line-dashed b-b line-lg pull-in col-sm-12"></div>
 
 					<div class="col-sm-3 col-sm-offset-3">
-						<button type="submit" class="btn btn-success">确认上线</button>
+						<button type="button" id="online-btn" class="btn btn-success">确认上线</button>
 					</div>
 
 				</form>
@@ -75,5 +78,5 @@
 <{include file="chat.tpl"}>
 <{include file="script.tpl"}>
 <script type="text/javascript" src="js/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="js/adduser.js"></script>
+<script type="text/javascript" src="js/admin_appmanager.js"></script>
 <{include file="footer.tpl"}>
