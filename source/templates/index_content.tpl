@@ -47,4 +47,14 @@
 <{include file="mini_aside.tpl"}>
 <{include file="chat.tpl"}>
 <{include file="script.tpl"}>
+<script type="text/javascript" src="<{$SITE_DOMAIN}>/js/fresh.js"></script>
+<script>
+        $('.mini-aside').each(function() {
+                var elem = $(this);
+                var func_url = '<{$SITE_DOMAIN}>' + $(this).data('funcurl') + '?func=aside_html';
+                $.get(func_url, function(data){
+                        elem.html(data);
+                });
+        });
+</script>
 <{include file="footer.tpl"}>

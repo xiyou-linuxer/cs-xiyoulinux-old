@@ -10,7 +10,7 @@ class Updata {
 		$link = $this->getlink();
 		$result = $link->query($sql_str);
 		if ($result == false)
-			echo $error_str;
+			echo $error_str." | ".$sql_str;
 		if (is_object($result))
 		{
 			if($result->num_rows > 0)

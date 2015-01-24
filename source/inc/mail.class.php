@@ -24,6 +24,7 @@ class Mail{
 		if ($result == false)
 			echo $error_str;
 
+		$array = array();
 		if (is_object($result))
 		{
 			if($result->num_rows > 0)
@@ -401,6 +402,17 @@ class Mail{
 		return json_encode($new_result);
 	}
 
+	public function set_mail_readed($mid,$uid)
+	{
+		$sql = "select touid from cs_mail where mid=$mid;";
+		$touid_json = $this->link_result($sql, "get mail info error");
+		$touid = json_decode($touid_json[0]["touid"]);
+		$touid->{$uid} = "1";
+		$touid_json = json_encode($touid);
+		$sql = "update cs_mail set touid='$touid_json' where mid=$mid;";
+		return $this->link_result($sql, "update mail info error");
+	}
+
 	public function get_mail_info($mid)		//G
 	{
 		$sql = "select isdraft from cs_mail where mid=$mid;";
@@ -416,12 +428,23 @@ class Mail{
 		$touid_json = $this->link_result($touid_sql, "select touid error");
 		$touid = json_decode($touid_json[0]["touid"]);
 		if ( $isdraft == 0 ) {
-			$touid->{$this->uid} = "1";
-			$touid_json = json_encode($touid);
-			$sql = "update cs_mail set touid='$touid_json' where mid=$mid;";
-			$this->link_result($sql, "update mail info error");
+			//$touid->{$this->uid} = "1";
+			//$touid_json = json_encode($touid);
+			//$sql = "update cs_mail set touid='$touid_json' where mid=$mid;";
+			//$this->link_result($sql, "update mail info error");
+			foreach ( $touid as $key=>$value) {
+				if ( $key != _empty_ )
+					$users[] = $this->uid_to_name($key);
+				else
+					$users[] = " ";
+			}
+			$users = implode(",",$users );
+			$result[0]["touser"] = "$users";
+            		$result[0]["isdraft"] = "false";
+
 			return json_encode($result);
 		}
+
 		else {
 			foreach ( $touid as $key=>$value) {
 				if ( $key != _empty_ )

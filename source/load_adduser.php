@@ -6,6 +6,13 @@ include('aside.php');
 include('chat.php');
 include('footer.php');
 
-$tpl->display('admin_adduser.tpl');
+include_onec('access_ctl.php');
+if (checkPermisson() == 1){
+        $tpl->display('admin_adduser.tpl');
+}else{
+        echo "<script languege=\"javascript\">";
+        echo "document.loaction=\"index.php\"";
+        echo "</script>";
+}
 
 ?>

@@ -1,10 +1,11 @@
 <?php
-
-include_once('../../init.php');
-include('../../header.php');
-include('../../aside.php');
-include('../../chat.php');
-include('../../footer.php');
+include_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+include_once(BASE_PATH . '/init.php');
+echo 'hello';
+include_once(BASE_PATH . '/header.php');
+include(BASE_PATH . '/aside.php');
+include(BASE_PATH . '/chat.php');
+include(BASE_PATH . '/footer.php');
 include('bug.class.php');
 
 $GET_SEARCH = $_GET['search_bug'];
@@ -37,9 +38,9 @@ $tpl->assign('fixed_bug',$fixed_bug);
 
 $tpl->assign('commited_bug',$commited_bug);
 
-$tpl->display('header.html');
-$tpl->display('aside.html');
-$tpl->display('feedback/feedback.html');
-$tpl->display('chat.html');
-$tpl->display('footer.html');
+$tpl->display('header.tpl');
+$tpl->display('aside.tpl');
+$tpl->display('feedback/feedback.tpl');
+$tpl->display('chat.tpl');
+$tpl->display('footer.tpl');
 ?>

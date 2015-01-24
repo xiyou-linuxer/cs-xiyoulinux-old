@@ -8,7 +8,7 @@
 /*网站根目录*/
 define('BASE_PATH', dirname(__FILE__));
 /**/
-define('SITE_DOMAIN','http://dev.xiyoulinux.org/cs_zyj');
+define('SITE_DOMAIN','http://cs.xiyoulinux.org');
 
 /*数据库用户名*/
 define('MYSQL_USER_NAME', 'root');
@@ -21,6 +21,5 @@ define('MYSQL_CHARSET', 'utf8');
 
 /*Smary相关配置*/
 define('SMARTY_HOME_PATH', '/usr/local/lib/php/smarty');
-define('SMARTY_CLASS_PATH', SMARTY_HOME_PATH . 'Smarty.class.php');
 
 ?>

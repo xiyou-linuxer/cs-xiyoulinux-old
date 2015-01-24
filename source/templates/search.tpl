@@ -2,6 +2,7 @@
 <{include file="header_nav.tpl"}>
 <{include file="aside.tpl"}>
 <section class="vbox stretch">	
+<section class="scrollable wrapper-lg" id="bjax-target">
 <div class="alert alert-success" role="alert" >
 	<p>"<{$search}>"搜索结果如下：</p>
 	</div>
@@ -19,16 +20,16 @@
                     <li class="list-group-item">
                       <div class="media">
                      <span class="pull-left thumb-sm"><img src="<{$quesArray[times].picture}>" alt="" class="img-circle"></span>
-                           <div class="col-sm-9">
+                           <div class="col-sm-10">
                             <a href="<{$quesArray[times].href}>"><strong class="block"><{$quesArray[times].title}></strong></a>
                             <a href="<{$quesArray[times].writerhref}>"><small><{$quesArray[times].writer}></small></a>
-                          </div>
-                          <div class="col-sm-10">
-                            <small><p align="left"><{$quesArray[times].answer}></p></small>
-                        <p align="right">
-                           <small><{$quesArray[times].time}></small>
-                         </p>
-                        </div>
+                            <div style="margin-top:10px;">
+                                <small><p align="left"><{$quesArray[times].answer}></p></small>
+                                    <p align="right">
+                                        <small><{$quesArray[times].time}></small>
+                                    </p>
+                            </div>
+                            </div>
                        </div>
                     </li>
 
@@ -63,6 +64,7 @@
               </section>
             </div>
           </div>
+	</section>
 </section>
 <{include file="chat.tpl"}>
 <{include file="script.tpl"}>

@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(BASE_PATH . "/server/fresh.server.php");
+
+require_once("/usr/local/lnmp/nginx/html/cs/server/fresh.server.php");
 
 function get_message($a, $uid, $mid, $start){
 	$m = $a->get("uid_mid", $uid, $mid, $start);
@@ -20,8 +20,8 @@ function get_message($a, $uid, $mid, $start){
 			".$m['time']."</span>
 			</header>
 			<div class='panel-body'>
-			<h4><a href=".$m['href']." </a>".$m['mdescribe']."</br>".$m['message']."</h4>
-			<div class='line pull-in'></div></div>
+			<h4><a href=".$m['href'].">".$m['mdescribe']."</a></h4>
+			<div class='panel-body'><blockpanel-bodyquote><p>".$m['message']."</blockquote></div>
 			</section>
 			</article>";
 

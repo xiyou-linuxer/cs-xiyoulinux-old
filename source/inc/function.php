@@ -35,38 +35,44 @@ function checkArr($checkArr){	//检查对应类型，参数是数组
 }
 
 function checkStr($type,$desStr){	//看代码都懂
-	$result = false;
+    $result = false;
 
-	switch($type){
-	case 'digit':
-		$result = (preg_match("/^\d+$/",$desStr) > 0);
-		break;
-	case 'phone':
-		$result = (preg_match("/^[\d-]+$/",$desStr) > 0);
-		break;
-	case 'mail':
-		//$result = (preg_match("/^\w+@\w+\.com$/",$desStr) > 0);
-		$result = (preg_match("/^\w+@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]*([\.][a-z]*)?$/",$desStr) > 0);
-		break;
-	case 'chinese':
-		$result = (preg_match("/^[\x{4e00}-\x{9fa5}]+$/u",$desStr) > 0);
-		break;
-	case 'normal':
-		$result = (preg_match("/^\w+$/",$desStr) > 0);
-		break;
-    case 'site':
-        $result = (preg_match("/^[a-zA-z]+:\/\/[^\s]*$/",$desStr) > 0);
-        break;
-	/*case 'site':
-		$result = (preg_match("/^\w+\.\w+$/",$desStr) > 0);
-        if (!$result)
-            echo "destr:".$desStr."type:".$type;
-		break;*/
+    switch($type){
+        case 'digit':
+            $result = (preg_match("/^\d+$/",$desStr) > 0);
+            break;
+        case 'phone':
+            $result = (preg_match("/^\d{3}-\d{8}|\d{4}-\{7,8}|1\d{10}$/",$desStr) > 0);
+            break;
+        case 'mail':
+            $result = (preg_match("/^[\w!#$%&'*+\/=?^_`{|}~-]+(?:\.[\w!#$%&'*+\/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?$/",$desStr) > 0);
+            break;
+        case 'chinese':
+            $result = (preg_match("/^[\x{4e00}-\x{9fa5}]+$/u",$desStr) > 0);
+            break;
+        case 'normal':
+            $result = (preg_match("/^\w+$/",$desStr) > 0);
+            break;
+        case 'site':
+            $result = (preg_match("/^[a-zA-z]+:\/\/[^\s]*$/",$desStr) > 0);
+            break;
+        case 'weixin':
+            $result = (preg_match("/^[a-zA-Z][a-zA-Z\d-_]{5,19}$/", $desStr) > 0);
+            break;
+        case 'qq':
+            $result = (preg_match("/^\d{5,12}$/", $desStr) > 0);
+            break;
+        /*case 'site':
+            $result = (preg_match("/^\w+\.\w+$/",$desStr) > 0);
+            if (!$result)
+                echo "destr:".$desStr."type:".$type;
+            break;*/
 
-	default:
-		break;
-	}
-	return $result;
+        default:
+            break;
+    }
+    
+    return $result;
 }
 
 function substr_utf8($string,$start,$length, $flag)  

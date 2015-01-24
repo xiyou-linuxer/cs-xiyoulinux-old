@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(BASE_PATH . "/inc/conn.php");
-require_once(BASE_PATH . "/inc/user.class.php");
+
+require_once("/usr/local/lnmp/nginx/html/cs/inc/conn.php");
+require_once("/usr/local/lnmp/nginx/html/cs/inc/user.class.php");
 
 class GetArt{
 	private $conn;
