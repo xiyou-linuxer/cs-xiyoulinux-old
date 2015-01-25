@@ -8,6 +8,9 @@ $(document).ready(function(){
      * 检测手机号是否输入正确
      */
     $("input[name='telphone']").focusout(function(){
+//                console.log("val: " + $("input[name='telphone']").val());
+  //              console.log("boolean: " + checkMailCanUse($("input[name='telphone']").val()));
+
         if (checkPhoneCanUse($("input[name='telphone']").val()) != 1){
             if ($("input[name='telphone']").nextAll().html() == undefined){
                 $("input[name='telphone']").after('<label class=" control-label" name="warn"><p class="text-danger">该手机号不可使用，请重新输入。</p></label>');
@@ -21,8 +24,8 @@ $(document).ready(function(){
      * 检测邮箱是否输入正确
      */
     $("input[name='email']").focusout(function(){
-        console.log("val: " + $("input[name='email']").val());
-        console.log("boolean: " + checkMailCanUse($("input[name='email']").val()));
+//        console.log("val: " + $("input[name='email']").val());
+  //      console.log("boolean: " + checkMailCanUse($("input[name='email']").val()));
         if (checkMailCanUse($("input[name='email']").val()) != 1){
             if ($("input[name='email']").nextAll().html() == undefined){
                 $("input[name='email']").after('<label class=" control-label" name="warn"><p class="text-danger">该邮箱不可使用，请重新输入。</p></label>');
@@ -72,7 +75,7 @@ function checkMailCanUse(mail){
             mail: mail
         }
         ,success: function (data) {
-            console.log("data: " + data)
+    //        console.log("data: " + data)
             isok = data;
         }
     });
@@ -95,7 +98,7 @@ function checkPhoneCanUse(phone){
             phone:phone
         }
         ,success: function (data) {
-            //console.log("data: " + data)
+            console.log("data: " + data)
             isok =  data;
         }
     });

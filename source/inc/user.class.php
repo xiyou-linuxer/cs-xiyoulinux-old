@@ -1,6 +1,6 @@
 <?php
-	require_once("conn.php");
-	require_once("function.php");
+	require_once(dirname(__FILE__) . "/conn.php");
+	require_once(dirname(__FILE__) . "/function.php");
 	
 class User{
 	private $conn;
@@ -33,13 +33,13 @@ class User{
 			"$workplace" => 'chinese',
 			"$job"  => 'chinese'
 		);
-		if( !checkArr($checkArr) )
-			return false;
-
-        if (checkStr('mail', $mail))
+        if( !checkArr($checkArr) )
             return false;
 
-        if (!empty($phone) && checkStr('phone', $phone)){
+        if (!empty($mail) && $this->check_data($mail, 'mail'))
+            return false;
+         
+        if (isset($phone) && $this->check_data($phone, 'phone')){
             return false;
         }
 
@@ -79,7 +79,7 @@ class User{
 		return false;
 		
 	}
-	public function get_userinfo($uid){
+        public function get_userinfo($uid){
 		if( !checkStr('digit',$uid) ){
 			return false;
 		}
@@ -119,7 +119,14 @@ class User{
             "$job"  => 'chinese'
         );
         if( !checkArr($checkArr) )
+                return false;
+        if (!empty($mail) && $this->check_data($mail, 'mail'))
             return false;
+         
+        if (isset($phone) && $this->check_data($phone, 'phone')){
+            return false;
+        }
+
         $sql = "UPDATE `cs_user` SET phone='$phone',mail='$mail',qq='$qq',wechat='$wechat', blog='$blog',github='$github',native='$native',major='$major',workplace='$workplace',job='$job' WHERE uid='$uid'";
 
         $link = new Csdb();
@@ -258,22 +265,25 @@ class User{
 
     /*by liaoshengxin 2015.01.14  22:17*/
     /***检查是否存在邮箱或者手机，若存在则返回true,不存在则返回false***/
-    public function check_data($data,$tag){
-        if($tag == 'phone'){
-            $sql = "select * from cs_user where phone='$data';";
-            $result = $this->conn->query($sql);
-            if($result->num_rows > 0)
-                return true;
-            else
-                return false;
-        }
-        else if($tag == 'mail') {
-            $sql = "select * from cs_user where mail='$data';";
-            $result = $this->conn->query($sql);
-            if($result->num_rows > 0)
-                return true;
-            else
-                return false;
+        public function check_data($data,$tag){
+                if (is_null($data) || ($data == '')){
+                        return false;
+                }
+                if($tag == 'phone'){
+                        $sql = "select * from cs_user where phone='$data';";
+                        $result = $this->conn->query($sql);
+                if($result->num_rows > 0)
+                        return true;
+                else
+                        return false;
+                }
+                else if($tag == 'mail') {
+                        $sql = "select * from cs_user where mail='$data';";
+                        $result = $this->conn->query($sql);
+                if($result->num_rows > 0)
+                        return true;
+                else
+                        return false;
         }
         return true;
     }
