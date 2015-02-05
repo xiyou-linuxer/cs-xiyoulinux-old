@@ -1,6 +1,7 @@
 <?php
-require_once(dirname(dirname(__FILE__)) . "/config.php");
-require_once("conn.php");
+
+
+require_once(dirname(__FILE__) . "/conn.php");
 
 class Plugin{
 	private $conn;
@@ -9,15 +10,15 @@ class Plugin{
 		$this->conn = new Csdb();
 	}
 	public function flush_app_list(){
-		$handle = opendir(BASE_PATH . "/app");
+		$handle = opendir("/usr/local/lnmp/nginx/html/dev/cs_ll/app");
 		if($handle){
 			while (false !== ($file = readdir($handle))){
 				if($file != '..' && $file != '.'){
-					$xml = $this->parse_app(BASE_PATH . "/app/$file/config");
+					$xml = $this->parse_app("/usr/local/lnmp/nginx/html/dev/cs_ll/app/$file/config");
 					if( $xml ){
 						$status = $this->conn->query("SELECT * FROM cs_app where name='$file';");
 						if($status->num_rows == 0){
-                                                        $attr = json_encode($xml);
+							$attr = json_encode($xml, JSON_UNESCAPED_UNICODE);
 							$this->conn->query("insert into cs_app values(NULL,'$file',1,'$attr');");
 						}
 					}
@@ -30,17 +31,26 @@ class Plugin{
 		return true;
 	}
 	public function get_app_list(){
-		$this->flush_app_list();
-		$result = $this->conn->query("select name,attr from cs_app where status=1;");
+		//$this->flush_app_list();
+		$result = $this->conn->query("select * from cs_app where status = 1;");
 		$list = "";
 		while( ($arr = $result->fetch_assoc()) )
 			$list[] = $arr;
 		if($list === "")
 			return false;
 		return $list;
-	}
+        }
+        public function get_all_app_list(){
+                $result = $this->conn->query("select * from cs_app;");
+                $list = "";
+                while( ($arr = $result->fetch_assoc()) )
+                        $list[] = $arr;
+                if($list == "")
+                        return false;
+                return $list;
+        }
 	public function change_app($file,$status){
-		if( is_file(BASE_PATH . "/app/$file/config") ){	
+		if( is_file("../app/$file/config") ){	
 			$query_str = "update `cs_app` set status=$status where name='$file';";
 			$result = $this->conn->query($query_str);
 			if($result)
