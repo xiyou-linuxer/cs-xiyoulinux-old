@@ -95,7 +95,7 @@
       $self.slimScroll($data);
     });
 	});	
-
+/*
 	// portlet
 	$('.portlet').each(function(){
 		$(".portlet").sortable({
@@ -111,7 +111,7 @@
             tolerance: 'pointer'
 	    });
     });
-
+*/
 	// docs
   $('#docs pre code').each(function(){
 	    var $this = $(this);

@@ -1,31 +1,30 @@
 <?php
-include('header.php');
-include('aside.php');
-include('chat.php');
-include('footer.php');
+require_once('init.php');
 
-$mail = new Mail($_COOKIE['uid']);
+$mailObj = new MailClass($_COOKIE['uid']);
 
-$json = $mail->get_mail_list(2);
-$mail_objects = json_decode($json);
+$json_str = $mailObj->get_mail_list(2);
+$mail_info_array = json_decode($json_str);
 
-if (!isset($mail_objects->result)) {
-    $mail_list= array();
-    foreach ( $mail_objects as $mail ) {
+$mail_info_list= array();
+if (!isset($mail_info_array->result)) {
+    foreach ( $mail_info_array as $mail_obj ) {
         $item = array(
-            'mid'=>$mail->mid,
-            'title'=>$mail->title,
-            'date'=>$mail->date,
-            'fromuser'=>$mail->fromuser,
-            'status'=>$mail->status);
-        array_push($mail_list, $item);
+            'mid'=>$mail_obj->mid,
+            'title'=>$mail_obj->title,
+            'date'=>$mail_obj->date,
+            'fromuser'=>$mail_obj->fromuser,
+            'status'=>$mail_obj->status
+        );
+        array_push($mail_info_list, $item);
     }
-    $tpl->assign('mail_list', $mail_list);
 }
-
+/*
 $last_page = basename($_SERVER['SCRIPT_FILENAME']);
 setcookie('last_page',$last_page, time()+3600);
 setcookie('mail_type','read', time()+3600);
+*/
+$smarty->assign('mail_info_list', $mail_info_list);
 
-$tpl->display('mail_list.tpl');
+$smarty->display('mail_list.tpl');
 ?>

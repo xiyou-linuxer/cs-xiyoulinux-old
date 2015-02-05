@@ -1,48 +1,37 @@
 <?php
-
-include_once('init.php');
-include('header.php');
-include('aside.php');
-include('chat.php');
-include('footer.php');
+require_once('init.php');
 
 $mid = $_GET['mid'];
-$mail_class = new Mail($_COOKIE['uid']);
-$json_str   = $mail_class->get_mail_info($mid);
-$mail_info  = json_decode($json_str);
-//var_dump($mail_info);
-//echo "asdasd";
+$login_uid = $_COOKIE['uid'];
 
-$tpl->assign('mail_title', $mail_info[0]->title);
-$tpl->assign('mail_content', $mail_info[0]->content);
+$mailObj = new MailClass($login_uid);
+$json_str   = $mailObj->get_mail_info($mid);
+$mail_obj  = json_decode($json_str);
 
-//var_dump($mail_info[0]);
-if ($mail_info[0]->isdraft == 'true') {
-    $tpl->assign('mail_isdraft', 'true');
-    $tpl->assign('mail_touser', $mail_info[0]->touser);
-    $tpl->assign('mail_edit_param', '?mid='.$mid);
-    $tpl->assign('btn_del_caption', "删除草稿");
-    $tpl->assign('btn_edit_caption', "编辑草稿");
-    $tpl->assign('fromuid', $mail_info[0]->fromuid);
-    $tpl->assign('uid', $_COOKIE['uid']);
+$mail_info_array = array();
+$mail_info_array['isdraft'] = $mail_obj[0]->isdraft;
+$mail_info_array['mid'] = $mail_obj[0]->mid;
+$mail_info_array['title'] = $mail_obj[0]->title;
+$mail_info_array['date'] = $mail_obj[0]->date;
+$mail_info_array['fromuid'] = $mail_obj[0]->fromuid;
+$mail_info_array['fromuser'] = $mail_obj[0]->fromuser;
+$mail_info_array['touser'] = $mail_obj[0]->touser;
+$mail_info_array['content'] = $mail_obj[0]->content;
+
+$btn_del_caption = "删除信息";
+$btn_edit_caption = "回复信息";
+if ($mail_obj[0]->isdraft == 'true') {
+    $btn_del_caption = "删除草稿";
+    $btn_edit_caption = "编辑草稿";
 } else {
-    if ( $mail_info[0]->fromuid != $_COOKIE['uid'] )
-    {
-	$mail_class->set_mail_readed($mid, $_COOKIE['uid']);
-    }
-    $tpl->assign('mail_isdraft', 'false');
-    $tpl->assign('mail_fromuser', $mail_info[0]->fromuser);
-    $tpl->assign('mail_date', $mail_info[0]->date);
-    $tpl->assign('mail_edit_param', '?touid='.$mail_info[0]->fromuid);
-    $tpl->assign('btn_del_caption', "删除信息");
-    $tpl->assign('btn_edit_caption', "回复信息");
-    $tpl->assign('fromuid', $mail_info[0]->fromuid);
-    $tpl->assign('uid', $_COOKIE['uid']);
-    $tpl->assign('mail_touser', $mail_info[0]->touser);
-    /*$tpl->assign('fromuid', $mail_info[0]->fromuid);
-    $tpl->assign('uid', $_COOKIE['uid']);
-    $tpl->assign('mail_touser', $mail_info[0]->touser);*/
+    //if ( $mail_obj[0]->fromuid != $login_uid ) {
+	$mailObj->set_mail_readed($mid, $login_uid);
+    //}
 }
 
-$tpl->display('mail_view.tpl');
+$smarty->assign('mail_info', $mail_info_array);
+$smarty->assign('btn_del_caption', $btn_del_caption);
+$smarty->assign('btn_edit_caption', $btn_edit_caption);
+
+$smarty->display('mail_view.tpl');
 ?>

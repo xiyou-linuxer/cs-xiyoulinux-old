@@ -21,5 +21,5 @@ $result = $bug->bug_send($content,$uid,$method,$title);
 if($result)
 	echo '发布成功!';
 else
-	echo false;
+	echo '发布失败!';
 ?>

@@ -1,12 +1,6 @@
 <?php
-include_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-include_once(BASE_PATH . '/init.php');
-echo 'hello';
-include_once(BASE_PATH . '/header.php');
-include(BASE_PATH . '/aside.php');
-include(BASE_PATH . '/chat.php');
-include(BASE_PATH . '/footer.php');
-include('bug.class.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/init.php');
+require_once('bug.class.php');
 
 $GET_SEARCH = $_GET['search_bug'];
 $uid = $_COOKIE['uid'];
@@ -30,17 +24,12 @@ $result_mine = $bug->bug_mine($uid);
 foreach($result_mine as $value_mine)
 	$commited_bug[] = array("name"=>$value_mine['title'],"status"=>$value_mine['status'],"bugid"=>$value_mine['bugid']);
 	
-$tpl->assign('GET_SEARCH', $GET_SEARCH);
+$smarty->assign('GET_SEARCH', $GET_SEARCH);
 
-$tpl->assign('search_bug',$search_bug);
-$tpl->assign('waited_bug',$waited_bug);
-$tpl->assign('fixed_bug',$fixed_bug);
+$smarty->assign('search_bug',$search_bug);
+$smarty->assign('waited_bug',$waited_bug);
+$smarty->assign('fixed_bug',$fixed_bug);
+$smarty->assign('commited_bug',$commited_bug);
 
-$tpl->assign('commited_bug',$commited_bug);
-
-$tpl->display('header.tpl');
-$tpl->display('aside.tpl');
-$tpl->display('feedback/feedback.tpl');
-$tpl->display('chat.tpl');
-$tpl->display('footer.tpl');
+$smarty->display(dirname(__FILE__) . '/templates/feedback.tpl');
 ?>
