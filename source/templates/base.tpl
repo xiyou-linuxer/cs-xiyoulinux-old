@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="<{#SiteDomain#}>/css/font.css" type="text/css" />
 
     <link rel="stylesheet" href="<{#SiteDomain#}>/css/app.css" type="text/css" />
+
+    <link rel="stylesheet" href="<{#SiteDomain#}>/plugins/cs-coms/jquery.coms.css" type="text/css" />
 	
     <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
@@ -44,6 +46,8 @@
 <{block name="scripts"}>
 
     <script type="text/javascript" src="<{#SiteDomain#}>/js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/cs-coms/jquery.coms.js"></script>
 
     <!-- Bootstrap -->
     <script type="text/javascript" src="<{#SiteDomain#}>/js/bootstrap.js"></script>
