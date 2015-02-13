@@ -66,7 +66,7 @@
 
             </form>
 
-            <form class="navbar-form navbar-left input-s-box m-t m-l-n-xs hidden-xs" role="search" action="<{#SiteDomain#}>/server/activity.server.php" method="post">
+            <form class="navbar-form navbar-left input-s-box m-t m-l-n-xs hidden-xs" role="search">
 
                 <div class="form-group">
 
@@ -78,7 +78,7 @@
 
                         </span>
 
-                        <input name="activity_text" type="text" id="activity_text" class="form-control input-sm no-border rounded" placeholder="发表一条新动态...">
+                        <input id="activity_text" type="text" class="form-control input-sm no-border rounded" placeholder="发表一条新动态...">
 
                     </div>
 
@@ -578,6 +578,28 @@
                         elem.html(data);
                     }
                 });
+            });
+
+            //发表动态按钮事件
+            $('#btn_new_activity').click(function() {
+                var actTxt = $('#activity_text').val();
+
+                if (actTxt == '') {
+                    alert('不能发表空动态');
+                    return false;
+                }
+
+                $.post('<{#SiteDomain#}>/server/activity.server.php', {activity_text: actTxt}, function (data) {
+                    var obj = JSON.parse(data);
+
+                    if (obj.state == 'success') {
+                        alert('动态发表成功!');
+                    } else {
+                        alert('动态发表失败!');
+                    }
+                });
+                
+                return false;
             });
 
             //登出按钮事件

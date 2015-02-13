@@ -6,8 +6,12 @@ include_once(BASE_PATH . "/includes/activity.class.php");
 $msg = $_POST["activity_text"];
 $uid = $_SESSION["uid"];
 
+$res = array('state'=>'', 'msg'=>'');
+
 if($msg == "") {
-    echo '<script>alert("对不起，不能发表空动态");window.location.href = "' . SITE_DOMAIN . '/index.php";</script>';
+    $res['state'] = 'failed';
+    $res['msg'] = '不能发表空动态';
+    echo json_encode($res);
     exit;
 }
 
@@ -22,5 +26,8 @@ if ($message == "话题：") $message = "";
 $activityObj = new ActivityClass();
 $activityObj -> insert_activity($uid, 0, $msg, "label-success", "发表动态", $message, "#");
 
-echo '<script>window.location.href = "' . SITE_DOMAIN . '/index.php";</script>';
+$res['state'] = 'success';
+$res['msg'] = '动态发表成功';
+echo json_encode($res);
+
 ?>

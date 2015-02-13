@@ -40,7 +40,7 @@
                                 
                                 <div class="panel-body">
                                     
-                                    <blockquote>
+                                    <blockpanel-bodyquote>
                                         
                                         <p><{$activity_list[activity_list].message}></p>
                                     

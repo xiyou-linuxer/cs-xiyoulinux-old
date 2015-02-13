@@ -290,7 +290,7 @@
 
                                     <h4>
 
-                                        <{$activity_list[activity_list].mdescribe}></h4>
+                                        <a href="<{$activity_list[activity_list].href}>"><{$activity_list[activity_list].mdescribe}></a></h4>
 
                                     <div class="panel-body">
 
