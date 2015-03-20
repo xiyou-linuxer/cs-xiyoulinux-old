@@ -1,12 +1,15 @@
 <{extends file="base.tpl"}>
 
+<{block name="stylesheet" append}>
+<{/block}>
+
 <{block name="frame"}>
 
     <section class="vbox">
 
         <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
 
-            <div class="navbar-header aside bg-info">
+            <div id="navbar_header" class="navbar-header aside bg-info">
 
                 <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
 
@@ -34,7 +37,7 @@
 
                 <li>
 
-                    <a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+                    <a href="#nav,.navbar-header" id="navbar_toggle" data-toggle="class:nav-xs,nav-xs" class="text-muted">
 
                         <i class="fa fa-indent text"></i>
 
@@ -46,7 +49,7 @@
 
             </ul>
 
-            <form class="navbar-form navbar-left input-s-box m-t m-l-n-xs hidden-xs" role="search" action="search.php" method="get">
+            <form class="navbar-form navbar-left input-s-box m-t m-l-n-xs hidden-xs" role="search" action="<{#SiteDomain#}>/search.php" method="get">
 
                 <div class="form-group">
 
@@ -210,7 +213,7 @@
 
                         <li>
 
-                            <a href="#sidebar" data-toggle="class:nav-xs,nav-xs" class="text-muted active">
+                            <a href="#sidebar" id="sidebar_toggle" data-toggle="class:nav-xs,nav-xs" class="text-muted active">
 
                                 <i class="fa fa-indent text"></i>
 
@@ -549,7 +552,47 @@
 <{/block}>
 
 <{block name="scripts" append}>
+    <script type="text/javascript">
+        function get_cookie(name) {
+            var arr = document.cookie.split("; ");
+            for (var i = 0; i < arr.length; i++) {
+                var temp = arr[i].split("=");
+                if (temp[0] == name) {
+                    return unescape(temp[1]);
+                }
+            }
+            return null;
+        }
 
+        function set_cookie(name, value, expire) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() + expire);
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        }
+
+        if (get_cookie("navbar_status") == "close") {
+            var navHeader = document.getElementById("navbar_header");
+            navHeader.className +=" nav-xs";
+            var navbar = document.getElementById("nav");
+            navbar.className +=" nav-xs";
+        }
+        if (get_cookie("sidebar_status") == "close") {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.className +=" nav-xs";
+        }
+
+        var toggle = document.getElementById("navbar_toggle");
+        toggle.addEventListener("click", function () {
+            var status = (get_cookie("navbar_status") == "close") ? "open" : "close";
+            set_cookie("navbar_status", status, 999999999);
+        }, false);
+
+        var toggle = document.getElementById("sidebar_toggle");
+        toggle.addEventListener("click", function () {
+            var status = (get_cookie("sidebar_status") == "close") ? "open" : "close";
+            set_cookie("sidebar_status", status, 999999999);
+        }, false);
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             //online
@@ -608,8 +651,8 @@
                     action: 'logout'
                 };
                 $.get("<{#SiteDomain#}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=true",function(){});
-                $.post('server/login.server.php', param, function() {
-                    location.href = 'signin.php';
+                $.post('<{#SiteDomain#}>/server/login.server.php', param, function() {
+                    location.href = '<{#SiteDomain#}>/signin.php';
                 });
             });
         });
