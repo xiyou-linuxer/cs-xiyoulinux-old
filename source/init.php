@@ -2,46 +2,48 @@
 
 session_start();
 
+require_once(dirname(__FILE__) .'/config.php');
+
 if(!isset($_SESSION['uid']) ) {
-    header('location: signin.php');
+    header('location: ' . SITE_DOMAIN . '/signin.php');
     exit;
 }
-
-setcookie('uid', $_SESSION['uid'], time()+3600);
 
 require_once(dirname(__FILE__) .'/smarty.php');
 require_once(dirname(__FILE__) .'/includes/mail.class.php');
 require_once(dirname(__FILE__) . '/includes/user.class.php');
 require_once(dirname(__FILE__) . '/includes/plugin.class.php');
 
+setcookie('uid', $_SESSION['uid'], time()+3600);
+
 $login_uid = $_SESSION['uid'];
 $_COOKIE['uid'] = $login_uid;
 
 //获取登录用户信息
-$userObj = new UserClass();
+$CUser = new UserClass();
 //获取登录用户名
-$json_str = $userObj->get_userinfo($login_uid);
+$json_str = $CUser->get_userinfo($login_uid);
 $user_obj = json_decode($json_str);
 $username = $user_obj[0]->name;
 //获取登录用户头像
-$user_avatar = $userObj->get_avatar($login_uid);
+$user_avatar = $CUser->get_avatar($login_uid);
 //获取登录用户权限
-$user_privilege = $userObj->get_privilege($_SESSION['uid']);
+$user_privilege = $CUser->get_privilege($_SESSION['uid']);
 
 //获取站内信信息
-$mailObj = new MailClass($login_uid);
+$CMail = new MailClass($login_uid);
 //获取未读站内信数量
-$json_str = $mailObj->get_mail_count();
+$json_str = $CMail->get_mail_count();
 $result_array = json_decode($json_str);
 $unread_mail_count = $result_array->unread;
 
 //获取站内信数组
-$json_str = $mailObj->get_mail_list(1);
+$json_str = $CMail->get_mail_list(1);
 $unread_mail_array = json_decode($json_str);
 $unread_mail_list= array();
 if (!isset($unread_mail_array->result)) {
     foreach ( $unread_mail_array as $mail_obj ) {
-        $fromuser_avatar = $userObj->get_avatar($mail_obj->fromuid);
+        $fromuser_avatar = $CUser->get_avatar($mail_obj->fromuid);
         $item = array(
             'mid'=>$mail_obj->mid,
             'title'=>$mail_obj->title,
@@ -54,8 +56,8 @@ if (!isset($unread_mail_array->result)) {
 }
 
 //获取应用信息
-$pluginObj = new PluginClass();
-$app_info_array = $pluginObj->get_app_list();
+$CPlugin = new PluginClass();
+$app_info_array = $CPlugin->get_app_list();
 $app_info_list= array();
 if (is_array($app_info_array)) {
     foreach ( $app_info_array as $app_obj ) {
@@ -80,21 +82,21 @@ if (is_array($app_info_array)) {
 
 //获取在线用户信息
 $user_info_list = array();
-$user_online = $userObj->get_user_list('online');
+$user_online = $CUser->get_user_list('online');
 if ($user_online->num_rows) {
     while ( ($item = $user_online->fetch_assoc()) ) {
         $item['status'] = "on b-light right sm";
-        $item['avatar'] = $userObj->get_avatar($item['uid']);
+        $item['avatar'] = $CUser->get_avatar($item['uid']);
 
         array_push($user_info_list, $item);
     }
 }
 
-$user_offline = $userObj->get_user_list('offline');
+$user_offline = $CUser->get_user_list('offline');
 if ($user_offline->num_rows) {
     while ( ($item = $user_offline->fetch_assoc()) ) {
         $item['status'] = "off b-light right sm";
-        $item['avatar'] = $userObj->get_avatar($item['uid']);
+        $item['avatar'] = $CUser->get_avatar($item['uid']);
 
         array_push($user_info_list, $item);
     }
