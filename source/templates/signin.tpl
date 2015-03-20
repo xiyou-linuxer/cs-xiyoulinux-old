@@ -47,7 +47,7 @@
                 $.post('<{#SiteDomain#}>/server/login.server.php', param, function(data){
                     if(data.substring(0,4) == 'true' ){
                         $.get("<{#SiteDomain#}>/server/online.server.php?uid="+data.substring(5)+"&logout=false",function(){});
-                        location.href = 'index.php';
+                        location.href = '<{$referer_uri}>';
                     }else{
                         if(data.substring(5,6) == '1'){
                             data = data.substring(6);
@@ -57,7 +57,7 @@
                             alert('用户和密码都不可为空 !!');
                             break;
                         case '3':
-                            alert('用户不存在 !!');
+                            alert('该用户不存在 !!');
                             break;
                         case '4':
                             alert('验证码错误 !!');
