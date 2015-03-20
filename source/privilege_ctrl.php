@@ -8,9 +8,10 @@ if (!isset($_SESSION['uid'])) {
 $uid = $_SESSION['uid'];
 $userObj = new UserClass();
 $permisson = $userObj->get_privilege($uid);
-
 if($permisson != '1') {
-    header('location: index.php');
+	echo '<script type="text/javascript">javascript:history.back(1);</script>';
+    //header('location: ' . $_SERVER["HTTP_REFERER"]);
+    exit;
 }
 
 ?>
