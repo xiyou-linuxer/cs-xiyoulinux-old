@@ -26,7 +26,7 @@
 }
 .dataTables_wrapper label {
   font-weight: normal;
-  font-size: 12px;
+  font-size: 14px;
   display: block;
   margin-bottom: 0;
 }
@@ -55,6 +55,13 @@
 .dataTables_length,
 .dataTables_filter {
   padding: 15px;
+}
+.dataTables_length select {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.dataTables_filter input {
+  margin-left: 10px;
 }
 .dataTables_info,
 .dataTables_paginate {
