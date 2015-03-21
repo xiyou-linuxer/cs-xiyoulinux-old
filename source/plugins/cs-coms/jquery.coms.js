@@ -39,15 +39,17 @@
                 com = _this.get("com"),
                 mask = _this.get("mask");
             com.on("click", ".com-alert-btn", function(e) {
+                var cb = _this.get("callback");
                 _this.hide();
+                cb && cb(true);
             });
             com.on("click", ".cfm-true-btn", function(e) {
-                var cb = _this.get("cfmCallBack");
+                var cb = _this.get("callback");
                 _this.hide();
                 cb && cb(true);
             });
             com.on("click", ".cfm-false-btn", function(e) {
-                var cb = _this.get("cfmCallBack");
+                var cb = _this.get("callback");
                 _this.hide();
                 cb && cb(false);
             });
@@ -56,7 +58,7 @@
             });
             $(document).on("keyup", function(e) {
                 var kc = e.keyCode,
-                    cb = _this.get("cfmCallBack");;
+                    cb = _this.get("callback");;
                 if (kc === 27) {
                     _this.hide();
                 } else if (kc === 13) {
@@ -65,18 +67,15 @@
                         cb && cb(true);
                     }
                 }
-            });
+            })
         },
-        alert: function(str) {
+        alert: function(str, callback) {
             var str = typeof str === 'string' ? str : str.toString(),
                 com = this.get("com");
             this.set("type", "alert");
             com.find(".com-static").html(str);
-            if (typeof btnstr == "undefined") {
-                com.find(".com-btn-wrapper").html(Tags.alertBtn);
-            } else {
-                com.find(".com-btn-wrapper").html(btnstr);
-            }
+            com.find(".com-btn-wrapper").html(Tags.alertBtn);
+            this.set("callback", (callback || function() {}));
             this.show();
         },
         confirm: function(str, callback) {
@@ -85,14 +84,16 @@
             this.set("type", "confirm");
             com.find(".com-static").html(str);
             com.find(".com-btn-wrapper").html(Tags.cfmBtns);
-            this.set("cfmCallBack", (callback || function() {}));
+            this.set("callback", (callback || function() {}));
             this.show();
         },
         show: function() {
-            this.get("com").fadeIn();
-            this.get("mask").fadeIn();
+            var _this = this;
+            _this.get("com").fadeIn();
+            _this.get("mask").fadeIn();
         },
         hide: function() {
+            $(this).on("keyup", null);
             var com = this.get("com");
             com.find(".com-static").html("");
             com.find(".com-btn-wrapper").html("");
@@ -108,8 +109,8 @@
     };
 
     var obj = new JComs();
-    window.alert = function(str) {
-        obj.alert.call(obj, str);
+    window.alert = function(str, cb) {
+        obj.alert.call(obj, str, cb);
     };
     window.confirm = function(str, cb) {
         obj.confirm.call(obj, str, cb);
