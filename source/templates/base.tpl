@@ -47,7 +47,7 @@
 
     <script type="text/javascript" src="<{#SiteDomain#}>/js/jquery.min.js"></script>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/cs-coms/jquery.coms.js"></script>
+<!--    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/cs-coms/jquery.coms.js"></script>-->
 
     <!-- Bootstrap -->
     <script type="text/javascript" src="<{#SiteDomain#}>/js/bootstrap.js"></script>
