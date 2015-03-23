@@ -271,7 +271,7 @@
 
                                             <a href="<{#SiteDomain#}>/app/<{$laside_app_list[laside_app_list].app_home}>">
 
-                                                <i class="<{$laside_app_list[laside_app_list].app_icon}> icon text-success"></i>
+                                                <i class="<{$laside_app_list[laside_app_list].app_icon}> icon <{$laside_app_list[laside_app_list].icon_color}>"></i>
 
                                                 <{if $laside_app_list[laside_app_list].update_status == 'true'}>
                                                 <b class="badge bg-info pull-right"><{$laside_app_list[laside_app_list].update_number}></b>
