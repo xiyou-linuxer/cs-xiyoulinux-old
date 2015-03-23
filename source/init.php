@@ -71,7 +71,7 @@ if (is_array($app_info_array)) {
         $item = array('app_name'=>$app_aside->dis_name,
             'app_home'=>$app_aside->load_file,
             'app_icon'=>$app_aside->icon,
-            'app_icon_color'=>$app_aside->icon_color,
+            'icon_color'=>$app_aside->icon_color,
             'update_status'=>$update_status,
             'app_function'=>'/app/'.$app_name.'/function.php'
         );
