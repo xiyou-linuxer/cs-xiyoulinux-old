@@ -1,5 +1,5 @@
 <?php
-    include('config.php');
+    include(dirname(__FILE__) . '/config.php');
     include(SMARTY_HOME_PATH . '/Smarty.class.php');
     
     $smarty = new Smarty();
