@@ -54,7 +54,8 @@
 }
 .dataTables_length,
 .dataTables_filter {
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .dataTables_length select {
   margin-left: 10px;
