@@ -1,57 +1,42 @@
+/**
+* author : jensyn
+* edit   : 2015-03-29
+* version: 1.1.0
+**/
 
-.page-content h1,
-.page-content h2,
-.page-content h3,
-.page-content h4,
-.page-content h5,
-.page-content h6,
+/*reset*/
 .page-content legend {
+	color: #788188;
 	font-weight: 600;
+	font-size: 2.0rem;
+	line-height: 2.8rem;
 }
 .page-content ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-.page-content .nav-list .nav-header {
-	font-weight: 600;
+
+.page-content input:-webkit-autofill, 
+.page-content textarea:-webkit-autofill,
+.page-content select:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-.page-content .nav-list>li .fa {
-	margin-right: 4px;
+.page-content .dataTables_wrapper select,
+.page-content .dataTables_wrapper input {
+	outline: none;
+	border-radius: 1px;
 }
-.page-content .well {
-	background-color: #fff;
+.page-content .dataTables_wrapper .dataTables_paginate {
+	padding-right: 0;
 }
-.page-content .summary ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-.page-content .summary ul:after  {
-	display: block;
-	content: " ";
-	width: 0;
-	height: 0;
-	visibility: hidden;
-	clear: both;
-}
-.page-content .summary ul>li {
-	width: 25%;
-	border-right: 1px solid #eee;
-	text-align: center;
-	float: left;
-}
-.page-content .summary ul>li:last-child {
-	border-right: 0;
-}
-.page-content .summary ul>li .count {
-	line-height: 1.0;
-	margin-top: 0;
-	margin-bottom: 10px;
-}
-.page-content .btn-judge {
-	padding: 10px;
-	margin-bottom: 20px;
+.page-content .tabbable li.active a,
+.page-content .tabbable li.active a:hover,
+.page-content .tabbable li.active a:focus,
+.page-content .tabbable li.active a:visited
+ {
+	color: #fff;
+	background-color: #5a6a7a;
 }
 .page-content .chosen-container {
 	width: 100% !important;
@@ -63,11 +48,108 @@
 .page-content .chosen-single span {
 	line-height: 34px;
 }
+.page-content .control-group {
+	margin-bottom: 20px;
+}
+.page-content .margin-bottom,
+.page-content .chosen-container {
+	margin-bottom: 20px;
+}
 
+
+/*sidebar*/
+.page-content .nav-list .nav-list-group {
+	font-weight: 600;
+	line-height: 2.5rem;
+}
+.page-content .nav-list .nav-list-item a {
+	color: inherit;
+	background-color: inherit;
+}
+.page-content .nav-list .nav-list-item .fa {
+	margin-right: 4px;
+}
+.page-content .nav-list .nav-list-item .badge {
+	position: absolute;
+	right: 10px;
+}
+.page-content .nav-list .nav-list-item.active {
+	color: #fff;
+	background-color: #4cb6cb;
+}
+.page-content .nav-list .nav-list-item.active .badge {
+	color: #4cb6cb;
+	background-color: #fff;
+}
+.page-content .nav-list .nav-list-item:not(.active):hover {
+	background-color: #e8eff0;
+}
+
+.page-content .summary-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.page-content .summary-list:after  {
+	display: block;
+	content: " ";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	clear: both;
+}
+.page-content .summary-list .summary-list-item {
+	width: 25%;
+	border-right: 1px solid #eee;
+	text-align: center;
+	float: left;
+}
+.page-content .summary-list .summary-list-item:last-child {
+	border-right: 0;
+}
+.page-content .summary-list .summary-list-item .count {
+	line-height: 1.0;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+
+/*index*/
+.page-content .app-info .logo {
+	width: 114px;
+	height: 114px;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("../images/sign_min.png");
+	background-size: cover;
+}
+
+
+/*start*/
+.page-content .select-panel {
+	min-height: 500px;
+}
+.page-content .select-panel .form-control-wrapper {
+	margin-top: 100px;
+}
+.page-content .select-panel .input-group {
+	margin-bottom: 50px;
+}
+
+/*interview*/
 .page-content ul.user-info {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+.page-content ul.user-info:after  {
+	display: block;
+	content: " ";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	clear: both;
 }
 .page-content ul.user-info>li {
 	font-size: 18px;
@@ -77,58 +159,60 @@
 .page-content ul.user-info>li:last-child {
 	border-right: 0;
 }
-.page-content .control-group {
-	margin-bottom: 20px;
+.page-content #interview_time {
+	float: right;
+	font-size: 14px;
+	font-weight: 500;
 }
-.page-content .margin-bottom,
-.page-content .chosen-container {
-	margin-bottom: 20px;
+.page-content .record-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;	
 }
-.page-content .record-list,
+.page-content .record-list .record-list-item {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #dadada;
+}
+.page-content .record-list-item:last-child {
+	padding: 0;
+	margin: 0;
+	border-bottom: 0;
+}
+.page-content .record-list-item p {
+	margin-top: 10px;
+}
+.page-content .record-list-item ul.meta {
+	margin-bottom: 10px;
+}
+.page-content .record-list-item ul.meta>li {
+	padding-left: 5px;
+	padding-right: 5px;
+	display: inline-block;
+	border-right: 1px solid #adadad;
+}
+.page-content .record-list-item ul.meta>li:last-child {
+	border-right: 0;
+}
+
+/*history*/
 .page-content .history-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-.page-content .record-list .record-item {
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #dadada;
-}
-.page-content .record-item:last-child {
-	padding: 0;
-	margin: 0;
-	border-bottom: 0;
-}
-.page-content .history-item p,
-.page-content .record-item p {
+.page-content .history-list-item p {
 	margin-top: 10px;
 }
-.page-content .record-item .meta span {
-	font-weight: 600;
-	padding: 5px;
-}
 
-.page-content .tabbable li.active a,
-.page-content .tabbable li.active a:hover,
-.page-content .tabbable li.active a:focus,
-.page-content .tabbable li.active a:visited
- {
-	color: #fff;
-	background-color: #5a6a7a;
-}
 
-.page-content .well-info {
-	background-color: #545ca6;
+/*judge*/
+.page-content .btn-judge {
+	padding: 10px;
+	margin-bottom: 20px;
 }
-
-/*首页*/
-.page-content .logo {
-	width: 114px;
-	height: 114px;
-	margin-top: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	background-image: url("../images/sign_min.png");
-	background-size: cover;
+.page-content #select_round {
+	background-color: inherit;
+	border: 0;
+	outline: none;
 }
