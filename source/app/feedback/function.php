@@ -1,5 +1,7 @@
 <?php
 
+require_once('bug.class.php');
+
 $func = $_GET['func'];
 
 if ($func == 'cal_num') echo cal_num();
@@ -12,66 +14,38 @@ function cal_num()
 
 function aside_html()
 {
-	return '
-<h4 class="font-thin">内测反馈</h4>
+      $bug = new Bug();
 
+	$str = '
+<h4 class="font-thin">最新反馈</h4>
 <section class="panel panel-default">
-
       <div class="table-responsive">
-
             <table class="table table-striped b-t b-light">
-
-                  <thead>
-
+                  <!--<thead>
                         <tr>
-
-                              <th class="th-sortable" data-toggle="class">项目</th>
-
-                              <th>开始日期</th>
-
-                              <th>
-                                    <i class="icon-like"></i>
-                              </th>
-
+                              <th>Bug</th>
+                              <th>提交人</th>
+                              <th>状态</th>
                         </tr>
-
-                        <tr>
-
-                              <td>XY Cloud</td>
-
-                              <td>2010-05-17</td>
-
-                              <td>243</td>
-
-                        </tr>
-
-                        <tr>
-
-                              <td>XY ftp</td>
-
-                              <td>2011-03-21</td>
-
-                              <td>46</td>
-
-                        </tr>
-
-                        <tr>
-
-                              <td>XY kernel</td>
-
-                              <td>2012-08-21</td>
-
-                              <td>41</td>
-
-                        </tr>
-
-                  </thead>
-
+                  </thead>-->
+                  <tbody>
+';
+      $result_all = $bug->bug_status(2);
+      foreach($result_all as $value_all)
+      {
+            if($value_all['status'] == 0) $str .= '                           <tr><td><span class="label label-info">新发布</span>&nbsp;';
+            else if($value_all['status'] == 1) $str .= '                           <tr><td><span class="label label-danger">修复中</span>&nbsp;';
+            else if($value_all['status'] == 2) $str .= '                           <tr><td><span class="label label-success">已修复</span>&nbsp;';
+            else if($value_all['status'] == 3) $str .= '                           <tr><td><span class="label label-default">已关闭</span>&nbsp;';
+            $str .= '<a href="/app/feedback/bug_info.php?bug_name='.$value_all['bugid'].'">'.$value_all['title'].'</a></td></tr>
+';
+      }
+	$str .= '
+                  </tbody>
             </table>
-
       </div>
-
 </section>
 ';
+      return $str;
 }
 ?>
