@@ -55,10 +55,12 @@ class ActivityClass {
             $time = floor($b/60) . "分钟" . ($b-floor($b/60)*60) . "秒前";
         else if($b < 1*3600)
             $time = floor($b/60) . "分钟前";
-        else if($b >= 24*3600)
+		else if($b < 24*3600)
+			$time = floor($b/3600) . "小时前";
+        else if($b <= 24*3600*7)
             $time = floor($b/3600/24) . "天前";
-        else if($b >= 1*3600)
-            $time = floor($b/3600) . "小时前";
+		else
+			$time = $mresult['rdate'];
 
         $array = array(
             "name" => $name,
