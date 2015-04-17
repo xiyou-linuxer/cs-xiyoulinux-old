@@ -108,9 +108,9 @@
                     function(data){
                    // console.log('return: ' + data);
                         if (data == 1){
-                            alert($('#online-select').text().trim() + ' 下线成功');
+                            alert($('#online-select').find("option:selected").text().trim() + ' 下线成功');
                         }else{
-                            alert($('#online-select').val().trim() + ' 下线失败');
+                            alert($('#online-select').find("option:selected").text().trim() + ' 下线失败');
                         }
                        location.reload();
                     }
@@ -126,9 +126,9 @@
                     },
                     function (data) {
                         if (data == 1){
-                            alert($('#offline-select').text().trim() + ' 上线成功');
+                            alert($('#offline-select').find("option:selected").text().trim() + ' 上线成功');
                         }else{
-                            alert($('#offline-select').text().trim() + '上线失败');
+                            alert($('#offline-select').find("option:selected").text().trim() + '上线失败');
                         }
                         location.reload();
                     }
