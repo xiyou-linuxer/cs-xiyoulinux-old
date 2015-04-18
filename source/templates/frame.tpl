@@ -61,7 +61,7 @@
 
                         </span>
 
-                        <input name="wd" type="text" id="search_inf" class="form-control input-sm no-border rounded" placeholder="搜索项目、问答、招聘、活动等应用内容...">
+                        <input name="wd" type="text" id="search_inf" class="form-control input-sm no-border rounded" placeholder="搜索用户、动态、应用等全站内容...">
 
                     </div>
 
@@ -81,7 +81,7 @@
 
                         </span>
 
-                        <input id="activity_text" type="text" class="form-control input-sm no-border rounded" placeholder="发表一条新动态...">
+                        <input id="activity_text" type="text" class="form-control input-sm no-border rounded" placeholder="发表一条新动态，话题前后用#隔开...">
 
                     </div>
 
@@ -269,12 +269,12 @@
                                         <{section name=laside_app_list loop=$laside_app_list}>
                                         <li>
 
-                                            <a href="<{#SiteDomain#}>/app/<{$laside_app_list[laside_app_list].app_home}>">
+                                            <a href="<{$laside_app_list[laside_app_list].app_home}>">
 
                                                 <i class="<{$laside_app_list[laside_app_list].app_icon}> icon <{$laside_app_list[laside_app_list].icon_color}>"></i>
 
                                                 <{if $laside_app_list[laside_app_list].update_status == 'true'}>
-                                                <b class="badge bg-info pull-right"><{$laside_app_list[laside_app_list].update_number}></b>
+                                                <b class="badge bg-info pull-right" data-action="get_update_num" data-funcurl="<{$laside_app_list[laside_app_list].app_function}>"></b>
                                                 <{/if}>
                                                 <span class="font-bold"><{$laside_app_list[laside_app_list].app_name}></span>
 
@@ -611,9 +611,9 @@
                 });            
             }, 60000);
 
-            $('.update-num').each(function() {
+            $('[data-action="get_update_num"]').each(function() {
                 var elem = $(this);
-                var func_url = elem.data('funcurl') + '?func=cal_num';
+                var func_url = "<{#SiteDomain#}>" + elem.data('funcurl') + '?func=cal_num';
                 $.get(func_url, function(data) {
                     if (data == '0') {
                         elem.remove();
