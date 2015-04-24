@@ -2,9 +2,9 @@
     <aside>
 		<icon>icon-speech</icon>
 		<icon_color>text-danger</icon_color>
-		<dis_name>内测反馈</dis_name>
-		<dis_number>1</dis_number>
-		<load_file>feedback/feedback.php</load_file>
+		<dis_name>反馈</dis_name>
+		<dis_number>0</dis_number>
+		<load_file>http://cs.xiyoulinux.org/app/feedback/feedback.php</load_file>
     </aside>
     <plugin_use>1</plugin_use>
 </document>
