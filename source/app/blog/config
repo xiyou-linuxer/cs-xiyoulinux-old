@@ -1,0 +1,10 @@
+<document>
+    <aside>
+		<icon>fa fa-rss</icon>
+		<icon_color>text-info</icon_color>
+		<dis_name>群博</dis_name>
+		<dis_number>0</dis_number>
+		<load_file>http://blog.xiyoulinux.org\" target=\"_blank</load_file>
+    </aside>
+    <plugin_use>0</plugin_use>
+</document>
