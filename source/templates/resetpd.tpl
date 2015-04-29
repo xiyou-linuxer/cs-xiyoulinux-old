@@ -8,7 +8,7 @@
   
         <div class="container aside-xl">
 
-            <a class="navbar-brand block" href="index.html"><span class="h1 font-bold">Xiyou Linux Group</span></a>
+            <a class="navbar-brand block" href="index.php"><span class="h1 font-bold">Xiyou Linux Group</span></a>
     
             <section class="m-b-lg">
       
