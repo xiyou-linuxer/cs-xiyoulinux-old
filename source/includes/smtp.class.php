@@ -26,8 +26,9 @@ class SmtpClass {
         $this->user = $user; 
         $this->pass = $pass; 
         $this->host_name = "localhost"; //is used in HELO command  
-        $this->log_file = "smtp.log"; 
-        $this->sock = FALSE; 
+        $this->log_file = ""; 
+        $this->sock = FALSE;
+        date_default_timezone_set('PRC');
 } 
 
     /* Main Function */ 
@@ -35,7 +36,7 @@ class SmtpClass {
     { 
         $mail_from = $this->get_address($this->strip_comment($from)); 
         $body = ereg_replace("(^|(\r\n))(\.)", "\1.\3", $body); 
-        $header .= "MIME-Version:1.0\r\n"; 
+        $header = "MIME-Version:1.0\r\n"; 
         if($mailtype=="HTML") 
         { 
             $header .= "Content-Type:text/html\r\n"; 

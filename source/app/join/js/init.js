@@ -24,7 +24,7 @@
  	$('[data-ride="datatables"]').each(function() {
 		var oTable = $(this).dataTable({
 			"order": [],
-			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'><'col-sm-6'p>>",
+			"sDom": "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'panel-body text-right'p>",
 			"sPaginationType": "full_numbers",
 			"oLanguage": {
 				"sProcessing": "正在加载中......",
