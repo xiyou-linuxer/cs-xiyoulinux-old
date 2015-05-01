@@ -2,7 +2,7 @@
     session_start();
     include('smarty.php');
 
-    $referer_uri = ($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : "index.php";
+    $referer_uri = (!empty($_GET['referer_uri'])) ? $_GET['referer_uri'] : "index.php";
     if(isset($_SESSION['uid']) ) {
         header('location: ' . $referer_uri);
         exit;

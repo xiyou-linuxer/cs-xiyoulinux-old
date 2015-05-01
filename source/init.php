@@ -5,7 +5,8 @@ session_start();
 require_once(dirname(__FILE__) .'/config.php');
 
 if(!isset($_SESSION['uid']) ) {
-    header('location: ' . SITE_DOMAIN . '/signin.php');
+    $referer_uri = urlencode('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+    header('location: ' . SITE_DOMAIN . '/signin.php?referer_uri=' . $referer_uri);
     exit;
 }
 
