@@ -130,7 +130,7 @@
                         
                         <{if $commited_bug[times].status eq "3"}><span class="label label-default">已关闭</span><{/if}>
 
-                        <a href="<{#SiteDomain#}>/app/feedback/bug_info.php?bug_name=<{$search_bug[times].bugid}>" class="h5"><{$search_bug[times].name}></a>
+                        <a href="<{$site_domain}>/app/feedback/bug_info.php?bug_name=<{$search_bug[times].bugid}>" class="h5"><{$search_bug[times].name}></a>
                     
                     </div>
                       
@@ -319,7 +319,7 @@
                         bugmethod: $('#bug-method').val(),
                         bugtitle: $('#bug-title').val()
                     };
-                    $.post('<{#SiteDomain#}>/app/feedback/commit_bug.php', param, function(data) {
+                    $.post('<{$site_domain}>/app/feedback/commit_bug.php', param, function(data) {
                         $('#tips-modal-content').html(data);
                         $('#tips-modal').modal({keyboard:true});
                     });

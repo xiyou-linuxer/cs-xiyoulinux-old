@@ -53,10 +53,10 @@ function checkStr($type,$desStr){	//看代码都懂
             $result = (preg_match("/^\w+$/",$desStr) > 0);
             break;
         case 'site':
-            $result = (preg_match("/^[a-zA-z]+:\/\/[^\s]*$/",$desStr) > 0);
+            $result = (preg_match("/^[a-zA-z\d]+[^\s]*$/",$desStr) > 0);
             break;
         case 'weixin':
-            $result = (preg_match("/^[a-zA-Z][a-zA-Z\d-_]{5,19}$/", $desStr) > 0);
+            $result = (preg_match("/^[a-zA-Z\d-_]{6,20}$/", $desStr) > 0);
             break;
         case 'qq':
             $result = (preg_match("/^\d{5,12}$/", $desStr) > 0);
