@@ -100,7 +100,7 @@
 
             $('#btn-delete-mail').click(function() {
                 var param = {action: 'del_mail', mid: '<{$mail_info.mid}>'};
-                $.post('<{#SiteDomain#}>/server/mail.server.php', param, function (data, status) {
+                $.post('<{$site_domain}>/server/mail.server.php', param, function (data, status) {
                     var obj = eval('(' + data + ')');
                     if (obj.result == 'true') {
                         $('.modal-body').html('删除成功');

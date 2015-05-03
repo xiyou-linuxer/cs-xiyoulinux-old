@@ -124,7 +124,7 @@
                             verify:'<{$verify}>',
                             time:'<{$time}>'
                         };
-                        $.post('<{#SiteDomain#}>/server/resetpd.server.php', param, function(data) {
+                        $.post('<{$site_domain}>/server/resetpd.server.php', param, function(data) {
                             $('#tips_message').html(data);
                             $('#example').modal({keyboard:true});
                         });

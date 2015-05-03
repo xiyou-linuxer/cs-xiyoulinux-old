@@ -107,7 +107,7 @@
                         email: $('#email').val()
                     };
                             
-                    $.post('<{#SiteDomain#}>/server/forgetpd.server.php', param, function(data) {
+                    $.post('<{$site_domain}>/server/forgetpd.server.php', param, function(data) {
                         $('#tips_message').html(data);
                         $('#example').modal({keyboard:true});
                     });
@@ -117,7 +117,7 @@
             });
 
             $('#signingo').click(function() {
-                window.location = '<{#SiteDomain#}>/signin.php';
+                window.location = '<{$site_domain}>/signin.php';
                 return false;
             });
         });

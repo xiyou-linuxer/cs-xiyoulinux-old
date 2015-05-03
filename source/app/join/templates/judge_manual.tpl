@@ -131,9 +131,8 @@
 		var uid = "<{$info["uid"]}>";
 		console.log(uid);
 		if (uid == "") {
-			alert("本轮决策已完成！", function () {
-				location.href="judge.php";
-			});
+			alert("本轮决策已完成！");
+			location.href="judge.php";
 		}
 	})();
 	$('[data-type="button"]').click(function() {

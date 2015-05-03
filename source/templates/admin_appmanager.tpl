@@ -2,7 +2,7 @@
 
 <{block name="stylesheet" append}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/js/chosen/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/js/chosen/chosen.css" type="text/css" />
 
 <{/block}>
 
@@ -73,7 +73,7 @@
 
 <{block name="scripts" append}>
     
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/chosen/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/chosen/chosen.jquery.min.js"></script>
     
     <script type="text/javascript">
         /**
@@ -84,7 +84,7 @@
             init(),
             $('#flush-btn').click(function(){
                 $.post(
-                    '<{#SiteDomain#}>/server/admin.server.php',
+                    '<{$site_domain}>/server/admin.server.php',
                     {
                         action:'flush'
                     },
@@ -99,7 +99,7 @@
             }),
             $('#offline-btn').click(function () {
                 $.post(
-                    '<{#SiteDomain#}>/server/admin.server.php',
+                    '<{$site_domain}>/server/admin.server.php',
                     {
                         action:'changeAppStatus',
                         name:$('#online-select').val(),
@@ -118,7 +118,7 @@
             }),
             $('#online-btn').click(function(){
                 $.post(
-                    '<{#SiteDomain#}>/server/admin.server.php',
+                    '<{$site_domain}>/server/admin.server.php',
                     {
                         action:'changeAppStatus',
                         name:$('#offline-select').val(),
@@ -143,7 +143,7 @@
         function init(){
             $.ajax({
                 type:'POST',
-                url:'<{#SiteDomain#}>/server/admin.server.php',
+                url:'<{$site_domain}>/server/admin.server.php',
                 data:{
                     action:'getAppList'
                 },

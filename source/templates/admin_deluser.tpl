@@ -2,7 +2,7 @@
 
 <{block name="stylesheet" append}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/js/chosen/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/js/chosen/chosen.css" type="text/css" />
 
 <{/block}>
 
@@ -68,7 +68,7 @@
 
 <{block name="scripts" append}>
     
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/chosen/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/chosen/chosen.jquery.min.js"></script>
     
     <script type="text/javascript">
 
@@ -76,7 +76,7 @@
          * Created by andrew on 14-12-27.
          */
         $(document).ready(function() {
-            $.post('<{#SiteDomain#}>/server/admin.server.php',
+            $.post('<{$site_domain}>/server/admin.server.php',
                 {
                     action:'getAllGrade'
                 },
@@ -94,7 +94,7 @@
                     $('</optgroup>').appendTo('#grade-select');
                     $('#grade-select').trigger('chosen:updated');
 
-                    $.post('<{#SiteDomain#}>/server/admin.server.php',
+                    $.post('<{$site_domain}>/server/admin.server.php',
                         {
                             action:'getMemberByGrade',
                             grade:$('#grade-select').val()
@@ -117,7 +117,7 @@
                     )
 
                     $("#grade-select").change(function() {
-                            $.post('<{#SiteDomain#}>/server/admin.server.php',
+                            $.post('<{$site_domain}>/server/admin.server.php',
                                 {
                                     action:'getMemberByGrade',
                                     grade:$('#grade-select').val()
@@ -142,7 +142,7 @@
                     );
 
                     $("#submit").click(function(){
-                        $.post('<{#SiteDomain#}>/server/admin.server.php',
+                        $.post('<{$site_domain}>/server/admin.server.php',
                             {
                                 action:'deleteUser',
                                 uid:$('#member-select').val()

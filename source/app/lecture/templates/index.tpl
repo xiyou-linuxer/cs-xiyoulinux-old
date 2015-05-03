@@ -1,8 +1,8 @@
 <{extends file="../../../templates/frame.tpl"}>
 
 <{block name="stylesheet" append}>
-<link rel="stylesheet" href="<{#SiteDomain#}>/js/datatables/datatables.css" type="text/css" />
-<link rel="stylesheet" href="<{#SiteDomain#}>/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" />
+<link rel="stylesheet" href="<{$site_domain}>/js/datatables/datatables.css" type="text/css" />
+<link rel="stylesheet" href="<{$site_domain}>/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <{/block}>
 
@@ -212,10 +212,10 @@
 <{/block}>
 
 <{block name="scripts" append}>
-<script type="text/javascript" src="<{#SiteDomain#}>/js/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<{$site_domain}>/js/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="http://cdn.bootcss.com/moment.js/2.10.2/moment.min.js"></script>
-<script type="text/javascript" src="<{#SiteDomain#}>/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="<{#SiteDomain#}>/js/jquery.urlGET.js"></script>
+<script type="text/javascript" src="<{$site_domain}>/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="<{$site_domain}>/js/jquery.urlGET.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         // 手风琴列表

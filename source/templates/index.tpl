@@ -91,7 +91,7 @@
                     $.ajax({
                         type: "post",
                         data: {"mid": mid},
-                        url: "<{#SiteDomain#}>/server/refresh.server.php",
+                        url: "<{$site_domain}>/server/refresh.server.php",
                         success: function(data){
                             if( data.substr(0,5) != 'false'){
                                 $(".comment-item:last").after(data);
@@ -112,7 +112,7 @@
         //get mini aside data
         $('.mini-aside').each(function() {
             var elem = $(this);
-            var func_url = '<{#SiteDomain#}>' + $(this).data('funcurl') + '?func=aside_html';
+            var func_url = '<{$site_domain}>' + $(this).data('funcurl') + '?func=aside_html';
             $.get(func_url, function(data){
                 elem.html(data);
             });

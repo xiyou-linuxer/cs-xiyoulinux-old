@@ -15,19 +15,19 @@
 
 <{block name="stylesheet"}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/bootstrap.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/animate.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/font-awesome.min.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/simple-line-icons.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/font.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/app.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/plugins/cs-coms/jquery.coms.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/plugins/cs-coms/jquery.coms.css" type="text/css" />
 	
     <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
@@ -45,21 +45,21 @@
 
 <{block name="scripts"}>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/jquery.min.js"></script>
 
-<!--    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/cs-coms/jquery.coms.js"></script>-->
+<!--    <script type="text/javascript" src="<{$site_domain}>/plugins/cs-coms/jquery.coms.js"></script>-->
 
     <!-- Bootstrap -->
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/bootstrap.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/bootstrap.js"></script>
 
     <!-- App -->
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/app.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/app.js"></script>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/slimscroll/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/app.plugin.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/app.plugin.js"></script>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/cookie.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/cookie.js"></script>
 
 <{/block}>
 

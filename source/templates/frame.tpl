@@ -17,7 +17,7 @@
 
                 </a>
 
-                <a href="<{#SiteDomain#}>/index.php" class="navbar-brand text-lt">
+                <a href="<{$site_domain}>/index.php" class="navbar-brand text-lt">
 
                     <i class="icon-screen-desktop"></i>
 
@@ -49,7 +49,7 @@
 
             </ul>
 
-            <form class="navbar-form navbar-left input-s-box m-t m-l-n-xs hidden-xs" role="search" action="<{#SiteDomain#}>/search.php" method="get">
+            <form class="navbar-form navbar-left input-s-box m-t m-l-n-xs hidden-xs" role="search" action="<{$site_domain}>/search.php" method="get">
 
                 <div class="form-group">
 
@@ -118,7 +118,7 @@
                                 <div class="list-group list-group-alt">
 
                                     <{section name=nav_unread_mail_list loop=$nav_unread_mail_list}>
-                                    <a href="<{#SiteDomain#}>/mail_view.php?mid=<{$nav_unread_mail_list[nav_unread_mail_list].mid}>" class="media list-group-item">
+                                    <a href="<{$site_domain}>/mail_view.php?mid=<{$nav_unread_mail_list[nav_unread_mail_list].mid}>" class="media list-group-item">
 
                                         <span class="pull-left thumb-sm">
 
@@ -136,7 +136,7 @@
 
                                     </a>
                                     <{sectionelse}>
-                                    <a href="<{#SiteDomain#}>/mail_unread.php" class="media list-group-item">
+                                    <a href="<{$site_domain}>/mail_unread.php" class="media list-group-item">
                                         <span class="media-body block m-b-none">
 
                                             暂时没有任何未读站内信
@@ -149,9 +149,9 @@
 
                                 <div class="panel-footer text-sm">
 
-                                    <a href="<{#SiteDomain#}>/mail_all.php" class="pull-right"><i class="fa fa-cog"></i></a>
+                                    <a href="<{$site_domain}>/mail_all.php" class="pull-right"><i class="fa fa-cog"></i></a>
 
-                                    <a href="<{#SiteDomain#}>/mail_all.php">查看所有站内信</a>
+                                    <a href="<{$site_domain}>/mail_all.php">查看所有站内信</a>
 
                                 </div>
 
@@ -178,13 +178,13 @@
                         <ul class="dropdown-menu animated fadeInRight">
                             <li>
 
-                                <a href="<{#SiteDomain#}>/profile.php?id=<{$nav_profile_uid}>">个人中心</a>
+                                <a href="<{$site_domain}>/profile.php?id=<{$nav_profile_uid}>">个人中心</a>
 
                             </li>
 
                             <li>
 
-                                <a href="<{#SiteDomain#}>/mail_all.php">
+                                <a href="<{$site_domain}>/mail_all.php">
 
                                     <{if $nav_unread_mail_count > 0}>
                                     <span class="badge bg-danger pull-right"><{$nav_unread_mail_count}></span>
@@ -255,7 +255,7 @@
 
                                         <li>
 
-                                            <a href="<{#SiteDomain#}>/index.php">
+                                            <a href="<{$site_domain}>/index.php">
 
                                                 <i class="icon-home"></i>
 
@@ -292,7 +292,7 @@
 
                                         <li>
 
-                                            <a href="<{#SiteDomain#}>/profile.php">
+                                            <a href="<{$site_domain}>/profile.php">
 
                                                 <i class="icon-user icon"></i>
 
@@ -327,7 +327,7 @@
 
                                                 <li >
 
-                                                    <a href="<{#SiteDomain#}>/mail_edit.php" class="auto">
+                                                    <a href="<{$site_domain}>/mail_edit.php" class="auto">
 
                                                         <i class="fa fa-angle-right text-xs"></i>
 
@@ -339,7 +339,7 @@
 
                                                 <li >
 
-                                                    <a href="<{#SiteDomain#}>/mail_all.php" class="auto">
+                                                    <a href="<{$site_domain}>/mail_all.php" class="auto">
 
                                                         <i class="fa fa-angle-right text-xs"></i>
 
@@ -350,7 +350,7 @@
                                                 </li>
                                                 <li >
 
-                                                    <a href="<{#SiteDomain#}>/mail_send.php" class="auto">
+                                                    <a href="<{$site_domain}>/mail_send.php" class="auto">
 
                                                         <i class="fa fa-angle-right text-xs"></i>
 
@@ -361,7 +361,7 @@
                                                 </li>
                                                 <li >
 
-                                                    <a href="<{#SiteDomain#}>/mail_read.php" class="auto">
+                                                    <a href="<{$site_domain}>/mail_read.php" class="auto">
 
                                                         <i class="fa fa-angle-right text-xs"></i>
 
@@ -373,7 +373,7 @@
 
                                                 <li >
 
-                                                    <a href="<{#SiteDomain#}>/mail_unread.php" class="auto">
+                                                    <a href="<{$site_domain}>/mail_unread.php" class="auto">
 
                                                         <i class="fa fa-angle-right text-xs"></i>
 
@@ -389,7 +389,7 @@
 
                                                 <li >
 
-                                                    <a href="<{#SiteDomain#}>/mail_draft.php" class="auto">
+                                                    <a href="<{$site_domain}>/mail_draft.php" class="auto">
 
                                                         <i class="fa fa-angle-right text-xs"></i>
 
@@ -428,23 +428,23 @@
                                             <ul class="nav dk text-sm">
 
                                                 <li>
-                                                    <a href="<{#SiteDomain#}>/admin_adduser.php"> <i class="icon-plus icon text-success"></i>
+                                                    <a href="<{$site_domain}>/admin_adduser.php"> <i class="icon-plus icon text-success"></i>
                                                         <span class="font-bold">添加用户</span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="<{#SiteDomain#}>/admin_deluser.php"> <i class="fa fa-trash-o icon text-danger"></i>
+                                                    <a href="<{$site_domain}>/admin_deluser.php"> <i class="fa fa-trash-o icon text-danger"></i>
                                                         <span class="font-bold">删除用户</span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="<{#SiteDomain#}>/admin_deliver.php">
+                                                    <a href="<{$site_domain}>/admin_deliver.php">
                                                         <i class="icon-refresh icon text-info"></i>
                                                         <span class="font-bold">权限移交</span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="<{#SiteDomain#}>/admin_appmanager.php">
+                                                    <a href="<{$site_domain}>/admin_appmanager.php">
                                                         <i class="icon-grid icon text-primary-lter"></i>
                                                         <span class="font-bold">应用管理</span>
                                                     </a>
@@ -510,7 +510,7 @@
 
                                                     <div class="hidden-nav-xs">
                                                         
-                                                        <a href="<{#SiteDomain#}>/profile.php?uid=<{$raside_user_list[raside_user_list].uid}>"><{$raside_user_list[raside_user_list].name}></a>
+                                                        <a href="<{$site_domain}>/profile.php?uid=<{$raside_user_list[raside_user_list].uid}>"><{$raside_user_list[raside_user_list].name}></a>
 
                                                     </div>
 
@@ -596,10 +596,10 @@
     <script type="text/javascript">
         $(document).ready(function() {
             //online
-            $.get("<{#SiteDomain#}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=false",function(){});
+            $.get("<{$site_domain}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=false",function(){});
             setInterval(function() {
                 $.ajax({
-                    url: "<{#SiteDomain#}>/server/online.server.php",
+                    url: "<{$site_domain}>/server/online.server.php",
                     type: "GET",
                     dataType: "JSON",
                     data: {
@@ -613,7 +613,7 @@
 
             $('[data-action="get_update_num"]').each(function() {
                 var elem = $(this);
-                var func_url = "<{#SiteDomain#}>" + elem.data('funcurl') + '?func=cal_num';
+                var func_url = "<{$site_domain}>" + elem.data('funcurl') + '?func=cal_num';
                 $.get(func_url, function(data) {
                     if (data == '0') {
                         elem.remove();
@@ -632,7 +632,7 @@
                     return false;
                 }
 
-                $.post('<{#SiteDomain#}>/server/activity.server.php', {activity_text: actTxt}, function (data) {
+                $.post('<{$site_domain}>/server/activity.server.php', {activity_text: actTxt}, function (data) {
                     var obj = JSON.parse(data);
 
                     if (obj.state == 'success') {
@@ -650,9 +650,9 @@
                 var param = {
                     action: 'logout'
                 };
-                $.get("<{#SiteDomain#}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=true",function(){});
-                $.post('<{#SiteDomain#}>/server/login.server.php', param, function() {
-                    location.href = '<{#SiteDomain#}>/signin.php';
+                $.get("<{$site_domain}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=true",function(){});
+                $.post('<{$site_domain}>/server/login.server.php', param, function() {
+                    location.href = '<{$site_domain}>/signin.php';
                 });
             });
         });

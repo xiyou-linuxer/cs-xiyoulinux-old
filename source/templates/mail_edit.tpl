@@ -2,9 +2,9 @@
 
 <{block name="stylesheet" append}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/mail.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/mail.css" type="text/css" />
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/plugins/wysihtml5/css/bootstrap-wysihtml5-0.0.2.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/plugins/wysihtml5/css/bootstrap-wysihtml5-0.0.2.css" type="text/css" />
 
 <{/block}>
 
@@ -102,11 +102,11 @@
 
 <{block name="scripts" append}>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/typeahead/js/bootstrap-typeahead.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/plugins/typeahead/js/bootstrap-typeahead.js"></script>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/wysihtml5/js/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/plugins/wysihtml5/js/wysihtml5-0.3.0.js"></script>
 
-    <script type="text/javascript" src="<{#SiteDomain#}>/plugins/wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/plugins/wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>
 
     <script type="text/javascript">
 
@@ -120,7 +120,7 @@
                     touser: $('#mail-editor-touser').val(),
                     content: $('#mail-editor-content').val()
                 };
-                $.post('<{#SiteDomain#}>/server/mail.server.php', param, function (data, status) {
+                $.post('<{$site_domain}>/server/mail.server.php', param, function (data, status) {
                     var obj = eval('(' + data + ')');
                     if (obj.result == 'true') {
                         $('.modal-body').html('保存成功');
@@ -140,7 +140,7 @@
                     touser: $('#mail-editor-touser').val(),
                     content: $('#mail-editor-content').val()
                 };
-                $.post('<{#SiteDomain#}>/server/mail.server.php', param, function (data, status) {
+                $.post('<{$site_domain}>/server/mail.server.php', param, function (data, status) {
                     var obj = eval('(' + data + ')');
                     if (obj.result == 'true') {
                         $('.modal-body').html('发送成功');
@@ -168,7 +168,7 @@
                     var pname = pname[pname.length - 1];
 
                     var param = {action: 'auto_complete', username: pname};
-                    $.post('<{#SiteDomain#}>/server/mail.server.php', param, function (data) {
+                    $.post('<{$site_domain}>/server/mail.server.php', param, function (data) {
                         var objs = eval(data);
                         var name = new Array();
                         for (var i = 0; i < objs.length; i++) {

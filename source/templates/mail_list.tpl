@@ -2,7 +2,7 @@
 
 <{block name="stylesheet" append}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/css/mail.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/css/mail.css" type="text/css" />
 
 <{/block}>
 

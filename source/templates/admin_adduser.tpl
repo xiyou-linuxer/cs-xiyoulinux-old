@@ -2,7 +2,7 @@
 
 <{block name="stylesheet" append}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/js/chosen/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/js/chosen/chosen.css" type="text/css" />
 
 <{/block}>
 
@@ -413,7 +413,7 @@
 
 <{block name="scripts" append}>
     
-    <script type="text/javascript" src="<{#SiteDomain#}>/js/chosen/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="<{$site_domain}>/js/chosen/chosen.jquery.min.js"></script>
     
     <script type="text/javascript">
 
@@ -461,7 +461,7 @@
                     tel: $('[name=telphone]').val()
                 };
                 
-                $.post("<{#SiteDomain#}>/server/admin.server.php", param, function(data) {
+                $.post("<{$site_domain}>/server/admin.server.php", param, function(data) {
                         if (data == 1) {
                             alert("" + $('[name=name]').val() + '信息添加成功');
                         }else{
@@ -481,7 +481,7 @@
             var isok = 0;
             $.ajax({
                 type:'POST',
-                url:"<{#SiteDomain#}>/server/admin.server.php",
+                url:"<{$site_domain}>/server/admin.server.php",
                 async:false,
                 data: {
                     action:'checkMailCanUse',
@@ -503,7 +503,7 @@
             var isok = 0;
             $.ajax({
                 type:'POST',
-                url:"<{#SiteDomain#}>/server/admin.server.php",
+                url:"<{$site_domain}>/server/admin.server.php",
                 async:false,
                 data: {
                     action:'checkPhoneCanUse',

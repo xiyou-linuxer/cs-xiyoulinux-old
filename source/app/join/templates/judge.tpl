@@ -1,7 +1,7 @@
 <{extends file="../../../templates/frame.tpl"}>
 
 <{block name="stylesheet" append}>
-<link rel="stylesheet" href="<{#SiteDomain#}>/js/datatables/datatables.css" type="text/css" />
+<link rel="stylesheet" href="<{$site_domain}>/js/datatables/datatables.css" type="text/css" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <{/block}>
 
@@ -326,7 +326,7 @@
 <{/block}>
 
 <{block name="scripts" append}>
-<script type="text/javascript" src="<{#SiteDomain#}>/js/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<{$site_domain}>/js/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/init.js"></script>
 <script type="text/javascript">
 	$("#select_round").change(function() {
@@ -357,16 +357,14 @@
 				break;
 			case "passa": 
 				$.post('./async.php', param, function (data) {
-					alert("已自动决策" + data + "个用户！", function () {
-						location.reload();
-					});
+					alert("已自动决策" + data + "个用户！");
+					location.reload();
 				});
 				break;
 			case "dropc":
 				$.post('./async.php', param, function (data) {
-					alert("已自动决策" + data + "个用户！", function () {
-						location.reload();
-					});
+					alert("已自动决策" + data + "个用户！");
+					location.reload();
 				});
 				break;
 		}

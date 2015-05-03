@@ -4,7 +4,7 @@
 
 <{block name="stylesheet" append}>
 
-    <link rel="stylesheet" href="<{#SiteDomain#}>/js/chosen/chosen.css" type="text/css" />
+    <link rel="stylesheet" href="<{$site_domain}>/js/chosen/chosen.css" type="text/css" />
 
 <{/block}>
 
@@ -398,7 +398,7 @@
             $("#submit-info").click(function(){
                 //alert('grade:' + $("#grade-btn").text() +'\nuid:'+ getCookie('uid') + "\nphone" + $("#phone").val() + "\nmail:" + $("#mail").val() + "\nworkplace" + $("#workplace-btn").text() + "\njob:" + $("#job").val() + "\nmajor:" + $("#major").val() + "\nqq:" + $("#qq").val() + "\nwechat" + $("#wechat").val() + "\nblog" + $("#blog").val() + "\ngithub" + $("#github").val());
                 $.post(
-                    '<{#SiteDomain#}>/server/profile.server.php',
+                    '<{$site_domain}>/server/profile.server.php',
                     {
                         action:'update_userinfo',
                         uid:getCookie('uid'),
@@ -450,7 +450,7 @@
                     times++;
                     if(times == 1)
                     {
-                    $.post('<{#SiteDomain#}>/server/profile.server.php',
+                    $.post('<{$site_domain}>/server/profile.server.php',
                         {
                             action: 'refresh_activity',
                             uid: uid,

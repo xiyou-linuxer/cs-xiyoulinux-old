@@ -1,7 +1,7 @@
 <{extends file="../../../templates/base.tpl"}>
 
 <{block name="stylesheet" append}>
-<link rel="stylesheet" href="<{#SiteDomain#}>/js/datatables/datatables.css" type="text/css" />
+<link rel="stylesheet" href="<{$site_domain}>/js/datatables/datatables.css" type="text/css" />
 <link rel="stylesheet" href="http://libs.useso.com/js/bootstrap-switch/3.0.1/css/bootstrap3/bootstrap-switch.min.css" type="text/css" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <{/block}>
@@ -130,7 +130,7 @@
 <{/block}>
 
 <{block name="scripts" append}>
-<script type="text/javascript" src="<{#SiteDomain#}>/js/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<{$site_domain}>/js/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="http://libs.useso.com/js/bootstrap-switch/3.0.1/js/bootstrap-switch.min.js"></script>
 <script type="text/javascript" src="js/init.js"></script>
 <script type="text/javascript">
@@ -160,9 +160,8 @@
 
 		$.post("./async.php", param, function (data) {
 			if (data == "1") {
-				alert("签到成功！", function() {
-					location.reload();
-				});
+				alert("签到成功！");
+				location.reload();
 			}
 
 			if (data == "0") {

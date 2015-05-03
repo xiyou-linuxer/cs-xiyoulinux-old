@@ -223,9 +223,8 @@ $('[data-action="save"]').click(function() {
 	console.log(param);
 	$.post("./async.php", param, function(data) {
 		if (data == "1") {
-			alert("保存成功！", function() {
-				location.href = "start.php";
-			});
+			alert("保存成功！");
+			location.href = "start.php";
 		} else {
 			alert("保存失败！");
 			return false;
