@@ -1,4 +1,3 @@
-<{config_load file="base.conf"}>
 <!DOCTYPE html>
 
 <html lang="en" class="app">
