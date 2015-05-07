@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ ! -f "config.php" ];then
-        echo -e "\033[31mthere seems to be no config file\033[0m"
+        echo -e "\033[31merror: there seems to be no config file\033[0m"
+        echo -e "\033[31minstall proccess exit\033[0m"
         exit
 fi
 
@@ -19,7 +20,11 @@ if [ ! $compiled_file = "" ];then
         sudo rm ./templates_c/* -rf
 fi
 
-echo -e "\033[33mchange mode of log files\033[0m"
+if [ ! -f "./server/smtp.log" ];then
+        echo -e "\033[33mcreate file\033[0m server/smtp.log"
+        touch ./server/smtp.log
+fi
+echo -e "\033[33mchange mode of\033[0m server/smtp.log"
 chmod 777 ./server/smtp.log
 
 for dir in `ls ./app`
