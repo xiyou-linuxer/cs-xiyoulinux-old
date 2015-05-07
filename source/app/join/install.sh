@@ -11,3 +11,6 @@ do
         echo -e "\033[33mchmod of\033[0m "$logfile
         chmod 777 $logfile
 done
+
+echo -e "\033[33mchmod of\033[0m config.php"
+chmod 777 config.php
