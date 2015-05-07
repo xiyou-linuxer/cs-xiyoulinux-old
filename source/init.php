@@ -103,7 +103,6 @@ if ($user_offline->num_rows) {
     }
 }
 
-$smarty->assign('site_domain', SITE_DOMAIN);
 $smarty->assign('nav_unread_mail_list', $unread_mail_list);
 $smarty->assign('nav_unread_mail_count', $unread_mail_count);
 $smarty->assign('nav_profile_username', $username);
