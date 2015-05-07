@@ -10,4 +10,5 @@
     $smarty->left_delimiter = '<{';
     $smarty->right_delimiter = '}>';
 
+    $smarty->assign("site_domain", SITE_DOMAIN);
 ?>
