@@ -1,7 +1,7 @@
 <{extends file="../../../templates/frame.tpl"}>
 
 <{block name="stylesheet" append}>
-<link rel="stylesheet" href="http://cs.xiyoulinux.org/js/chosen/chosen.css" type="text/css" />
+<link rel="stylesheet" href="<{$site_domain}>/js/chosen/chosen.css" type="text/css" />
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <{/block}>
 
@@ -164,7 +164,7 @@
 
 <{block name="scripts" append}>
 <script type="text/javascript" src="js/init.js"></script>
-<script type="text/javascript" src="http://cs.xiyoulinux.org/js/chosen/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="<{$site_domain}>/js/chosen/chosen.jquery.min.js"></script>
 
 <script type="text/javascript">
 (function() {

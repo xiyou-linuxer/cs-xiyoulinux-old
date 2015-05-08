@@ -1,5 +1,6 @@
 <?php
 	require_once(dirname(dirname(dirname(__FILE__))) . '/includes/db.class.php');
+	require_once(dirname(dirname(dirname(__FILE__))) . '/includes/user.class.php');
 	include_once('./config.php');
 
 	$dbObj = new DBClass();
@@ -26,6 +27,7 @@
 	if ($_POST["action"] == "dropc") echo dropc($dbObj, $Current_Status);
 	if ($_POST["action"] == "register") echo register($dbObj);
 	if ($_POST["action"] == "check") echo check($dbObj);
+	if ($_GET["action"] == "getdata") echo getdata($dbObj, $Current_Status, $_GET["tag"]);
 
 	function save($dbObj, $Current_Status)
 	{
@@ -314,5 +316,45 @@
 			fclose($logfile);
 			return -2;
 		}
-	}
+        }
+        function getdata($dbObj, $Current_Status, $dataTag) {
+                switch ($dataTag) {
+                case "signed":
+                        $sql = "SELECT qid, app_join_info.uid AS uid, sno, name, class, time, interviewer FROM app_join_info, app_join_queue WHERE app_join_info.uid = app_join_queue.uid AND round = ".$Current_Status." AND app_join_queue.qstatus = 1 ORDER BY time ASC";
+                        $result = $dbObj->query($sql);
+                        if($result->num_rows > 0){
+	                        while($com = $result->fetch_assoc()) {
+                                        $CUser = new UserClass();
+                		        $json_str = $CUser->get_userinfo($com["interviewer"]);
+                		        $user_obj = json_decode($json_str);
+		                        $com["interviewer"] = $user_obj[0]->name;
+                                        $signed[] = $com;
+                                }
+                        }
+                        $sql = "SELECT qid, app_join_info.uid AS uid, sno, name, class, time FROM app_join_info, app_join_queue WHERE app_join_info.uid = app_join_queue.uid AND round = ".$Current_Status." AND app_join_queue.qstatus = 0 ORDER BY time ASC";
+                        $result = $dbObj->query($sql);
+                        if($result->num_rows > 0){
+                        	while($com = $result->fetch_assoc())
+                        	{
+                                        $signed[] = $com;
+                                }
+                        }
+                        return json_encode($signed);
+                case "interviewed":
+                        $sql = "SELECT qid, app_join_info.uid AS uid, sno, name, class, time, interviewer FROM app_join_info, app_join_queue WHERE app_join_info.uid = app_join_queue.uid AND round = ".$Current_Status." AND app_join_queue.qstatus = 2 ORDER BY time ASC";
+                        $result = $dbObj->query($sql);
+                        if($result->num_rows > 0){
+                        	while($com = $result->fetch_assoc())
+                                {
+                                        $CUser = new UserClass();
+                        		$json_str = $CUser->get_userinfo($com["interviewer"]);
+                        		$user_obj = json_decode($json_str);
+                        		$com["interviewer"] = $user_obj[0]->name;
+                        		$interviewed[] = $com;
+                        	}
+                                return json_encode($interviewed);
+                        }
+                        break;
+                }
+        }
 ?>
