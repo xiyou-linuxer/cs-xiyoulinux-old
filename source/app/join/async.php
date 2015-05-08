@@ -352,9 +352,8 @@
                         		$com["interviewer"] = $user_obj[0]->name;
                         		$interviewed[] = $com;
                         	}
-                                return json_encode($interviewed);
                         }
-                        break;
+                        return json_encode($interviewed);
                 }
         }
 ?>
