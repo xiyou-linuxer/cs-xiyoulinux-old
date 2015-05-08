@@ -340,6 +340,7 @@
 		});
 	});
 	$('[data-type="button"]').click(function() {
+                var btn = $(this);
 		var action = $(this).data("action");
 		if (!action) {
 			return false;
@@ -352,7 +353,9 @@
 			case "resetstatus": 
 				param.uid = $(this).data("uid");
 				$.post('./async.php', param, function (data) {
-					location.reload();
+                                    if (data == "1") {
+                                        btn.parents("tr").remove();
+                                    }
 				});
 				break;
 			case "passa": 
