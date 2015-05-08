@@ -251,28 +251,29 @@ $(document).ready(function() {
 
     function update_signed_data() {
         $.get("./async.php?action=getdata&tag=signed", function(data){
-            if (!data) return false;
-            var data = JSON.parse(data);
             var inner_html = "";
-            if (data && data.length) {
-                for (var i=0, len=data.length; i<len; i++) {
-                    inner_html += "<tr><td>" + data[i].uid + "</td>";
-                    inner_html += "<td>" + data[i].sno + "</td>";
-                    inner_html += "<td>" + data[i].name + "</td>";
-                    inner_html += "<td>" + data[i].class + "</td>";
-                    inner_html += "<td>" + data[i].time + "</td>";
-                    if (data[i].interviewer != undefined && data[i].interviewer != "") {
-                        inner_html += "<td>已被 <strong>" + data[i].interviewer + "</strong> 叫号</td>";
-                        inner_html += '<td><a data-action=\"interview\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-success\">面试</a> ';
-                        inner_html += '<a data-action=\"delsign\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-danger\">删除</a></td>';
-                    } else {
-                        inner_html +="<td>待安排面试</td>";
-                        inner_html += '<td><a data-action=\"delsign\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-danger\">删除</a></td>';
+            if (data) {
+                var data = JSON.parse(data);
+                if (data && data.length) {
+                    for (var i=0, len=data.length; i<len; i++) {
+                        inner_html += "<tr><td>" + data[i].uid + "</td>";
+                        inner_html += "<td>" + data[i].sno + "</td>";
+                        inner_html += "<td>" + data[i].name + "</td>";
+                        inner_html += "<td>" + data[i].class + "</td>";
+                        inner_html += "<td>" + data[i].time + "</td>";
+                        if (data[i].interviewer != undefined && data[i].interviewer != "") {
+                            inner_html += "<td>已被 <strong>" + data[i].interviewer + "</strong> 叫号</td>";
+                            inner_html += '<td><a data-action=\"interview\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-success\">面试</a> ';
+                            inner_html += '<a data-action=\"delsign\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-danger\">删除</a></td>';
+                        } else {
+                            inner_html +="<td>待安排面试</td>";
+                            inner_html += '<td><a data-action=\"delsign\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-danger\">删除</a></td>';
+                        }
+                        inner_html += "</tr>";
                     }
-                    inner_html += "</tr>";
+                } else {
+                    inner_html = '<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">没有查询到任何记录！</td></tr>';
                 }
-            } else {
-                inner_html = '<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">没有查询到任何记录！</td></tr>';
             }
             $('[data-ride="datatables"][data-tag="signed"]').find("tbody").html(inner_html);
             reg_signed_events();
@@ -280,22 +281,23 @@ $(document).ready(function() {
     }
     function update_interviewed_data() {
         $.get("./async.php?action=getdata&tag=interviewed", function(data){
-            if (!data) return false;
-            var data = JSON.parse(data);
             var inner_html = "";
-            if (data && data.length) {
-                for (var i=0, len=data.length; i<len; i++) {
-                    inner_html += "<tr><td>" + data[i].uid + "</td>";
-                    inner_html += "<td>" + data[i].sno + "</td>";
-                    inner_html += "<td>" + data[i].name + "</td>";
-                    inner_html += "<td>" + data[i].class + "</td>";
-                    inner_html += "<td>" + data[i].time + "</td>";
-                    inner_html += "<td>已被 <strong>" + data[i].interviewer + "</strong> 面试</td>";
-                    inner_html += '<td><a data-action=\"reset\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-warning\">撤销</a></td>';
-                    inner_html += "</tr>";
+            if (data) {
+                var data = JSON.parse(data);
+                if (data && data.length) {
+                    for (var i=0, len=data.length; i<len; i++) {
+                        inner_html += "<tr><td>" + data[i].uid + "</td>";
+                        inner_html += "<td>" + data[i].sno + "</td>";
+                        inner_html += "<td>" + data[i].name + "</td>";
+                        inner_html += "<td>" + data[i].class + "</td>";
+                        inner_html += "<td>" + data[i].time + "</td>";
+                        inner_html += "<td>已被 <strong>" + data[i].interviewer + "</strong> 面试</td>";
+                        inner_html += '<td><a data-action=\"reset\" data-qid=\"' + data[i].qid + '\" class=\"btn btn-xs btn-warning\">撤销</a></td>';
+                        inner_html += "</tr>";
+                    }
+                } else {
+                    inner_html = '<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">没有查询到任何记录！</td></tr>';
                 }
-            } else {
-                inner_html = '<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">没有查询到任何记录！</td></tr>';
             }
             $('[data-ride="datatables"][data-tag="interviewed"]').find("tbody").html(inner_html);
             reg_interviewed_events();
