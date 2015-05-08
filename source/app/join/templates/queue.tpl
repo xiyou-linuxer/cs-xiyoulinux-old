@@ -251,6 +251,7 @@ $(document).ready(function() {
 
     function update_signed_data() {
         $.get("./async.php?action=getdata&tag=signed", function(data){
+            if (!data) return false;
             var data = JSON.parse(data);
             var inner_html = "";
             if (data && data.length) {
@@ -279,6 +280,7 @@ $(document).ready(function() {
     }
     function update_interviewed_data() {
         $.get("./async.php?action=getdata&tag=interviewed", function(data){
+            if (!data) return false;
             var data = JSON.parse(data);
             var inner_html = "";
             if (data && data.length) {
