@@ -596,19 +596,9 @@
     <script type="text/javascript">
         $(document).ready(function() {
             //online
-            $.get("<{$site_domain}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=false",function(){});
+            $.get("<{$site_domain}>/server/online.server.php?action=online",function(){});
             setInterval(function() {
-                $.ajax({
-                    url: "<{$site_domain}>/server/online.server.php",
-                    type: "GET",
-                    dataType: "JSON",
-                    data: {
-                        "uid": get_cookie('uid'),
-                    },
-                    success: function(data){
-                        console.log(data);
-                    }
-                });            
+            	$.get("<{$site_domain}>/server/online.server.php?action=online",function(){});
             }, 60000);
 
             $('[data-action="get_update_num"]').each(function() {
@@ -650,7 +640,7 @@
                 var param = {
                     action: 'logout'
                 };
-                $.get("<{$site_domain}>/server/online.server.php?uid="+get_cookie('uid')+"&logout=true",function(){});
+                $.get("<{$site_domain}>/server/online.server.php?action=logout",function(){});
                 $.post('<{$site_domain}>/server/login.server.php', param, function() {
                     location.href = '<{$site_domain}>/signin.php';
                 });

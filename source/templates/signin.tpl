@@ -46,7 +46,7 @@
                 };
                 $.post('<{$site_domain}>/server/login.server.php', param, function(data){
                     if(data.substring(0,4) == 'true' ){
-                        $.get("<{$site_domain}>/server/online.server.php?uid="+data.substring(5)+"&logout=false",function(){});
+                        $.get("<{$site_domain}>/server/online.server.php?action=online",function(){});
                         location.href = '<{$referer_uri}>';
                     }else{
                         if(data.substring(5,6) == '1'){
