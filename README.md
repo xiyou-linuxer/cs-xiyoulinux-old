@@ -4,6 +4,44 @@
 
 1. **环境搭建**
 
+  ```
+  PHP >= 5.5.9 
+    - OpenSSL PHP 扩展
+    - PDO PHP 扩展
+    - Mbstring PHP 扩展
+    - Tokenizer PHP 扩展
+  Nginx >= 1.9.1
+  ```
+
+1. **环境配置**
+
+  ```
+  1. nginx虚拟主机配置：
+
+    server {
+      listen       80;
+      server_name dev.cs.xiyoulinux.org;
+      // root为本地代码public目录的路径
+      root /home/web/cs.xiyoulinux.org/public;
+      
+      location / {
+        index  index.html index.php index.htm;
+        try_files $uri $uri/ /index.php?$query_string;
+      }
+
+      location ~ \.php$ {
+        fastcgi_pass    127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include         fastcgi_params;
+      }
+    }
+
+  2. hosts文件设置
+    
+    127.0.0.1 dev.xiyoulinux.org
+  ```
+
 1. **代码部署**
 
   ```
