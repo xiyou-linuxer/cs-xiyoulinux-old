@@ -48,6 +48,27 @@
   // 拉取线上代码
   git clone https://github.com/xiyou-linuxer/cs-xiyoulinux.git
   
+  // 安装依赖
+  composer install
+  
+  // 修改权限
+  // 注：这里的nginx为启动nginx的用户名，如果没有配置的话，默认为nobody
+  chown nginx.nginx storage -R
+  chown nginx.nginx bootstrap/cache -R
+  
+  // 生成配置文件
+  cp .env.sample .env
+  
+  // 生成App Key
+  php artisan key:generate
+  
+  // 更新缓存
+  php artisan config:cache
+  ```
+  
+1. **协作开发**
+
+  ```
   // 基于master分支创建新的分支
   // 新功能使用feat-前缀命名, 例如：feat-profile
   // bug修复使用fix-前缀命名，例如：fix-csrf
