@@ -1,5 +1,5 @@
 ### 西邮Linux兴趣小组内部交流平台(CS) V2.0
-[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+[![Build Status](https://travis-ci.org/xiyou-linuxer/cs-xiyoulinux.svg?branch=master)](https://travis-ci.org/xiyou-linuxer/cs-xiyoulinux)
 #### 本地开发
 
 1. **环境搭建**
