@@ -76,6 +76,9 @@
   
   // 编辑代码
   
+  // 执行单元测试
+  phpunit
+  
   // 添加代码
   // git add filename添加单个文件
   // git add . 添加当前文件下所有文件
