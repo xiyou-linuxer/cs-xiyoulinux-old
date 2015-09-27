@@ -1,4 +1,4 @@
-### Xiyou Linux Group Collaboration System(CS) V2.0
+### Xiyou Linux Group Collaboration System(CS)
 
 CS系统旨在提供一个方便小组历届成员沟通交流的平台。CS系统分为两大部分：基础服务平台，和应用模块。基础服务平台主要提供数据库的连接服务，以及面向上层应用的RESTful开放接口；应用模块的定义为：和具体业务逻辑紧密相关的模块，包括项目、问答、招聘、基金、活动等。
 
