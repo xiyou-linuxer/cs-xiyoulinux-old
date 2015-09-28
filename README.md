@@ -27,7 +27,7 @@ CS系统旨在提供一个方便小组历届成员沟通交流的平台。CS系�
     server {
       listen       80;
       server_name dev.cs.xiyoulinux.org;
-      // root为项目代码中public文件夹所在的路径
+      # root为项目代码中public文件夹所在的路径
       root /home/web/cs.xiyoulinux.org/public;
       
       location / {
@@ -45,7 +45,7 @@ CS系统旨在提供一个方便小组历届成员沟通交流的平台。CS系�
 
   2. hosts文件设置
     
-    127.0.0.1 dev.xiyoulinux.org
+    127.0.0.1 dev.cs.xiyoulinux.org
   ```
 
 1. **代码部署**
