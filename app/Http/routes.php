@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('framework');
+});
+
+Route::get('/users', function () {
+    return view('welcome1');
 });
