@@ -1,19 +1,30 @@
 <?php
 
+/**
+ * Service config
+ *
+ * Service config
+ *
+ * PHP version 5.5.9
+ *
+ * @category Config
+ * @package  CS
+ * @author   Jensyn <zhangyongjun369@gmail.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @version  GIT: 
+ * @link     https://github.com/xiyou-linuxer/cs-xiyoulinux
+*/
+
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Third Party Services
-    |--------------------------------------------------------------------------
-    |
-    | This file is for storing the credentials for third party services such
-    | as Stripe, Mailgun, Mandrill, and others. This file provides a sane
-    | default location for this type of information, allowing packages
-    | to have a conventional place to find your various credentials.
-    |
+    /**
+     * Third Party Services
+     *
+     * This file is for storing the credentials for third party services such
+     * as Stripe, Mailgun, Mandrill, and others. This file provides a sane
+     * default location for this type of information, allowing packages
+     * to have a conventional place to find your various credentials.
     */
-
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

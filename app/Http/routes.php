@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return Response::json(array('error' => 'null'));
+    return Response::json(['error' => 'null']);
 });

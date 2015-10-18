@@ -6,5 +6,8 @@ before_script:
   - composer install
   - cp .env.example .env
   - php artisan key:generate
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
 script:
   - phpunit
+  - bash ./phpcs.sh
