@@ -12,6 +12,10 @@ for($i = 0; $i < 10; ++$i){
 	$activity_array[] = $tmp;
 }
 
+foreach ($activity_array as $key => $act) {
+    $activity_array[$key]['comments'] = $a->get_comments($act['mid']);
+}
+
 $appObj = new PluginClass();
 $result = $appObj->get_app_list();
 
