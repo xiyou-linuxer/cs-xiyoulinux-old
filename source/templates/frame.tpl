@@ -622,7 +622,10 @@
                     return false;
                 }
 
-                $.post('<{$site_domain}>/server/activity.server.php', {activity_text: actTxt}, function (data) {
+                $.post('<{$site_domain}>/server/activity.server.php', {
+                    action: 'new_act',
+                    activity_text: actTxt
+                }, function (data) {
                     var obj = JSON.parse(data);
 
                     if (obj.state == 'success') {
