@@ -35,6 +35,13 @@
   .comment-content:last-child{
     border-bottom-width: 0px;
   }
+  .modal-body textarea{
+    width: 100%;
+    height: 120px;
+  }
+  .pull-right i{
+    cursor: pointer;
+  }
   </style>
 <{/block}>
 
@@ -120,7 +127,7 @@
                   </div>
                   <div class="modal-body">
                     <input id="commentActId" type="hidden">
-                    <textarea id="commentContent" cols="90" rows="6"></textarea>
+                    <textarea id="commentContent"></textarea>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
