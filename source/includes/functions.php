@@ -10,13 +10,13 @@ function checkUser($uid){
 }
 
 function getIP() {		//获取IP
-	if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))  
-		$realip = $_SERVER['HTTP_X_FORWARDED_FOR']; 
-	elseif (isset($_SERVER['HTTP_CLIENT_IP']))  
-		$realip = $_SERVER['HTTP_CLIENT_IP']; 
+	if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+		$realip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	elseif (isset($_SERVER['HTTP_CLIENT_IP']))
+		$realip = $_SERVER['HTTP_CLIENT_IP'];
 	else
-		$realip = $_SERVER['REMOTE_ADDR']; 
-	return $realip; 
+		$realip = $_SERVER['REMOTE_ADDR'];
+	return $realip;
 }
 
 function checkArr($checkArr){	//检查对应类型，参数是数组
@@ -34,7 +34,7 @@ function checkArr($checkArr){	//检查对应类型，参数是数组
 	return $check_ok;
 }
 
-function checkStr($type,$desStr){	//看代码都懂
+function checkStr($type,$desStr){	//看代码都懂//懂毛毛，注释不全，看不懂，推了
     $result = false;
     switch($type){
         case 'digit':
@@ -70,23 +70,23 @@ function checkStr($type,$desStr){	//看代码都懂
         default:
             break;
     }
-    
+
     return $result;
 }
 
-function substr_utf8($string,$start,$length, $flag)  
+function substr_utf8($string,$start,$length, $flag)
 {
-    $chars = $string;  
+    $chars = $string;
     $i=0;
     do{
         if (preg_match ("/[0-9a-zA-Z]/", $chars[$i])){
-            $m++;  
-        }  
+            $m++;
+        }
         else {
             $n++;
-        } 
+        }
 
-        $k = $n/3+$m/2;  
+        $k = $n/3+$m/2;
         $l = $n/3+$m;
         $i++;
     } while($k < $length);
@@ -94,7 +94,7 @@ function substr_utf8($string,$start,$length, $flag)
     if ($flag > 0 && strlen($str) < strlen($string)) {
         $str = $str . "...";
     }
-    return $str;  
-} 
+    return $str;
+}
 
 ?>

@@ -17,8 +17,8 @@ if ( !isset($_COOKIE['uid'])) {
 }
 
 $mailObj = new MailClass($_COOKIE['uid']);
-
 $action = $_POST['action'];
+
 
 switch( $action ) {
     case "del_mail":
@@ -29,9 +29,12 @@ switch( $action ) {
         break;
     case "send_mail":    //发送邮件 当包含mid时只做更新不做插入
         $title = $_POST['title'];
+        $title = htmlentities($title, ENT_QUOTES, 'UTF-8');
         $touser = $_POST['touser'];
         $content = $_POST['content'];
-        if ( isset($_POST['mid']) ) {
+        //$content = htmlentities($content, ENT_QUOTES, 'UTF-8');
+        //这里需要用白名单过滤特殊字符，后期需要添加处理，防止xss
+	if ( isset($_POST['mid']) ) {
             echo $mailObj->del_mail($title, $touser, $content, $_POST['mid']);
         }
         else {
@@ -44,7 +47,7 @@ switch( $action ) {
         echo $mailObj->get_name_match($username);
         exit;
         break;
-    case "save_draft":    
+    case "save_draft":
         echo $mailObj->save_draft();
         exit;
         break;

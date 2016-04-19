@@ -3,19 +3,18 @@
 
     if (!isset($_GET['action']) || !isset($_SESSION['uid'])) {
         exit();
-    }    
+    }
 
     include(dirname(dirname(__FILE__)) . '/config.php');
     include(BASE_PATH . '/includes/online.class.php');
     $online_class = new OnlineClass();
-    
+
     $uid=$_SESSION['uid'];
     $action=$_GET['action'];
-    
+
     if ($action == 'logout') {
         $time = time()-600;
-    }
-    else {
+    } else {
         $time = time();
     }
     $result = $online_class->select_online($uid, $time);

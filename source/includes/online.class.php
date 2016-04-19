@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . "/db.class.php");	
-	
+require_once(dirname(__FILE__) . "/db.class.php");
+
 class OnlineClass {
 	private function getlink() {
 		return new DBClass();
@@ -8,6 +8,7 @@ class OnlineClass {
 	private function link_result($sql_str, $error_str)
 	{
 		$link = $this->getlink();
+		$sql_str = $link->dhtmlspecialchars($sql_str);
 		$result = $link->query($sql_str);
 		if ($result == false)
 			echo $error_str;

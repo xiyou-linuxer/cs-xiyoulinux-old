@@ -28,7 +28,7 @@
     <footer id="footer">
       <div class="text-center padder">
         <p>
-          <small>Copyright &copy; 2014 Xiyou Linux Group</small>
+          <small>Copyright &copy; 2014-2016 Xiyou Linux Group</small>
         </p>
       </div>
   </footer>
