@@ -8,6 +8,7 @@ if ( !isset($_POST['action']) ) {
 }
 
 $action = $_POST['action'];
+$action = htmlentities($action, ENT_QUOTES,'UTF-8');
 
 if ( $action == 'logout' ) {
     if ( isset($_SESSION['uid']) ) {
@@ -32,8 +33,12 @@ if ( $action == 'login' ) {
         print 'false2';
         exit;
     }
+    /*修订：2016-04-19 王博
+    防止SQL注入，用户校验
+    */
 
     $dbObj = new DBClass();
+    $name = $dbObj->dhtmlspecialchars($name);
     $query = "SELECT `uid`,`password` FROM `cs_user` WHERE `name`='$name';";
     $result = $dbObj->query($query);
     if( $result->num_rows <= 0 ){

@@ -87,7 +87,6 @@
                 <p><{$activity_list[n].message}></p>
               </blockquote>
               <div class="pull-right">
-                <i class="fa fa-thumbs-up"></i>
                 <i class="fa fa-comments" style="margin-left:10px;" 
                 data-action="comment" data-actid="<{$activity_list[n].mid}>"></i>
               </div>

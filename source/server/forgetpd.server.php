@@ -4,9 +4,13 @@ require_once(BASE_PATH . "/includes/smtp.class.php");
 require_once(BASE_PATH . "/includes/db.class.php");
 
 $name = $_POST["name"];
+$name = htmlentities($name);
 $mail = $_POST["email"];
+$mail = htmlentities($mail);
 
 $dbObj = new DBClass();
+$name = $dbObj->dhtmlspecialchars($name);
+$mail = $dbObj->dhtmlspecialchars($mail);
 $sql = "select mail,name,uid, password from cs_user where name='$name' and mail='$mail';";
 $result = $dbObj->query($sql);
 if($result->num_rows == 0){
@@ -31,7 +35,7 @@ $smtppass = SMTP_SERVER_PASS;
 $smtpemailto = $userinfo['mail'];
 $mailsubject = "找回密码";
 $mailbody =  "亲爱的".$name."：\n\n您在".$time."提交了找回密码请求。请点击下面的链接重置密码
-（链接24小时内有效）。\n".$url."\n如果您确认您没有进行此操作，请忽略此邮件内容。\n本邮件为系统自动发送,请勿直接回复。"; 
+（链接24小时内有效）。\n".$url."\n如果您确认您没有进行此操作，请忽略此邮件内容。\n本邮件为系统自动发送,请勿直接回复。\nXiyou Linux Group";
 $mailtype = "html";
 
 $smtpObj = new SmtpClass($smtpserver, $smtpserverport, true, $smtpuser, $smtppass);

@@ -6,7 +6,8 @@ require_once(dirname(__FILE__) .'/config.php');
 
 if(!isset($_SESSION['uid']) ) {
     $referer_uri = urlencode('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-    header('location: ' . SITE_DOMAIN . '/signin.php?referer_uri=' . $referer_uri);
+    //header('location: ' . SITE_DOMAIN . '/signin.php?referer_uri=' . $referer_uri);
+    header('location: ' . SITE_DOMAIN . '/signin.php');
     exit;
 }
 
@@ -66,7 +67,7 @@ if (is_array($app_info_array)) {
         $json_str = $app_obj['attr'];
         $app_attr = json_decode($json_str);
         $app_aside = $app_attr->aside;
-        
+
         //$update_status = 'false';
         $update_status = ($app_aside->dis_number == '1') ? 'true' : 'false';
         $item = array('app_name'=>$app_aside->dis_name,

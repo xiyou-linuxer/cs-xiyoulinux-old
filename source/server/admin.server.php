@@ -16,14 +16,41 @@ require_once(BASE_PATH . '/includes/functions.php');
 $adminObj = new AdminClass();
 $userObj = new UserClass();
 
+
+/**
+ *
+ * Data : 2016-04-19
+ * User : Wangbo
+ * Info : 增加用户权限判定，输入过滤
+ *
+ */
+
+if(!isset($_SESSION['uid']) ) {
+    header('location: '.SITE_DOMAIN);
+    exit;
+}
+
+//获取登录用户信息
+$CUser = new UserClass();
+//获取登录用户权限
+$user_privilege = $CUser->get_privilege($_SESSION['uid']);
+
+if ($user_privilege == 0) {
+  echo "<script>alert("禁止非法请求");window.location.href=\"".SITE_DOMAIN."\";</script>";
+  exit();
+}
+/////////////////
+
+
+
 if (isset($_POST['action'])){
-    $action = $_POST['action'];
+    $action = htmlentities($_POST['action'] , ENT_QUOTES, 'UTF-8');
 }
 if (isset($_POST['grade'])){
-    $grade = $_POST['grade'];
+    $grade = htmlentities($_POST['grade'] , ENT_QUOTES, 'UTF-8');
 }
 if (isset($_POST['uid'])){
-    $uid = $_POST['uid'];
+    $uid = htmlentities($_POST['uid'] , ENT_QUOTES, 'UTF-8');
 }
 
 if (isset($action)){
@@ -222,7 +249,7 @@ function check_phone_can_use(){
     $userObj = new UserClass();
     return boolean2Num(!$userObj->check_data($phone, 'phone'));
 }
- 
+
 //var_dump(addPackingUser("测试测是",1,"qasdasd23@qq.com", 2014, "计算科学与技术", '', '', ''));
 
 /**

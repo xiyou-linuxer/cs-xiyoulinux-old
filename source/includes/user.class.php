@@ -1,14 +1,14 @@
 <?php
     require_once(dirname(__FILE__) . "/db.class.php");
     require_once(dirname(__FILE__) . "/functions.php");
-    
+
 class UserClass{
     private $dbObj;
 
     public function __construct(){
         $this->dbObj = new DBClass();
-    }    
-        
+    }
+
     public function add_user($name,$password,$sex,$phone,$mail,$qq,$wechat,
         $blog,$github,$native,$grade,$major,$workplace,$job)
     {
@@ -16,7 +16,7 @@ class UserClass{
         if( empty($name) || empty($password) || $sex=="" || empty($mail) || empty($grade) || empty($major) )
             return false;
         $password = md5($password);
-        
+
         $checkArr = array(
             "$name" => "chinese",
             "$password" => 'normal',
@@ -38,11 +38,11 @@ class UserClass{
 
         if (!empty($mail) && $this->check_data($mail, 'mail', $uid))
             return false;
-         
+
         if (isset($phone) && $this->check_data($phone, 'phone', $uid)){
             return false;
         }
-
+        $name = $this->dbObj->dhtmlspecialchars($name);
         $query_str = "SELECT * FROM `cs_user` where name='$name';";
         $result = $this->dbObj->query($query_str);
         if( $result->num_rows > 0 ){
@@ -62,7 +62,7 @@ class UserClass{
     public function del_user($uid){
         if( !checkStr('digit',$uid) )
             return false;
-        
+        $uid = $this->dbObj->dhtmlspecialchars($uid);
         $query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
         $result = $this->dbObj->query($query_str);
         if( $result->num_rows <= 0 ){
@@ -71,21 +71,21 @@ class UserClass{
             return false;
         }
         $query_str = "DELETE FROM `cs_user` WHERE uid='$uid';";
-        
+
         if( is_object($result) )
             $result->close();
 
         if( $this->dbObj->query($query_str) )
             return true;
         return false;
-        
+
     }
-    
+
     public function get_userinfo($uid){
         if( !checkStr('digit',$uid) ){
             return false;
         }
-        
+        $uid = $this->dbObj->dhtmlspecialchars($uid);
         $query_str = "SELECT * FROM `cs_user` WHERE uid='$uid';";
         $result = $this->dbObj->query($query_str);
         if( $result->num_rows <= 0 ){
@@ -106,7 +106,7 @@ class UserClass{
     {
         if ( $this->check_user($uid) )
             return false;
-        
+
     	$checkArr = array(
             "$uid" => 'digit',
             "$phone" => 'phone',
@@ -146,7 +146,7 @@ class UserClass{
             return false;
 
         $checkArr = array(
-            "$uid" => 'digit', 
+            "$uid" => 'digit',
             "$password" => 'normal',
             "$phone" => 'phone',
             "$mail" => 'mail',
@@ -161,15 +161,15 @@ class UserClass{
         );
         if( !checkArr($checkArr) )
             return false;
-        
+
         $query_str = "SELECT * FROM `cs_user` where uid='$uid';";
         $result = $this->dbObj->query($query_str);
         if( $result->num_rows <= 0 ){
             if( is_object($result) )
                 $result->close();
             return false;
-        }    
-        
+        }
+
         $infoArr = array(
             'password' => "'$password'",
             'phone'    => "'$phone'",
@@ -204,7 +204,7 @@ class UserClass{
     public function get_privilege($uid){
         if( !checkStr('digit',$uid) )
             return false;
-        
+
         $query_str = "SELECT * FROM `cs_user` WHERE uid=$uid;";
         $result = $this->dbObj->query($query_str);
         if( $result->num_rows <= 0 ){
@@ -214,18 +214,18 @@ class UserClass{
         }
         $row = $result->fetch_assoc();
         return $row['privilege'];
-        
+
         if( is_object($result) )
-            $result->close();    
+            $result->close();
     }
     public function deliver_privilege($uid_now,$uid_next){
         if( !checkStr('digit',$uid_now) || !checkStr('digit',$uid_next) )
             return false;
-        
+
         $query_str1 = "SELECT * FROM `cs_user` WHERE uid=$uid_now;";
         $query_str2 = "SELECT * FROM `cs_user` WHERE uid=$uid_next;";
         $result1 = $this->dbObj->query($query_str1);
-        $result2 = $this->dbObj->query($query_str2);    
+        $result2 = $this->dbObj->query($query_str2);
         if( $result1->num_rows <= 0 || $result2->num_rows <= 0){
             if( is_object($result1) )
                 $result1->close();
@@ -239,7 +239,7 @@ class UserClass{
         if($row1['privilege'] != '1' ||$row2['privilege'] != '0')
             return false;
         $query_str1 = "UPDATE `cs_user` SET privilege=0 WHERE uid=$uid_now;";
-        $query_str2 = "UPDATE `cs_user` SET privilege=1 WHERE uid=$uid_next;";    
+        $query_str2 = "UPDATE `cs_user` SET privilege=1 WHERE uid=$uid_next;";
         $this->dbObj->query($query_str1);
         $this->dbObj->query($query_str2);
 
@@ -306,7 +306,7 @@ class UserClass{
                 $sql = "SELECT cs_user.name, cs_user.uid, cs_user.workplace, cs_online.time FROM cs_user, cs_online WHERE cs_online.uid=cs_user.uid AND cs_online.time > " . $time . ";";
                 break;
             case 'offline':
-                $sql = "SELECT cs_user.name, cs_user.uid, cs_user.workplace, cs_online.time FROM cs_user, cs_online WHERE cs_online.uid=cs_user.uid AND cs_online.time < " . $time . ";";          
+                $sql = "SELECT cs_user.name, cs_user.uid, cs_user.workplace, cs_online.time FROM cs_user, cs_online WHERE cs_online.uid=cs_user.uid AND cs_online.time < " . $time . ";";
                 break;
             case 'all':
                 $sql = "SELECT cs_user.name, cs_user.uid, cs_user.workplace, cs_online.time FROM cs_user, cs_online WHERE cs_online.uid=cs_user.uid;";

@@ -4,8 +4,10 @@ require_once(dirname(dirname(__FILE__)) . '/config.php');
 include_once(BASE_PATH . "/includes/activity.class.php");
 
 $action = $_POST["action"];
+$action = htmlentities($action,ENT_QUOTES,'UTF-8');
 $user_id = $_SESSION["uid"];
-
+$user_id = htmlentities($user_id,ENT_QUOTES,'UTF-8');
+//最好用正则过滤，恩
 $res = array('state'=>'', 'msg'=>'');
 
 if (!isset($action)) {
@@ -17,6 +19,8 @@ if (!isset($action)) {
 
 if ($action == 'new_act') {
     $msg = $_POST["activity_text"];
+
+    $msg = htmlentities($msg, ENT_QUOTES, 'UTF-8');
     if($msg == "") {
         $res['state'] = 'failed';
         $res['msg'] = '不能发表空动态';
@@ -37,12 +41,13 @@ if ($action == 'new_act') {
 
     $res['state'] = 'success';
     $res['msg'] = '动态发表成功';
-    echo json_encode($res);    
+    echo json_encode($res);
 }
 
 if ($action == 'new_comment') {
     $act_id = $_POST["act_id"];
     $content = $_POST["content"];
+    $content = htmlentities($content, ENT_QUOTES, 'UTF-8');
     if($content == "") {
         $res['state'] = 'failed';
         $res['msg'] = '评论信息不能为空';
@@ -55,7 +60,7 @@ if ($action == 'new_comment') {
 
     $res['state'] = 'success';
     $res['msg'] = '评论发表成功';
-    echo json_encode($res);    
+    echo json_encode($res);
 }
 
 ?>
